@@ -41,6 +41,8 @@ class ImageCropperViewController: UIViewController {
         
         pinchGestureRecognizer.addTarget(self, action:"pinchView")
         panGestureRecognizer.addTarget(self, action: "panView")
+        self.view.addGestureRecognizer(pinchGestureRecognizer)
+        self.view.addGestureRecognizer(panGestureRecognizer)
     }
     
 //    func initView(){
@@ -86,27 +88,27 @@ class ImageCropperViewController: UIViewController {
         self.overlayView.layer.mask = maskLayer;
     }
     
-//    func pinchView(pinchGestureRecognizer:UIPinchGestureRecognizer){
-//        var view:UIView = self.showImgView
-//        if(pinchGestureRecognizer.state == UIGestureRecognizerState.Began || pinchGestureRecognizer.state == UIGestureRecognizerState.Changed){
-//            view.transform = CGAffineTransformScale(view.transform, pinchGestureRecognizer.scale, pinchGestureRecognizer.scale)
-//            pinchGestureRecognizer.scale = 1
-//        }
-//        else if(pinchGestureRecognizer.state == UIGestureRecognizerState.Ended){
-//            var newFrame:CGRect = self.showImgView.frame;
+    func pinchView(pinchGestureRecognizer:UIPinchGestureRecognizer){
+        var view:UIView = self.showImgView
+        if(pinchGestureRecognizer.state == UIGestureRecognizerState.Began || pinchGestureRecognizer.state == UIGestureRecognizerState.Changed){
+            view.transform = CGAffineTransformScale(view.transform, pinchGestureRecognizer.scale, pinchGestureRecognizer.scale)
+            pinchGestureRecognizer.scale = 1
+        }
+        else if(pinchGestureRecognizer.state == UIGestureRecognizerState.Ended){
+            var newFrame:CGRect = self.showImgView.frame;
 //            newFrame = handleScaleOverflow(newFrame)
 //            newFrame = handleBorderOverflow(newFrame)
-//            UIView.animateWithDuration(0.3, animations: { () -> Void in
-//                self.showImgView.frame = newFrame
-//                self.oldFrame = newFrame
-//            })
-//        }
-//    }
-//    
-//    func panView(panGestureRecoginzer:UIPanGestureRecognizer){
-//        //
-//    }
-//    
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.showImgView.frame = newFrame
+                self.oldFrame = newFrame
+            })
+        }
+    }
+
+    func panView(panGestureRecoginzer:UIPanGestureRecognizer){
+        //
+    }
+//
 //    func handleScaleOverflow(frame:CGRect)->CGRect{
 //        var oriCenter: CGPoint = CGPointMake(newFrame.origin.x + newFrame.size.width/2, newFrame.origin.y + newFrame.size.height/2)
 //        
