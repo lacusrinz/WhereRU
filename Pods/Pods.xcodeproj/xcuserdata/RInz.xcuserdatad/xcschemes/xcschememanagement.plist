@@ -29,12 +29,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Reachability.xcscheme</key>
+		<key>Pods-RSKImageCropper.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-SDWebImage.xcscheme</key>
+		<key>Pods-Reachability.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -54,11 +54,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-UIActivityIndicator-for-SDWebImage.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,62 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>16B3C2DF6486440DAC42ABE1</key>
+		<key>21D6D34273F47B6116D5DAF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>26973E82BB1443078A089225</key>
+		<key>2F12937A2734C7AAEDE1FA87</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>35131B7AB3E2448FBC8A5A4B</key>
+		<key>471DE8DF529AD948FAFADBB6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4D137DC2944B4C47892DAED1</key>
+		<key>585D57C40574901736AD4483</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>70717CAF854C4DAA969A95E3</key>
+		<key>7CCB377F5398095FC9DE8C18</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AEF01817DC75405DBDE0DC2D</key>
+		<key>7FB561577AEF5615C57EA348</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B0951D8BC8F744DE8FBBB806</key>
+		<key>8182A713EC4155D1F824D4CA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C38DF6656EDA4633951BDC76</key>
+		<key>A5D37D827E2A39801236187B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF21F7B895AC4FD5B0786424</key>
+		<key>CF47C509E1925467F6F5333C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EA7EC35DAAAE46E88DECC845</key>
+		<key>F8C91B92D6730BA8B58A4D4F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F73B3084F9AC4D3FB46E393E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FF42E53B18144FAE9DDD210E</key>
+		<key>FB1E194CB6C2BA67C71FA354</key>
 		<dict>
 			<key>primary</key>
 			<true/>

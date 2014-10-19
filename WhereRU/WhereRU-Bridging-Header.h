@@ -3,3 +3,4 @@
 //
 
 #import "ViewPagerController.h"
+#import "RSKImageCropper.h"

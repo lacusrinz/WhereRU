@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gts-7A-H1c">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="gts-7A-H1c">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -296,9 +296,6 @@
                                 <state key="normal" title="Share my ID">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <segue destination="gX6-Eb-UMi" kind="show" identifier="show" id="eZT-N1-8ST"/>
-                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -331,66 +328,6 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3940" y="-528"/>
-        </scene>
-        <!--Image Cropper View Controller-->
-        <scene sceneID="CWA-Gg-5pX">
-            <objects>
-                <viewController id="gX6-Eb-UMi" customClass="ImageCropperViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZPJ-0e-gcm"/>
-                        <viewControllerLayoutGuide type="bottom" id="Elj-A9-usL"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Qhx-ZH-Er7">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="ppt-Bl-Gmi">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                            </imageView>
-                            <view alpha="0.49999999999999961" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lm4-ni-H46">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nWw-Ok-IRT">
-                                <rect key="frame" x="140" y="140" width="320" height="320"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="320" id="VLV-CW-n3n"/>
-                                    <constraint firstAttribute="width" constant="320" id="cRA-6X-JCS"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="ppt-Bl-Gmi" secondAttribute="bottom" id="4Y5-ye-6n7"/>
-                            <constraint firstAttribute="trailing" secondItem="lm4-ni-H46" secondAttribute="trailing" id="7PC-Gz-8di"/>
-                            <constraint firstItem="lm4-ni-H46" firstAttribute="top" secondItem="Qhx-ZH-Er7" secondAttribute="top" constant="20" id="Dm4-9c-gkx"/>
-                            <constraint firstAttribute="bottom" secondItem="lm4-ni-H46" secondAttribute="bottom" id="OGP-6i-Rbt"/>
-                            <constraint firstItem="ppt-Bl-Gmi" firstAttribute="leading" secondItem="Qhx-ZH-Er7" secondAttribute="leading" id="WbZ-nh-fWb"/>
-                            <constraint firstItem="nWw-Ok-IRT" firstAttribute="centerY" secondItem="Qhx-ZH-Er7" secondAttribute="centerY" id="XQT-RO-GfX"/>
-                            <constraint firstItem="ppt-Bl-Gmi" firstAttribute="top" secondItem="Qhx-ZH-Er7" secondAttribute="top" constant="20" id="Xl9-ad-nHU"/>
-                            <constraint firstAttribute="trailing" secondItem="ppt-Bl-Gmi" secondAttribute="trailing" id="ZlL-KB-H8B"/>
-                            <constraint firstItem="nWw-Ok-IRT" firstAttribute="centerX" secondItem="ppt-Bl-Gmi" secondAttribute="centerX" id="nho-Mj-tuh"/>
-                            <constraint firstItem="lm4-ni-H46" firstAttribute="leading" secondItem="Qhx-ZH-Er7" secondAttribute="leading" id="uEn-b4-qff"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="overlayView" destination="lm4-ni-H46" id="Rze-gP-Gec"/>
-                        <outlet property="panGestureRecognizer" destination="80T-RR-CfK" id="PW2-Y9-wBp"/>
-                        <outlet property="pinchGestureRecognizer" destination="YgR-GK-nPz" id="woC-Ev-I7o"/>
-                        <outlet property="ratioView" destination="nWw-Ok-IRT" id="l82-JI-rvZ"/>
-                        <outlet property="showImgView" destination="ppt-Bl-Gmi" id="Z0u-wZ-sus"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="j6S-NV-WrX" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <pinchGestureRecognizer id="YgR-GK-nPz">
-                    <connections>
-                        <action selector="pinchView:" destination="gX6-Eb-UMi" id="goN-0w-GTE"/>
-                    </connections>
-                </pinchGestureRecognizer>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="80T-RR-CfK"/>
-            </objects>
-            <point key="canvasLocation" x="4810" y="-528"/>
         </scene>
         <!--Signin View Controller-->
         <scene sceneID="FWi-oP-pgb">
