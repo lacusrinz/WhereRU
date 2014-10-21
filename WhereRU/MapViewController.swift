@@ -8,25 +8,28 @@
 
 import UIKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MAMapViewDelegate {
 
+    var mapView: MAMapView?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    @IBOutlet weak var label: UILabel!
-    
-    var _label:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        label.text = _label
+        initMapView()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func initMapView() {
+        mapView = MAMapView(frame: self.view.bounds)
+        mapView!.delegate = self
+        self.view.addSubview(mapView!)
+        
+        mapView!.showsUserLocation = true
+        mapView!.userTrackingMode = MAUserTrackingMode.Follow
+        
+        mapView!.setZoomLevel(15.1, animated: true)
     }
     
 

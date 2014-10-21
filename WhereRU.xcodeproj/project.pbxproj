@@ -16,6 +16,16 @@
 		A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; };
 		A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
+		A88DB5AA19F6A7E200FF7807 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5A919F6A7E200FF7807 /* QuartzCore.framework */; };
+		A88DB5AC19F6A7EC00FF7807 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5AB19F6A7EC00FF7807 /* CoreLocation.framework */; };
+		A88DB5AE19F6A7F600FF7807 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5AD19F6A7F600FF7807 /* SystemConfiguration.framework */; };
+		A88DB5B019F6A7FF00FF7807 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5AF19F6A7FF00FF7807 /* CoreTelephony.framework */; };
+		A88DB5B219F6A80B00FF7807 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B119F6A80B00FF7807 /* libz.dylib */; };
+		A88DB5B419F6A81400FF7807 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B319F6A81400FF7807 /* OpenGLES.framework */; };
+		A88DB5B619F6A81E00FF7807 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */; };
+		A88DB5B819F6A82800FF7807 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B719F6A82800FF7807 /* Security.framework */; };
+		A88DB5BC19F6A8D300FF7807 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5BB19F6A8D300FF7807 /* MAMapKit.framework */; };
+		A88DB5C019F6A91800FF7807 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A88DB5BF19F6A91800FF7807 /* AMap.bundle */; };
 		A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */; };
 		A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */; };
 		A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5A19C1EB0F00EEFC98 /* LoginViewController.swift */; };
@@ -83,6 +93,16 @@
 		A814C8E119CFF47A00735E7B /* avatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatarImageView.h; sourceTree = "<group>"; };
 		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
+		A88DB5A919F6A7E200FF7807 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		A88DB5AB19F6A7EC00FF7807 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		A88DB5AD19F6A7F600FF7807 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		A88DB5AF19F6A7FF00FF7807 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		A88DB5B119F6A80B00FF7807 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		A88DB5B319F6A81400FF7807 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
+		A88DB5B719F6A82800FF7807 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		A88DB5BB19F6A8D300FF7807 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
+		A88DB5BF19F6A91800FF7807 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
 		A8D58A5019C1EB0F00EEFC98 /* WhereRU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereRU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A5419C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +136,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A88DB5BC19F6A8D300FF7807 /* MAMapKit.framework in Frameworks */,
+				A88DB5B819F6A82800FF7807 /* Security.framework in Frameworks */,
+				A88DB5B619F6A81E00FF7807 /* libstdc++.6.0.9.dylib in Frameworks */,
+				A88DB5B419F6A81400FF7807 /* OpenGLES.framework in Frameworks */,
+				A88DB5B219F6A80B00FF7807 /* libz.dylib in Frameworks */,
+				A88DB5B019F6A7FF00FF7807 /* CoreTelephony.framework in Frameworks */,
+				A88DB5AE19F6A7F600FF7807 /* SystemConfiguration.framework in Frameworks */,
+				A88DB5AC19F6A7EC00FF7807 /* CoreLocation.framework in Frameworks */,
+				A88DB5AA19F6A7E200FF7807 /* QuartzCore.framework in Frameworks */,
 				A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */,
 				57BE627E684A45D69E5ECD76 /* libPods.a in Frameworks */,
 			);
@@ -236,6 +265,16 @@
 		FEE12FCDBF1E43C69B3E5840 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A88DB5BF19F6A91800FF7807 /* AMap.bundle */,
+				A88DB5BB19F6A8D300FF7807 /* MAMapKit.framework */,
+				A88DB5B719F6A82800FF7807 /* Security.framework */,
+				A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */,
+				A88DB5B319F6A81400FF7807 /* OpenGLES.framework */,
+				A88DB5B119F6A80B00FF7807 /* libz.dylib */,
+				A88DB5AF19F6A7FF00FF7807 /* CoreTelephony.framework */,
+				A88DB5AD19F6A7F600FF7807 /* SystemConfiguration.framework */,
+				A88DB5AB19F6A7EC00FF7807 /* CoreLocation.framework */,
+				A88DB5A919F6A7E200FF7807 /* QuartzCore.framework */,
 				0B7DD70D1EB048628041DBA1 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -349,6 +388,7 @@
 					};
 					A8D58A4F19C1EB0F00EEFC98 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = SNC6RGUH57;
 					};
 					A8D58A6719C1EB0F00EEFC98 = {
 						CreatedOnToolsVersion = 6.0;
@@ -398,6 +438,7 @@
 			files = (
 				A8D58A5E19C1EB0F00EEFC98 /* Main.storyboard in Resources */,
 				A8D58A6319C1EB0F00EEFC98 /* LaunchScreen.xib in Resources */,
+				A88DB5C019F6A91800FF7807 /* AMap.bundle in Resources */,
 				A8D58A6019C1EB0F00EEFC98 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -687,9 +728,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Extern",
+					/Users/RInz/Downloads,
+				);
 				INFOPLIST_FILE = WhereRU/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WhereRU/WhereRU-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -701,9 +751,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Extern",
+					/Users/RInz/Downloads,
+				);
 				INFOPLIST_FILE = WhereRU/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "WhereRU/WhereRU-Bridging-Header.h";
 			};
 			name = Release;

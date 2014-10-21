@@ -40,7 +40,7 @@ public class avatarImageView: UIImageView {
     }
 
     @IBInspectable
-    var mask : Bool = 1{
+    var mask : Bool = true{
         didSet{
             layer.masksToBounds = mask
         }

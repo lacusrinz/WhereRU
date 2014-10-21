@@ -4,3 +4,4 @@
 
 #import "ViewPagerController.h"
 #import "RSKImageCropper.h"
+#import <MAMapKit/MAMapKit.h>
