@@ -55,7 +55,6 @@ class HostViewController: ViewPagerController, ViewPagerDelegate, ViewPagerDataS
             myViewController._name = "Content View \(index)"
             return myViewController
         case 1:
-            mapViewController._label = "Content View \(index)"
             return mapViewController
         default:
             return nil

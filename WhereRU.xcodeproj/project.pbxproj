@@ -24,8 +24,8 @@
 		A88DB5B419F6A81400FF7807 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B319F6A81400FF7807 /* OpenGLES.framework */; };
 		A88DB5B619F6A81E00FF7807 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */; };
 		A88DB5B819F6A82800FF7807 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B719F6A82800FF7807 /* Security.framework */; };
-		A88DB5BC19F6A8D300FF7807 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5BB19F6A8D300FF7807 /* MAMapKit.framework */; };
 		A88DB5C019F6A91800FF7807 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A88DB5BF19F6A91800FF7807 /* AMap.bundle */; };
+		A8968FF919F7D4300000F49A /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8968FF619F7D3E90000F49A /* MAMapKit.framework */; };
 		A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */; };
 		A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */; };
 		A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5A19C1EB0F00EEFC98 /* LoginViewController.swift */; };
@@ -101,8 +101,8 @@
 		A88DB5B319F6A81400FF7807 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
 		A88DB5B719F6A82800FF7807 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A88DB5BB19F6A8D300FF7807 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../../../Downloads/MAMapKit.framework; sourceTree = "<group>"; };
 		A88DB5BF19F6A91800FF7807 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
+		A8968FF619F7D3E90000F49A /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		A8D58A5019C1EB0F00EEFC98 /* WhereRU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereRU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A5419C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -136,7 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A88DB5BC19F6A8D300FF7807 /* MAMapKit.framework in Frameworks */,
+				A8968FF919F7D4300000F49A /* MAMapKit.framework in Frameworks */,
 				A88DB5B819F6A82800FF7807 /* Security.framework in Frameworks */,
 				A88DB5B619F6A81E00FF7807 /* libstdc++.6.0.9.dylib in Frameworks */,
 				A88DB5B419F6A81400FF7807 /* OpenGLES.framework in Frameworks */,
@@ -198,6 +198,7 @@
 		A8D58A4719C1EB0F00EEFC98 = {
 			isa = PBXGroup;
 			children = (
+				A8968FF619F7D3E90000F49A /* MAMapKit.framework */,
 				A8D58A5219C1EB0F00EEFC98 /* WhereRU */,
 				A8D58A6B19C1EB0F00EEFC98 /* WhereRUTests */,
 				A814C90419D01BF100735E7B /* IBDesignableViews */,
@@ -266,7 +267,6 @@
 			isa = PBXGroup;
 			children = (
 				A88DB5BF19F6A91800FF7807 /* AMap.bundle */,
-				A88DB5BB19F6A8D300FF7807 /* MAMapKit.framework */,
 				A88DB5B719F6A82800FF7807 /* Security.framework */,
 				A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */,
 				A88DB5B319F6A81400FF7807 /* OpenGLES.framework */,
