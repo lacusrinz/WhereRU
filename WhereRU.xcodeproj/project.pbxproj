@@ -198,7 +198,6 @@
 		A8D58A4719C1EB0F00EEFC98 = {
 			isa = PBXGroup;
 			children = (
-				A8968FF619F7D3E90000F49A /* MAMapKit.framework */,
 				A8D58A5219C1EB0F00EEFC98 /* WhereRU */,
 				A8D58A6B19C1EB0F00EEFC98 /* WhereRUTests */,
 				A814C90419D01BF100735E7B /* IBDesignableViews */,
@@ -266,6 +265,7 @@
 		FEE12FCDBF1E43C69B3E5840 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A8968FF619F7D3E90000F49A /* MAMapKit.framework */,
 				A88DB5BF19F6A91800FF7807 /* AMap.bundle */,
 				A88DB5B719F6A82800FF7807 /* Security.framework */,
 				A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */,

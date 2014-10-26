@@ -20,8 +20,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     @IBOutlet weak var recognizeID: UILabel!
     @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = ""
-    var _id:String = ""
+    var _name:String = "XXX"
+    var _id:String = "8754325"
     
     override func viewDidLoad() {
         super.viewDidLoad()

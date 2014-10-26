@@ -14,7 +14,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ICViewPager.xcscheme</key>
+		<key>Pods-JASwipeCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,57 +62,57 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>21D6D34273F47B6116D5DAF4</key>
+		<key>1596AFB28BE6F2B7F944F1A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2F12937A2734C7AAEDE1FA87</key>
+		<key>17C323833E595A264CC5CCFB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>471DE8DF529AD948FAFADBB6</key>
+		<key>2906A2F34856F5B9E97049FD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>585D57C40574901736AD4483</key>
+		<key>2A0919EF536C0900AC7DF71B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7CCB377F5398095FC9DE8C18</key>
+		<key>5BD31FBECD4B6EB527C0DE87</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7FB561577AEF5615C57EA348</key>
+		<key>65CE778C9EF4F9E699416A8B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8182A713EC4155D1F824D4CA</key>
+		<key>75342B18B815B30E9B8EF24D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A5D37D827E2A39801236187B</key>
+		<key>940642DDEA9CA90B93D33A30</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF47C509E1925467F6F5333C</key>
+		<key>A579A8BB36219C6F2CFB86A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F8C91B92D6730BA8B58A4D4F</key>
+		<key>C2C26578B574BA548CFF8E90</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FB1E194CB6C2BA67C71FA354</key>
+		<key>D0AC5346E47DB4BC5B18F1CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
