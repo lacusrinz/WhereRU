@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65CE778C9EF4F9E699416A8B"
+               BlueprintIdentifier = "DEE43B8CF8ECB1585DC9F802"
                BuildableName = "libPods-JASwipeCell.a"
                BlueprintName = "Pods-JASwipeCell"
                ReferencedContainer = "container:Pods.xcodeproj">

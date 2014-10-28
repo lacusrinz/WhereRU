@@ -275,7 +275,7 @@
         <!--Event-->
         <scene sceneID="kg7-nv-5ia">
             <objects>
-                <viewController id="trY-MJ-bd8" sceneMemberID="viewController">
+                <viewController id="trY-MJ-bd8" customClass="EventViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aWL-Ft-fif"/>
                         <viewControllerLayoutGuide type="bottom" id="gi9-dq-gbu"/>
@@ -319,6 +319,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Event" id="c51-4b-Mcw"/>
                     <navigationItem key="navigationItem" id="IMn-YP-gIl"/>
+                    <connections>
+                        <outlet property="tableView" destination="KWB-ZL-Eqx" id="gSs-8F-dVj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOI-YV-caX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

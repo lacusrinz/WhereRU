@@ -78,6 +78,12 @@
 #define COCOAPODS_VERSION_MINOR_Mantle_extobjc 3
 #define COCOAPODS_VERSION_PATCH_Mantle_extobjc 1
 
+// PureLayout
+#define COCOAPODS_POD_AVAILABLE_PureLayout
+#define COCOAPODS_VERSION_MAJOR_PureLayout 2
+#define COCOAPODS_VERSION_MINOR_PureLayout 0
+#define COCOAPODS_VERSION_PATCH_PureLayout 1
+
 // RSKImageCropper
 #define COCOAPODS_POD_AVAILABLE_RSKImageCropper
 #define COCOAPODS_VERSION_MAJOR_RSKImageCropper 0
