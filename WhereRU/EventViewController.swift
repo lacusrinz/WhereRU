@@ -45,9 +45,13 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:EventTableViewCell = EventTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "JATableViewCellIdentifier");
-        cell.textLabel.text = "111"
         cell.addActionButtons(self.rightButtons(), withButtonWidth: 60, withButtonPosition: JAButtonLocation.Right)
+        cell.configureCellWithTitle("\(indexPath.row)")
         cell.delegate = self
+        
+        cell.setNeedsLayout()
+        cell.setNeedsUpdateConstraints()
+        cell.updateConstraintsIfNeeded()
         return cell
     }
     
@@ -59,6 +63,16 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
+    func swipingLeftForCell(cell: JASwipeCell!) {
+        var indexPaths:NSArray = tableView.indexPathsForVisibleRows()!
+        for path in indexPaths{
+            var visibleCell:JASwipeCell = tableView.cellForRowAtIndexPath(path as NSIndexPath) as JASwipeCell
+            if (cell != visibleCell){
+                cell.resetContainerView()
+            }
+        }
+    }
+    
     func leftMostButtonSwipeCompleted(cell: JASwipeCell!) {
         //todo
     }
@@ -66,6 +80,14 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     func rightMostButtonSwipeCompleted(cell: JASwipeCell!) {
         //todo
     }
+    
+//    func scrollViewDidScroll(scrollView: UIScrollView) {
+//        var indexPaths:NSArray = tableView.indexPathsForVisibleRows()!
+//        for path in indexPaths{
+//            var cell:JASwipeCell = tableView.cellForRowAtIndexPath(path as NSIndexPath) as JASwipeCell
+//            cell.resetContainerView()
+//        }
+//    }
 
     /*
     // MARK: - Navigation

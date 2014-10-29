@@ -18,7 +18,6 @@ class EventTableViewCell: JASwipeCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         titleLabel.numberOfLines = 0
-        titleLabel.text = "xxx"
         self.topContentView.addSubview(titleLabel)
     }
     
@@ -27,6 +26,10 @@ class EventTableViewCell: JASwipeCell {
         titleLabel.autoPinEdgeToSuperviewEdge(ALEdge.Left, withInset: 10)
         titleLabel.autoAlignAxisToSuperviewAxis(ALAxis.Vertical)
         titleLabel.autoAlignAxisToSuperviewAxis(ALAxis.Horizontal)
+    }
+    
+    func configureCellWithTitle(title: NSString){
+        self.titleLabel.text = title
     }
 
 }
