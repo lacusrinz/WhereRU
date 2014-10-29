@@ -1,1 +1,0 @@
-../../../JASwipeCell/JASwipeCell/JASwipeCell.h
