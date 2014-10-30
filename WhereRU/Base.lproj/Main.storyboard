@@ -413,10 +413,10 @@
             </objects>
             <point key="canvasLocation" x="1668" y="1870"/>
         </scene>
-        <!--Map View Controller-->
+        <!--View Controller-->
         <scene sceneID="3cY-W2-2mv">
             <objects>
-                <viewController storyboardIdentifier="mapViewController" id="fLE-Zz-XK7" customClass="MapViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mapViewController" id="fLE-Zz-XK7" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WEe-rh-4PK"/>
                         <viewControllerLayoutGuide type="bottom" id="jTM-2x-yXV"/>

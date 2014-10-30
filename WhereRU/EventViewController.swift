@@ -11,13 +11,13 @@ import UIKit
 class EventViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, JASwipeCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    var tableData:NSArray?
+    var tableData:NSMutableArray?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        tableData = NSArray(array: ["xx","xxxx","xxxxx"])
+        tableData = NSMutableArray(array: ["x","xxx","xxxx"])
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -32,21 +32,24 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func rightButtons()->NSArray{
         var deleteRightButton: JAActionButton = JAActionButton(actionButtonWithTitle: "Delete", color: UIColor.redColor()) { (actionButton, cell) -> Void in
-            //todo
-            println("delete")
+            cell.completePinToTopViewAnimation()
+            self .rightMostButtonSwipeCompleted(cell)
         }
-        var buttonArray:NSArray = NSArray(array: [deleteRightButton])
+        var DisableRightButton: JAActionButton = JAActionButton(actionButtonWithTitle: "Disable", color: UIColor.greenColor()) { (actionButton, cell) -> Void in
+            //todo
+        }
+        var buttonArray:NSArray = NSArray(array: [deleteRightButton, DisableRightButton])
         return buttonArray;
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return self.tableData!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell:EventTableViewCell = EventTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "JATableViewCellIdentifier");
         cell.addActionButtons(self.rightButtons(), withButtonWidth: 60, withButtonPosition: JAButtonLocation.Right)
-        cell.configureCellWithTitle("\(indexPath.row)")
+        cell.configureCellWithTitle("\(tableData!.objectAtIndex(indexPath.row))")
         cell.delegate = self
         
         cell.setNeedsLayout()
@@ -67,8 +70,8 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
         var indexPaths:NSArray = tableView.indexPathsForVisibleRows()!
         for path in indexPaths{
             var visibleCell:JASwipeCell = tableView.cellForRowAtIndexPath(path as NSIndexPath) as JASwipeCell
-            if (cell != visibleCell){
-                cell.resetContainerView()
+            if (visibleCell != cell){
+                visibleCell.resetContainerView()
             }
         }
     }
@@ -78,16 +81,21 @@ class EventViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func rightMostButtonSwipeCompleted(cell: JASwipeCell!) {
-        //todo
+        var indexPath:NSIndexPath = self.tableView.indexPathForCell(cell)!
+        self.tableData?.removeObjectAtIndex(indexPath.row)
+        
+        self.tableView.beginUpdates()
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        self.tableView.endUpdates()
     }
     
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        var indexPaths:NSArray = tableView.indexPathsForVisibleRows()!
-//        for path in indexPaths{
-//            var cell:JASwipeCell = tableView.cellForRowAtIndexPath(path as NSIndexPath) as JASwipeCell
-//            cell.resetContainerView()
-//        }
-//    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var indexPaths:NSArray = tableView.indexPathsForVisibleRows()!
+        for path in indexPaths{
+            var cell:JASwipeCell = tableView.cellForRowAtIndexPath(path as NSIndexPath) as JASwipeCell
+            cell.resetContainerView()
+        }
+    }
 
     /*
     // MARK: - Navigation
