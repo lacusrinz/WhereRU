@@ -3,7 +3,7 @@
 //
 
 #import "RSKImageCropper.h"
+
 #import <MAMapKit/MAMapKit.h>
-#import "JASwipeCell.h"
-#import "JAActionButton.h"
-#import "ALView+PureLayout.h"
+
+#import "SWTableViewCell.h"
