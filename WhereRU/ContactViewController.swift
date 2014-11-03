@@ -1,21 +1,21 @@
 //
-//  EventViewController.swift
+//  ContactViewController.swift
 //  WhereRU
 //
-//  Created by RInz on 14/10/26.
+//  Created by RInz on 14/11/3.
 //  Copyright (c) 2014年 RInz. All rights reserved.
 //
 
 import UIKit
 
-class EventViewController: UITableViewController, SWTableViewCellDelegate{
-    
+class ContactViewController: UITableViewController, SWTableViewCellDelegate {
+
     var tableData:NSMutableArray?
     var rowsCount:NSInteger = 0
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         tableData = NSMutableArray(array: ["x","xxx","xxxx"])
         rowsCount = tableData!.count
@@ -54,10 +54,10 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cellIdentifier:NSString = "eventTableViewCell"
-        var cell:EventTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? EventTableViewCell
-
-//        cell = EventTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellIdentifier)
+        let cellIdentifier:NSString = "contactTableViewCell"
+        var cell:ContactTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? ContactTableViewCell
+        
+        //        cell = EventTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellIdentifier)
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
@@ -75,15 +75,57 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
         return true
     }
     
+    /*
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
 
-    
+        // Configure the cell...
+
+        return cell
+    }
+    */
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return NO if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            // Delete the row from the data source
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+        } else if editingStyle == .Insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return NO if you do not want the item to be re-orderable.
+        return true
+    }
+    */
 
     /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
+        // Get the new view controller using [segue destinationViewController].
         // Pass the selected object to the new view controller.
     }
     */
