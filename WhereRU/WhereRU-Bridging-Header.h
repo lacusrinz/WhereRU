@@ -7,3 +7,5 @@
 #import <MAMapKit/MAMapKit.h>
 
 #import "SWTableViewCell.h"
+
+#import <ShareSDK/ShareSDK.h>

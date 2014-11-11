@@ -9,9 +9,9 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var password: UITextField!
+    
+    @IBOutlet weak var weiboLoginButton: UIButton!
+    @IBOutlet weak var wxLoginButton: UIButton!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        var user = User.shared
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,13 +28,22 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func back(sender: AnyObject) {
+    @IBAction func weiboLogin(sender: AnyObject) {
+        ShareSDK.getUserInfoWithType(ShareTypeSinaWeibo, authOptions: nil) {
+            (result, userInfo, error) -> Void in
+            if(result){
+                print("uid = \(userInfo.uid())")
+                print("name = \(userInfo.nickname())")
+                print("icon = \(userInfo.profileImage())")
+            }
+        }
+    }
+    @IBAction func wxLogin(sender: AnyObject) {
+        //todo
     }
 
-    @IBAction func forgetPassword(sender: AnyObject) {
-    }
-    
-    @IBAction func signin(sender: AnyObject) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //todo
     }
 }
 
