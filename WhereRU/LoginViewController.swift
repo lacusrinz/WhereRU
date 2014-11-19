@@ -20,7 +20,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var user = User.shared
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,6 +34,11 @@ class LoginViewController: UIViewController {
                 println("uid = \(userInfo.uid())")
                 println("name = \(userInfo.nickname())")
                 println("icon = \(userInfo.profileImage())")
+                User.shared.name = userInfo.nickname()
+                User.shared.uid = userInfo.uid()
+                var avatar:NSDictionary = userInfo.sourceData()
+                User.shared.avatar = NSURL(string: avatar.objectForKey("avatar_hd") as String)
+                User.shared.site_name = "weibo"
                 
                 var manager = AFHTTPRequestOperationManager()
                 var socialUserSearchURL:NSString = "http://localhost:8000/socialuser?search=\(userInfo.uid())"
@@ -47,6 +51,7 @@ class LoginViewController: UIViewController {
                         if(count == 1){
                             var id = response["results"][0]["id"].string
                             println("segue !")
+                            self.performSegueWithIdentifier("login", sender: self)
                         }else{
                             var socialUserCreateURL:NSString = "http://localhost:8000/socialuser/"
                             var params:NSMutableDictionary = NSMutableDictionary(capacity: 6)
@@ -59,6 +64,7 @@ class LoginViewController: UIViewController {
                                 parameters: params,
                                 success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
                                     println("post success! \(userInfo.nickname())")
+                                    self.performSegueWithIdentifier("login", sender: self)
                                 },
                                 failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                                     println("Error: " + error.localizedDescription)
@@ -78,7 +84,9 @@ class LoginViewController: UIViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //todo
+        if(segue.identifier == "login"){
+            //
+        }
     }
 }
 

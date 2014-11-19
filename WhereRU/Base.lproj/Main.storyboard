@@ -248,7 +248,7 @@
                     <connections>
                         <outlet property="weiboLoginButton" destination="T6f-iV-yur" id="6zk-Rn-8FE"/>
                         <outlet property="wxLoginButton" destination="IUe-zt-2F1" id="Ptc-xd-rY2"/>
-                        <segue destination="Gkz-UB-kM1" kind="show" identifier="signin" id="sYl-ur-Ych"/>
+                        <segue destination="Gkz-UB-kM1" kind="show" identifier="login" id="sYl-ur-Ych"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qre-96-T62" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -20,14 +20,15 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     @IBOutlet weak var recognizeID: UILabel!
     @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = "XXX"
-    var _id:String = "8754325"
+    var _name:String = User.shared.name!
+    var _id:String = User.shared.uid!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         name.text = _name
         recognizeID.text = _id
+        avatar.setImageWithURL(User.shared.avatar, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
         avatar.addGestureRecognizer(avatarTap)
     }
