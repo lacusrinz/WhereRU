@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -286,9 +286,9 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-0Z-d4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6452" y="-528"/>
+            <point key="canvasLocation" x="5641" y="-528"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Events-->
         <scene sceneID="pa4-FL-Ihz">
             <objects>
                 <viewController id="MSc-Bs-5Fz" sceneMemberID="viewController">
@@ -301,10 +301,75 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Events" id="koq-0A-1x8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="283-zc-6re" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6320" y="-1182"/>
+            <point key="canvasLocation" x="6334" y="-528"/>
+        </scene>
+        <!--Add Contacts-->
+        <scene sceneID="IqV-LT-gZB">
+            <objects>
+                <viewController id="LBV-IX-PVo" customClass="AddContactViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LDY-aE-WAQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="ABm-nN-8NV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9vd-cK-niy">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pha-Qu-nhB">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="LBV-IX-PVo" id="FNR-3u-3R1"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="pha-Qu-nhB" firstAttribute="leading" secondItem="9vd-cK-niy" secondAttribute="leading" id="8aP-JQ-4wN"/>
+                            <constraint firstItem="pha-Qu-nhB" firstAttribute="top" secondItem="LDY-aE-WAQ" secondAttribute="bottom" id="itn-vu-Xqu"/>
+                            <constraint firstAttribute="trailing" secondItem="pha-Qu-nhB" secondAttribute="trailing" id="maP-WY-7OG"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Contacts" id="5ok-PC-Yqk"/>
+                    <connections>
+                        <outlet property="contactSearchBar" destination="pha-Qu-nhB" id="1Se-r8-RgT"/>
+                        <outlet property="searchDisplayController" destination="xAl-mf-nMQ" id="FUK-ks-ivO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bXh-ec-1ZK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="xAl-mf-nMQ">
+                    <connections>
+                        <outlet property="delegate" destination="LBV-IX-PVo" id="gg7-Ix-1wf"/>
+                        <outlet property="searchBar" destination="pha-Qu-nhB" id="fiK-gP-r0i"/>
+                        <outlet property="searchContentsController" destination="LBV-IX-PVo" id="KjZ-wn-l7t"/>
+                        <outlet property="searchResultsDataSource" destination="LBV-IX-PVo" id="5IL-mT-Jjs"/>
+                        <outlet property="searchResultsDelegate" destination="LBV-IX-PVo" id="D3D-zd-Bdg"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="6334" y="136"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="idH-T5-BZg">
+            <objects>
+                <viewController id="09j-RC-4oE" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qLx-ZG-Fed"/>
+                        <viewControllerLayoutGuide type="bottom" id="6jo-4f-q7c"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zn9-O7-rFH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0ZT-ve-VLM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6334" y="851"/>
         </scene>
         <!--My-->
         <scene sceneID="CXx-FY-1Hd">
@@ -389,7 +454,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5641" y="895"/>
+            <point key="canvasLocation" x="5641" y="1789"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="BmQ-5I-TiN">
@@ -587,7 +652,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zJ-ez-R9p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5644" y="-528"/>
+            <point key="canvasLocation" x="4829" y="-528"/>
         </scene>
         <!--Contacts-->
         <scene sceneID="e6y-3u-m81">
@@ -603,6 +668,9 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G4u-U4-chN" id="AQC-oO-wYE">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="09j-RC-4oE" kind="showDetail" id="Ukc-zh-sVi"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -611,7 +679,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Contacts" id="nzi-70-dd9">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="ZkU-jL-6H4"/>
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="ZkU-jL-6H4">
+                            <connections>
+                                <segue destination="LBV-IX-PVo" kind="show" id="PYh-jg-hbm"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BAl-tG-3a2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -654,7 +726,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xtg-5s-K3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4829" y="895"/>
+            <point key="canvasLocation" x="4829" y="1789"/>
         </scene>
     </scenes>
     <resources>

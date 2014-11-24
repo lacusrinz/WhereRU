@@ -58,6 +58,7 @@
 		A8D58A6019C1EB0F00EEFC98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A5F19C1EB0F00EEFC98 /* Images.xcassets */; };
 		A8D58A6319C1EB0F00EEFC98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A6119C1EB0F00EEFC98 /* LaunchScreen.xib */; };
 		A8D58A6F19C1EB0F00EEFC98 /* WhereRUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */; };
+		A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -168,6 +169,7 @@
 		A8D58A6819C1EB0F00EEFC98 /* WhereRUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereRUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A6D19C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereRUTests.swift; sourceTree = "<group>"; };
+		A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		AD89DB976DA14163BD3289AD /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -272,6 +274,7 @@
 				A8BA437B19FD446A004A8300 /* EventViewController.swift */,
 				A8B8A1261A07C7890000FB6F /* ContactViewController.swift */,
 				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
+				A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */,
 				A811A23C19D408000079B7F8 /* MapViewController.swift */,
 			);
 			name = Controller;
@@ -714,6 +717,7 @@
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
 				A811A23E19D408000079B7F8 /* MapViewController.swift in Sources */,
+				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
 			);

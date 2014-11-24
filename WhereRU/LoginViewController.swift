@@ -12,6 +12,8 @@ class LoginViewController: UIViewController {
     
     @IBOutlet weak var weiboLoginButton: UIButton!
     @IBOutlet weak var wxLoginButton: UIButton!
+    var userinfo:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    var manager = AFHTTPRequestOperationManager()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,6 +22,29 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        var uid:String? = self.userinfo.stringForKey("uid") as String?
+        if uid != ""{
+            var socialUserSearchURL:NSString = "http://localhost:8000/socialuser?search=" + uid!
+            SVProgressHUD.show()
+            self.manager.GET(socialUserSearchURL,
+                parameters: nil,
+                success: {
+                    (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    var response = JSONValue(object)
+                    var count = response["count"].integer
+                    if count == 1{
+                        User.shared.uid = response["results"][0]["site_uid"].string
+                        User.shared.name = response["results"][0]["username"].string
+                        User.shared.avatar = NSURL(string: response["results"][0]["avatar"].string!)
+                        User.shared.site_name = "ShareTypeSinaWeibo"
+                        SVProgressHUD.showSuccessWithStatus("Welcome back!")
+                        self.performSegueWithIdentifier("login", sender: self)
+                    }
+                }) {
+                    (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    //
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,36 +59,46 @@ class LoginViewController: UIViewController {
                 println("uid = \(userInfo.uid())")
                 println("name = \(userInfo.nickname())")
                 println("icon = \(userInfo.profileImage())")
-                User.shared.name = userInfo.nickname()
-                User.shared.uid = userInfo.uid()
-                var avatar:NSDictionary = userInfo.sourceData()
-                User.shared.avatar = NSURL(string: avatar.objectForKey("avatar_hd") as String)
-                User.shared.site_name = "weibo"
                 
-                var manager = AFHTTPRequestOperationManager()
                 var socialUserSearchURL:NSString = "http://localhost:8000/socialuser?search=\(userInfo.uid())"
-                manager.GET(socialUserSearchURL,
+                self.manager.GET(socialUserSearchURL,
                     parameters: nil,
                     success: {
                         (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
                         var response = JSONValue(responseObject)
                         var count = response["count"].integer
                         if(count == 1){
-                            var id = response["results"][0]["id"].string
+                            User.shared.uid = response["results"][0]["site_uid"].string
+                            User.shared.name = response["results"][0]["username"].string
+                            User.shared.avatar = NSURL(string: response["results"][0]["avatar"].string!)
+                            User.shared.site_name = "ShareTypeSinaWeibo"
+                            
+                            self.userinfo.setObject(User.shared.uid, forKey: "uid")
+                            self.userinfo.synchronize()
+                            
                             println("segue !")
                             self.performSegueWithIdentifier("login", sender: self)
                         }else{
+                            var sourceData:NSDictionary = userInfo.sourceData()
                             var socialUserCreateURL:NSString = "http://localhost:8000/socialuser/"
                             var params:NSMutableDictionary = NSMutableDictionary(capacity: 6)
                             params.setObject(userInfo.nickname(), forKey: "username")
                             params.setObject("ShareTypeSinaWeibo", forKey: "site_name")
                             params.setObject(userInfo.uid(), forKey: "site_uid")
-                            params.setObject(userInfo.profileImage(), forKey: "avatar")
+                            params.setObject(sourceData.objectForKey("avatar_hd")!, forKey: "avatar")
                             params.setObject(true, forKey: "is_active")
-                            manager.POST(socialUserCreateURL,
+                            self.manager.POST(socialUserCreateURL,
                                 parameters: params,
                                 success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
                                     println("post success! \(userInfo.nickname())")
+                                    User.shared.name = userInfo.nickname()
+                                    User.shared.uid = userInfo.uid()
+                                    User.shared.avatar = NSURL(string: sourceData.objectForKey("avatar_hd") as String)
+                                    User.shared.site_name = "ShareTypeSinaWeibo"
+                                    
+                                    self.userinfo.setObject(User.shared.uid, forKey: "uid")
+                                    self.userinfo.synchronize()
+                                    
                                     self.performSegueWithIdentifier("login", sender: self)
                                 },
                                 failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
@@ -84,7 +119,7 @@ class LoginViewController: UIViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if(segue.identifier == "login"){
+        if segue.identifier == "login"{
             //
         }
     }
