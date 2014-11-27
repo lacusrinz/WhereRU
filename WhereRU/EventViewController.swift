@@ -15,7 +15,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         tableData = NSMutableArray(array: ["x","xxx","xxxx"])
         rowsCount = tableData!.count

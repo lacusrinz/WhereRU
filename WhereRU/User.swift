@@ -9,10 +9,11 @@
 import UIKit
 
 public class User  {
-    var name:NSString?
-    var uid:NSString?
-    var site_name:NSString?
+    var username:String?
+    var nickname:String?
+    var from:String?
     var avatar:NSURL?
+    var is_social:Bool = false
     
     public class var shared : User {
         return Inner.instance

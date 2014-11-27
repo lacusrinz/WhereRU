@@ -15,16 +15,6 @@
 		A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; };
 		A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
-		A88DB5AA19F6A7E200FF7807 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5A919F6A7E200FF7807 /* QuartzCore.framework */; };
-		A88DB5AC19F6A7EC00FF7807 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5AB19F6A7EC00FF7807 /* CoreLocation.framework */; };
-		A88DB5AE19F6A7F600FF7807 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5AD19F6A7F600FF7807 /* SystemConfiguration.framework */; };
-		A88DB5B019F6A7FF00FF7807 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5AF19F6A7FF00FF7807 /* CoreTelephony.framework */; };
-		A88DB5B219F6A80B00FF7807 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B119F6A80B00FF7807 /* libz.dylib */; };
-		A88DB5B419F6A81400FF7807 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B319F6A81400FF7807 /* OpenGLES.framework */; };
-		A88DB5B619F6A81E00FF7807 /* libstdc++.6.0.9.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */; };
-		A88DB5B819F6A82800FF7807 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A88DB5B719F6A82800FF7807 /* Security.framework */; };
-		A88DB5C019F6A91800FF7807 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = A88DB5BF19F6A91800FF7807 /* AMap.bundle */; };
-		A8968FF919F7D4300000F49A /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8968FF619F7D3E90000F49A /* MAMapKit.framework */; };
 		A8B8A12119FF0D310000FB6F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */; };
 		A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */; };
 		A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1261A07C7890000FB6F /* ContactViewController.swift */; };
@@ -118,16 +108,6 @@
 		A814C8E119CFF47A00735E7B /* avatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatarImageView.h; sourceTree = "<group>"; };
 		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
-		A88DB5A919F6A7E200FF7807 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		A88DB5AB19F6A7EC00FF7807 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		A88DB5AD19F6A7F600FF7807 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		A88DB5AF19F6A7FF00FF7807 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
-		A88DB5B119F6A80B00FF7807 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		A88DB5B319F6A81400FF7807 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.6.0.9.dylib"; path = "usr/lib/libstdc++.6.0.9.dylib"; sourceTree = SDKROOT; };
-		A88DB5B719F6A82800FF7807 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		A88DB5BF19F6A91800FF7807 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = AMap.bundle; sourceTree = "<group>"; };
-		A8968FF619F7D3E90000F49A /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
 		A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1261A07C7890000FB6F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
@@ -195,22 +175,13 @@
 				A8B8A18D1A10AD9B0000FB6F /* libsqlite3.dylib in Frameworks */,
 				A8B8A18B1A10796E0000FB6F /* libicucore.dylib in Frameworks */,
 				A8B8A1881A1073EC0000FB6F /* ShareSDKFlatShareViewUI.framework in Frameworks */,
-				A8968FF919F7D4300000F49A /* MAMapKit.framework in Frameworks */,
-				A88DB5B819F6A82800FF7807 /* Security.framework in Frameworks */,
 				A8B8A1831A1073EC0000FB6F /* libSinaWeiboSDK.a in Frameworks */,
 				A8B8A17C1A1073EC0000FB6F /* WeChatConnection.framework in Frameworks */,
-				A88DB5B619F6A81E00FF7807 /* libstdc++.6.0.9.dylib in Frameworks */,
 				A8B8A1861A1073EC0000FB6F /* ShareSDK.framework in Frameworks */,
-				A88DB5B419F6A81400FF7807 /* OpenGLES.framework in Frameworks */,
-				A88DB5B219F6A80B00FF7807 /* libz.dylib in Frameworks */,
 				A8B8A1891A1073EC0000FB6F /* ShareSDKShareActionSheet.framework in Frameworks */,
-				A88DB5B019F6A7FF00FF7807 /* CoreTelephony.framework in Frameworks */,
 				A8B8A1791A1073EC0000FB6F /* QQConnection.framework in Frameworks */,
 				A8B8A1811A1073EC0000FB6F /* TencentOpenAPI.framework in Frameworks */,
-				A88DB5AE19F6A7F600FF7807 /* SystemConfiguration.framework in Frameworks */,
 				A8B8A17D1A1073EC0000FB6F /* AGCommon.framework in Frameworks */,
-				A88DB5AC19F6A7EC00FF7807 /* CoreLocation.framework in Frameworks */,
-				A88DB5AA19F6A7E200FF7807 /* QuartzCore.framework in Frameworks */,
 				A8B8A1851A1073EC0000FB6F /* libWeChatSDK.a in Frameworks */,
 				A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */,
 				A8B8A17B1A1073EC0000FB6F /* TwitterConnection.framework in Frameworks */,
@@ -461,16 +432,6 @@
 				A8B8A18C1A10AD9B0000FB6F /* libsqlite3.dylib */,
 				A8B8A18A1A10796E0000FB6F /* libicucore.dylib */,
 				A8B8A1591A1073EB0000FB6F /* ShareSDK */,
-				A8968FF619F7D3E90000F49A /* MAMapKit.framework */,
-				A88DB5BF19F6A91800FF7807 /* AMap.bundle */,
-				A88DB5B719F6A82800FF7807 /* Security.framework */,
-				A88DB5B519F6A81E00FF7807 /* libstdc++.6.0.9.dylib */,
-				A88DB5B319F6A81400FF7807 /* OpenGLES.framework */,
-				A88DB5B119F6A80B00FF7807 /* libz.dylib */,
-				A88DB5AF19F6A7FF00FF7807 /* CoreTelephony.framework */,
-				A88DB5AD19F6A7F600FF7807 /* SystemConfiguration.framework */,
-				A88DB5AB19F6A7EC00FF7807 /* CoreLocation.framework */,
-				A88DB5A919F6A7E200FF7807 /* QuartzCore.framework */,
 				0B7DD70D1EB048628041DBA1 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -639,7 +600,6 @@
 				A8B8A17F1A1073EC0000FB6F /* Resource.bundle in Resources */,
 				A8B8A1871A1073EC0000FB6F /* ShareSDKFlatShareViewUI.bundle in Resources */,
 				A8B8A1821A1073EC0000FB6F /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				A88DB5C019F6A91800FF7807 /* AMap.bundle in Resources */,
 				A8D58A6019C1EB0F00EEFC98 /* Images.xcassets in Resources */,
 				A8B8A1841A1073EC0000FB6F /* WeiboSDK.bundle in Resources */,
 			);
