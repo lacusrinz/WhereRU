@@ -28,7 +28,11 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
 
         name.text = _name
         recognizeID.text = _id
-        avatar.setImageWithURL(User.shared.avatar, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        var avatarURL:NSURL? = nil
+        if User.shared.avatar != ""{
+             avatarURL = NSURL(string: User.shared.avatar!)
+        }
+        avatar.setImageWithURL(avatarURL, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
         avatar.addGestureRecognizer(avatarTap)
     }

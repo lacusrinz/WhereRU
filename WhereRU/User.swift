@@ -12,7 +12,7 @@ public class User  {
     var username:String?
     var nickname:String?
     var from:String?
-    var avatar:NSURL?
+    var avatar:String?
     var is_social:Bool = false
     
     public class var shared : User {
