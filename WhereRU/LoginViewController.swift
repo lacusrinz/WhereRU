@@ -14,10 +14,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var wxLoginButton: UIButton!
     var userinfo:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     var manager = AFHTTPRequestOperationManager()
+    var authToken:String?
     
     var loginURL:String = "http://localhost:8000/auth/login"
     var meURL:String = "http://localhost:8000/auth/me"
-    var registrURL:NSString = "http://localhost:8000/auth/register"
+    var registrURL:String = "http://localhost:8000/auth/register"
+    var friendsURL:String = "http://localhost:8000/friends"
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -37,9 +39,9 @@ class LoginViewController: UIViewController {
                 success: {
                     (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
-                    var auth_token:String! = response["auth_token"].string
-                    if (auth_token != ""){
-                        self.manager.requestSerializer.setValue("Token "+auth_token, forHTTPHeaderField: "Authorization")
+                    self.authToken = response["auth_token"].string
+                    if (self.authToken != ""){
+                        self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
                         self.manager.GET(self.meURL,
                             parameters: nil,
                             success: {
@@ -71,7 +73,7 @@ class LoginViewController: UIViewController {
                 println("icon = \(userInfo.profileImage())")
                 
                 var params:NSMutableDictionary = NSMutableDictionary(capacity: 2)
-                params.setObject(userInfo.nickname() + "_ShareTypeSinaWeibo", forKey: "username")
+                params.setObject(userInfo.uid() + "_ShareTypeSinaWeibo", forKey: "username")
                 params.setObject(",mnbvcxz", forKey: "password")
                 
                 self.manager.POST(self.loginURL,
@@ -79,9 +81,9 @@ class LoginViewController: UIViewController {
                     success: {
                         (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
                         var response = JSONValue(responseObject)
-                        var auth_token = response["auth_token"].string
-                        if(auth_token != ""){
-                            self.manager.requestSerializer.setValue("Token "+auth_token!, forHTTPHeaderField: "Authorization")
+                        self.authToken = response["auth_token"].string
+                        if(self.authToken != ""){
+                            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
                             self.manager.GET(self.meURL,
                                 parameters: nil,
                                 success: {
@@ -113,7 +115,7 @@ class LoginViewController: UIViewController {
                             var sourceData:NSDictionary = userInfo.sourceData()
                             
                             var params:NSMutableDictionary = NSMutableDictionary(capacity: 6)
-                            params.setObject(userInfo.nickname() + "_ShareTypeSinaWeibo", forKey: "username")
+                            params.setObject(userInfo.uid() + "_ShareTypeSinaWeibo", forKey: "username")
                             params.setObject(",mnbvcxz", forKey: "password")
                             params.setObject(userInfo.nickname(), forKey: "nickname")
                             params.setObject("ShareTypeSinaWeibo", forKey: "From")
@@ -125,6 +127,7 @@ class LoginViewController: UIViewController {
                                     println("post success! \(userInfo.nickname())")
                                     
                                     var response = JSONValue(responseObject)
+                                    self.authToken = response["auth_token"].string
                                     User.shared.username = response["username"].string
                                     User.shared.nickname = response["nickname"].string
                                     User.shared.from = response["From"].string
@@ -152,7 +155,23 @@ class LoginViewController: UIViewController {
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "login"{
-            //
+            self.manager.requestSerializer.clearAuthorizationHeader()
+            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+            self.manager.GET(friendsURL,
+                parameters: nil,
+                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    var response = JSONValue(object)
+                    var count = response["count"].integer
+                    for var index = 0; index<count; ++index{
+                        var friend = Friend()
+                        friend.to_user = response["results"][index]["nickname"].string
+                        friend.from_user = User.shared.nickname
+                        User.shared.friends.append(friend)
+                    }
+                },
+                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    //
+            })
         }
     }
 }
