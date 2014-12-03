@@ -19,7 +19,7 @@ class LoginViewController: UIViewController {
     var loginURL:String = "http://localhost:8000/auth/login"
     var meURL:String = "http://localhost:8000/auth/me"
     var registrURL:String = "http://localhost:8000/auth/register"
-    var friendsURL:String = "http://localhost:8000/friends"
+    var friendsURL:String = "http://localhost:8000/friends/"
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -156,8 +156,9 @@ class LoginViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "login"{
             self.manager.requestSerializer.clearAuthorizationHeader()
-            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-            self.manager.GET(friendsURL,
+            var token = "Token "+self.authToken!
+            self.manager.requestSerializer.setValue(token, forHTTPHeaderField: "Authorization")
+            self.manager.GET(self.friendsURL,
                 parameters: nil,
                 success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
@@ -170,7 +171,7 @@ class LoginViewController: UIViewController {
                     }
                 },
                 failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    //
+                    println("Error: " + error.localizedDescription)
             })
         }
     }

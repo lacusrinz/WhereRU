@@ -10,15 +10,15 @@ import UIKit
 
 class ContactViewController: UITableViewController, SWTableViewCellDelegate {
 
-    var tableData:NSMutableArray?
+    var tableData = [Friend]()
     var rowsCount:NSInteger = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
-        tableData = NSMutableArray(array: ["x","xxx","xxxx"])
-        rowsCount = tableData!.count
+        tableData = User.shared.friends
+        rowsCount = tableData.count
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -61,7 +61,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
-        cell?.textLabel.text = "xxxx"
+        cell?.textLabel.text = tableData[indexPath.row].to_user
         
         return cell!
     }
