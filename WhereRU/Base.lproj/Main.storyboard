@@ -350,7 +350,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="6334" y="136"/>
+            <point key="canvasLocation" x="7112" y="139"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="idH-T5-BZg">
@@ -368,7 +368,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ZT-ve-VLM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6334" y="851"/>
+            <point key="canvasLocation" x="6358" y="139"/>
         </scene>
         <!--My-->
         <scene sceneID="CXx-FY-1Hd">
@@ -453,12 +453,12 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="5641" y="1789"/>
+            <point key="canvasLocation" x="5641" y="869"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Animated Tab Bar Controller-->
         <scene sceneID="BmQ-5I-TiN">
             <objects>
-                <tabBarController id="Gkz-UB-kM1" sceneMemberID="viewController">
+                <tabBarController id="Gkz-UB-kM1" customClass="RAMAnimatedTabBarController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="vH4-8t-lGT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -468,7 +468,7 @@
                     <connections>
                         <segue destination="GVe-s8-hIb" kind="relationship" relationship="viewControllers" id="RBt-ze-L8g"/>
                         <segue destination="7YY-ve-Htu" kind="relationship" relationship="viewControllers" id="oXH-40-Mw2"/>
-                        <segue destination="xdX-ML-fzp" kind="relationship" relationship="viewControllers" id="9d8-J0-fbX"/>
+                        <segue destination="xdX-ML-fzp" kind="relationship" relationship="viewControllers" id="4b6-N1-WZ7"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GtK-Dw-WmI" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -634,11 +634,20 @@
             </objects>
             <point key="canvasLocation" x="1668" y="-618"/>
         </scene>
-        <!--Events-->
+        <!--地点-->
         <scene sceneID="2EE-WY-uZo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GVe-s8-hIb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Events" image="icon_pin" id="0IY-ms-GE0"/>
+                    <tabBarItem key="tabBarItem" title="地点" image="icon_pin" id="0IY-ms-GE0" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="ZuT-94-hg3" id="AlA-ZP-J1v"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ldJ-Ni-Q9i">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -650,6 +659,16 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zJ-ez-R9p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="ZuT-94-hg3" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
+                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
+                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="4829" y="-528"/>
         </scene>
@@ -689,11 +708,20 @@
             </objects>
             <point key="canvasLocation" x="5641" y="138"/>
         </scene>
-        <!--Contacts-->
+        <!--好友-->
         <scene sceneID="0CH-Uy-ayv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7YY-ve-Htu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Contacts" image="icon_user" id="ZnP-fk-fCC"/>
+                    <tabBarItem key="tabBarItem" title="好友" image="icon_user" id="ZnP-fk-fCC" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="06w-b8-Hrj" id="azU-xb-oFc"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xmf-5x-jaU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -705,14 +733,33 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iev-qX-39S" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="06w-b8-Hrj" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
+                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
+                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
             <point key="canvasLocation" x="4829" y="138"/>
         </scene>
-        <!--My-->
+        <!--我-->
         <scene sceneID="aKO-sc-MKK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xdX-ML-fzp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="My" image="Settings" id="zab-3y-b8o"/>
+                    <tabBarItem key="tabBarItem" title="我" image="Settings" id="zab-3y-b8o" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <outlet property="animation" destination="9yx-if-2pb" id="qyJ-C2-9xC"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7BE-P2-k1q">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -724,8 +771,18 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xtg-5s-K3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="9yx-if-2pb" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
+                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
+                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </customObject>
             </objects>
-            <point key="canvasLocation" x="4829" y="1789"/>
+            <point key="canvasLocation" x="4829" y="869"/>
         </scene>
     </scenes>
     <resources>
