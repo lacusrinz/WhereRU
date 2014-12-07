@@ -61,7 +61,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
-        cell?.textLabel.text = "xxxx"
+        cell?.textLabel?.text="xxxx"//.textLabel.text = "xxxx"
         
         return cell!
     }

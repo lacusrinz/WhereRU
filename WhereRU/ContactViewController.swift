@@ -61,7 +61,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
-        cell?.textLabel.text = tableData[indexPath.row].to_user
+        cell?.textLabel!.text = tableData[indexPath.row].to_user
         
         return cell!
     }
