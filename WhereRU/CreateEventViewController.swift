@@ -9,17 +9,17 @@
 import UIKit
 import avatarImageView
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate {
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
     @IBOutlet weak var eventTextView: UITextView!
     @IBOutlet weak var participatorCollectionView: UICollectionView!
-
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         locationMapView.delegate = self
         locationMapView.showsUserLocation = true
         locationMapView.userTrackingMode = MAUserTrackingMode.Follow
@@ -27,6 +27,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate {
         
         eventTextView.layer.borderColor = UIColor.blackColor().CGColor
         eventTextView.layer.borderWidth = 1
+        
+        participatorCollectionView.delegate = self
+        participatorCollectionView.dataSource = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,6 +37,15 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cellIdentifier:NSString = "ParticipatorCollectionViewCell"
+        var cell: ParticipatorCollectionViewCell = participatorCollectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as ParticipatorCollectionViewCell
+        return cell
+    }
 
     /*
     // MARK: - Navigation

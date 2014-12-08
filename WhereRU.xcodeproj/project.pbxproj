@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		57BE627E684A45D69E5ECD76 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7DD70D1EB048628041DBA1 /* libPods.a */; };
 		A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */; };
+		A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */; };
 		A80CDDFE1A2FEF070007C345 /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80CDDF71A2FEF070007C345 /* RAMTransitionItemAnimation.swift */; };
 		A80CDDFF1A2FEF070007C345 /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80CDDF81A2FEF070007C345 /* RAMAnimatedTabBarController.swift */; };
 		A80CDE001A2FEF070007C345 /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80CDDF91A2FEF070007C345 /* RAMItemAnimationProtocol.swift */; };
 		A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A811A23819D407EC0079B7F8 /* MyViewController.swift */; };
-		A811A23E19D408000079B7F8 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A811A23C19D408000079B7F8 /* MapViewController.swift */; };
 		A814C8D719CFECB600735E7B /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C8D619CFECB600735E7B /* SigninViewController.swift */; };
 		A814C8E219CFF47A00735E7B /* avatarImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A814C8E119CFF47A00735E7B /* avatarImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; };
@@ -105,11 +105,11 @@
 		0B7DD70D1EB048628041DBA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33BB9B7AA719B13BE841C77 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
+		A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		A80CDDF71A2FEF070007C345 /* RAMTransitionItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTransitionItemAnimation.swift; sourceTree = "<group>"; };
 		A80CDDF81A2FEF070007C345 /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
 		A80CDDF91A2FEF070007C345 /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		A811A23819D407EC0079B7F8 /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
-		A811A23C19D408000079B7F8 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		A811A24019D40E4A0079B7F8 /* WhereRU-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhereRU-Bridging-Header.h"; sourceTree = "<group>"; };
 		A814C8D619CFECB600735E7B /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		A814C8DD19CFF47A00735E7B /* avatarImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = avatarImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -282,7 +282,6 @@
 				A8B8A1261A07C7890000FB6F /* ContactViewController.swift */,
 				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
 				A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */,
-				A811A23C19D408000079B7F8 /* MapViewController.swift */,
 				A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */,
 			);
 			name = Controller;
@@ -292,6 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */,
+				A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */,
 				A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */,
 			);
 			name = View;
@@ -718,9 +718,9 @@
 				A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
-				A811A23E19D408000079B7F8 /* MapViewController.swift in Sources */,
 				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
 				A80CDDFE1A2FEF070007C345 /* RAMTransitionItemAnimation.swift in Sources */,
+				A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
 				A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */,

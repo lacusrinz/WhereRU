@@ -61,7 +61,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
-        cell?.textLabel?.text="xxxx"//.textLabel.text = "xxxx"
+        cell?.textLabel?.text="xxxx"
         
         return cell!
     }
@@ -76,16 +76,10 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
     }
     
 
-    
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
-    */
 
 }
