@@ -412,7 +412,18 @@
                             <constraint firstItem="x17-JQ-pz1" firstAttribute="leading" secondItem="2Hu-xN-MgY" secondAttribute="leadingMargin" id="x6J-eJ-HXz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="去这里" id="koq-0A-1x8"/>
+                    <navigationItem key="navigationItem" title="去这里" id="koq-0A-1x8">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="fUd-k9-cfz">
+                            <connections>
+                                <action selector="Back:" destination="MSc-Bs-5Fz" id="4rD-le-4mD"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="tSB-9m-fuM">
+                            <connections>
+                                <action selector="Done:" destination="MSc-Bs-5Fz" id="u2E-U7-xvZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="eventTextView" destination="Np6-Vn-Epc" id="IZo-Uk-frI"/>

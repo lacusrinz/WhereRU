@@ -9,13 +9,17 @@
 import UIKit
 import avatarImageView
 
+protocol CreateEventViewControllerDelegate{
+    func CreateEventViewControllerDidBack(CreateEventViewController)
+}
+
 class CreateEventViewController: UIViewController,  MAMapViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
     @IBOutlet weak var eventTextView: UITextView!
     @IBOutlet weak var participatorCollectionView: UICollectionView!
-    
+    var delegate:CreateEventViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,5 +60,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, UICollect
         // Pass the selected object to the new view controller.
     }
     */
+    @IBAction func Back(sender: AnyObject) {
+        self.delegate?.CreateEventViewControllerDidBack(self)
+    }
+    
+    @IBAction func Done(sender: AnyObject) {
+    }
 
 }

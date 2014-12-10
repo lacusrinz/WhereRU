@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UITableViewController, SWTableViewCellDelegate{
+class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate{
     
     var tableData:NSMutableArray?
     var rowsCount:NSInteger = 0
@@ -80,6 +80,15 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate{
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "addEvent"{
+            let navigationController = segue.destinationViewController as UINavigationController
+            let createEventViewController = navigationController.viewControllers[0] as CreateEventViewController
+            createEventViewController.delegate = self
+        }
+    }
+    
+    func CreateEventViewControllerDidBack(_: CreateEventViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
 }
