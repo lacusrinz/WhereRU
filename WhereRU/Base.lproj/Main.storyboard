@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MSc-Bs-5Fz">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -296,7 +296,7 @@
                         <viewControllerLayoutGuide type="bottom" id="yYW-0f-TEk"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Hu-xN-MgY">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WLi-Ij-gX5" customClass="MAMapView">
@@ -392,17 +392,27 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="adu-xg-GCf">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="MSc-Bs-5Fz" id="l65-Ta-2Lk"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lAC-Rb-caX" firstAttribute="top" secondItem="Np6-Vn-Epc" secondAttribute="top" id="0dq-om-gUZ"/>
                             <constraint firstItem="lAC-Rb-caX" firstAttribute="bottom" secondItem="Np6-Vn-Epc" secondAttribute="bottom" constant="-30" id="4zN-dG-kaM"/>
+                            <constraint firstItem="adu-xg-GCf" firstAttribute="top" secondItem="WLi-Ij-gX5" secondAttribute="top" id="6qT-Mv-tId"/>
                             <constraint firstItem="WLi-Ij-gX5" firstAttribute="centerX" secondItem="Iqf-do-roA" secondAttribute="centerX" id="A9g-Ie-JTW"/>
                             <constraint firstItem="Np6-Vn-Epc" firstAttribute="trailing" secondItem="Iqf-do-roA" secondAttribute="trailing" id="AL4-Jo-Qsb"/>
                             <constraint firstAttribute="trailing" secondItem="WLi-Ij-gX5" secondAttribute="trailing" id="HrR-aq-VV0"/>
                             <constraint firstItem="lAC-Rb-caX" firstAttribute="top" secondItem="WLi-Ij-gX5" secondAttribute="bottom" constant="14" id="OlZ-Tw-ZmY"/>
                             <constraint firstItem="WLi-Ij-gX5" firstAttribute="top" secondItem="ad1-KL-EV9" secondAttribute="bottom" id="Soe-Ml-uce"/>
                             <constraint firstItem="Iqf-do-roA" firstAttribute="leading" secondItem="x17-JQ-pz1" secondAttribute="leading" id="W22-2a-XRH"/>
+                            <constraint firstItem="adu-xg-GCf" firstAttribute="leading" secondItem="WLi-Ij-gX5" secondAttribute="leading" id="Xmn-1M-2kN"/>
+                            <constraint firstItem="adu-xg-GCf" firstAttribute="trailing" secondItem="WLi-Ij-gX5" secondAttribute="trailing" id="Zmw-d3-661"/>
                             <constraint firstItem="Iqf-do-roA" firstAttribute="bottom" secondItem="yYW-0f-TEk" secondAttribute="top" constant="-8" id="bMw-CU-8Bl"/>
                             <constraint firstItem="x17-JQ-pz1" firstAttribute="top" secondItem="lAC-Rb-caX" secondAttribute="bottom" constant="44" id="gtK-ak-1D6"/>
                             <constraint firstItem="WLi-Ij-gX5" firstAttribute="leading" secondItem="2Hu-xN-MgY" secondAttribute="leading" id="hOV-d9-N5m"/>
@@ -428,11 +438,22 @@
                     <connections>
                         <outlet property="eventTextView" destination="Np6-Vn-Epc" id="IZo-Uk-frI"/>
                         <outlet property="locationMapView" destination="WLi-Ij-gX5" id="FYU-GW-6ne"/>
+                        <outlet property="locationSearchBar" destination="adu-xg-GCf" id="N4w-nx-oe4"/>
                         <outlet property="myAvatarImageView" destination="lAC-Rb-caX" id="jga-EX-UH9"/>
                         <outlet property="participatorCollectionView" destination="Iqf-do-roA" id="opG-Z2-U49"/>
+                        <outlet property="searchDisplayController" destination="mNF-e6-SBk" id="k3L-7y-ZAX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="283-zc-6re" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="mNF-e6-SBk">
+                    <connections>
+                        <outlet property="delegate" destination="MSc-Bs-5Fz" id="ICY-7g-9tx"/>
+                        <outlet property="searchBar" destination="adu-xg-GCf" id="Cuu-ks-lGF"/>
+                        <outlet property="searchContentsController" destination="MSc-Bs-5Fz" id="3b4-zj-Jku"/>
+                        <outlet property="searchResultsDataSource" destination="MSc-Bs-5Fz" id="hs2-Kg-5XF"/>
+                        <outlet property="searchResultsDelegate" destination="MSc-Bs-5Fz" id="nAz-lP-tBd"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="7112" y="-528"/>
         </scene>

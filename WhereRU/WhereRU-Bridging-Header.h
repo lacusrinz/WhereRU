@@ -3,9 +3,15 @@
 //
 
 #import "RSKImageCropper.h"
+
 #import <MAMapKit/MAMapKit.h>
+#import <AMapSearchKit/AMapSearchAPI.h>
+#import <AMapSearchKit/AMapCommonObj.h>
+
 #import "SWTableViewCell.h"
+
 #import <ShareSDK/ShareSDK.h>
+
 #import "SVProgressHUD.h"
 #import "JSONKit.h"
 #import "AFNetworking.h"
