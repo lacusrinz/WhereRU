@@ -17,6 +17,7 @@ pod 'RSKImageCropper', '~>0.3.0'
 #pod 'PureLayout', '~> 2.0.1'
 #pod 'DAContextMenuTableViewController'
 pod 'SWTableViewCell', '~> 0.3.6'
+pod 'IQKeyboardManager'
 
 pod 'AMap2DMap'
 pod 'AMapSearch'

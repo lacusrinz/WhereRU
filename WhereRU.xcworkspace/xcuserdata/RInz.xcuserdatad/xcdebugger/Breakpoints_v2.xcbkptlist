@@ -185,14 +185,14 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WhereRU/CreateEventViewController.swift"
-            timestampString = "440595783.198138"
+            filePath = "WhereRU/ReGeocodeAnnotation.swift"
+            timestampString = "440660916.286814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "searchBarSearchButtonClicked(_:)"
-            landmarkType = "5">
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "ReGeocodeAnnotation"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -202,44 +202,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhereRU/CreateEventViewController.swift"
-            timestampString = "440522847.631749"
+            timestampString = "440825051.834603"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "searchTipsWithKey(_:)"
+            startingLineNumber = "269"
+            endingLineNumber = "269"
+            landmarkName = "deleteParticipator(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WhereRU/CreateEventViewController.swift"
-            timestampString = "440522847.631749"
+            timestampString = "440867266.057083"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "searchGeocodeWithKey(_:adcode:)"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
+            landmarkName = "addParticipator(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "WhereRU/CommonUtility.swift"
-            timestampString = "440597986.513831"
+            filePath = "WhereRU/CreateEventViewController.swift"
+            timestampString = "440867365.753226"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "minMapRectForAnnotations(_:)"
+            startingLineNumber = "237"
+            endingLineNumber = "237"
+            landmarkName = "collectionView(_:numberOfItemsInSection:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WhereRU/CreateEventViewController.swift"
+            timestampString = "440867483.215687"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
+            landmarkName = "collectionView(_:cellForItemAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

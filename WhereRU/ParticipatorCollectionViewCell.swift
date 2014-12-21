@@ -11,5 +11,5 @@ import avatarImageView
 
 public class ParticipatorCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var participatorAvatarImage: avatarImageView!
-    
+    var isParticipator:Bool = false
 }

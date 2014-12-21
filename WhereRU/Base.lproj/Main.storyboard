@@ -341,10 +341,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Iqf-do-roA">
-                                <rect key="frame" x="16" y="500" width="568" height="92"/>
+                                <rect key="frame" x="16" y="500" width="568" height="100"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="92" id="hiL-A3-uno"/>
+                                    <constraint firstAttribute="height" constant="100" id="hiL-A3-uno"/>
                                 </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nRq-vU-C68">
                                     <size key="itemSize" width="50" height="50"/>
@@ -364,12 +364,12 @@
                                                     <rect key="frame" x="2" y="0.0" width="48" height="50"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
+                                                        <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="plus"/>
                                                         <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                             <color key="value" red="1" green="0.015895079409999999" blue="0.026901705870000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                            <real key="value" value="1"/>
+                                                            <real key="value" value="0.0"/>
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                             <real key="value" value="24"/>
@@ -413,7 +413,7 @@
                             <constraint firstItem="Iqf-do-roA" firstAttribute="leading" secondItem="x17-JQ-pz1" secondAttribute="leading" id="W22-2a-XRH"/>
                             <constraint firstItem="adu-xg-GCf" firstAttribute="leading" secondItem="WLi-Ij-gX5" secondAttribute="leading" id="Xmn-1M-2kN"/>
                             <constraint firstItem="adu-xg-GCf" firstAttribute="trailing" secondItem="WLi-Ij-gX5" secondAttribute="trailing" id="Zmw-d3-661"/>
-                            <constraint firstItem="Iqf-do-roA" firstAttribute="bottom" secondItem="yYW-0f-TEk" secondAttribute="top" constant="-8" id="bMw-CU-8Bl"/>
+                            <constraint firstItem="Iqf-do-roA" firstAttribute="bottom" secondItem="yYW-0f-TEk" secondAttribute="top" id="bMw-CU-8Bl"/>
                             <constraint firstItem="x17-JQ-pz1" firstAttribute="top" secondItem="lAC-Rb-caX" secondAttribute="bottom" constant="44" id="gtK-ak-1D6"/>
                             <constraint firstItem="WLi-Ij-gX5" firstAttribute="leading" secondItem="2Hu-xN-MgY" secondAttribute="leading" id="hOV-d9-N5m"/>
                             <constraint firstItem="Iqf-do-roA" firstAttribute="top" secondItem="x17-JQ-pz1" secondAttribute="bottom" constant="13" id="jiT-KM-4Oh"/>
@@ -968,6 +968,7 @@
         <image name="line" width="303" height="6"/>
         <image name="logo" width="167" height="192"/>
         <image name="map" width="960" height="600"/>
+        <image name="plus" width="256" height="256"/>
         <image name="weibo_icon" width="58" height="58"/>
         <image name="wx_icon" width="58" height="58"/>
     </resources>

@@ -13,19 +13,25 @@ protocol CreateEventViewControllerDelegate{
     func CreateEventViewControllerDidBack(CreateEventViewController)
 }
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate {
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
     @IBOutlet weak var eventTextView: UITextView!
     @IBOutlet weak var participatorCollectionView: UICollectionView!
     @IBOutlet weak var locationSearchBar: UISearchBar!
+
     
     var search:AMapSearchAPI?
     var delegate:CreateEventViewControllerDelegate?
     var clLocationManager:CLLocationManager?
     var displayController:UISearchDisplayController?
     var tips:[AMapTip]?
+    var createAnnotationLongPress:UILongPressGestureRecognizer?
+    var deleteParticipatorByPanGesture:UIPanGestureRecognizer?
+    var addParticipatorByTapGesture:UITapGestureRecognizer?
+    
+    var participators:[Participant]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +45,19 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         locationMapView.showsUserLocation = true
         locationMapView.userTrackingMode = MAUserTrackingMode.Follow
         locationMapView.setZoomLevel(15.1, animated: true)
+        
+        createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
+        createAnnotationLongPress!.delegate = self
+        createAnnotationLongPress!.minimumPressDuration = 0.5
+        self.view.addGestureRecognizer(createAnnotationLongPress!)
+        
+        deleteParticipatorByPanGesture = UIPanGestureRecognizer(target: self, action: "deleteParticipator:")
+        deleteParticipatorByPanGesture!.delegate = self
+        participatorCollectionView.addGestureRecognizer(deleteParticipatorByPanGesture!)
+        
+        addParticipatorByTapGesture = UITapGestureRecognizer(target: self, action: "addParticipator:")
+        addParticipatorByTapGesture!.delegate = self
+        participatorCollectionView.addGestureRecognizer(addParticipatorByTapGesture!)
         
         eventTextView.layer.borderColor = UIColor.blackColor().CGColor
         eventTextView.layer.borderWidth = 1
@@ -58,7 +77,20 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
 //        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "navigation_bar_background"), forBarMetrics: UIBarMetrics.Default)
 //        self.navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
         
-        self.tips = []
+        tips = []
+        participators = []
+        
+        //test data
+        var p1 = Participant()
+        p1.nickname="A"
+        p1.avatar = ""
+        var p2 = Participant()
+        p2.nickname="B"
+        p2.avatar = ""
+        var p3 = Participant()
+        p3.nickname="C"
+        p3.avatar = ""
+        participators = [p1,p2,p3]
     }
     
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -71,6 +103,13 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             geo.city = [adcode!]
         }
         self.search?.AMapGeocodeSearch(geo)
+    }
+    
+    func searchReGeocodeWithCoordinate(coordinate:CLLocationCoordinate2D){
+        var regeo = AMapReGeocodeSearchRequest()
+        regeo.location = AMapGeoPoint.locationWithLatitude(CGFloat(coordinate.latitude), longitude: CGFloat(coordinate.longitude))
+        regeo.requireExtension = true
+        self.search?.AMapReGoecodeSearch(regeo)
     }
     
     func searchTipsWithKey(key:NSString){
@@ -94,6 +133,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     //MARK: - MAMapViewDelegate
+    func mapView(mapView: MAMapView!, didAddAnnotationViews views: [AnyObject]!) {
+        var view:MAAnnotationView = views[0] as MAAnnotationView
+        self.locationMapView.selectAnnotation(view.annotation, animated: true)
+    }
+    
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKindOfClass(GeocodeAnnotation){
             let geoCellIdentifier = "geoCellIdentifier"
@@ -101,6 +145,17 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             if poiAnnotationView == nil{
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: geoCellIdentifier)
             }
+            poiAnnotationView?.canShowCallout = true
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+            return poiAnnotationView
+        }
+        if annotation.isKindOfClass(ReGeocodeAnnotation){
+            let invertGeoIdentifier = "invertGeoIdentifier"
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(invertGeoIdentifier) as MAPinAnnotationView?
+            if poiAnnotationView == nil{
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: invertGeoIdentifier)
+            }
+            poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = true
             poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
             return poiAnnotationView
@@ -123,6 +178,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
         }
         self.locationMapView .addAnnotations(annotations)
+    }
+    
+    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
+        if response.regeocode != nil{
+            var coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(request.location.latitude), Double(request.location.longitude))
+            var reGeocodeAnnotation:ReGeocodeAnnotation = ReGeocodeAnnotation(reGeocode: response.regeocode, coordinate: coordinate)
+            self.locationMapView.addAnnotation(reGeocodeAnnotation)
+        }
     }
     
     func onInputTipsSearchDone(request: AMapInputTipsSearchRequest!, response: AMapInputTipsSearchResponse!) {
@@ -171,13 +234,75 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     // MARK: - CollectionViewDelegate
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return participators!.count+1
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cellIdentifier:NSString = "ParticipatorCollectionViewCell"
         var cell: ParticipatorCollectionViewCell = participatorCollectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as ParticipatorCollectionViewCell
+        
+        if indexPath.row == participators!.count{
+            cell.participatorAvatarImage.image = UIImage(named: "plus")
+        }else{
+            cell.participatorAvatarImage.setImageWithURL(NSURL(string: participators![indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            cell.participatorAvatarImage.layer.borderWidth = 1
+            cell.isParticipator = true;
+        }
+        
         return cell
+    }
+    
+    //MARK: - Handle Gesture
+    
+    func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    func addAnnotationOnMapByLongPress(longPress: UILongPressGestureRecognizer) {
+        if longPress.state == UIGestureRecognizerState.Began{
+            var coordinate:CLLocationCoordinate2D = self.locationMapView.convertPoint(createAnnotationLongPress!.locationInView(self.view), toCoordinateFromView: self.locationMapView)
+            self.searchReGeocodeWithCoordinate(coordinate)
+        }
+    }
+    
+    func deleteParticipator(sender:UIPanGestureRecognizer){
+        if sender.state == UIGestureRecognizerState.Began{
+            var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
+            var panCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
+            if panCellPath != nil{
+                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(panCellPath!) as ParticipatorCollectionViewCell
+                if cell.isParticipator{
+                    var array:[NSIndexPath] = [panCellPath!]
+                    participatorCollectionView.performBatchUpdates({
+                        () -> Void in
+                        self.participatorCollectionView.deleteItemsAtIndexPaths(array)
+                        self.participators?.removeAtIndex(panCellPath!.row)
+                        self.participatorCollectionView.reloadData()
+                    }, completion: { (bool) -> Void in
+                        //
+                    })
+                }
+            }
+        }
+    }
+    
+    func addParticipator(sender:UITapGestureRecognizer){
+        if sender.state == UIGestureRecognizerState.Ended{
+            var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
+            var tapCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
+            if tapCellPath != nil{
+                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as ParticipatorCollectionViewCell
+                if !cell.isParticipator{
+                    //test data
+                    var D:Participant = Participant()
+                    D.nickname = "D"
+                    D.avatar = ""
+                    self.participators?.append(D)
+                    self.participatorCollectionView.insertItemsAtIndexPaths([tapCellPath!])
+                    self.participatorCollectionView.reloadData()
+                }
+            }
+        }
     }
 
     /*
