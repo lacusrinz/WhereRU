@@ -46,6 +46,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         locationMapView.userTrackingMode = MAUserTrackingMode.Follow
         locationMapView.setZoomLevel(15.1, animated: true)
         
+        myAvatarImageView.setImageWithURL(NSURL(string: User.shared.avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        
         createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
         createAnnotationLongPress!.delegate = self
         createAnnotationLongPress!.minimumPressDuration = 0.5

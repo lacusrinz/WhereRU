@@ -16,15 +16,15 @@ class LoginViewController: UIViewController {
     var manager = AFHTTPRequestOperationManager()
     var authToken:String?
     
-//    var loginURL:String = "http://54.255.168.161/auth/login"
-//    var meURL:String = "http://54.255.168.161/auth/me"
-//    var registrURL:String = "http://54.255.168.161/auth/register"
-//    var friendsURL:String = "http://54.255.168.161/friends/"
+    var loginURL:String = "http://54.255.168.161/auth/login"
+    var meURL:String = "http://54.255.168.161/auth/me"
+    var registrURL:String = "http://54.255.168.161/auth/register"
+    var friendsURL:String = "http://54.255.168.161/friends/"
     
-    var loginURL:String = "http://localhost:8000/auth/login"
-    var meURL:String = "http://localhost:8000/auth/me"
-    var registrURL:String = "http://localhost:8000/auth/register"
-    var friendsURL:String = "http://localhost:8000/friends/"
+//    var loginURL:String = "http://localhost:8000/auth/login"
+//    var meURL:String = "http://localhost:8000/auth/me"
+//    var registrURL:String = "http://localhost:8000/auth/register"
+//    var friendsURL:String = "http://localhost:8000/friends/"
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

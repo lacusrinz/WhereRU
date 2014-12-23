@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="MSc-Bs-5Fz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -276,7 +277,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="事件列表" id="zSl-Wq-x8a">
-                        <barButtonItem key="rightBarButtonItem" title="Add" id="QNQ-hR-GTP">
+                        <barButtonItem key="rightBarButtonItem" title="创建" id="QNQ-hR-GTP">
                             <connections>
                                 <segue destination="ZRs-HO-PzU" kind="modal" identifier="addEvent" id="8va-EQ-8Jc"/>
                             </connections>
