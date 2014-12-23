@@ -833,12 +833,50 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactTableViewCell" id="G4u-U4-chN" customClass="ContactTableViewCell" customModule="WhereRU" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactTableViewCell" id="G4u-U4-chN" customClass="ContactTableViewCell" customModule="WhereRU">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G4u-U4-chN" id="AQC-oO-wYE">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pea-gW-NZb">
+                                            <rect key="frame" x="56" y="13" width="536" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XfO-g1-Cya" customClass="avatarImageView" customModule="avatarImageView">
+                                            <rect key="frame" x="8" y="2" width="40" height="40"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="40" id="Xod-Wp-99A"/>
+                                                <constraint firstAttribute="width" constant="40" id="cOV-k4-IOa"/>
+                                            </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <real key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="20"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="Pea-gW-NZb" firstAttribute="leading" secondItem="XfO-g1-Cya" secondAttribute="trailing" constant="8" symbolic="YES" id="8T7-gy-wkY"/>
+                                        <constraint firstItem="XfO-g1-Cya" firstAttribute="leading" secondItem="AQC-oO-wYE" secondAttribute="leadingMargin" id="KKR-4w-Ywx"/>
+                                        <constraint firstItem="Pea-gW-NZb" firstAttribute="top" secondItem="AQC-oO-wYE" secondAttribute="topMargin" constant="5" id="S6e-5V-P23"/>
+                                        <constraint firstItem="Pea-gW-NZb" firstAttribute="trailing" secondItem="AQC-oO-wYE" secondAttribute="trailingMargin" id="cFu-tI-wmc"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Pea-gW-NZb" secondAttribute="bottom" constant="1" id="hVO-f6-Vav"/>
+                                        <constraint firstItem="XfO-g1-Cya" firstAttribute="top" secondItem="AQC-oO-wYE" secondAttribute="topMargin" constant="-6" id="uy3-ZY-eBM"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="avatar" destination="XfO-g1-Cya" id="9Yy-02-8as"/>
+                                    <outlet property="name" destination="Pea-gW-NZb" id="Bpt-Rb-PRm"/>
                                     <segue destination="09j-RC-4oE" kind="showDetail" id="Ukc-zh-sVi"/>
                                 </connections>
                             </tableViewCell>
@@ -858,7 +896,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BAl-tG-3a2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5641" y="138"/>
+            <point key="canvasLocation" x="5641" y="134"/>
         </scene>
         <!--好友-->
         <scene sceneID="0CH-Uy-ayv">

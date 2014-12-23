@@ -7,7 +7,11 @@
 //
 
 import UIKit
+import avatarImageView
 
-class ContactTableViewCell: SWTableViewCell {
+public class ContactTableViewCell: SWTableViewCell {
    
+    @IBOutlet weak var avatar: avatarImageView!
+    @IBOutlet weak var name: UILabel!
+    
 }

@@ -138,6 +138,7 @@ class LoginViewController: UIViewController {
                                     User.shared.from = response["From"].string
                                     User.shared.avatar = response["avatar"].string
                                     User.shared.is_social = true
+                                    self.authToken = response["auth_token"].string
                                     
                                     self.userinfo.setObject(User.shared.username, forKey: "username")
                                     self.userinfo.setObject(",mnbvcxz", forKey: "password")
@@ -172,6 +173,7 @@ class LoginViewController: UIViewController {
                         var friend = Friend()
                         friend.to_user = response["results"][index]["nickname"].string
                         friend.from_user = User.shared.nickname
+                        friend.avatar = response["results"][index]["avatar"].string
                         User.shared.friends.append(friend)
                     }
                 },

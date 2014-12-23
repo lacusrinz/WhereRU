@@ -43,7 +43,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 95
+        return 44
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -61,7 +61,8 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
-        cell?.textLabel!.text = tableData[indexPath.row].to_user
+        cell?.name.text = tableData[indexPath.row].to_user
+        cell?.avatar.setImageWithURL(NSURL(string: tableData[indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
         return cell!
     }

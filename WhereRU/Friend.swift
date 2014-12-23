@@ -11,4 +11,5 @@ import UIKit
 public class Friend: NSObject {
     var to_user:String?
     var from_user:String?
+    var avatar:String?
 }
