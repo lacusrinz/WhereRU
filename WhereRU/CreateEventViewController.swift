@@ -28,7 +28,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     var displayController:UISearchDisplayController?
     var tips:[AMapTip]?
     var createAnnotationLongPress:UILongPressGestureRecognizer?
-    var deleteParticipatorByPanGesture:UIPanGestureRecognizer?
+    var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     var addParticipatorByTapGesture:UITapGestureRecognizer?
     
     var participators:[Participant]?
@@ -53,7 +53,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         createAnnotationLongPress!.minimumPressDuration = 0.5
         self.view.addGestureRecognizer(createAnnotationLongPress!)
         
-        deleteParticipatorByPanGesture = UIPanGestureRecognizer(target: self, action: "deleteParticipator:")
+        deleteParticipatorByPanGesture = UILongPressGestureRecognizer(target: self, action: "deleteParticipator:")
         deleteParticipatorByPanGesture!.delegate = self
         participatorCollectionView.addGestureRecognizer(deleteParticipatorByPanGesture!)
         
@@ -92,7 +92,16 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         var p3 = Participant()
         p3.nickname="C"
         p3.avatar = ""
-        participators = [p1,p2,p3]
+        var p4 = Participant()
+        p4.nickname="D"
+        p4.avatar = ""
+        var p5 = Participant()
+        p5.nickname="E"
+        p5.avatar = ""
+        var p6 = Participant()
+        p6.nickname="F"
+        p6.avatar = ""
+        participators = [p1,p2,p3,p4,p5,p6]
     }
     
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -268,7 +277,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func deleteParticipator(sender:UIPanGestureRecognizer){
-        if sender.state == UIGestureRecognizerState.Began{
+        if sender.state == UIGestureRecognizerState.Ended{
             var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
             var panCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
             if panCellPath != nil{

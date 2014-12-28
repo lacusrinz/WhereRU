@@ -279,7 +279,7 @@
                     <navigationItem key="navigationItem" title="事件列表" id="zSl-Wq-x8a">
                         <barButtonItem key="rightBarButtonItem" title="创建" id="QNQ-hR-GTP">
                             <connections>
-                                <segue destination="ZRs-HO-PzU" kind="modal" identifier="addEvent" id="8va-EQ-8Jc"/>
+                                <segue destination="ZRs-HO-PzU" kind="presentation" identifier="addEvent" id="8va-EQ-8Jc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -342,12 +342,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Iqf-do-roA">
-                                <rect key="frame" x="16" y="500" width="568" height="100"/>
+                                <rect key="frame" x="16" y="500" width="568" height="50"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="hiL-A3-uno"/>
+                                    <constraint firstAttribute="height" constant="50" id="hiL-A3-uno"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nRq-vU-C68">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="nRq-vU-C68">
                                     <size key="itemSize" width="50" height="50"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -400,6 +400,16 @@
                                     <outlet property="delegate" destination="MSc-Bs-5Fz" id="l65-Ta-2Lk"/>
                                 </connections>
                             </searchBar>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aio-v9-nMw">
+                                <rect key="frame" x="277" y="562" width="46" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="46" id="1Kh-uk-Ca0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="完成">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -414,8 +424,10 @@
                             <constraint firstItem="Iqf-do-roA" firstAttribute="leading" secondItem="x17-JQ-pz1" secondAttribute="leading" id="W22-2a-XRH"/>
                             <constraint firstItem="adu-xg-GCf" firstAttribute="leading" secondItem="WLi-Ij-gX5" secondAttribute="leading" id="Xmn-1M-2kN"/>
                             <constraint firstItem="adu-xg-GCf" firstAttribute="trailing" secondItem="WLi-Ij-gX5" secondAttribute="trailing" id="Zmw-d3-661"/>
-                            <constraint firstItem="Iqf-do-roA" firstAttribute="bottom" secondItem="yYW-0f-TEk" secondAttribute="top" id="bMw-CU-8Bl"/>
+                            <constraint firstItem="yYW-0f-TEk" firstAttribute="top" secondItem="aio-v9-nMw" secondAttribute="bottom" constant="8" symbolic="YES" id="aZD-vz-3kU"/>
+                            <constraint firstItem="Iqf-do-roA" firstAttribute="bottom" secondItem="yYW-0f-TEk" secondAttribute="top" constant="-50" id="bMw-CU-8Bl"/>
                             <constraint firstItem="x17-JQ-pz1" firstAttribute="top" secondItem="lAC-Rb-caX" secondAttribute="bottom" constant="44" id="gtK-ak-1D6"/>
+                            <constraint firstItem="aio-v9-nMw" firstAttribute="centerX" secondItem="Iqf-do-roA" secondAttribute="centerX" id="h03-at-898"/>
                             <constraint firstItem="WLi-Ij-gX5" firstAttribute="leading" secondItem="2Hu-xN-MgY" secondAttribute="leading" id="hOV-d9-N5m"/>
                             <constraint firstItem="Iqf-do-roA" firstAttribute="top" secondItem="x17-JQ-pz1" secondAttribute="bottom" constant="13" id="jiT-KM-4Oh"/>
                             <constraint firstItem="x17-JQ-pz1" firstAttribute="leading" secondItem="lAC-Rb-caX" secondAttribute="leading" id="qD7-cS-eEs"/>
@@ -429,9 +441,12 @@
                                 <action selector="Back:" destination="MSc-Bs-5Fz" id="4rD-le-4mD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="完成" id="tSB-9m-fuM">
+                        <barButtonItem key="rightBarButtonItem" title="详细" id="tSB-9m-fuM">
                             <connections>
                                 <action selector="Done:" destination="MSc-Bs-5Fz" id="u2E-U7-xvZ"/>
+                                <segue destination="r1V-7N-Ufy" kind="popoverPresentation" popoverAnchorBarButtonItem="tSB-9m-fuM" id="CcP-ab-eud">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -457,6 +472,31 @@
                 </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="7112" y="-528"/>
+        </scene>
+        <!--详细信息-->
+        <scene sceneID="NzK-Gu-Mni">
+            <objects>
+                <viewController id="ZzX-p4-Tno" customClass="CreateEventDetailViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="WPA-eZ-iWD"/>
+                        <viewControllerLayoutGuide type="bottom" id="eiO-fP-KLi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uCq-y8-ytf">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="详细信息" id="9Vn-xp-mbS">
+                        <barButtonItem key="rightBarButtonItem" title="完成" id="0V2-VE-3hl">
+                            <connections>
+                                <action selector="Done:" destination="ZzX-p4-Tno" id="eMS-O6-44o"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="juz-AB-Sn8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="8655" y="-528"/>
         </scene>
         <!--Add Contacts-->
         <scene sceneID="IqV-LT-gZB">
@@ -991,6 +1031,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4e-tX-KGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="6334" y="-528"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eWb-uZ-QkU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="r1V-7N-Ufy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5bm-wE-fvj">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ZzX-p4-Tno" kind="relationship" relationship="rootViewController" id="XCh-GN-PzH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T3V-NN-7bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7843" y="-528"/>
         </scene>
     </scenes>
     <resources>
