@@ -8,12 +8,11 @@
 
 import UIKit
 
-class CreateEventDetailViewController: UIViewController {
+class CreateEventDetailViewController: UITableViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +23,7 @@ class CreateEventDetailViewController: UIViewController {
     @IBAction func Done(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
-
+    
     /*
     // MARK: - Navigation
 

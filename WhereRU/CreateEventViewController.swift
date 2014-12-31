@@ -305,26 +305,24 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as ParticipatorCollectionViewCell
                 if !cell.isParticipator{
                     //test data
-                    var D:Participant = Participant()
-                    D.nickname = "D"
-                    D.avatar = ""
-                    self.participators?.append(D)
-                    self.participatorCollectionView.insertItemsAtIndexPaths([tapCellPath!])
-                    self.participatorCollectionView.reloadData()
+//                    var D:Participant = Participant()
+//                    D.nickname = "D"
+//                    D.avatar = ""
+//                    self.participators?.append(D)
+//                    self.participatorCollectionView.insertItemsAtIndexPaths([tapCellPath!])
+//                    self.participatorCollectionView.reloadData()
+                    self.performSegueWithIdentifier("addParticipant", sender: self)
                 }
             }
         }
     }
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        //
     }
-    */
+
     @IBAction func Back(sender: AnyObject) {
         self.delegate?.CreateEventViewControllerDidBack(self)
     }
