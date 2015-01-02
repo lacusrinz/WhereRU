@@ -13,7 +13,7 @@ protocol CreateEventViewControllerDelegate{
     func CreateEventViewControllerDidBack(CreateEventViewController)
 }
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate {
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
@@ -31,7 +31,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     var addParticipatorByTapGesture:UITapGestureRecognizer?
     
-    var participators:[Participant]?
+    var participators:[Friend]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,25 +83,25 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         participators = []
         
         //test data
-        var p1 = Participant()
-        p1.nickname="A"
-        p1.avatar = ""
-        var p2 = Participant()
-        p2.nickname="B"
-        p2.avatar = ""
-        var p3 = Participant()
-        p3.nickname="C"
-        p3.avatar = ""
-        var p4 = Participant()
-        p4.nickname="D"
-        p4.avatar = ""
-        var p5 = Participant()
-        p5.nickname="E"
-        p5.avatar = ""
-        var p6 = Participant()
-        p6.nickname="F"
-        p6.avatar = ""
-        participators = [p1,p2,p3,p4,p5,p6]
+//        var p1 = Friend()
+//        p1.to_user="A"
+//        p1.avatar = ""
+//        var p2 = Friend()
+//        p2.to_user="B"
+//        p2.avatar = ""
+//        var p3 = Friend()
+//        p3.to_user="C"
+//        p3.avatar = ""
+//        var p4 = Participant()
+//        p4.nickname="D"
+//        p4.avatar = ""
+//        var p5 = Participant()
+//        p5.nickname="E"
+//        p5.avatar = ""
+//        var p6 = Participant()
+//        p6.nickname="F"
+//        p6.avatar = ""
+//        participators = [p1,p2,p3]//,p4,p5,p6]
     }
     
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -254,10 +254,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         if indexPath.row == participators!.count{
             cell.participatorAvatarImage.image = UIImage(named: "plus")
+            cell.participatorAvatarImage.layer.borderWidth = 0
+            cell.isParticipator = false
         }else{
             cell.participatorAvatarImage.setImageWithURL(NSURL(string: participators![indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
             cell.participatorAvatarImage.layer.borderWidth = 1
-            cell.isParticipator = true;
+            cell.isParticipator = true
         }
         
         return cell
@@ -320,7 +322,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
 
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //
+        if segue.identifier == "addParticipant"{
+            let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
+            let addParticipantsTableViewController:AddParticipantsTableViewController = navigationController.viewControllers[0] as AddParticipantsTableViewController
+            addParticipantsTableViewController.delegate = self
+        }
     }
 
     @IBAction func Back(sender: AnyObject) {
@@ -330,6 +336,20 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBAction func Done(sender: AnyObject) {
     }
     
-    //// MARK: -
-
+    //// MARK: - addParticipantsDelegate
+    func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [Friend]) {
+        for friend in friends{
+            var needAdd:Bool = true
+            for participator in participators!{
+                if participator.to_user == friend.to_user{
+                    needAdd = false
+                }
+            }
+            if needAdd{
+                self.participators?.append(friend)
+            }
+        }
+        self.participatorCollectionView.reloadData()
+        dismissViewControllerAnimated(true, completion: nil)
+    }
 }

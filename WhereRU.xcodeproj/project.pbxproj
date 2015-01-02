@@ -51,6 +51,7 @@
 		A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA437B19FD446A004A8300 /* EventViewController.swift */; };
 		A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA6CB81A2D8613004A72A4 /* Friend.swift */; };
 		A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */; };
+		A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */; };
 		A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */; };
 		A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */; };
 		A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */; };
@@ -159,6 +160,7 @@
 		A8BA437B19FD446A004A8300 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A8BA6CB81A2D8613004A72A4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantsTableViewController.swift; sourceTree = "<group>"; };
+		A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventDetailViewController.swift; sourceTree = "<group>"; };
 		A8D58A5019C1EB0F00EEFC98 /* WhereRU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereRU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A5419C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 		A8B8A12319FF0D520000FB6F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */,
 				A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */,
 				A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */,
 				A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */,
@@ -764,6 +767,7 @@
 				A8A81C1B1A3FBD0B005EA36C /* GeocodeAnnotation.swift in Sources */,
 				A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */,
 				A8B991021A432A2700AB75DB /* ReGeocodeAnnotation.swift in Sources */,
+				A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */,
 				A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
