@@ -13,7 +13,7 @@ protocol CreateEventViewControllerDelegate{
     func CreateEventViewControllerDidBack(CreateEventViewController)
 }
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate {
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, CreateEventDetailViewControllerDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
@@ -32,6 +32,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     var addParticipatorByTapGesture:UITapGestureRecognizer?
     
     var participators:[Friend]?
+    var event:Event?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,27 +82,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         tips = []
         participators = []
-        
-        //test data
-//        var p1 = Friend()
-//        p1.to_user="A"
-//        p1.avatar = ""
-//        var p2 = Friend()
-//        p2.to_user="B"
-//        p2.avatar = ""
-//        var p3 = Friend()
-//        p3.to_user="C"
-//        p3.avatar = ""
-//        var p4 = Participant()
-//        p4.nickname="D"
-//        p4.avatar = ""
-//        var p5 = Participant()
-//        p5.nickname="E"
-//        p5.avatar = ""
-//        var p6 = Participant()
-//        p6.nickname="F"
-//        p6.avatar = ""
-//        participators = [p1,p2,p3]//,p4,p5,p6]
+        event = Event()
     }
     
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -117,6 +98,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func searchReGeocodeWithCoordinate(coordinate:CLLocationCoordinate2D){
+        self.clear()
         var regeo = AMapReGeocodeSearchRequest()
         regeo.location = AMapGeoPoint.locationWithLatitude(CGFloat(coordinate.latitude), longitude: CGFloat(coordinate.longitude))
         regeo.requireExtension = true
@@ -184,6 +166,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             annotations.append(geocodeAnnotation)
         }
         if annotations.count == 1{
+            println((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
+            println((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
             self.locationMapView.setCenterCoordinate(annotations[0].coordinate, animated: true)
         }else{
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
@@ -193,6 +177,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
         if response.regeocode != nil{
+            println(request.location.latitude)
+            println(request.location.longitude)
             var coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(request.location.latitude), Double(request.location.longitude))
             var reGeocodeAnnotation:ReGeocodeAnnotation = ReGeocodeAnnotation(reGeocode: response.regeocode, coordinate: coordinate)
             self.locationMapView.addAnnotation(reGeocodeAnnotation)
@@ -327,16 +313,22 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             let addParticipantsTableViewController:AddParticipantsTableViewController = navigationController.viewControllers[0] as AddParticipantsTableViewController
             addParticipantsTableViewController.delegate = self
         }
+        if segue.identifier == "createEventDetail"{
+            let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
+            let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as CreateEventDetailViewController
+            createEventDetailViewController.delegate = self
+//            if event?.date != nil{
+                createEventDetailViewController.date = self.event?.date
+                createEventDetailViewController.need = self.event!.needLocation
+//            }
+        }
     }
 
     @IBAction func Back(sender: AnyObject) {
         self.delegate?.CreateEventViewControllerDidBack(self)
     }
     
-    @IBAction func Done(sender: AnyObject) {
-    }
-    
-    //// MARK: - addParticipantsDelegate
+    // MARK: - addParticipantsDelegate
     func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [Friend]) {
         for friend in friends{
             var needAdd:Bool = true
@@ -352,4 +344,24 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         self.participatorCollectionView.reloadData()
         dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: - createEventDetailViewControllerDelegate
+    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: NSDate, _ needLocation: Bool) {
+        event?.date = date
+        event?.needLocation = needLocation
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: - Main Login
+    @IBAction func CreateNewEvent(sender: AnyObject) {
+        if self.locationMapView.annotations.count>0{
+            var latitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude
+            var longitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude
+            println(latitude)
+            println(longitude)
+        }else{
+            //todo
+        }
+    }
+    
 }

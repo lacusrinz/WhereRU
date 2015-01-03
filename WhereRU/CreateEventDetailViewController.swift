@@ -8,11 +8,26 @@
 
 import UIKit
 
+protocol CreateEventDetailViewControllerDelegate{
+    func CreateEventDetailViewControllerDone(CreateEventDetailViewController, NSDate, Bool)
+}
+
 class CreateEventDetailViewController: UITableViewController{
 
+    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var needLocation: UISwitch!
+    var date:NSDate?
+    var need:Bool = true
+    
+    var delegate:CreateEventDetailViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
+        if date != nil{
+            datePicker.setDate(date!, animated: true)
+            needLocation.enabled = need
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +36,8 @@ class CreateEventDetailViewController: UITableViewController{
     }
     
     @IBAction func Done(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.delegate?.CreateEventDetailViewControllerDone(self, datePicker.date, needLocation.enabled)
+//        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     /*

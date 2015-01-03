@@ -409,6 +409,9 @@
                                 <state key="normal" title="完成">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="CreateNewEvent:" destination="MSc-Bs-5Fz" eventType="touchUpInside" id="WEH-ui-W4v"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -443,8 +446,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="详细" id="tSB-9m-fuM">
                             <connections>
-                                <action selector="Done:" destination="MSc-Bs-5Fz" id="u2E-U7-xvZ"/>
-                                <segue destination="r1V-7N-Ufy" kind="popoverPresentation" popoverAnchorBarButtonItem="tSB-9m-fuM" id="CcP-ab-eud">
+                                <segue destination="r1V-7N-Ufy" kind="popoverPresentation" identifier="createEventDetail" popoverAnchorBarButtonItem="tSB-9m-fuM" id="CcP-ab-eud">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -1159,6 +1161,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="datePicker" destination="vyI-fF-Yt7" id="zXR-D9-p7l"/>
+                        <outlet property="needLocation" destination="LaX-Mz-eSg" id="Lpv-nk-HoJ"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yq-4v-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
