@@ -9,6 +9,7 @@
 import UIKit
 
 public class User  {
+    var id:Int = 0
     var username:String?
     var nickname:String?
     var from:String?

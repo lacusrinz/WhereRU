@@ -9,14 +9,14 @@
 import UIKit
 
 protocol CreateEventDetailViewControllerDelegate{
-    func CreateEventDetailViewControllerDone(CreateEventDetailViewController, NSDate, Bool)
+    func CreateEventDetailViewControllerDone(CreateEventDetailViewController, String, Bool)
 }
 
 class CreateEventDetailViewController: UITableViewController{
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var needLocation: UISwitch!
-    var date:NSDate?
+    var date:String?
     var need:Bool = true
     
     var delegate:CreateEventDetailViewControllerDelegate?
@@ -25,8 +25,11 @@ class CreateEventDetailViewController: UITableViewController{
         super.viewDidLoad()
         self.tableView.tableFooterView = UIView()
         if date != nil{
-            datePicker.setDate(date!, animated: true)
-            needLocation.enabled = need
+            var dateFormate:NSDateFormatter = NSDateFormatter()
+            dateFormate.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm")
+            var datetime = dateFormate.dateFromString(date!)
+            datePicker.setDate(datetime!, animated: true)
+            needLocation.on = need
         }
     }
 
@@ -36,7 +39,10 @@ class CreateEventDetailViewController: UITableViewController{
     }
     
     @IBAction func Done(sender: AnyObject) {
-        self.delegate?.CreateEventDetailViewControllerDone(self, datePicker.date, needLocation.enabled)
+        var dateFormate:NSDateFormatter = NSDateFormatter()
+        dateFormate.dateFormat = "yyyy-MM-dd HH:mm"//.setLocalizedDateFormatFromTemplate("yyyy - MM - dd HH:mm")
+        var date:String = dateFormate.stringFromDate(datePicker.date)
+        self.delegate?.CreateEventDetailViewControllerDone(self, date, needLocation.on)
 //        self.dismissViewControllerAnimated(true, completion: nil)
     }
     

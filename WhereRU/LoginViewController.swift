@@ -52,10 +52,15 @@ class LoginViewController: UIViewController {
                             success: {
                                 (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
                                 var response = JSONValue(responseObject)
+                                User.shared.id = response["id"].integer!
                                 User.shared.username = response["username"].string
                                 User.shared.nickname = response["nickname"].string
                                 User.shared.from = response["From"].string
                                 User.shared.avatar = response["avatar"].string
+                                
+                                self.userinfo.setObject(self.authToken, forKey: "authToken")
+                                self.userinfo.synchronize()
+                                
                                 self.performSegueWithIdentifier("login", sender: self)
                         }, failure: {
                             (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
@@ -94,6 +99,7 @@ class LoginViewController: UIViewController {
                                 success: {
                                     (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
                                     var response = JSONValue(responseObject)
+                                    User.shared.id = response["id"].integer!
                                     User.shared.username = response["username"].string
                                     User.shared.nickname = response["nickname"].string
                                     User.shared.from = response["From"].string
@@ -101,6 +107,7 @@ class LoginViewController: UIViewController {
                                     
                                     self.userinfo.setObject(User.shared.username, forKey: "username")
                                     self.userinfo.setObject(",mnbvcxz", forKey: "password")
+                                    self.userinfo.setObject(self.authToken, forKey: "authToken")
                                     self.userinfo.synchronize()
                                     
                                     println("segue !")
@@ -133,6 +140,7 @@ class LoginViewController: UIViewController {
                                     
                                     var response = JSONValue(responseObject)
                                     self.authToken = response["auth_token"].string
+                                    User.shared.id = response["id"].integer!
                                     User.shared.username = response["username"].string
                                     User.shared.nickname = response["nickname"].string
                                     User.shared.from = response["From"].string
@@ -142,6 +150,7 @@ class LoginViewController: UIViewController {
                                     
                                     self.userinfo.setObject(User.shared.username, forKey: "username")
                                     self.userinfo.setObject(",mnbvcxz", forKey: "password")
+                                    self.userinfo.setObject(self.authToken, forKey: "authToken")
                                     self.userinfo.synchronize()
                                     
                                     self.performSegueWithIdentifier("login", sender: self)

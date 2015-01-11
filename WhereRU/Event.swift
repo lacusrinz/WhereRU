@@ -9,10 +9,11 @@
 import UIKit
 
 class Event: NSObject {
-    var owner:NSString?
-    var participants:[Friend]?
+    var eventID:Int = 0
+    var owner:String?
+    var participants:String?
     var coordinate:CLLocationCoordinate2D?
-    var date:NSDate?// = NSDate(timeIntervalSinceNow: 0)
+    var date:String?// = NSDate(timeIntervalSinceNow: 0)
     var needLocation:Bool = true
-    var Message:NSString?
+    var Message:String?
 }

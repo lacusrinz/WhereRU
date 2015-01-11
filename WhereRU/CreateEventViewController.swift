@@ -34,6 +34,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     var participators:[Friend]?
     var event:Event?
     
+    var userinfo:NSUserDefaults = NSUserDefaults.standardUserDefaults()
+    
+    var eventsURL:String = "http://54.255.168.161/events/"
+    var eventsAddParticipantsURL:String = "http://54.255.168.161/events/"
+    var authToken:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,6 +89,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         tips = []
         participators = []
         event = Event()
+        authToken = self.userinfo.stringForKey("authToken")
     }
     
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -318,8 +325,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as CreateEventDetailViewController
             createEventDetailViewController.delegate = self
 //            if event?.date != nil{
-                createEventDetailViewController.date = self.event?.date
-                createEventDetailViewController.need = self.event!.needLocation
+            createEventDetailViewController.date = self.event?.date
+            createEventDetailViewController.need = self.event!.needLocation
 //            }
         }
     }
@@ -346,7 +353,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     // MARK: - createEventDetailViewControllerDelegate
-    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: NSDate, _ needLocation: Bool) {
+    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: String, _ needLocation: Bool) {
         event?.date = date
         event?.needLocation = needLocation
         dismissViewControllerAnimated(true, completion: nil)
@@ -354,11 +361,53 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     // MARK: - Main Login
     @IBAction func CreateNewEvent(sender: AnyObject) {
+        
+        SVProgressHUD.show()
+
         if self.locationMapView.annotations.count>0{
-            var latitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude
-            var longitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude
-            println(latitude)
-            println(longitude)
+//            var latitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude
+//            var longitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude
+//            println(latitude)
+//            println(longitude)
+//            self.event!.coordinate = self.locationMapView.annotations[0].coordinate
+//            self.event!.Message = self.eventTextView.text
+//            self.event!.owner = User.shared.id
+            var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+            params.setObject(User.shared.id, forKey: "owner")
+            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
+            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
+            params.setObject(event!.date!, forKey: "startdate")
+            params.setObject(event!.needLocation, forKey: "needLocation")
+            params.setObject(self.eventTextView.text!, forKey: "message")
+            params.setObject(User.shared.nickname!, forKey: "createdBy")
+            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
+            
+            var manager = AFHTTPRequestOperationManager()
+            manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+            
+            manager.POST(eventsURL,
+                parameters: params,
+                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    var response = JSONValue(object)
+                    self.event!.eventID = response["id"].integer!
+                    
+                    var participantsParams:Dictionary = Dictionary<String, String>()
+                    for p:Friend in self.participators!{
+                        participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
+                    }
+                    var url = "http://54.255.168.161/events/\(self.event!.eventID)/set_participants/"
+                    manager.POST(url,
+                        parameters: participantsParams,
+                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                            SVProgressHUD.showSuccessWithStatus("√")
+                        },
+                        failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                            println("set participant failed:"+error.description)
+                    })
+                },
+                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    println("create event failed:"+error.description)
+            })
         }else{
             //todo
         }
