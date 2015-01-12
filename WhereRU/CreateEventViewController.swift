@@ -11,6 +11,7 @@ import avatarImageView
 
 protocol CreateEventViewControllerDelegate{
     func CreateEventViewControllerDidBack(CreateEventViewController)
+    func CreateEventViewControllerDone(CreateEventViewController)
 }
 
 class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, CreateEventDetailViewControllerDelegate {
@@ -33,8 +34,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     var participators:[Friend]?
     var event:Event?
-    
-    var userinfo:NSUserDefaults = NSUserDefaults.standardUserDefaults()
     
     var eventsURL:String = "http://54.255.168.161/events/"
     var eventsAddParticipantsURL:String = "http://54.255.168.161/events/"
@@ -89,7 +88,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         tips = []
         participators = []
         event = Event()
-        authToken = self.userinfo.stringForKey("authToken")
+        authToken = User.shared.token
     }
     
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -364,14 +363,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         SVProgressHUD.show()
 
-        if self.locationMapView.annotations.count>0{
-//            var latitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude
-//            var longitude =  (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude
-//            println(latitude)
-//            println(longitude)
-//            self.event!.coordinate = self.locationMapView.annotations[0].coordinate
-//            self.event!.Message = self.eventTextView.text
-//            self.event!.owner = User.shared.id
+        if self.locationMapView.annotations.count > 0{
             var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
             params.setObject(User.shared.id, forKey: "owner")
             params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
@@ -399,7 +391,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                     manager.POST(url,
                         parameters: participantsParams,
                         success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                            SVProgressHUD.showSuccessWithStatus("√")
+                            SVProgressHUD.showSuccessWithStatus("")
+                            self.delegate?.CreateEventViewControllerDone(self)
                         },
                         failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                             println("set participant failed:"+error.description)

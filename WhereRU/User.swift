@@ -16,6 +16,7 @@ public class User  {
     var avatar:String?
     var is_social:Bool = false
     var friends = [Friend]()
+    var token:String?
     
     public class var shared : User {
         return Inner.instance

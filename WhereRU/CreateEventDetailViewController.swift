@@ -26,7 +26,7 @@ class CreateEventDetailViewController: UITableViewController{
         self.tableView.tableFooterView = UIView()
         if date != nil{
             var dateFormate:NSDateFormatter = NSDateFormatter()
-            dateFormate.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm")
+            dateFormate.dateFormat = "yyyy-MM-dd HH:mm"
             var datetime = dateFormate.dateFromString(date!)
             datePicker.setDate(datetime!, animated: true)
             needLocation.on = need

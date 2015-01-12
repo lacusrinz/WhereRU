@@ -12,52 +12,24 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     var tableData:Array<Event>?
     var rowsCount:NSInteger = 0
-    var eventsURL = "http://54.255.168.161/events"
+    var eventsURL = "http://54.255.168.161/events/"
     var manager = AFHTTPRequestOperationManager()
     var authToken:String?
-    var userinfo:NSUserDefaults = NSUserDefaults.standardUserDefaults()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        self.tableData = Array<Event>()
         
-        authToken = self.userinfo.stringForKey("authToken")
-        manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-        manager.GET(eventsURL,
-            parameters: nil,
-            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                var response = JSONValue(object)
-                var sum:Int = response["count"].integer!
-                for var i=0; i<sum; ++i{
-                    var event = Event()
-                    event.eventID = response["result"][i]["id"].integer!
-                    event.owner = response["result"][i]["owner"].string
-                    event.participants = response["result"][i]["participants"].string
-                    event.coordinate = CLLocationCoordinate2D(latitude: response["result"][i]["latitude"].double!, longitude: response["result"][i]["longitude"].double!)
-                    event.date = response["result"][i]["startdate"].string!
-//                    var dateFormate:NSDateFormatter = NSDateFormatter()
-//                    dateFormate.setLocalizedDateFormatFromTemplate("yyyy-MM-dd HH:mm")
-//                    event.date = dateFormate.dateFromString(date)
-                    event.needLocation = response["result"][i]["needLocation"].bool!
-                    event.Message = response["result"][i]["message"].string
-                    self.tableData?.append(event)
-                }
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                println("get event list:"+error.description)
+        self.tableView.addPullToRefreshWithActionHandler { () -> Void in
+            self.updateEvents()
         }
-        
-        self.tableView.reloadData()
+//        SVProgressHUD.show()
+        tableView.triggerPullToRefresh()
+
     }
-    
-    func rightButtons()->NSArray{
-        var rightUtilityButtons:NSMutableArray = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "Disable")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Archive")
-        return rightUtilityButtons
-    }
-    
     
     override func numberOfSectionsInTableView(tableView: UITableView)->NSInteger{
         return 1;
@@ -72,7 +44,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 95
+        return 88
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -90,9 +62,19 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
-        cell?.textLabel?.text = (self.tableData![indexPath.row] as Event).Message
+        cell?.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
+        cell?.eventDateTime.text = (self.tableData![indexPath.row] as Event).date
+//        cell?.textLabel?.text = (self.tableData![indexPath.row] as Event).Message
         
         return cell!
+    }
+    
+    // MARK: - SWTableViewCell Delegate
+    func rightButtons()->NSArray{
+        var rightUtilityButtons:NSMutableArray = NSMutableArray()
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "Disable")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Archive")
+        return rightUtilityButtons
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
@@ -102,6 +84,34 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
         return true
+    }
+    
+    // MARK: - SVPullToRefresh func
+    func updateEvents(){
+        self.tableData?.removeAll(keepCapacity: true)
+        self.authToken = User.shared.token
+        manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+        manager.GET(eventsURL,
+            parameters: nil,
+            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                var response = JSONValue(object)
+                var sum:Int = response["count"].integer!
+                for var i=0; i<sum; ++i{
+                    var event = Event()
+                    event.eventID = response["results"][i]["id"].integer!
+                    event.owner = response["results"][i]["owner"].integer!
+                    event.participants = response["results"][i]["participants"].string
+                    event.coordinate = CLLocationCoordinate2D(latitude: response["results"][i]["latitude"].double!, longitude: response["results"][i]["longitude"].double!)
+                    event.date = response["results"][i]["startdate"].string!
+                    event.needLocation = response["results"][i]["needLocation"].bool!
+                    event.Message = response["results"][i]["message"].string
+                    self.tableData!.append(event)
+                }
+                self.tableView.reloadData()
+                self.tableView.pullToRefreshView.stopAnimating()
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                println("get event list:"+error.description)
+        }
     }
     
 
@@ -118,6 +128,11 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     func CreateEventViewControllerDidBack(_: CreateEventViewController) {
         dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func CreateEventViewControllerDone(_: CreateEventViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
+        self.tableView.triggerPullToRefresh()
     }
 
 }

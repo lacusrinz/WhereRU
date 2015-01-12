@@ -10,6 +10,9 @@ import UIKit
 
 public class EventTableViewCell: SWTableViewCell {
     
+    @IBOutlet weak var eventMessage: UILabel!
+    @IBOutlet weak var eventDateTime: UILabel!
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }

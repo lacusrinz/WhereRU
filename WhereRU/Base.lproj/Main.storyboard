@@ -258,17 +258,49 @@
         <!--事件列表-->
         <scene sceneID="AM4-j8-KvJ">
             <objects>
-                <tableViewController id="HdP-lS-8zJ" customClass="EventViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController automaticallyAdjustsScrollViewInsets="NO" id="HdP-lS-8zJ" customClass="EventViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Tij-Vg-rJp">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventTableViewCell" id="UWQ-aP-xfA" customClass="EventTableViewCell" customModule="WhereRU" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="eventTableViewCell" rowHeight="88" id="UWQ-aP-xfA" customClass="EventTableViewCell" customModule="WhereRU" customModuleProvider="target">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="UWQ-aP-xfA" id="7Q7-IG-PBR">
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHT-2l-IJw">
+                                            <rect key="frame" x="8" y="59" width="291" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="21" id="NHC-Qz-HHK"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dPd-eE-gp8">
+                                            <rect key="frame" x="8" y="9" width="291" height="42"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="291" id="SFm-af-a4Z"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="rHT-2l-IJw" firstAttribute="leading" secondItem="7Q7-IG-PBR" secondAttribute="leadingMargin" id="6VQ-za-Yd2"/>
+                                        <constraint firstItem="dPd-eE-gp8" firstAttribute="top" secondItem="7Q7-IG-PBR" secondAttribute="topMargin" constant="1" id="B7h-m1-DFg"/>
+                                        <constraint firstItem="rHT-2l-IJw" firstAttribute="trailing" secondItem="dPd-eE-gp8" secondAttribute="trailing" id="NMN-aA-RKS"/>
+                                        <constraint firstItem="rHT-2l-IJw" firstAttribute="top" secondItem="dPd-eE-gp8" secondAttribute="bottom" constant="8" symbolic="YES" id="USL-7y-jPN"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="rHT-2l-IJw" secondAttribute="bottom" constant="-1" id="vlu-ql-yCa"/>
+                                        <constraint firstItem="rHT-2l-IJw" firstAttribute="leading" secondItem="dPd-eE-gp8" secondAttribute="leading" id="wJM-KP-nHk"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="eventDateTime" destination="rHT-2l-IJw" id="0g2-xK-Zk5"/>
+                                    <outlet property="eventMessage" destination="dPd-eE-gp8" id="nKe-Aq-YkK"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -276,6 +308,7 @@
                             <outlet property="delegate" destination="HdP-lS-8zJ" id="fJC-pI-h7d"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="事件列表" id="zSl-Wq-x8a">
                         <barButtonItem key="rightBarButtonItem" title="创建" id="QNQ-hR-GTP">
                             <connections>
@@ -286,7 +319,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-0Z-d4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5641" y="-528"/>
+            <point key="canvasLocation" x="5641" y="-529"/>
         </scene>
         <!--去这里-->
         <scene sceneID="pa4-FL-Ihz">

@@ -10,7 +10,7 @@ import UIKit
 
 class Event: NSObject {
     var eventID:Int = 0
-    var owner:String?
+    var owner:Int = 0
     var participants:String?
     var coordinate:CLLocationCoordinate2D?
     var date:String?// = NSDate(timeIntervalSinceNow: 0)

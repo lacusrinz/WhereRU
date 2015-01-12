@@ -57,10 +57,8 @@ class LoginViewController: UIViewController {
                                 User.shared.nickname = response["nickname"].string
                                 User.shared.from = response["From"].string
                                 User.shared.avatar = response["avatar"].string
-                                
-                                self.userinfo.setObject(self.authToken, forKey: "authToken")
-                                self.userinfo.synchronize()
-                                
+                                User.shared.token = self.authToken
+
                                 self.performSegueWithIdentifier("login", sender: self)
                         }, failure: {
                             (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
@@ -104,10 +102,10 @@ class LoginViewController: UIViewController {
                                     User.shared.nickname = response["nickname"].string
                                     User.shared.from = response["From"].string
                                     User.shared.avatar = response["avatar"].string
+                                    User.shared.token = self.authToken
                                     
                                     self.userinfo.setObject(User.shared.username, forKey: "username")
                                     self.userinfo.setObject(",mnbvcxz", forKey: "password")
-                                    self.userinfo.setObject(self.authToken, forKey: "authToken")
                                     self.userinfo.synchronize()
                                     
                                     println("segue !")
@@ -147,10 +145,10 @@ class LoginViewController: UIViewController {
                                     User.shared.avatar = response["avatar"].string
                                     User.shared.is_social = true
                                     self.authToken = response["auth_token"].string
+                                    User.shared.token = self.authToken
                                     
                                     self.userinfo.setObject(User.shared.username, forKey: "username")
                                     self.userinfo.setObject(",mnbvcxz", forKey: "password")
-                                    self.userinfo.setObject(self.authToken, forKey: "authToken")
                                     self.userinfo.synchronize()
                                     
                                     self.performSegueWithIdentifier("login", sender: self)

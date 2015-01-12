@@ -17,3 +17,5 @@
 #import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h"
+#import "SVPullToRefresh.h"
+#import "UIScrollView+SVPullToRefresh.h"
