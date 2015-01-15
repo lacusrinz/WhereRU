@@ -312,10 +312,13 @@
                     <navigationItem key="navigationItem" title="事件列表" id="zSl-Wq-x8a">
                         <barButtonItem key="rightBarButtonItem" title="创建" id="QNQ-hR-GTP">
                             <connections>
-                                <segue destination="ZRs-HO-PzU" kind="presentation" identifier="addEvent" id="8va-EQ-8Jc"/>
+                                <action selector="createEvent:" destination="HdP-lS-8zJ" id="D7U-7f-9me"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="editEvent" id="uYs-4N-BPU"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-0Z-d4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -507,7 +510,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="7075" y="-528"/>
+            <point key="canvasLocation" x="7027" y="-529"/>
         </scene>
         <!--Add Contacts-->
         <scene sceneID="IqV-LT-gZB">
@@ -1098,7 +1101,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAP-4i-itB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8463" y="-1236"/>
+            <point key="canvasLocation" x="8484" y="-1222"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eWb-uZ-QkU">
@@ -1219,7 +1222,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwu-gG-jfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7760" y="-1234"/>
+            <point key="canvasLocation" x="7760" y="-1222"/>
         </scene>
     </scenes>
     <resources>

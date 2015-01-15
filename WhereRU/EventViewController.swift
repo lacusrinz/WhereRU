@@ -69,6 +69,10 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         return cell!
     }
     
+    @IBAction func createEvent(sender: AnyObject) {
+        performSegueWithIdentifier("editEvent", sender: self)
+    }
+    
     // MARK: - SWTableViewCell Delegate
     func rightButtons()->NSArray{
         var rightUtilityButtons:NSMutableArray = NSMutableArray()
@@ -119,7 +123,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "addEvent"{
+        if segue.identifier == "editEvent"{
             let navigationController = segue.destinationViewController as UINavigationController
             let createEventViewController = navigationController.viewControllers[0] as CreateEventViewController
             createEventViewController.delegate = self
