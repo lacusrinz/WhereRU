@@ -317,12 +317,33 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="editEvent" id="uYs-4N-BPU"/>
+                        <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="createEvent" id="uYs-4N-BPU"/>
+                        <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="editEvent" id="hJQ-bR-sTe"/>
+                        <segue destination="SPO-XM-q57" kind="showDetail" identifier="viewEvent" id="pOu-0Q-lSf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-0Z-d4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5641" y="-529"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="H1I-wN-Jmz">
+            <objects>
+                <viewController id="Pe3-oC-WQn" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z5s-eO-yYI"/>
+                        <viewControllerLayoutGuide type="bottom" id="kDJ-Jq-UyY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cgS-ES-0bm">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="KR7-q6-Ns9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PRf-lg-57q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7027" y="-1920"/>
         </scene>
         <!--去这里-->
         <scene sceneID="pa4-FL-Ihz">
@@ -1224,6 +1245,24 @@
             </objects>
             <point key="canvasLocation" x="7760" y="-1222"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="zJ1-70-5L8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SPO-XM-q57" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tey-uU-ST4">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Pe3-oC-WQn" kind="relationship" relationship="rootViewController" id="gSh-JV-RKr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JAx-r3-iyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6334" y="-1920"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Settings" width="30" height="30"/>
@@ -1243,4 +1282,7 @@
         <image name="weibo_icon" width="58" height="58"/>
         <image name="wx_icon" width="58" height="58"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="uYs-4N-BPU"/>
+    </inferredMetricsTieBreakers>
 </document>

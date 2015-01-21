@@ -51,6 +51,7 @@
 		A8B991041A4670BA00AB75DB /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B991031A4670BA00AB75DB /* Participant.swift */; };
 		A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA437B19FD446A004A8300 /* EventViewController.swift */; };
 		A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA6CB81A2D8613004A72A4 /* Friend.swift */; };
+		A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */; };
 		A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */; };
 		A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */; };
 		A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */; };
@@ -161,6 +162,7 @@
 		A8B991031A4670BA00AB75DB /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		A8BA437B19FD446A004A8300 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A8BA6CB81A2D8613004A72A4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventViewController.swift; sourceTree = "<group>"; };
 		A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantsTableViewController.swift; sourceTree = "<group>"; };
 		A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventDetailViewController.swift; sourceTree = "<group>"; };
@@ -311,13 +313,9 @@
 			children = (
 				A814C8D619CFECB600735E7B /* SigninViewController.swift */,
 				A8D58A5A19C1EB0F00EEFC98 /* LoginViewController.swift */,
-				A8BA437B19FD446A004A8300 /* EventViewController.swift */,
-				A8B8A1261A07C7890000FB6F /* ContactViewController.swift */,
+				A8BB16921A6F794D00680CC6 /* Event */,
+				A8BB16931A6F799700680CC6 /* Contact */,
 				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
-				A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */,
-				A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */,
-				A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */,
-				A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -439,6 +437,34 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		A8BB168F1A6F6F1E00680CC6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		A8BB16921A6F794D00680CC6 /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				A8BA437B19FD446A004A8300 /* EventViewController.swift */,
+				A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */,
+				A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */,
+				A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */,
+				A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */,
+			);
+			name = Event;
+			sourceTree = "<group>";
+		};
+		A8BB16931A6F799700680CC6 /* Contact */ = {
+			isa = PBXGroup;
+			children = (
+				A8B8A1261A07C7890000FB6F /* ContactViewController.swift */,
+				A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */,
+			);
+			name = Contact;
+			sourceTree = "<group>";
+		};
 		A8D58A4719C1EB0F00EEFC98 = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +491,7 @@
 		A8D58A5219C1EB0F00EEFC98 /* WhereRU */ = {
 			isa = PBXGroup;
 			children = (
+				A8BB168F1A6F6F1E00680CC6 /* API */,
 				A8B8A1921A14F8F00000FB6F /* Utils */,
 				A8B8A18F1A124F0C0000FB6F /* Model */,
 				A8B8A12219FF0D470000FB6F /* Controller */,
@@ -772,6 +799,7 @@
 				A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */,
 				A8B991021A432A2700AB75DB /* ReGeocodeAnnotation.swift in Sources */,
 				A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */,
+				A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */,
 				A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

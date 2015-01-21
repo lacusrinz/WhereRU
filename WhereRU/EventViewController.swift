@@ -10,11 +10,12 @@ import UIKit
 
 class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate{
     
-    var tableData:Array<Event>?
-    var rowsCount:NSInteger = 0
-    var eventsURL = "http://54.255.168.161/events/"
-    var manager = AFHTTPRequestOperationManager()
-    var authToken:String?
+    private var tableData:Array<Event>?
+    private var rowsCount:NSInteger = 0
+    private var eventsURL = "http://54.255.168.161/events/"
+    private var manager = AFHTTPRequestOperationManager()
+    private var authToken:String?
+    private var selectedRowNumber:Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,11 +27,11 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         self.tableView.addPullToRefreshWithActionHandler { () -> Void in
             self.updateEvents()
         }
-//        SVProgressHUD.show()
         tableView.triggerPullToRefresh()
 
     }
     
+    //MARK: - UITableView Delegate
     override func numberOfSectionsInTableView(tableView: UITableView)->NSInteger{
         return 1;
     }
@@ -48,29 +49,28 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //todo
         if(!tableView.editing){
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
+        selectedRowNumber = indexPath.row
+        performSegueWithIdentifier("editEvent", sender: self)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
         var cell:EventTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? EventTableViewCell
 
-//        cell = EventTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellIdentifier)
         cell!.rightUtilityButtons = self.rightButtons()
         cell!.delegate = self
         
         cell?.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
         cell?.eventDateTime.text = (self.tableData![indexPath.row] as Event).date
-//        cell?.textLabel?.text = (self.tableData![indexPath.row] as Event).Message
         
         return cell!
     }
     
     @IBAction func createEvent(sender: AnyObject) {
-        performSegueWithIdentifier("editEvent", sender: self)
+        performSegueWithIdentifier("createEvent", sender: self)
     }
     
     // MARK: - SWTableViewCell Delegate
@@ -94,8 +94,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     func updateEvents(){
         self.tableData?.removeAll(keepCapacity: true)
         self.authToken = User.shared.token
-        manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-        manager.GET(eventsURL,
+        self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+        self.manager.GET(eventsURL,
             parameters: nil,
             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                 var response = JSONValue(object)
@@ -107,6 +107,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                     event.participants = response["results"][i]["participants"].string
                     event.coordinate = CLLocationCoordinate2D(latitude: response["results"][i]["latitude"].double!, longitude: response["results"][i]["longitude"].double!)
                     event.date = response["results"][i]["startdate"].string!
+                    event.date = event.date?.stringByReplacingOccurrencesOfString("T", withString: " ", options: NSStringCompareOptions.allZeros, range: nil).stringByReplacingOccurrencesOfString(":00Z", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
                     event.needLocation = response["results"][i]["needLocation"].bool!
                     event.Message = response["results"][i]["message"].string
                     self.tableData!.append(event)
@@ -123,10 +124,16 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "createEvent"{
+            let navigationController = segue.destinationViewController as UINavigationController
+            let createEventViewController = navigationController.viewControllers[0] as CreateEventViewController
+            createEventViewController.delegate = self
+        }
         if segue.identifier == "editEvent"{
             let navigationController = segue.destinationViewController as UINavigationController
             let createEventViewController = navigationController.viewControllers[0] as CreateEventViewController
             createEventViewController.delegate = self
+            createEventViewController.event = self.tableData![selectedRowNumber] as Event
         }
     }
     

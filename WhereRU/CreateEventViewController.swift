@@ -21,23 +21,24 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBOutlet weak var eventTextView: UITextView!
     @IBOutlet weak var participatorCollectionView: UICollectionView!
     @IBOutlet weak var locationSearchBar: UISearchBar!
-
     
-    var search:AMapSearchAPI?
-    var delegate:CreateEventViewControllerDelegate?
-    var clLocationManager:CLLocationManager?
-    var displayController:UISearchDisplayController?
-    var tips:[AMapTip]?
-    var createAnnotationLongPress:UILongPressGestureRecognizer?
-    var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
-    var addParticipatorByTapGesture:UITapGestureRecognizer?
+    private var search:AMapSearchAPI?
+    private var clLocationManager:CLLocationManager?
+    private var displayController:UISearchDisplayController?
+    private var tips:[AMapTip]?
+    private var createAnnotationLongPress:UILongPressGestureRecognizer?
+    private var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
+    private var addParticipatorByTapGesture:UITapGestureRecognizer?
+    
+    private var eventsURL:String = "http://54.255.168.161/events/"
+    private var eventsAddParticipantsURL:String = "http://54.255.168.161/events/"
+    private var ParticipantsInEvent:String = "http://54.255.168.161/participants/by_event?eventid="
+    private var authToken:String?
+    private var manager = AFHTTPRequestOperationManager()
     
     var participators:[Friend]?
     var event:Event?
-    
-    var eventsURL:String = "http://54.255.168.161/events/"
-    var eventsAddParticipantsURL:String = "http://54.255.168.161/events/"
-    var authToken:String?
+    var delegate:CreateEventViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,8 +49,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }
         
         locationMapView.delegate = self
-        locationMapView.showsUserLocation = true
-        locationMapView.userTrackingMode = MAUserTrackingMode.Follow
         locationMapView.setZoomLevel(15.1, animated: true)
         
         myAvatarImageView.setImageWithURL(NSURL(string: User.shared.avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
@@ -82,15 +81,43 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         displayController?.searchResultsDataSource = self
         displayController?.searchResultsDelegate = self
         
-//        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "navigation_bar_background"), forBarMetrics: UIBarMetrics.Default)
-//        self.navigationController?.navigationBar.barStyle = UIBarStyle.BlackTranslucent
-        
         tips = []
         participators = []
-        event = Event()
         authToken = User.shared.token
+        
+        if let myEvent = event{
+            eventTextView.text = myEvent.Message
+            var point: MAPointAnnotation = MAPointAnnotation()
+            point.coordinate = myEvent.coordinate!
+            point.title = "目的地"
+            self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
+            self.locationMapView.addAnnotation(point)
+            
+            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+            self.manager.GET("http://54.255.168.161/participants/by_event/?eventid=\(myEvent.eventID)",
+                parameters: nil,
+                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    var response = JSONValue(object)
+                    var sum:Int = response["count"].integer!
+                    for var i=0; i<sum; ++i{
+                        var participant:Friend = Friend()
+                        participant.to_user = response["result"][i]["nickname"].string
+                        participant.from_user = User.shared.nickname
+                        participant.avatar = response["result"][i]["avatar"].string
+                        self.participators?.append(participant)
+                    }
+                    self.participatorCollectionView.reloadData()
+                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    print("Get Participants Failed: \(error.description)")
+            })
+        }else{
+            event = Event()
+            locationMapView.showsUserLocation = true
+            locationMapView.userTrackingMode = MAUserTrackingMode.Follow
+        }
     }
     
+    //MARK: - MAMAP Util func
     func searchGeocodeWithKey(key:NSString, adcode:String?){
         if key.length == 0{
             return
@@ -159,6 +186,18 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
             return poiAnnotationView
         }
+        if annotation.isKindOfClass(MAPointAnnotation){
+            let pointReuseIndetifier = "pointReuseIndetifier"
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as MAPinAnnotationView?
+            if poiAnnotationView == nil{
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            }
+            poiAnnotationView?.animatesDrop = true
+            poiAnnotationView?.canShowCallout = true
+            poiAnnotationView?.draggable = true;
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+            return poiAnnotationView
+        }
         return nil
     }
     
@@ -178,7 +217,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }else{
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
         }
-        self.locationMapView .addAnnotations(annotations)
+        self.locationMapView.addAnnotations(annotations)
     }
     
     func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
@@ -210,7 +249,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         return true
     }
     
-    //MARK: - UITableViewDataSource
+    //MARK: - SearchBar UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         println("tips number:\(self.tips!.count)")
         return self.tips!.count
@@ -298,13 +337,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             if tapCellPath != nil{
                 var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as ParticipatorCollectionViewCell
                 if !cell.isParticipator{
-                    //test data
-//                    var D:Participant = Participant()
-//                    D.nickname = "D"
-//                    D.avatar = ""
-//                    self.participators?.append(D)
-//                    self.participatorCollectionView.insertItemsAtIndexPaths([tapCellPath!])
-//                    self.participatorCollectionView.reloadData()
                     self.performSegueWithIdentifier("addParticipant", sender: self)
                 }
             }
@@ -323,10 +355,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
             let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as CreateEventDetailViewController
             createEventDetailViewController.delegate = self
-//            if event?.date != nil{
             createEventDetailViewController.date = self.event?.date
             createEventDetailViewController.need = self.event!.needLocation
-//            }
         }
     }
 
@@ -358,7 +388,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK: - Main Login
+    // MARK: - Main Logic
     @IBAction func CreateNewEvent(sender: AnyObject) {
         
         SVProgressHUD.show()
@@ -374,10 +404,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             params.setObject(User.shared.nickname!, forKey: "createdBy")
             params.setObject(User.shared.nickname!, forKey: "modifiedBy")
             
-            var manager = AFHTTPRequestOperationManager()
-            manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
             
-            manager.POST(eventsURL,
+            self.manager.POST(eventsURL,
                 parameters: params,
                 success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
@@ -388,7 +417,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                         participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
                     }
                     var url = "http://54.255.168.161/events/\(self.event!.eventID)/set_participants/"
-                    manager.POST(url,
+                    self.manager.POST(url,
                         parameters: participantsParams,
                         success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                             SVProgressHUD.showSuccessWithStatus("")
