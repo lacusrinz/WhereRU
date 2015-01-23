@@ -32,7 +32,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         authToken = User.shared.token
         if event!.owner != User.shared.id{
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            self.manager.GET("http://54.255.168.161/friends/\(event!.owner)",
+            self.manager.GET("http://54.255.168.161/friends/\(event!.owner)/",
                 parameters: nil,
                 success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)

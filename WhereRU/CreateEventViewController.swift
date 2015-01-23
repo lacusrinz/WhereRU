@@ -96,7 +96,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             self.locationMapView.addAnnotation(point)
             
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            self.manager.GET("http://54.255.168.161/participants/by_event/?eventid=\(myEvent.eventID)",
+            self.manager.GET("http://54.255.168.161/participants/by_event/?eventid=\(myEvent.eventID!)",
                 parameters: nil,
                 success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
@@ -395,7 +395,42 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         SVProgressHUD.show()
         if let eventid = event!.eventID{
-            //todo
+            var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+            params.setObject(User.shared.id, forKey: "owner")
+            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
+            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
+            params.setObject(event!.date!, forKey: "startdate")
+            params.setObject(event!.needLocation, forKey: "needLocation")
+            params.setObject(self.eventTextView.text!, forKey: "message")
+            params.setObject(User.shared.nickname!, forKey: "createdBy")
+            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
+            
+            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+            
+            self.manager.PUT("http://54.255.168.161/events/\(eventid)/",
+                parameters: params,
+                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    var response = JSONValue(object)
+                    self.event!.eventID = response["id"].integer!
+                    
+                    var participantsParams:Dictionary = Dictionary<String, String>()
+                    for p:Friend in self.participators!{
+                        participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
+                    }
+                    var url = "http://54.255.168.161/events/\(self.event!.eventID!)/set_participants/"
+                    self.manager.POST(url,
+                        parameters: participantsParams,
+                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                            SVProgressHUD.showSuccessWithStatus("")
+                            self.delegate?.CreateEventViewControllerDone(self)
+                        },
+                        failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                            println("set participant failed:"+error.description)
+                    })
+                },
+                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    println("update event failed:"+error.description)
+            })
         }else{
             if self.locationMapView.annotations.count > 0{
                 var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
@@ -420,7 +455,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                         for p:Friend in self.participators!{
                             participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
                         }
-                        var url = "http://54.255.168.161/events/\(self.event!.eventID)/set_participants/"
+                        var url = "http://54.255.168.161/events/\(self.event!.eventID!)/set_participants/"
                         self.manager.POST(url,
                             parameters: participantsParams,
                             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in

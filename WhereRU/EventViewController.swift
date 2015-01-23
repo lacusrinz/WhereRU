@@ -110,12 +110,12 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     // MARK: - SVPullToRefresh func
     func updateEvents(){
-        self.tableData?.removeAll(keepCapacity: true)
         self.authToken = User.shared.token
         self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
         self.manager.GET(eventsURL,
             parameters: nil,
             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                self.tableData?.removeAll(keepCapacity: true)
                 var response = JSONValue(object)
                 var sum:Int = response["count"].integer!
                 for var i=0; i<sum; ++i{
