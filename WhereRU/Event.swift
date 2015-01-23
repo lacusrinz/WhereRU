@@ -9,7 +9,7 @@
 import UIKit
 
 class Event: NSObject {
-    var eventID:Int = 0
+    var eventID:Int?
     var owner:Int = 0
     var participants:String?
     var coordinate:CLLocationCoordinate2D?

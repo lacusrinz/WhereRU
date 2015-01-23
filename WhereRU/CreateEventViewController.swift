@@ -21,6 +21,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBOutlet weak var eventTextView: UITextView!
     @IBOutlet weak var participatorCollectionView: UICollectionView!
     @IBOutlet weak var locationSearchBar: UISearchBar!
+    @IBOutlet weak var doneButton: UIButton!
     
     private var search:AMapSearchAPI?
     private var clLocationManager:CLLocationManager?
@@ -86,6 +87,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         authToken = User.shared.token
         
         if let myEvent = event{
+            doneButton.setTitle("跟新", forState: UIControlState.Normal)
             eventTextView.text = myEvent.Message
             var point: MAPointAnnotation = MAPointAnnotation()
             point.coordinate = myEvent.coordinate!
@@ -392,46 +394,49 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBAction func CreateNewEvent(sender: AnyObject) {
         
         SVProgressHUD.show()
-
-        if self.locationMapView.annotations.count > 0{
-            var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
-            params.setObject(User.shared.id, forKey: "owner")
-            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
-            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
-            params.setObject(event!.date!, forKey: "startdate")
-            params.setObject(event!.needLocation, forKey: "needLocation")
-            params.setObject(self.eventTextView.text!, forKey: "message")
-            params.setObject(User.shared.nickname!, forKey: "createdBy")
-            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
-            
-            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            
-            self.manager.POST(eventsURL,
-                parameters: params,
-                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    var response = JSONValue(object)
-                    self.event!.eventID = response["id"].integer!
-                    
-                    var participantsParams:Dictionary = Dictionary<String, String>()
-                    for p:Friend in self.participators!{
-                        participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
-                    }
-                    var url = "http://54.255.168.161/events/\(self.event!.eventID)/set_participants/"
-                    self.manager.POST(url,
-                        parameters: participantsParams,
-                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                            SVProgressHUD.showSuccessWithStatus("")
-                            self.delegate?.CreateEventViewControllerDone(self)
-                        },
-                        failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                            println("set participant failed:"+error.description)
-                    })
-                },
-                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    println("create event failed:"+error.description)
-            })
-        }else{
+        if let eventid = event!.eventID{
             //todo
+        }else{
+            if self.locationMapView.annotations.count > 0{
+                var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+                params.setObject(User.shared.id, forKey: "owner")
+                params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
+                params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
+                params.setObject(event!.date!, forKey: "startdate")
+                params.setObject(event!.needLocation, forKey: "needLocation")
+                params.setObject(self.eventTextView.text!, forKey: "message")
+                params.setObject(User.shared.nickname!, forKey: "createdBy")
+                params.setObject(User.shared.nickname!, forKey: "modifiedBy")
+                
+                self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+                
+                self.manager.POST(eventsURL,
+                    parameters: params,
+                    success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                        var response = JSONValue(object)
+                        self.event!.eventID = response["id"].integer!
+                        
+                        var participantsParams:Dictionary = Dictionary<String, String>()
+                        for p:Friend in self.participators!{
+                            participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
+                        }
+                        var url = "http://54.255.168.161/events/\(self.event!.eventID)/set_participants/"
+                        self.manager.POST(url,
+                            parameters: participantsParams,
+                            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                                SVProgressHUD.showSuccessWithStatus("")
+                                self.delegate?.CreateEventViewControllerDone(self)
+                            },
+                            failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                                println("set participant failed:"+error.description)
+                        })
+                    },
+                    failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                        println("create event failed:"+error.description)
+                })
+            }else{
+                //todo
+            }
         }
     }
     

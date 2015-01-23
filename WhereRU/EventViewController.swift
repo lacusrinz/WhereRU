@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate{
+class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate{
     
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
@@ -53,14 +53,17 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         selectedRowNumber = indexPath.row
-        performSegueWithIdentifier("editEvent", sender: self)
+        performSegueWithIdentifier("viewEvent", sender: self)
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
         var cell:EventTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? EventTableViewCell
-
-        cell!.rightUtilityButtons = self.rightButtons()
+        if (self.tableData![indexPath.row] as Event).owner == User.shared.id{
+            cell!.rightUtilityButtons = self.rightButtonsForOwner()
+        }else{
+            cell!.rightUtilityButtons = self.rightButtonsForParticipant()
+        }
         cell!.delegate = self
         
         cell?.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
@@ -74,15 +77,30 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     // MARK: - SWTableViewCell Delegate
-    func rightButtons()->NSArray{
+    func rightButtonsForOwner()->NSArray{
         var rightUtilityButtons:NSMutableArray = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "Disable")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Archive")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.blueColor(), title: "修改")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
+        return rightUtilityButtons
+    }
+    
+    func rightButtonsForParticipant()->NSArray{
+        var rightUtilityButtons:NSMutableArray = NSMutableArray()
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
         return rightUtilityButtons
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
-        print("right button, index:%@",index)
+        if cell.rightUtilityButtons.count == 3{
+            if index == 0{
+                selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
+                performSegueWithIdentifier("editEvent", sender: self)
+            }
+        }else if cell.rightUtilityButtons.count == 2{
+            //todo
+        }
     }
     
     
@@ -135,13 +153,25 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
             createEventViewController.delegate = self
             createEventViewController.event = self.tableData![selectedRowNumber] as Event
         }
+        if segue.identifier == "viewEvent"{
+            let navigationController = segue.destinationViewController as UINavigationController
+            let viewEventViewController = navigationController.viewControllers[0] as ViewEventViewController
+            viewEventViewController.delegate = self
+            viewEventViewController.event = self.tableData![selectedRowNumber] as Event
+        }
     }
     
     func CreateEventViewControllerDidBack(_: CreateEventViewController) {
         dismissViewControllerAnimated(true, completion: nil)
+        self.tableView.triggerPullToRefresh()
     }
     
     func CreateEventViewControllerDone(_: CreateEventViewController) {
+        dismissViewControllerAnimated(true, completion: nil)
+        self.tableView.triggerPullToRefresh()
+    }
+    
+    func ViewEventViewControllerDidBack(_: ViewEventViewController) {
         dismissViewControllerAnimated(true, completion: nil)
         self.tableView.triggerPullToRefresh()
     }
