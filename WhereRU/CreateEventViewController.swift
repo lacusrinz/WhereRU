@@ -103,9 +103,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                     var sum:Int = response["count"].integer!
                     for var i=0; i<sum; ++i{
                         var participant:Friend = Friend()
-                        participant.to_user = response["result"][i]["nickname"].string
+                        participant.to_user = response["results"][i]["nickname"].string
                         participant.from_user = User.shared.nickname
-                        participant.avatar = response["result"][i]["avatar"].string
+                        participant.avatar = response["results"][i]["avatar"].string
                         self.participators?.append(participant)
                     }
                     self.participatorCollectionView.reloadData()

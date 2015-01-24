@@ -670,7 +670,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pha-Qu-nhB">
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pha-Qu-nhB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -1155,6 +1155,7 @@
         <scene sceneID="Thg-kw-lfp">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZRs-HO-PzU" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8nm-LO-m4K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
