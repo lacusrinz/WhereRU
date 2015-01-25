@@ -13,12 +13,13 @@ protocol ViewEventViewControllerDelegate{
     func ViewEventViewControllerDidBack(ViewEventViewController)
 }
 
-class ViewEventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ViewEventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var mapImage: UIImageView!
     @IBOutlet weak var avatarImage: avatarImageView!
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var participantsCollection: UICollectionView!
+    @IBOutlet var mapTapGesture: UITapGestureRecognizer!
     
     private var authToken:String?
     private var manager = AFHTTPRequestOperationManager()
@@ -29,6 +30,11 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        mapTapGesture = UITapGestureRecognizer(target: self, action: "getMap")
+        mapTapGesture.delegate = self
+        mapImage.addGestureRecognizer(mapTapGesture)
+        
         authToken = User.shared.token
         if event!.owner != User.shared.id{
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
@@ -102,5 +108,20 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         cell.isParticipator = true
         
         return cell
+    }
+    
+    //MARK: - handle gesture
+    func getMap(){
+        performSegueWithIdentifier("getMap", sender: self)
+    }
+    
+    //MARK: - Navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "getMap"{
+            let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
+            let mapDetailViewController:MapDetailViewController = navigationController.viewControllers[0] as MapDetailViewController
+//            mapDetailViewController.delegate = self
+            mapDetailViewController.coordinate = event!.coordinate!
+        }
     }
 }
