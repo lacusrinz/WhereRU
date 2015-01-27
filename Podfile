@@ -3,7 +3,7 @@ xcodeproj "/Users/RInz/Documents/app/WhereRU/WhereRU.xcodeproj"
 
 platform :ios, '7.0'
 pod 'Reachability', '~> 3.1.1'
-pod 'Mantle', '~> 1.3.1'
+#pod 'Mantle', '~> 1.3.1'
 pod 'TSMessages', '~> 0.9.4'
 pod 'SVProgressHUD', '~> 1.0'
 pod 'SVPullToRefresh', '~> 0.4.1'

@@ -33,12 +33,16 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         var username:String? = self.userinfo.stringForKey("username") as String?
         var password:String? = self.userinfo.stringForKey("password") as String?
         if let name = username{
             var params:NSMutableDictionary = NSMutableDictionary(capacity: 2)
             params.setObject(username!, forKey: "username")
             params.setObject(password!, forKey: "password")
+            SVProgressHUD.show()
             self.manager.POST(self.loginURL,
                 parameters: params,
                 success: {
@@ -58,16 +62,18 @@ class LoginViewController: UIViewController {
                                 User.shared.from = response["From"].string
                                 User.shared.avatar = response["avatar"].string
                                 User.shared.token = self.authToken
-
+                                
+                                SVProgressHUD.showSuccessWithStatus("")
+                                
                                 self.performSegueWithIdentifier("login", sender: self)
-                        }, failure: {
-                            (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                            //
+                            }, failure: {
+                                (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                                SVProgressHUD.showErrorWithStatus("")
                         })
                     }
                 }) {
                     (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    //
+                    SVProgressHUD.showErrorWithStatus("")
             }
         }
     }

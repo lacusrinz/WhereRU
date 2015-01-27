@@ -23,6 +23,8 @@ class AddParticipantsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        
         tableData = User.shared.friends
         rowsCount = tableData.count
         

@@ -25,6 +25,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
 
         name.text = _name
         recognizeID.text = _id

@@ -23,6 +23,9 @@ class CreateEventDetailViewController: UITableViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        
         self.tableView.tableFooterView = UIView()
         if date != nil{
             var dateFormate:NSDateFormatter = NSDateFormatter()

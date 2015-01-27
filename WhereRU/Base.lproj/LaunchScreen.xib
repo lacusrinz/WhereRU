@@ -17,18 +17,11 @@
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="NPa-mv-BIS">
-                    <rect key="frame" x="143" y="50" width="195" height="184"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="184" id="CnN-wU-5sf"/>
-                        <constraint firstAttribute="width" constant="195" id="x82-sv-C6q"/>
-                    </constraints>
-                </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="聚" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS1-2n-mN9">
-                    <rect key="frame" x="175" y="263" width="130" height="58"/>
+                    <rect key="frame" x="175" y="103" width="130" height="58"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="58" id="DHa-yU-hfL"/>
-                        <constraint firstAttribute="width" constant="130" id="Pa6-5E-LaL"/>
+                        <constraint firstAttribute="height" constant="58" id="6v0-Bm-eUO"/>
+                        <constraint firstAttribute="width" constant="130" id="Wbz-cw-mK0"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="44"/>
                     <nil key="highlightedColor"/>
@@ -36,12 +29,10 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="9aN-Yw-NaW" firstAttribute="centerX" secondItem="NPa-mv-BIS" secondAttribute="centerX" id="4ZF-0d-nqx"/>
-                <constraint firstItem="9aN-Yw-NaW" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="A0E-PG-v1z"/>
-                <constraint firstAttribute="bottom" secondItem="9aN-Yw-NaW" secondAttribute="bottom" id="NI1-Ti-6FC"/>
-                <constraint firstItem="fS1-2n-mN9" firstAttribute="top" secondItem="NPa-mv-BIS" secondAttribute="bottom" constant="29" id="Uxv-50-W8e"/>
-                <constraint firstItem="fS1-2n-mN9" firstAttribute="centerX" secondItem="9aN-Yw-NaW" secondAttribute="centerX" id="Wzr-gZ-xDA"/>
-                <constraint firstItem="NPa-mv-BIS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="50" id="anw-Qh-GAc"/>
+                <constraint firstItem="9aN-Yw-NaW" firstAttribute="centerX" secondItem="fS1-2n-mN9" secondAttribute="centerX" id="4d8-KC-96Q"/>
+                <constraint firstItem="fS1-2n-mN9" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="103" id="T2z-Jm-g1z"/>
+                <constraint firstAttribute="bottom" secondItem="9aN-Yw-NaW" secondAttribute="bottom" id="VzU-NO-1fo"/>
+                <constraint firstItem="fS1-2n-mN9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="skI-sS-byH"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -50,6 +41,5 @@
     </objects>
     <resources>
         <image name="arrow_front" width="29" height="40"/>
-        <image name="logo" width="167" height="192"/>
     </resources>
 </document>

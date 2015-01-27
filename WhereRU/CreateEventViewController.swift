@@ -44,11 +44,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        
         if (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0{
             self.clLocationManager = CLLocationManager()
             self.clLocationManager?.requestAlwaysAuthorization()
         }
         
+        locationMapView.frame = CGRectMake(locationMapView.frame.origin.x, locationMapView.frame.origin.y, self.view.bounds.width, locationMapView.frame.size.height)
         locationMapView.delegate = self
         locationMapView.setZoomLevel(15.1, animated: true)
         
@@ -82,12 +85,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         displayController?.searchResultsDataSource = self
         displayController?.searchResultsDelegate = self
         
+        self.doneButton.setAttributedTitle(NSAttributedString(string: "完成", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName)), forState: .Normal)
+        
         tips = []
         participators = []
         authToken = User.shared.token
         
         if let myEvent = event{
-            doneButton.setTitle("跟新", forState: UIControlState.Normal)
+            self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName)), forState: .Normal)
             eventTextView.text = myEvent.Message
             var point: MAPointAnnotation = MAPointAnnotation()
             point.coordinate = myEvent.coordinate!

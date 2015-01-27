@@ -31,6 +31,8 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        
         mapTapGesture = UITapGestureRecognizer(target: self, action: "getMap")
         mapTapGesture.delegate = self
         mapImage.addGestureRecognizer(mapTapGesture)
@@ -54,6 +56,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         message.text = event!.Message
         message.layer.borderColor = UIColor.blackColor().CGColor
         message.layer.borderWidth = 1
+        message.editable = false
         participators = []
         
         participantsCollection.delegate = self

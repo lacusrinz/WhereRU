@@ -19,7 +19,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableData = Array<Event>()
@@ -27,6 +27,13 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         self.tableView.addPullToRefreshWithActionHandler { () -> Void in
             self.updateEvents()
         }
+        
+        var refreshView:UIView = UIView()
+        var refreshImage:UIImage = UIImage(named: "refreshIcon")!
+        var refreshImageView:UIImageView = UIImageView(image: refreshImage)
+        refreshView.addSubview(refreshImageView)
+        self.tableView.pullToRefreshView.setCustomView(refreshImageView, forState: 10)
+        
         tableView.triggerPullToRefresh()
 
     }
@@ -93,6 +100,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+        cell.hideUtilityButtonsAnimated(true)
         if cell.rightUtilityButtons.count == 3{
             if index == 0{
                 selectedRowNumber = self.tableView.indexPathForCell(cell)!.row

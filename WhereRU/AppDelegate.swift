@@ -25,6 +25,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //sina key:1349133812 secret:4bd6ac4bab2e283025407116806c2a6e
         ShareSDK.connectSinaWeiboWithAppKey("568898243", appSecret: "38a4f8204cc784f81f9f0daaf31e02e3", redirectUri: "http://www.sharesdk.cn")
         
+        var navBackgroundImage:UIImage = UIImage(named: "navigationBar_BackgroundColorPix")!
+        UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
+        
         return true
     }
     

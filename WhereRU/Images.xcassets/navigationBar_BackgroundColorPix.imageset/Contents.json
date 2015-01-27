@@ -2,7 +2,8 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "navigationBar_BackgroundColorPix.png"
     },
     {
       "idiom" : "universal",
@@ -10,8 +11,7 @@
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "iTunesArtwork@2x.png"
+      "scale" : "3x"
     }
   ],
   "info" : {

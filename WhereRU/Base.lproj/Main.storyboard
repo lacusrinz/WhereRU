@@ -310,7 +310,9 @@
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="事件列表" id="zSl-Wq-x8a">
-                        <barButtonItem key="rightBarButtonItem" title="创建" id="QNQ-hR-GTP">
+                        <barButtonItem key="rightBarButtonItem" image="createIcon" id="QNQ-hR-GTP">
+                            <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="createEvent:" destination="HdP-lS-8zJ" id="D7U-7f-9me"/>
                             </connections>
@@ -504,7 +506,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4I-5a-lV9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8572" y="-1920"/>
+            <point key="canvasLocation" x="8484" y="-1920"/>
         </scene>
         <!--去这里-->
         <scene sceneID="pa4-FL-Ihz">
@@ -1446,12 +1448,13 @@
         <image name="button_large_arrow" width="1307" height="69"/>
         <image name="button_normal_rounded_Green" width="155" height="40"/>
         <image name="button_normal_rounded_White" width="155" height="40"/>
+        <image name="createIcon" width="32" height="32"/>
         <image name="default_avatar" width="530" height="530"/>
         <image name="help" width="17" height="17"/>
         <image name="icon_pin" width="30" height="30"/>
         <image name="icon_user" width="30" height="30"/>
         <image name="line" width="303" height="6"/>
-        <image name="logo" width="167" height="192"/>
+        <image name="logo" width="341" height="341"/>
         <image name="map" width="960" height="600"/>
         <image name="plus" width="256" height="256"/>
         <image name="weibo_icon" width="58" height="58"/>
@@ -1460,4 +1463,5 @@
     <inferredMetricsTieBreakers>
         <segue reference="uYs-4N-BPU"/>
     </inferredMetricsTieBreakers>
+    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -16,6 +16,8 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        
         // Do any additional setup after loading the view.
         tableData = User.shared.friends
         rowsCount = tableData.count
