@@ -33,6 +33,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.setBackgroundColor(UIColor.clearColor())
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -42,7 +43,9 @@ class LoginViewController: UIViewController {
             var params:NSMutableDictionary = NSMutableDictionary(capacity: 2)
             params.setObject(username!, forKey: "username")
             params.setObject(password!, forKey: "password")
-            SVProgressHUD.show()
+            
+            SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
+            
             self.manager.POST(self.loginURL,
                 parameters: params,
                 success: {

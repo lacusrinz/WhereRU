@@ -44,7 +44,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        TSMessage.setDefaultViewController(self)
+        
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.translucent = false
         
         if (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0{
             self.clLocationManager = CLLocationManager()
@@ -397,9 +400,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     // MARK: - Main Logic
     @IBAction func CreateNewEvent(sender: AnyObject) {
-        
-        SVProgressHUD.show()
         if let eventid = event!.eventID{
+            SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
             params.setObject(User.shared.id, forKey: "owner")
             params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
@@ -437,7 +439,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                     println("update event failed:"+error.description)
             })
         }else{
-            if self.locationMapView.annotations.count > 0{
+            if event?.date == nil{
+                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
+            }else{
+                SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
                 var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
                 params.setObject(User.shared.id, forKey: "owner")
                 params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
@@ -474,8 +479,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                     failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                         println("create event failed:"+error.description)
                 })
-            }else{
-                //todo
             }
         }
     }

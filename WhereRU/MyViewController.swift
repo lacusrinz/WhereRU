@@ -27,6 +27,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.tabBarController?.tabBar.translucent = false
+        self.navigationController?.navigationBar.translucent = false
 
         name.text = _name
         recognizeID.text = _id

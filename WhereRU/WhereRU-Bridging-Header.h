@@ -19,3 +19,4 @@
 #import "UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "SVPullToRefresh.h"
 #import "UIScrollView+SVPullToRefresh.h"
+#import "TSMessage.h"

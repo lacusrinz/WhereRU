@@ -25,6 +25,7 @@ class CreateEventDetailViewController: UITableViewController{
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.translucent = false
         
         self.tableView.tableFooterView = UIView()
         if date != nil{

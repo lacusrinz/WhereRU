@@ -57,6 +57,7 @@ class AddParticipantsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell:AddParticipantTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as AddParticipantTableViewCell
+        cell.tintColor = UIColor.blueColor()
         if cell.selectedFriend{
             cell.selectedFriend = false
             cell.accessoryType = UITableViewCellAccessoryType.None

@@ -22,8 +22,13 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
         tableData = User.shared.friends
         rowsCount = tableData.count
         
+        self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
+        self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        
+        self.tabBarController?.tabBar.translucent = false
+        self.navigationController?.navigationBar.translucent = false
         
         self.tableView.reloadData()
     }
@@ -45,7 +50,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 80
+        return 64
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -57,16 +62,17 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "contactTableViewCell"
-        var cell:ContactTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? ContactTableViewCell
+        var cell:ContactTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as ContactTableViewCell
         
         //        cell = EventTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellIdentifier)
-        cell!.rightUtilityButtons = self.rightButtons()
-        cell!.delegate = self
+        cell.rightUtilityButtons = self.rightButtons()
+        cell.delegate = self
         
-        cell?.name.text = tableData[indexPath.row].to_user
-        cell?.avatar.setImageWithURL(NSURL(string: tableData[indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
+        cell.name.text = tableData[indexPath.row].to_user
+        cell.avatar.setImageWithURL(NSURL(string: tableData[indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         
-        return cell!
+        return cell
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {

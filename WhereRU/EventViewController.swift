@@ -20,6 +20,11 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.tabBarController?.tabBar.translucent = false
+        self.navigationController?.navigationBar.translucent = false
+        
+        self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
+        self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableData = Array<Event>()
@@ -52,7 +57,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 88
+        return 60
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -65,18 +70,21 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
-        var cell:EventTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? EventTableViewCell
+        var cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as EventTableViewCell
+        cell.leftUtilityButtons = self.leftButtonsForParticipant()
         if (self.tableData![indexPath.row] as Event).owner == User.shared.id{
-            cell!.rightUtilityButtons = self.rightButtonsForOwner()
+            cell.rightUtilityButtons = self.rightButtonsForOwner()
         }else{
-            cell!.rightUtilityButtons = self.rightButtonsForParticipant()
+            cell.rightUtilityButtons = self.rightButtonsForParticipant()
         }
-        cell!.delegate = self
+
+        cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
+        cell.delegate = self
         
-        cell?.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
-        cell?.eventDateTime.text = (self.tableData![indexPath.row] as Event).date
+        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
+        cell.eventDateTime.text = (self.tableData![indexPath.row] as Event).date
         
-        return cell!
+        return cell
     }
     
     @IBAction func createEvent(sender: AnyObject) {
@@ -86,22 +94,29 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     // MARK: - SWTableViewCell Delegate
     func rightButtonsForOwner()->NSArray{
         var rightUtilityButtons:NSMutableArray = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.blueColor(), title: "修改")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "修改")
+//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
+//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
         return rightUtilityButtons
     }
     
     func rightButtonsForParticipant()->NSArray{
         var rightUtilityButtons:NSMutableArray = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
+//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
+//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
         return rightUtilityButtons
+    }
+    
+    func leftButtonsForParticipant()->NSArray{
+        var leftUtilityButtons:NSMutableArray = NSMutableArray()
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "Accept Icon"))
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "Delete Icon"))
+        return leftUtilityButtons
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
         cell.hideUtilityButtonsAnimated(true)
-        if cell.rightUtilityButtons.count == 3{
+        if cell.rightUtilityButtons.count == 1{
             if index == 0{
                 selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
                 performSegueWithIdentifier("editEvent", sender: self)
