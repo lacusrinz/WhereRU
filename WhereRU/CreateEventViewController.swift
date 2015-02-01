@@ -31,9 +31,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     private var addParticipatorByTapGesture:UITapGestureRecognizer?
     
-    private var eventsURL:String = "http://54.255.168.161/events/"
-    private var eventsAddParticipantsURL:String = "http://54.255.168.161/events/"
-    private var ParticipantsInEvent:String = "http://54.255.168.161/participants/by_event?eventid="
     private var authToken:String?
     private var manager = AFHTTPRequestOperationManager()
     

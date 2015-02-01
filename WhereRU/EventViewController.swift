@@ -12,7 +12,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
-    private var eventsURL = "http://54.255.168.161/events/mine/"
     private var manager = AFHTTPRequestOperationManager()
     private var authToken:String?
     private var selectedRowNumber:Int = 0
@@ -135,7 +134,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     func updateEvents(){
         self.authToken = User.shared.token
         self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-        self.manager.GET(eventsURL,
+        self.manager.GET(mineURL,
             parameters: nil,
             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                 self.tableData?.removeAll(keepCapacity: true)

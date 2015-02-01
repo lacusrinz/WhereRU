@@ -16,16 +16,6 @@ class LoginViewController: UIViewController {
     var manager = AFHTTPRequestOperationManager()
     var authToken:String?
     
-    var loginURL:String = "http://54.255.168.161/auth/login"
-    var meURL:String = "http://54.255.168.161/auth/me"
-    var registrURL:String = "http://54.255.168.161/auth/register"
-    var friendsURL:String = "http://54.255.168.161/friends/"
-    
-//    var loginURL:String = "http://localhost:8000/auth/login"
-//    var meURL:String = "http://localhost:8000/auth/me"
-//    var registrURL:String = "http://localhost:8000/auth/register"
-//    var friendsURL:String = "http://localhost:8000/friends/"
-    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -46,7 +36,7 @@ class LoginViewController: UIViewController {
             
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             
-            self.manager.POST(self.loginURL,
+            self.manager.POST(loginURL,
                 parameters: params,
                 success: {
                     (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
@@ -54,7 +44,7 @@ class LoginViewController: UIViewController {
                     self.authToken = response["auth_token"].string
                     if (self.authToken != ""){
                         self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-                        self.manager.GET(self.meURL,
+                        self.manager.GET(meURL,
                             parameters: nil,
                             success: {
                                 (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
@@ -93,7 +83,7 @@ class LoginViewController: UIViewController {
                 params.setObject(userInfo.uid() + "_ShareTypeSinaWeibo", forKey: "username")
                 params.setObject(",mnbvcxz", forKey: "password")
                 
-                self.manager.POST(self.loginURL,
+                self.manager.POST(loginURL,
                     parameters: params,
                     success: {
                         (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) in
@@ -101,7 +91,7 @@ class LoginViewController: UIViewController {
                         self.authToken = response["auth_token"].string
                         if(self.authToken != ""){
                             self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-                            self.manager.GET(self.meURL,
+                            self.manager.GET(meURL,
                                 parameters: nil,
                                 success: {
                                     (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
@@ -140,7 +130,7 @@ class LoginViewController: UIViewController {
                             params.setObject("ShareTypeSinaWeibo", forKey: "From")
                             params.setObject(sourceData.objectForKey("avatar_hd")!, forKey: "avatar")
                             params.setObject(true, forKey: "is_social")
-                            self.manager.POST(self.registrURL,
+                            self.manager.POST(registrURL,
                                 parameters: params,
                                 success: { (operation:AFHTTPRequestOperation!, responseObject:AnyObject!) -> Void in
                                     println("post success! \(userInfo.nickname())")
@@ -180,7 +170,7 @@ class LoginViewController: UIViewController {
             self.manager.requestSerializer.clearAuthorizationHeader()
             var token = "Token "+self.authToken!
             self.manager.requestSerializer.setValue(token, forHTTPHeaderField: "Authorization")
-            self.manager.GET(self.friendsURL,
+            self.manager.GET(friendsURL,
                 parameters: nil,
                 success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)

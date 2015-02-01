@@ -9,12 +9,6 @@
 import UIKit
 
 class SigninViewController: UIViewController {
-
-
-    @IBOutlet weak var confirmPassword: UITextField!
-    @IBOutlet weak var password: UITextField!
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var name: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +19,6 @@ class SigninViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func back(sender: AnyObject) {
-    }
-
-    @IBAction func signin(sender: AnyObject) {
     }
     
     /*
