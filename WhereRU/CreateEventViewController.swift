@@ -78,7 +78,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         locationSearchBar.delegate = self
         
-        search = AMapSearchAPI(searchKey: "2e461f0bd5c6040de56f9e8aae0bceaf", delegate: self)
+        search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
         
         displayController = UISearchDisplayController(searchBar: locationSearchBar, contentsController: self)
         displayController?.delegate = self
