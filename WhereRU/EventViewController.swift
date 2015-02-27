@@ -24,8 +24,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         self.tableView.tableFooterView = UIView()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
         self.tableData = Array<Event>()
         
         self.tableView.addPullToRefreshWithActionHandler { () -> Void in
@@ -33,7 +33,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         }
         
         var refreshView:UIView = UIView()
-        var refreshImage:UIImage = UIImage(named: "refreshIcon")!
+        var refreshImage:UIImage = UIImage(named: "icon_refresh")!
         var refreshImageView:UIImageView = UIImageView(image: refreshImage)
         refreshView.addSubview(refreshImageView)
         self.tableView.pullToRefreshView.setCustomView(refreshImageView, forState: 10)
@@ -108,8 +108,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     func leftButtonsForParticipant()->NSArray{
         var leftUtilityButtons:NSMutableArray = NSMutableArray()
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "Accept Icon"))
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "Delete Icon"))
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "icon_accept"))
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "icon_delete"))
         return leftUtilityButtons
     }
     
@@ -134,7 +134,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     func updateEvents(){
         self.authToken = User.shared.token
         self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-        self.manager.GET(mineURL,
+        self.manager.GET(invitedURL,
             parameters: nil,
             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                 self.tableData?.removeAll(keepCapacity: true)

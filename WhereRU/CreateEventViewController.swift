@@ -291,7 +291,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         var cell: ParticipatorCollectionViewCell = participatorCollectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as ParticipatorCollectionViewCell
         
         if indexPath.row == participators!.count{
-            cell.participatorAvatarImage.image = UIImage(named: "plus")
+            cell.participatorAvatarImage.image = UIImage(named: "icon_add")
             cell.participatorAvatarImage.layer.borderWidth = 0
             cell.isParticipator = false
         }else{
@@ -436,7 +436,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                     println("update event failed:"+error.description)
             })
         }else{
-            if event?.date == nil{
+            if self.eventTextView.text.isEmpty && event?.date == nil{
+                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请在详细界面设置时间", type: .Error)
+            }else if self.eventTextView.text == ""{
+                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话", type: .Error)
+            }else if event?.date == nil{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
             }else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)

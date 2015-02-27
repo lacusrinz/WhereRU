@@ -24,8 +24,8 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
         
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         self.tableView.tableFooterView = UIView()
-        self.tableView.delegate = self
-        self.tableView.dataSource = self
+//        self.tableView.delegate = self
+//        self.tableView.dataSource = self
         
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false

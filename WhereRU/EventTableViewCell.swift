@@ -12,6 +12,8 @@ public class EventTableViewCell: SWTableViewCell {
     
     @IBOutlet weak var eventMessage: UILabel!
     @IBOutlet weak var eventDateTime: UILabel!
+    @IBOutlet weak var eventStatus: UIImageView!
+    @IBOutlet weak var numberOfAccept: UILabel!
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
