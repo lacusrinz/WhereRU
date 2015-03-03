@@ -101,7 +101,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             self.locationMapView.addAnnotation(point)
             
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            self.manager.GET("http://54.255.168.161/participants/by_event/?eventid=\(myEvent.eventID!)",
+            var url = String(format: participantsInEventURL, myEvent.eventID!)
+            self.manager.GET(url,
                 parameters: nil,
                 success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
@@ -410,8 +411,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             params.setObject(User.shared.nickname!, forKey: "modifiedBy")
             
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            
-            self.manager.PUT("http://54.255.168.161/events/\(eventid)/",
+            var url = String(format: updateEventURL, eventid)
+            self.manager.PUT(url,
                 parameters: params,
                 success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
@@ -421,7 +422,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                     for p:Friend in self.participators!{
                         participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
                     }
-                    var url = "http://54.255.168.161/events/\(self.event!.eventID!)/set_participants/"
+                    var url = String(format: addParticipantsToEventURL, self.event!.eventID!)
                     self.manager.POST(url,
                         parameters: participantsParams,
                         success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
@@ -456,7 +457,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 
                 self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
                 
-                self.manager.POST(eventsURL,
+                self.manager.POST(createEventURL,
                     parameters: params,
                     success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                         var response = JSONValue(object)
@@ -466,7 +467,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                         for p:Friend in self.participators!{
                             participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
                         }
-                        var url = "http://54.255.168.161/events/\(self.event!.eventID!)/set_participants/"
+                        var url = String(format: addParticipantsToEventURL, self.event!.eventID!)
                         self.manager.POST(url,
                             parameters: participantsParams,
                             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in

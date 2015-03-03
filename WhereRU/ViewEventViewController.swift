@@ -40,7 +40,8 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         authToken = User.shared.token
         if event!.owner != User.shared.id{
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            self.manager.GET("http://54.255.168.161/friends/\(event!.owner)/",
+            var url = String(format: friendByIdURL, event!.owner)
+            self.manager.GET(url,
                 parameters: nil,
                 success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     var response = JSONValue(object)
@@ -63,7 +64,8 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         participantsCollection.dataSource = self
         
         self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-        self.manager.GET("http://54.255.168.161/participants/by_event/?eventid=\(event!.eventID!)",
+        var url = String(format: participantsInEventURL, event!.eventID!)
+        self.manager.GET(url,
             parameters: nil,
             success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                 var response = JSONValue(object)

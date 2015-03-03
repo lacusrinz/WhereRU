@@ -176,14 +176,14 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-0Z-d4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5641" y="-529"/>
+            <point key="canvasLocation" x="5641" y="-1761"/>
         </scene>
         <!--发出的邀请-->
         <scene sceneID="04I-qq-Yst">
             <objects>
-                <tableViewController id="EKi-3z-bXM" customClass="InviteViewControllerTableViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="EKi-3z-bXM" customClass="InviteViewControllerTableViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Thc-gO-kKF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="487"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -263,7 +263,12 @@
                             <outlet property="delegate" destination="EKi-3z-bXM" id="QtE-hd-cT0"/>
                         </connections>
                     </tableView>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="发出的邀请" id="4ub-6c-B0A"/>
+                    <connections>
+                        <segue destination="SPO-XM-q57" kind="showDetail" identifier="viewEvent" id="jh8-af-kMz"/>
+                        <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="editEvent" id="aHM-u8-bUA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mui-iP-UAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -413,7 +418,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRf-lg-57q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="2Ue-BK-jCL"/>
             </objects>
-            <point key="canvasLocation" x="7027" y="-1920"/>
+            <point key="canvasLocation" x="7507" y="130"/>
         </scene>
         <!--Map Detail View Controller-->
         <scene sceneID="3xh-x2-eso">
@@ -447,7 +452,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4I-5a-lV9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8484" y="-1920"/>
+            <point key="canvasLocation" x="8964" y="130"/>
         </scene>
         <!--去这里-->
         <scene sceneID="pa4-FL-Ihz">
@@ -636,7 +641,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="7027" y="-529"/>
+            <point key="canvasLocation" x="7507" y="-829"/>
         </scene>
         <!--Add Contacts-->
         <scene sceneID="IqV-LT-gZB">
@@ -815,7 +820,7 @@
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4829" y="-528"/>
+            <point key="canvasLocation" x="4829" y="-1760"/>
         </scene>
         <!--好友-->
         <scene sceneID="e6y-3u-m81">
@@ -981,7 +986,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4e-tX-KGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6334" y="-528"/>
+            <point key="canvasLocation" x="6814" y="-828"/>
         </scene>
         <!--好友列表-->
         <scene sceneID="tpq-LG-zaA">
@@ -1055,7 +1060,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAP-4i-itB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8484" y="-1222"/>
+            <point key="canvasLocation" x="8964" y="-1522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eWb-uZ-QkU">
@@ -1073,7 +1078,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T3V-NN-7bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7760" y="-528"/>
+            <point key="canvasLocation" x="8240" y="-828"/>
         </scene>
         <!--详细信息-->
         <scene sceneID="hZ6-o3-iYR">
@@ -1158,7 +1163,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yq-4v-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8484" y="-528"/>
+            <point key="canvasLocation" x="8964" y="-828"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ajg-bY-CmO">
@@ -1176,7 +1181,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwu-gG-jfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7760" y="-1222"/>
+            <point key="canvasLocation" x="8240" y="-1522"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zJ1-70-5L8">
@@ -1194,7 +1199,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JAx-r3-iyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6334" y="-1920"/>
+            <point key="canvasLocation" x="6814" y="130"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aaP-wR-aJV">
@@ -1212,7 +1217,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8rd-jL-JxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7760" y="-1920"/>
+            <point key="canvasLocation" x="8240" y="130"/>
         </scene>
         <!--邀请-->
         <scene sceneID="3Et-vK-Ni3">
@@ -1269,7 +1274,8 @@
         <image name="logo" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="uYs-4N-BPU"/>
+        <segue reference="jh8-af-kMz"/>
+        <segue reference="aHM-u8-bUA"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

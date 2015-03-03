@@ -24,8 +24,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         self.tableView.tableFooterView = UIView()
-//        self.tableView.delegate = self
-//        self.tableView.dataSource = self
         self.tableData = Array<Event>()
         
         self.tableView.addPullToRefreshWithActionHandler { () -> Void in
@@ -71,17 +69,38 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         let cellIdentifier:NSString = "eventTableViewCell"
         var cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as EventTableViewCell
         cell.leftUtilityButtons = self.leftButtonsForParticipant()
-        if (self.tableData![indexPath.row] as Event).owner == User.shared.id{
-            cell.rightUtilityButtons = self.rightButtonsForOwner()
-        }else{
-            cell.rightUtilityButtons = self.rightButtonsForParticipant()
-        }
+//        if (self.tableData![indexPath.row] as Event).owner == User.shared.id{
+//            cell.rightUtilityButtons = self.rightButtonsForOwner()
+//        }else{
+//            cell.rightUtilityButtons = self.rightButtonsForParticipant()
+//        }
 
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.delegate = self
         
         cell.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
         cell.eventDateTime.text = (self.tableData![indexPath.row] as Event).date
+        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
+        
+        cell.eventStatus.hidden = true
+        
+        self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+        var url = String(format: eventStatusURL, (self.tableData![indexPath.row] as Event).eventID!)
+        self.manager.GET(url,
+            parameters: nil,
+            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                var response = JSONValue(object)
+                var status = response["results"]["status"].string
+                if status == "0"{
+                    cell.eventStatus.image = UIImage(named: "icon_refuse_invite")
+                    cell.eventStatus.hidden = false
+                }else if status == "1"{
+                    cell.eventStatus.image = UIImage(named: "icon_accept_invite")
+                    cell.eventStatus.hidden = false
+                }
+            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+            println("Get event status failed \(error.description)")
+        }
         
         return cell
     }
@@ -91,20 +110,11 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     // MARK: - SWTableViewCell Delegate
-    func rightButtonsForOwner()->NSArray{
-        var rightUtilityButtons:NSMutableArray = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "修改")
-//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
-//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
-        return rightUtilityButtons
-    }
-    
-    func rightButtonsForParticipant()->NSArray{
-        var rightUtilityButtons:NSMutableArray = NSMutableArray()
-//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "接受")
-//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "拒绝")
-        return rightUtilityButtons
-    }
+//    func rightButtonsForOwner()->NSArray{
+//        var rightUtilityButtons:NSMutableArray = NSMutableArray()
+//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "修改")
+//        return rightUtilityButtons
+//    }
     
     func leftButtonsForParticipant()->NSArray{
         var leftUtilityButtons:NSMutableArray = NSMutableArray()
@@ -150,6 +160,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                     event.date = event.date?.stringByReplacingOccurrencesOfString("T", withString: " ", options: NSStringCompareOptions.allZeros, range: nil).stringByReplacingOccurrencesOfString(":00Z", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
                     event.needLocation = response["results"][i]["needLocation"].bool!
                     event.Message = response["results"][i]["message"].string
+                    event.AcceptMemberCount = response["results"][i]["AcceptMemberCount"].integer
+                    event.RefuseMemberCount = response["results"][i]["RefuseMemberCount"].integer
                     self.tableData!.append(event)
                 }
                 self.tableView.reloadData()

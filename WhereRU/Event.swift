@@ -16,4 +16,6 @@ class Event: NSObject {
     var date:String?// = NSDate(timeIntervalSinceNow: 0)
     var needLocation:Bool = true
     var Message:String?
+    var AcceptMemberCount:Int?
+    var RefuseMemberCount:Int?
 }

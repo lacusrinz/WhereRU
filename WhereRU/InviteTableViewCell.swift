@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InviteTableViewCell: UITableViewCell {
+class InviteTableViewCell: SWTableViewCell {
 
     @IBOutlet weak var eventMessage: UILabel!
     @IBOutlet weak var eventDatetime: UILabel!
