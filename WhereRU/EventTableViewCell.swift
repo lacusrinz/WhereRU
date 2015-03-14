@@ -15,6 +15,8 @@ public class EventTableViewCell: SWTableViewCell {
     @IBOutlet weak var eventStatus: UIImageView!
     @IBOutlet weak var numberOfAccept: UILabel!
     
+    var cellParticipant:Int = 0
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
     }

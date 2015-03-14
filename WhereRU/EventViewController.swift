@@ -68,12 +68,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
         var cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as EventTableViewCell
-        cell.leftUtilityButtons = self.leftButtonsForParticipant()
-//        if (self.tableData![indexPath.row] as Event).owner == User.shared.id{
-//            cell.rightUtilityButtons = self.rightButtonsForOwner()
-//        }else{
-//            cell.rightUtilityButtons = self.rightButtonsForParticipant()
-//        }
+//        cell.leftUtilityButtons = self.leftButtonsForParticipant()
 
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.delegate = self
@@ -91,12 +86,15 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                 var response = JSONValue(object)
                 var status = response["results"]["status"].string
+                cell.cellParticipant = response["results"]["id"].integer!
                 if status == "0"{
                     cell.eventStatus.image = UIImage(named: "icon_refuse_invite")
                     cell.eventStatus.hidden = false
                 }else if status == "1"{
                     cell.eventStatus.image = UIImage(named: "icon_accept_invite")
                     cell.eventStatus.hidden = false
+                }else{
+                    cell.leftUtilityButtons = self.leftButtonsForParticipant()
                 }
             }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
             println("Get event status failed \(error.description)")
@@ -110,28 +108,94 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     // MARK: - SWTableViewCell Delegate
-//    func rightButtonsForOwner()->NSArray{
-//        var rightUtilityButtons:NSMutableArray = NSMutableArray()
-//        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "修改")
-//        return rightUtilityButtons
-//    }
-    
     func leftButtonsForParticipant()->NSArray{
         var leftUtilityButtons:NSMutableArray = NSMutableArray()
-        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "icon_accept"))
+        leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), icon: UIImage(named: "icon_accept"))
         leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "icon_delete"))
         return leftUtilityButtons
     }
     
-    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+    
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
         cell.hideUtilityButtonsAnimated(true)
-        if cell.rightUtilityButtons.count == 1{
-            if index == 0{
-                selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
-                performSegueWithIdentifier("editEvent", sender: self)
-            }
-        }else if cell.rightUtilityButtons.count == 2{
-            //todo
+        var id = (cell as EventTableViewCell).cellParticipant
+        var selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
+        var row_event = self.tableData![selectedRowNumber] as Event
+        
+        if index == 0{
+            SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
+            
+            var params:NSMutableDictionary = NSMutableDictionary(capacity: 3)
+            params.setObject(row_event.eventID!, forKey: "event")
+            params.setObject(User.shared.id, forKey: "participant")
+            params.setObject(1, forKey: "status")
+            var url = String(format: updateEventStatusURL, id)
+            
+            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+            
+            self.manager.PUT(url,
+                parameters: params,
+                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    
+                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
+                    params2.setObject(row_event.owner, forKey: "owner")
+                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
+                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
+                    params2.setObject(row_event.date!, forKey: "startdate")
+                    params2.setObject(row_event.Message!, forKey: "message")
+                    params2.setObject(row_event.AcceptMemberCount!+1, forKey: "AcceptMemberCount")
+                    params2.setObject(row_event.RefuseMemberCount!, forKey: "RefuseMemberCount")
+                    var url2 = String(format: updateEventURL, row_event.eventID!)
+                    self.manager.PUT(url2,
+                        parameters: params2,
+                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                            SVProgressHUD.dismiss()
+                            self.tableView.triggerPullToRefresh()
+                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                        println("put number failed:\(error.description)")
+                    })
+    
+                },
+                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    println("Update event status failed: \(error.description)")
+            })
+        }else{
+            SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
+            
+            var params:NSMutableDictionary = NSMutableDictionary(capacity: 3)
+            params.setObject(row_event.eventID!, forKey: "event")
+            params.setObject(User.shared.id, forKey: "participant")
+            params.setObject(0, forKey: "status")
+            var url = String(format: updateEventStatusURL, id)
+            
+            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+            
+            self.manager.PUT(url,
+                parameters: params,
+                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                    
+                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
+                    params2.setObject(row_event.owner, forKey: "owner")
+                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
+                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
+                    params2.setObject(row_event.date!, forKey: "startdate")
+                    params2.setObject(row_event.Message!, forKey: "message")
+                    params2.setObject(row_event.AcceptMemberCount!, forKey: "AcceptMemberCount")
+                    params2.setObject(row_event.RefuseMemberCount!+1, forKey: "RefuseMemberCount")
+                    var url2 = String(format: updateEventURL, row_event.eventID!)
+                    self.manager.PUT(url2,
+                        parameters: params2,
+                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+                            SVProgressHUD.dismiss()
+                            self.tableView.triggerPullToRefresh()
+                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                            //
+                    })
+                    
+                },
+                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+                    println("Update event status failed: \(error.description)")
+            })
         }
     }
     

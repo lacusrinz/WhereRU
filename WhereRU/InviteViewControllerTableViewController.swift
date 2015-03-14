@@ -122,6 +122,14 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
         return rightUtilityButtons
     }
     
+    func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
+        cell.hideUtilityButtonsAnimated(true)
+        if index == 0{
+            selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
+            performSegueWithIdentifier("editEvent", sender: self)
+        }
+    }
+    
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell: SWTableViewCell!) -> Bool {
         return true
     }

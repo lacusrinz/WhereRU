@@ -409,6 +409,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             params.setObject(self.eventTextView.text!, forKey: "message")
             params.setObject(User.shared.nickname!, forKey: "createdBy")
             params.setObject(User.shared.nickname!, forKey: "modifiedBy")
+            params.setObject(event!.AcceptMemberCount!, forKey: "AcceptMemberCount")
+            params.setObject(event!.RefuseMemberCount!, forKey: "RefuseMemberCount")
             
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
             var url = String(format: updateEventURL, eventid)
@@ -445,7 +447,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
             }else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
-                var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+                var params:NSMutableDictionary = NSMutableDictionary(capacity: 10)
                 params.setObject(User.shared.id, forKey: "owner")
                 params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
                 params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
@@ -454,6 +456,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 params.setObject(self.eventTextView.text!, forKey: "message")
                 params.setObject(User.shared.nickname!, forKey: "createdBy")
                 params.setObject(User.shared.nickname!, forKey: "modifiedBy")
+                params.setObject(0, forKey: "AcceptMemberCount")
+                params.setObject(0, forKey: "RefuseMemberCount")
                 
                 self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
                 
