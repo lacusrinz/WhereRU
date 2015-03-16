@@ -369,7 +369,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
 
     @IBAction func Back(sender: AnyObject) {
-        self.delegate?.CreateEventViewControllerDidBack(self)
+        if let tabBarController = self.tabBarController{
+            self.tabBarController!.selectedIndex = 0
+        }else{
+            self.delegate?.CreateEventViewControllerDidBack(self)
+        }
     }
     
     // MARK: - addParticipantsDelegate
@@ -430,6 +434,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                         success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                             SVProgressHUD.showSuccessWithStatus("")
                             self.delegate?.CreateEventViewControllerDone(self)
+//                            self.tabBarController!.selectedIndex = 0
                         },
                         failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                             println("set participant failed:"+error.description)
@@ -476,7 +481,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                             parameters: participantsParams,
                             success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                                 SVProgressHUD.showSuccessWithStatus("")
-                                self.delegate?.CreateEventViewControllerDone(self)
+//                                self.delegate?.CreateEventViewControllerDone(self)
+                                self.tabBarController!.selectedIndex = 0
                             },
                             failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                                 println("set participant failed:"+error.description)

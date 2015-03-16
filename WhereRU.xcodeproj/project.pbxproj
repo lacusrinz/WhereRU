@@ -22,6 +22,7 @@
 		A8A0C0371A921371007160D6 /* LineDashPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A0C0361A921371007160D6 /* LineDashPolyline.swift */; };
 		A8A81C1B1A3FBD0B005EA36C /* GeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A81C1A1A3FBD0B005EA36C /* GeocodeAnnotation.swift */; };
 		A8A81C1E1A407DF5005EA36C /* CommonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A81C1D1A407DF5005EA36C /* CommonUtility.swift */; };
+		A8A8D2B31AB5D0B7001DD630 /* mainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A8D2B21AB5D0B7001DD630 /* mainTabBarController.swift */; };
 		A8ABCCE01A58115800965031 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ABCCDF1A58115800965031 /* Event.swift */; };
 		A8B8A12119FF0D310000FB6F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */; };
 		A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */; };
@@ -134,6 +135,7 @@
 		A8A0C0361A921371007160D6 /* LineDashPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDashPolyline.swift; sourceTree = "<group>"; };
 		A8A81C1A1A3FBD0B005EA36C /* GeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocodeAnnotation.swift; sourceTree = "<group>"; };
 		A8A81C1D1A407DF5005EA36C /* CommonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtility.swift; sourceTree = "<group>"; };
+		A8A8D2B21AB5D0B7001DD630 /* mainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTabBarController.swift; sourceTree = "<group>"; };
 		A8ABCCDF1A58115800965031 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				A8BB16921A6F794D00680CC6 /* Event */,
 				A8BB16931A6F799700680CC6 /* Contact */,
 				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
+				A8A8D2B21AB5D0B7001DD630 /* mainTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
+				A8A8D2B31AB5D0B7001DD630 /* mainTabBarController.swift in Sources */,
 				A8A81C1E1A407DF5005EA36C /* CommonUtility.swift in Sources */,
 				A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */,
 				A8A0C0371A921371007160D6 /* LineDashPolyline.swift in Sources */,

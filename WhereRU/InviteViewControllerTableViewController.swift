@@ -34,7 +34,9 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
         var refreshImageView:UIImageView = UIImageView(image: refreshImage)
         refreshView.addSubview(refreshImageView)
         self.tableView.pullToRefreshView.setCustomView(refreshImageView, forState: 10)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         tableView.triggerPullToRefresh()
     }
 

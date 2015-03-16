@@ -35,9 +35,10 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         var refreshImageView:UIImageView = UIImageView(image: refreshImage)
         refreshView.addSubview(refreshImageView)
         self.tableView.pullToRefreshView.setCustomView(refreshImageView, forState: 10)
-        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         tableView.triggerPullToRefresh()
-
     }
     
     //MARK: - UITableView Delegate
@@ -101,10 +102,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         }
         
         return cell
-    }
-    
-    @IBAction func createEvent(sender: AnyObject) {
-        performSegueWithIdentifier("createEvent", sender: self)
     }
     
     // MARK: - SWTableViewCell Delegate
@@ -240,11 +237,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "createEvent"{
-            let navigationController = segue.destinationViewController as UINavigationController
-            let createEventViewController = navigationController.viewControllers[0] as CreateEventViewController
-            createEventViewController.delegate = self
-        }
         if segue.identifier == "editEvent"{
             let navigationController = segue.destinationViewController as UINavigationController
             let createEventViewController = navigationController.viewControllers[0] as CreateEventViewController

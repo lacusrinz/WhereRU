@@ -159,24 +159,15 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="收到的邀请" id="zSl-Wq-x8a">
-                        <barButtonItem key="rightBarButtonItem" image="icon_create" id="QNQ-hR-GTP">
-                            <inset key="imageInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="createEvent:" destination="HdP-lS-8zJ" id="D7U-7f-9me"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="收到的邀请" id="zSl-Wq-x8a"/>
                     <connections>
-                        <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="createEvent" id="uYs-4N-BPU"/>
                         <segue destination="ZRs-HO-PzU" kind="showDetail" identifier="editEvent" id="hJQ-bR-sTe"/>
                         <segue destination="SPO-XM-q57" kind="showDetail" identifier="viewEvent" id="pOu-0Q-lSf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="h7i-0Z-d4X" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5641" y="-1761"/>
+            <point key="canvasLocation" x="5633" y="-2289"/>
         </scene>
         <!--发出的邀请-->
         <scene sceneID="04I-qq-Yst">
@@ -272,7 +263,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mui-iP-UAP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5641" y="130"/>
+            <point key="canvasLocation" x="5633" y="-1354"/>
         </scene>
         <!--聚-->
         <scene sceneID="H1I-wN-Jmz">
@@ -418,7 +409,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PRf-lg-57q" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tapGestureRecognizer id="2Ue-BK-jCL"/>
             </objects>
-            <point key="canvasLocation" x="7507" y="130"/>
+            <point key="canvasLocation" x="7499" y="-1354"/>
         </scene>
         <!--Map Detail View Controller-->
         <scene sceneID="3xh-x2-eso">
@@ -452,7 +443,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4I-5a-lV9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8964" y="130"/>
+            <point key="canvasLocation" x="8956" y="-1354"/>
         </scene>
         <!--去这里-->
         <scene sceneID="pa4-FL-Ihz">
@@ -641,7 +632,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="7507" y="-829"/>
+            <point key="canvasLocation" x="7499" y="135"/>
         </scene>
         <!--Add Contacts-->
         <scene sceneID="IqV-LT-gZB">
@@ -763,10 +754,10 @@
             </objects>
             <point key="canvasLocation" x="5641" y="1961"/>
         </scene>
-        <!--Animated Tab Bar Controller-->
+        <!--Main Tab Bar Controller-->
         <scene sceneID="BmQ-5I-TiN">
             <objects>
-                <tabBarController id="Gkz-UB-kM1" customClass="RAMAnimatedTabBarController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Gkz-UB-kM1" customClass="mainTabBarController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="vH4-8t-lGT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -774,8 +765,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="GVe-s8-hIb" kind="relationship" relationship="viewControllers" id="RBt-ze-L8g"/>
                         <segue destination="dVF-jF-dFP" kind="relationship" relationship="viewControllers" id="mwe-Qc-UzS"/>
+                        <segue destination="GVe-s8-hIb" kind="relationship" relationship="viewControllers" id="RBt-ze-L8g"/>
+                        <segue destination="ZRs-HO-PzU" kind="relationship" relationship="viewControllers" id="Lk6-M1-G0W"/>
                         <segue destination="7YY-ve-Htu" kind="relationship" relationship="viewControllers" id="oXH-40-Mw2"/>
                         <segue destination="xdX-ML-fzp" kind="relationship" relationship="viewControllers" id="4b6-N1-WZ7"/>
                     </connections>
@@ -820,7 +812,7 @@
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4829" y="-1760"/>
+            <point key="canvasLocation" x="4821" y="-2288"/>
         </scene>
         <!--好友-->
         <scene sceneID="e6y-3u-m81">
@@ -974,6 +966,12 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZRs-HO-PzU" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
+                    <tabBarItem key="tabBarItem" title="" image="Icon_center_add" id="MNk-ch-NG1" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                        <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
+                        <connections>
+                            <outlet property="animation" destination="Lhm-ez-z9p" id="KhC-Fr-qwt"/>
+                        </connections>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8nm-LO-m4K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -985,8 +983,9 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4e-tX-KGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Lhm-ez-z9p" customClass="RAMFlipBottomTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="6814" y="-828"/>
+            <point key="canvasLocation" x="6806" y="135"/>
         </scene>
         <!--好友列表-->
         <scene sceneID="tpq-LG-zaA">
@@ -1060,7 +1059,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yAP-4i-itB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8964" y="-1522"/>
+            <point key="canvasLocation" x="8956" y="-558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eWb-uZ-QkU">
@@ -1078,7 +1077,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T3V-NN-7bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8240" y="-828"/>
+            <point key="canvasLocation" x="8232" y="136"/>
         </scene>
         <!--详细信息-->
         <scene sceneID="hZ6-o3-iYR">
@@ -1163,7 +1162,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Yq-4v-Dvi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8964" y="-828"/>
+            <point key="canvasLocation" x="8956" y="136"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ajg-bY-CmO">
@@ -1181,7 +1180,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rwu-gG-jfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8240" y="-1522"/>
+            <point key="canvasLocation" x="8232" y="-558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zJ1-70-5L8">
@@ -1199,7 +1198,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JAx-r3-iyi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6814" y="130"/>
+            <point key="canvasLocation" x="6806" y="-1354"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="aaP-wR-aJV">
@@ -1217,7 +1216,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8rd-jL-JxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="8240" y="130"/>
+            <point key="canvasLocation" x="8232" y="-1354"/>
         </scene>
         <!--邀请-->
         <scene sceneID="3Et-vK-Ni3">
@@ -1255,14 +1254,14 @@
                     </userDefinedRuntimeAttributes>
                 </customObject>
             </objects>
-            <point key="canvasLocation" x="4829" y="136"/>
+            <point key="canvasLocation" x="4821" y="-1348"/>
         </scene>
     </scenes>
     <resources>
+        <image name="Icon_center_add" width="42" height="42"/>
         <image name="default_avatar" width="530" height="530"/>
         <image name="icon_accept_invite" width="100" height="64"/>
         <image name="icon_add" width="256" height="256"/>
-        <image name="icon_create" width="32" height="32"/>
         <image name="icon_friends" width="30" height="27"/>
         <image name="icon_invite" width="30" height="28"/>
         <image name="icon_settings" width="30" height="30"/>
@@ -1274,8 +1273,8 @@
         <image name="logo" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jh8-af-kMz"/>
-        <segue reference="aHM-u8-bUA"/>
+        <segue reference="Lk6-M1-G0W"/>
+        <segue reference="pOu-0Q-lSf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

@@ -13,7 +13,7 @@ let meURL:String = "http://54.255.168.161/auth/me"
 let registrURL:String = "http://54.255.168.161/auth/register"
 
 let friendsURL:String = "http://54.255.168.161/friends/"
-let friendByIdURL:String = "http://54.255.168.161/friends/%d"
+let friendByIdURL:String = "http://54.255.168.161/friends/%d/"
 
 let inviteURL = "http://54.255.168.161/events/invite/"
 let invitedURL = "http://54.255.168.161/events/invited/"
