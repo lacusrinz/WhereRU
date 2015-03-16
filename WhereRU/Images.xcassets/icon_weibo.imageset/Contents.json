@@ -3,16 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "新浪微博sns_icon_1.png"
+      "filename" : "icon_weibo.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "新浪微博sns_icon_1@2x.png"
+      "filename" : "icon_weibo@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "icon_weibo@3x.png"
     }
   ],
   "info" : {

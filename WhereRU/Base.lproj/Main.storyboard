@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6f-iV-yur">
-                                <rect key="frame" x="16" y="522" width="141" height="58"/>
+                                <rect key="frame" x="16" y="551" width="112" height="29"/>
                                 <fontDescription key="fontDescription" name="CourierNewPS-ItalicMT" family="Courier New" pointSize="18"/>
                                 <state key="normal" title=" 微博账号" image="icon_weibo">
                                     <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -30,7 +30,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUe-zt-2F1">
-                                <rect key="frame" x="448" y="522" width="136" height="58"/>
+                                <rect key="frame" x="477" y="551" width="107" height="29"/>
                                 <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
                                 <state key="normal" title=" 微信账号" image="icon_wx">
                                     <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -41,7 +41,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="选择登陆方式" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g31-S1-TsW">
-                                <rect key="frame" x="16" y="474" width="568" height="21"/>
+                                <rect key="frame" x="16" y="503" width="568" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -1268,12 +1268,12 @@
         <image name="icon_user_accept" width="30" height="27"/>
         <image name="icon_user_refuse" width="30" height="27"/>
         <image name="icon_visit" width="30" height="18"/>
-        <image name="icon_weibo" width="58" height="58"/>
-        <image name="icon_wx" width="58" height="58"/>
+        <image name="icon_weibo" width="29" height="29"/>
+        <image name="icon_wx" width="29" height="29"/>
         <image name="logo" width="341" height="341"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Lk6-M1-G0W"/>
+        <segue reference="hJQ-bR-sTe"/>
         <segue reference="pOu-0Q-lSf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
