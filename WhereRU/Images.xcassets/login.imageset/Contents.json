@@ -2,16 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x"
+      "scale" : "1x",
+      "filename" : "login.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "login_background.png"
+      "filename" : "login@2x.png"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "login@3x.png"
     }
   ],
   "info" : {

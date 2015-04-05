@@ -22,6 +22,7 @@ PODS:
     - AFNetworking/NSURLSession
   - AMap2DMap (2.4.2)
   - AMapSearch (2.4.1)
+  - AVOSCloud (3.0.1)
   - HexColors (2.2.1)
   - IQKeyboardManager (3.2.1.0)
   - JSONKit-NoWarning (1.2)
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - AFNetworking (~> 2.3.1)
   - AMap2DMap
   - AMapSearch
+  - AVOSCloud
   - IQKeyboardManager
   - JSONKit-NoWarning (~> 1.2)
   - Reachability (~> 3.1.1)
@@ -57,6 +59,7 @@ SPEC CHECKSUMS:
   AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
   AMap2DMap: 582a8ec3aeb5fcce44adfe51f1a458111821fb0b
   AMapSearch: 1c6a5b217e808a82369070366b323c09e2eb06c5
+  AVOSCloud: 7eb247201941ebda786a2b7d82fe5a73768127b8
   HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
   IQKeyboardManager: 167388b27d0194abc50b2ffc3cc16b881a8227df
   JSONKit-NoWarning: fc8d6dd8ec65e303867d1bd274632fc60a4a8ab9
@@ -69,4 +72,4 @@ SPEC CHECKSUMS:
   TSMessages: b2b5dc71f65146387e51f2600bb0eb8f3a6c4ab8
   UIActivityIndicator-for-SDWebImage: 8bd92c15280fbe54816448c6b14674145eee05c7
 
-COCOAPODS: 0.36.0.beta.2
+COCOAPODS: 0.36.1

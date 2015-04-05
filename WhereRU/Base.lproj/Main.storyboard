@@ -18,73 +18,85 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T6f-iV-yur">
-                                <rect key="frame" x="16" y="393" width="112" height="29"/>
-                                <fontDescription key="fontDescription" name="CourierNewPS-ItalicMT" family="Courier New" pointSize="18"/>
-                                <state key="normal" title=" 微博账号" image="icon_weibo">
-                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="weiboLogin:" destination="Wox-rm-888" eventType="touchUpInside" id="Lxy-Tc-QmY"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ptL-h4-WeK" customClass="avatarImageView" customModule="avatarImageView">
-                                <rect key="frame" x="262" y="20" width="76" height="76"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                        <real key="value" value="0.0"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="38"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="logo"/>
-                                </userDefinedRuntimeAttributes>
-                            </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="img_or+line" translatesAutoresizingMaskIntoConstraints="NO" id="nFt-8F-xTu">
-                                <rect key="frame" x="16" y="367" width="568" height="32"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage" translatesAutoresizingMaskIntoConstraints="NO" id="MSQ-bj-ECu">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_titile" translatesAutoresizingMaskIntoConstraints="NO" id="Jm7-so-f6u">
+                                <rect key="frame" x="205" y="28" width="190" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="9Mr-Xg-FaZ"/>
+                                    <constraint firstAttribute="width" constant="190" id="MT3-59-3LW"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUe-zt-2F1">
-                                <rect key="frame" x="477" y="393" width="107" height="29"/>
-                                <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="18"/>
-                                <state key="normal" title=" 微信账号" image="icon_wx">
-                                    <color key="titleColor" red="0.50196081400000003" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="wxLogin:" destination="Wox-rm-888" eventType="touchUpInside" id="XFL-AZ-6dg"/>
-                                </connections>
-                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login" translatesAutoresizingMaskIntoConstraints="NO" id="H1H-am-nZP">
+                                <rect key="frame" x="135" y="235" width="330" height="129"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="129" id="EYo-hz-GnS"/>
+                                    <constraint firstAttribute="width" constant="330" id="uKM-aK-FnG"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_email" translatesAutoresizingMaskIntoConstraints="NO" id="FA0-Oi-Gds">
+                                <rect key="frame" x="150" y="261" width="23" height="19"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_Lock" translatesAutoresizingMaskIntoConstraints="NO" id="qpl-JP-kVr">
+                                <rect key="frame" x="150" y="321" width="23" height="19"/>
+                            </imageView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入邮箱地址" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VEK-Mz-eOU">
+                                <rect key="frame" x="181" y="256" width="204" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="请输入密码" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tZY-AY-RCn">
+                                <rect key="frame" x="181" y="316" width="204" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_subtitle" translatesAutoresizingMaskIntoConstraints="NO" id="Mad-JH-Eoi">
+                                <rect key="frame" x="229" y="206" width="143" height="21"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_signup" translatesAutoresizingMaskIntoConstraints="NO" id="w5N-Cf-xaa">
+                                <rect key="frame" x="219" y="433" width="162" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="162" id="nIH-jy-rSa"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="nFt-8F-xTu" secondAttribute="bottom" constant="201" id="05Y-g7-4bJ"/>
-                            <constraint firstItem="ptL-h4-WeK" firstAttribute="centerX" secondItem="nFt-8F-xTu" secondAttribute="centerX" id="2jl-ng-PCX"/>
-                            <constraint firstItem="nFt-8F-xTu" firstAttribute="leading" secondItem="URa-3Z-GxP" secondAttribute="leadingMargin" id="JXd-UB-mnB"/>
-                            <constraint firstItem="nFt-8F-xTu" firstAttribute="leading" secondItem="T6f-iV-yur" secondAttribute="leading" id="LFj-Vd-WGf"/>
-                            <constraint firstItem="IUe-zt-2F1" firstAttribute="top" secondItem="T6f-iV-yur" secondAttribute="top" id="XqM-ej-eok"/>
-                            <constraint firstItem="nFt-8F-xTu" firstAttribute="trailing" secondItem="IUe-zt-2F1" secondAttribute="trailing" id="fWc-II-6eK"/>
-                            <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="T6f-iV-yur" secondAttribute="bottom" constant="178" id="x6Q-bv-QZh"/>
-                            <constraint firstItem="ptL-h4-WeK" firstAttribute="top" secondItem="qMa-yC-GWY" secondAttribute="bottom" id="ygI-H4-HNR"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="top" secondItem="FA0-Oi-Gds" secondAttribute="bottom" constant="-45" id="1Ja-aY-qav"/>
+                            <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="H1H-am-nZP" secondAttribute="bottom" constant="236" id="1sH-MG-B0T"/>
+                            <constraint firstItem="Mad-JH-Eoi" firstAttribute="centerX" secondItem="H1H-am-nZP" secondAttribute="centerX" id="2QN-Mc-AZK"/>
+                            <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="qpl-JP-kVr" secondAttribute="bottom" constant="260" id="2ZK-dX-hpb"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="leading" secondItem="qpl-JP-kVr" secondAttribute="trailing" constant="-38" id="5NJ-Dc-miR"/>
+                            <constraint firstItem="MSQ-bj-ECu" firstAttribute="top" secondItem="URa-3Z-GxP" secondAttribute="top" id="9Qi-j8-jAB"/>
+                            <constraint firstItem="tZY-AY-RCn" firstAttribute="top" secondItem="H1H-am-nZP" secondAttribute="bottom" constant="-48" id="BXG-6Y-Va2"/>
+                            <constraint firstItem="qpl-JP-kVr" firstAttribute="top" secondItem="H1H-am-nZP" secondAttribute="bottom" constant="-43" id="IgW-XO-NVg"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="centerX" secondItem="Jm7-so-f6u" secondAttribute="centerX" id="JCD-Td-eYR"/>
+                            <constraint firstItem="Jm7-so-f6u" firstAttribute="top" secondItem="qMa-yC-GWY" secondAttribute="bottom" constant="8" symbolic="YES" id="JSV-7v-O5B"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="leading" secondItem="FA0-Oi-Gds" secondAttribute="trailing" constant="-38" id="Log-xc-5MO"/>
+                            <constraint firstItem="Jm7-so-f6u" firstAttribute="centerX" secondItem="MSQ-bj-ECu" secondAttribute="centerX" id="Lqr-9B-9e5"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="leading" secondItem="VEK-Mz-eOU" secondAttribute="trailing" constant="-250" id="MBM-3S-nqY"/>
+                            <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="w5N-Cf-xaa" secondAttribute="bottom" constant="116" id="Mhm-gp-oaL"/>
+                            <constraint firstAttribute="trailing" secondItem="MSQ-bj-ECu" secondAttribute="trailing" id="PI1-iq-dnT"/>
+                            <constraint firstItem="tZY-AY-RCn" firstAttribute="leading" secondItem="qpl-JP-kVr" secondAttribute="trailing" constant="8" id="TiK-il-6KV"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="leading" secondItem="tZY-AY-RCn" secondAttribute="trailing" constant="-250" id="UKE-GV-qvr"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="top" secondItem="Mad-JH-Eoi" secondAttribute="bottom" constant="8" symbolic="YES" id="Xja-xL-ilq"/>
+                            <constraint firstItem="VEK-Mz-eOU" firstAttribute="leading" secondItem="FA0-Oi-Gds" secondAttribute="trailing" constant="8" id="chn-JR-nVF"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="top" secondItem="VEK-Mz-eOU" secondAttribute="bottom" constant="-51" id="grT-0t-7vB"/>
+                            <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="Jm7-so-f6u" secondAttribute="bottom" constant="482" id="i10-A5-Llc"/>
+                            <constraint firstItem="MSQ-bj-ECu" firstAttribute="leading" secondItem="URa-3Z-GxP" secondAttribute="leading" id="kjg-Rn-j38"/>
+                            <constraint firstItem="w5N-Cf-xaa" firstAttribute="top" secondItem="H1H-am-nZP" secondAttribute="bottom" constant="69" id="oYQ-jA-ieo"/>
+                            <constraint firstItem="w5N-Cf-xaa" firstAttribute="centerX" secondItem="H1H-am-nZP" secondAttribute="centerX" id="phA-Cd-ehM"/>
+                            <constraint firstItem="qpl-JP-kVr" firstAttribute="leading" secondItem="FA0-Oi-Gds" secondAttribute="leading" id="xs2-3M-mZU"/>
+                            <constraint firstItem="MSQ-bj-ECu" firstAttribute="bottom" secondItem="anL-uT-OyJ" secondAttribute="top" id="y7L-xh-kb2"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="weiboLoginButton" destination="T6f-iV-yur" id="6zk-Rn-8FE"/>
-                        <outlet property="wxLoginButton" destination="IUe-zt-2F1" id="Ptc-xd-rY2"/>
                         <segue destination="Gkz-UB-kM1" kind="show" identifier="login" id="sYl-ur-Ych"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qre-96-T62" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3219" y="136"/>
+            <point key="canvasLocation" x="3219" y="135"/>
         </scene>
         <!--收到的邀请-->
         <scene sceneID="AM4-j8-KvJ">
@@ -1269,18 +1281,21 @@
     <resources>
         <image name="Icon_center_add" width="42" height="42"/>
         <image name="default_avatar" width="530" height="530"/>
+        <image name="homepage" width="960" height="600"/>
+        <image name="icon_Lock" width="20" height="27"/>
         <image name="icon_accept_invite" width="100" height="64"/>
         <image name="icon_add" width="256" height="256"/>
+        <image name="icon_email" width="23" height="19"/>
         <image name="icon_friends" width="30" height="27"/>
         <image name="icon_invite" width="30" height="28"/>
         <image name="icon_settings" width="30" height="30"/>
+        <image name="icon_signup" width="316" height="67"/>
+        <image name="icon_subtitle" width="143" height="21"/>
+        <image name="icon_titile" width="189" height="83"/>
         <image name="icon_user_accept" width="30" height="27"/>
         <image name="icon_user_refuse" width="30" height="27"/>
         <image name="icon_visit" width="30" height="18"/>
-        <image name="icon_weibo" width="29" height="29"/>
-        <image name="icon_wx" width="29" height="29"/>
-        <image name="img_or+line" width="572" height="22"/>
-        <image name="logo" width="76" height="76"/>
+        <image name="login" width="370" height="145"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="hJQ-bR-sTe"/>

@@ -21,3 +21,5 @@ pod 'IQKeyboardManager'
 
 pod 'AMap2DMap'
 pod 'AMapSearch'
+
+pod 'AVOSCloud'
