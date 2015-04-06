@@ -63,6 +63,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="signin:" destination="Sbx-cC-uIv" eventType="touchUpInside" id="dxr-SQ-E5N"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -92,6 +95,11 @@
                             <constraint firstItem="kSf-db-dec" firstAttribute="centerY" secondItem="cFK-RP-91x" secondAttribute="centerY" id="zhy-vJ-xBX"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="confirmPasswordTextField" destination="OjM-wm-Mzw" id="uvQ-oy-8rm"/>
+                        <outlet property="emailTextField" destination="kfX-GW-wqW" id="fN1-Lw-vdI"/>
+                        <outlet property="passwordTextField" destination="Kii-l8-eKS" id="Rvu-Nl-9ZV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTM-CG-1z0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

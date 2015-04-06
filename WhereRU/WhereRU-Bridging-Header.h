@@ -12,7 +12,9 @@
 
 #import "SWTableViewCell.h"
 
-#import <ShareSDK/ShareSDK.h>
+#import <AVOSCloud/AVOSCloud.h>;
+
+//#import <ShareSDK/ShareSDK.h>
 
 #import "SVProgressHUD.h"
 #import "JSONKit.h"

@@ -10,6 +10,10 @@ import UIKit
 
 class SigninViewController: UIViewController {
     
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var confirmPasswordTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +25,8 @@ class SigninViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func signin(sender: AnyObject) {
+    }
     /*
     // MARK: - Navigation
 
