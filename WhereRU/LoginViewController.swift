@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    @IBOutlet weak var emailAddressTextField: UITextField!
+    @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     required init(coder aDecoder: NSCoder) {
@@ -20,14 +20,27 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        SVProgressHUD.setBackgroundColor(UIColor.clearColor())
     }
     
     override func viewDidAppear(animated: Bool) {
-        //
+        var currentUser:AVUser? = AVUser.currentUser()
+        if (currentUser != nil){
+            self.performSegueWithIdentifier("login", sender: self)
+        }else{
+            println("no currentUser")
+        }
     }
 
     @IBAction func login(sender: AnyObject) {
+        AVUser.logInWithUsernameInBackground(nicknameTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
+            if (user != nil){
+                println("login success")
+                self.performSegueWithIdentifier("login", sender: self)
+            }else{
+                println("failed:\(error!.description)")
+            }
+        }
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

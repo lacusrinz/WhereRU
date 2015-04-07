@@ -17,11 +17,9 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
 
     @IBOutlet weak var avatar: avatarImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var recognizeID: UILabel!
     @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = User.shared.nickname!
-    var _id:String = User.shared.from!
+    var _name:String = AVUser.currentUser().objectForKey("username") as String//User.shared.nickname!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +29,6 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         self.navigationController?.navigationBar.translucent = false
 
         name.text = _name
-        recognizeID.text = _id
         var avatarURL:NSURL? = nil
         if User.shared.avatar != ""{
              avatarURL = NSURL(string: User.shared.avatar!)

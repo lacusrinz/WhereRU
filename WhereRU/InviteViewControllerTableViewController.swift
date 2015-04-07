@@ -46,33 +46,35 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
     
     // MARK: - SVPullToRefresh func
     func updateEvents(){
-        self.authToken = User.shared.token
-        self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-        self.manager.GET(inviteURL,
-            parameters: nil,
-            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                self.tableData?.removeAll(keepCapacity: true)
-                var response = JSONValue(object)
-                var sum:Int = response["count"].integer!
-                for var i=0; i<sum; ++i{
-                    var event = Event()
-                    event.eventID = response["results"][i]["id"].integer!
-                    event.owner = response["results"][i]["owner"].integer!
-                    event.participants = response["results"][i]["participants"].string
-                    event.coordinate = CLLocationCoordinate2D(latitude: response["results"][i]["latitude"].double!, longitude: response["results"][i]["longitude"].double!)
-                    event.date = response["results"][i]["startdate"].string!
-                    event.date = event.date?.stringByReplacingOccurrencesOfString("T", withString: " ", options: NSStringCompareOptions.allZeros, range: nil).stringByReplacingOccurrencesOfString(":00Z", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
-                    event.needLocation = response["results"][i]["needLocation"].bool!
-                    event.Message = response["results"][i]["message"].string
-                    event.AcceptMemberCount = response["results"][i]["AcceptMemberCount"].integer
-                    event.RefuseMemberCount = response["results"][i]["RefuseMemberCount"].integer
-                    self.tableData!.append(event)
-                }
-                self.tableView.reloadData()
-                self.tableView.pullToRefreshView.stopAnimating()
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                println("get event list:"+error.description)
-        }
+//        self.tableView.reloadData()
+        self.tableView.pullToRefreshView.stopAnimating()
+//        self.authToken = User.shared.token
+//        self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
+//        self.manager.GET(inviteURL,
+//            parameters: nil,
+//            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+//                self.tableData?.removeAll(keepCapacity: true)
+//                var response = JSONValue(object)
+//                var sum:Int = response["count"].integer!
+//                for var i=0; i<sum; ++i{
+//                    var event = Event()
+//                    event.eventID = response["results"][i]["id"].integer!
+//                    event.owner = response["results"][i]["owner"].integer!
+//                    event.participants = response["results"][i]["participants"].string
+//                    event.coordinate = CLLocationCoordinate2D(latitude: response["results"][i]["latitude"].double!, longitude: response["results"][i]["longitude"].double!)
+//                    event.date = response["results"][i]["startdate"].string!
+//                    event.date = event.date?.stringByReplacingOccurrencesOfString("T", withString: " ", options: NSStringCompareOptions.allZeros, range: nil).stringByReplacingOccurrencesOfString(":00Z", withString: "", options: NSStringCompareOptions.allZeros, range: nil)
+//                    event.needLocation = response["results"][i]["needLocation"].bool!
+//                    event.Message = response["results"][i]["message"].string
+//                    event.AcceptMemberCount = response["results"][i]["AcceptMemberCount"].integer
+//                    event.RefuseMemberCount = response["results"][i]["RefuseMemberCount"].integer
+//                    self.tableData!.append(event)
+//                }
+//                self.tableView.reloadData()
+//                self.tableView.pullToRefreshView.stopAnimating()
+//            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//                println("get event list:"+error.description)
+//        }
     }
 
     // MARK: - Table view data source

@@ -12,7 +12,7 @@
 
 #import "SWTableViewCell.h"
 
-#import <AVOSCloud/AVOSCloud.h>;
+#import <AVOSCloud/AVOSCloud.h>
 
 //#import <ShareSDK/ShareSDK.h>
 

@@ -120,8 +120,6 @@
 		A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1261A07C7890000FB6F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
-		A8B8A18A1A10796E0000FB6F /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
-		A8B8A18C1A10AD9B0000FB6F /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		A8B8A1901A1250280000FB6F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		A8B8A1931A14F9F90000FB6F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		A8B991011A432A2700AB75DB /* ReGeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReGeocodeAnnotation.swift; sourceTree = "<group>"; };
@@ -412,8 +410,6 @@
 		FEE12FCDBF1E43C69B3E5840 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				A8B8A18C1A10AD9B0000FB6F /* libsqlite3.dylib */,
-				A8B8A18A1A10796E0000FB6F /* libicucore.dylib */,
 				0B7DD70D1EB048628041DBA1 /* libPods.a */,
 			);
 			name = Frameworks;
