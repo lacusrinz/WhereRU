@@ -26,13 +26,13 @@ PODS:
   - HexColors (2.2.1)
   - IQKeyboardManager (3.2.1.0)
   - JSONKit-NoWarning (1.2)
+  - MJRefresh (1.4.3)
   - Reachability (3.1.1)
   - RSKImageCropper (0.3.1)
   - SDWebImage (3.7.1):
     - SDWebImage/Core (= 3.7.1)
   - SDWebImage/Core (3.7.1)
   - SVProgressHUD (1.1.2)
-  - SVPullToRefresh (0.4.1)
   - SWTableViewCell (0.3.7)
   - TSMessages (0.9.12):
     - HexColors
@@ -46,30 +46,30 @@ DEPENDENCIES:
   - AVOSCloud
   - IQKeyboardManager
   - JSONKit-NoWarning (~> 1.2)
+  - MJRefresh (~> 1.4.1)
   - Reachability (~> 3.1.1)
   - RSKImageCropper (~> 0.3.0)
   - SDWebImage (~> 3.7.1)
   - SVProgressHUD (~> 1.0)
-  - SVPullToRefresh (~> 0.4.1)
   - SWTableViewCell (~> 0.3.6)
   - TSMessages (~> 0.9.4)
   - UIActivityIndicator-for-SDWebImage (~> 1.2)
 
 SPEC CHECKSUMS:
-  AFNetworking: 6d7b76aa5d04c8c37daad3eef4b7e3f2a7620da3
-  AMap2DMap: 582a8ec3aeb5fcce44adfe51f1a458111821fb0b
-  AMapSearch: 1c6a5b217e808a82369070366b323c09e2eb06c5
+  AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
+  AMap2DMap: 6f19f93b3410c8105c34ef93dd9dbb537f7ea897
+  AMapSearch: e48c562fc7713f7e5f719863a15141a847e16c04
   AVOSCloud: 7eb247201941ebda786a2b7d82fe5a73768127b8
-  HexColors: 01384d2bbe8dc4ffa43c3b4135db6e976952d153
-  IQKeyboardManager: 167388b27d0194abc50b2ffc3cc16b881a8227df
-  JSONKit-NoWarning: fc8d6dd8ec65e303867d1bd274632fc60a4a8ab9
-  Reachability: 8e9635e3cb4f98e7f825e51147f677ecc694d0e7
-  RSKImageCropper: a56cef96c83ce2a58e43cc3df37e3251ab22b96a
-  SDWebImage: 116e88633b5b416ea0ca4b334a4ac59cf72dd38d
-  SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
-  SVPullToRefresh: d5161ebc833a38b465364412e5e307ca80bbb190
-  SWTableViewCell: 25de71898e3fcd11cf75707ef90245acf990ec03
-  TSMessages: b2b5dc71f65146387e51f2600bb0eb8f3a6c4ab8
-  UIActivityIndicator-for-SDWebImage: 8bd92c15280fbe54816448c6b14674145eee05c7
+  HexColors: abfd172e329dab59888614ccba6f216cec59289d
+  IQKeyboardManager: 658fa6263e305e2976bb73a2309151eb250283da
+  JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
+  MJRefresh: 6eb09aefa9622f0908fdf42d63c2070478c04c42
+  Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
+  RSKImageCropper: d5cb67586af50470bf4e4d9fe8cff5a198ed26e5
+  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
+  SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
+  SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
+  TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3
+  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
 COCOAPODS: 0.36.1
