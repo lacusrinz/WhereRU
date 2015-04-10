@@ -1,5 +1,4 @@
 #source 'https://github.com/CocoaPods/Specs.git'
-xcodeproj "/Users/RInz/Documents/app/WhereRU/WhereRU.xcodeproj"
 
 platform :ios, '7.0'
 pod 'Reachability', '~> 3.1.1'
