@@ -22,17 +22,18 @@ PODS:
     - AFNetworking/NSURLSession
   - AMap2DMap (2.4.2)
   - AMapSearch (2.4.1)
-  - AVOSCloud (3.0.1)
+  - AVOSCloud (3.0.2)
+  - FoldingTabBar (1.0.0)
   - HexColors (2.2.1)
-  - IQKeyboardManager (3.2.1.0)
+  - IQKeyboardManager (3.2.2)
   - JSONKit-NoWarning (1.2)
-  - MJRefresh (1.4.3)
+  - MJRefresh (1.4.4)
   - Reachability (3.1.1)
   - RSKImageCropper (0.3.1)
-  - SDWebImage (3.7.1):
-    - SDWebImage/Core (= 3.7.1)
-  - SDWebImage/Core (3.7.1)
-  - SVProgressHUD (1.1.2)
+  - SDWebImage (3.7.2):
+    - SDWebImage/Core (= 3.7.2)
+  - SDWebImage/Core (3.7.2)
+  - SVProgressHUD (1.1.3)
   - SWTableViewCell (0.3.7)
   - TSMessages (0.9.12):
     - HexColors
@@ -44,6 +45,7 @@ DEPENDENCIES:
   - AMap2DMap
   - AMapSearch
   - AVOSCloud
+  - FoldingTabBar (~> 1.0.0)
   - IQKeyboardManager
   - JSONKit-NoWarning (~> 1.2)
   - MJRefresh (~> 1.4.1)
@@ -59,17 +61,18 @@ SPEC CHECKSUMS:
   AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
   AMap2DMap: 6f19f93b3410c8105c34ef93dd9dbb537f7ea897
   AMapSearch: e48c562fc7713f7e5f719863a15141a847e16c04
-  AVOSCloud: 7eb247201941ebda786a2b7d82fe5a73768127b8
+  AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
+  FoldingTabBar: 463d247453a2ba826ae79f5be1e6b8b93b6aa0ce
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
-  IQKeyboardManager: 658fa6263e305e2976bb73a2309151eb250283da
+  IQKeyboardManager: 99df8006864663a4126a77b9a2f7ea70077eff31
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
-  MJRefresh: 6eb09aefa9622f0908fdf42d63c2070478c04c42
+  MJRefresh: e4a25dd1f3afbe5c547ff0d434cb40997803bc81
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   RSKImageCropper: d5cb67586af50470bf4e4d9fe8cff5a198ed26e5
-  SDWebImage: ed3095af2ff88b436426037444979b917f6c5575
-  SVProgressHUD: 3afb875b9eb23acd1bed9b82495695c68621a8b2
+  SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
   TSMessages: 2a52642128d7ab15b46930c810b9c9403a2b58f3
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-COCOAPODS: 0.36.1
+COCOAPODS: 0.36.3

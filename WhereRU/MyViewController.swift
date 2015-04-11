@@ -9,7 +9,7 @@
 import UIKit
 import avatarImageView
 
-class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate {
+class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate, YALTabBarInteracting {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -19,12 +19,12 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     @IBOutlet weak var name: UILabel!
     @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = AVUser.currentUser().objectForKey("username") as String//User.shared.nickname!
+    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
 
@@ -76,7 +76,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as UIImage
+            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
             var imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
             imageCropVC.delegate = self
             self.presentViewController(imageCropVC, animated: true, completion: { () -> Void in

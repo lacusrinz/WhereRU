@@ -1,7 +1,6 @@
 #source 'https://github.com/CocoaPods/Specs.git'
-xcodeproj "/Users/RInz/Documents/app/WhereRU/WhereRU.xcodeproj"
 
-platform :ios, '7.0'
+platform :ios, '8.0'
 pod 'Reachability', '~> 3.1.1'
 #pod 'Mantle', '~> 1.3.1'
 pod 'TSMessages', '~> 0.9.4'
@@ -17,6 +16,7 @@ pod 'RSKImageCropper', '~>0.3.0'
 #pod 'JASwipeCell'
 #pod 'PureLayout', '~> 2.0.1'
 #pod 'DAContextMenuTableViewController'
+#pod 'SwiftyJSON', '>~> 2.1.3'
 pod 'SWTableViewCell', '~> 0.3.6'
 pod 'IQKeyboardManager'
 
@@ -24,3 +24,4 @@ pod 'AMap2DMap'
 pod 'AMapSearch'
 
 pod 'AVOSCloud'
+pod 'FoldingTabBar', '~> 1.0.0'

@@ -24,7 +24,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
 //        initToolBar()
         
@@ -163,7 +163,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKindOfClass(MAPointAnnotation){
             let pointReuseIndetifier = "pointReuseIndetifier"
-            var poiAnnotationView:MAPinAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as MAPinAnnotationView?
+            var poiAnnotationView:MAPinAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
             }

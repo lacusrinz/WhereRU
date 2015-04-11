@@ -19,17 +19,11 @@
 		A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; };
 		A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
-		A8A0C0371A921371007160D6 /* LineDashPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A0C0361A921371007160D6 /* LineDashPolyline.swift */; };
-		A8A81C1B1A3FBD0B005EA36C /* GeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A81C1A1A3FBD0B005EA36C /* GeocodeAnnotation.swift */; };
-		A8A81C1E1A407DF5005EA36C /* CommonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A81C1D1A407DF5005EA36C /* CommonUtility.swift */; };
-		A8A8D2B31AB5D0B7001DD630 /* mainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A8D2B21AB5D0B7001DD630 /* mainTabBarController.swift */; };
 		A8ABCCE01A58115800965031 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ABCCDF1A58115800965031 /* Event.swift */; };
 		A8B8A12119FF0D310000FB6F /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */; };
 		A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */; };
 		A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1261A07C7890000FB6F /* ContactViewController.swift */; };
 		A8B8A1911A1250280000FB6F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1901A1250280000FB6F /* User.swift */; };
-		A8B8A1941A14F9F90000FB6F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1931A14F9F90000FB6F /* SwiftyJSON.swift */; };
-		A8B991021A432A2700AB75DB /* ReGeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B991011A432A2700AB75DB /* ReGeocodeAnnotation.swift */; };
 		A8B991041A4670BA00AB75DB /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B991031A4670BA00AB75DB /* Participant.swift */; };
 		A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA437B19FD446A004A8300 /* EventViewController.swift */; };
 		A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA6CB81A2D8613004A72A4 /* Friend.swift */; };
@@ -46,6 +40,7 @@
 		A8D58A6019C1EB0F00EEFC98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A5F19C1EB0F00EEFC98 /* Images.xcassets */; };
 		A8D58A6319C1EB0F00EEFC98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A6119C1EB0F00EEFC98 /* LaunchScreen.xib */; };
 		A8D58A6F19C1EB0F00EEFC98 /* WhereRUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */; };
+		A8E51F9A1AD96A18000F2AFF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */; };
 		A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */; };
 		A8F6656E1AA061690077A927 /* InviteViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656D1AA061690077A927 /* InviteViewControllerTableViewController.swift */; };
 		A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656F1AA066B90077A927 /* InviteTableViewCell.swift */; };
@@ -112,17 +107,11 @@
 		A814C8E119CFF47A00735E7B /* avatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatarImageView.h; sourceTree = "<group>"; };
 		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
-		A8A0C0361A921371007160D6 /* LineDashPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDashPolyline.swift; sourceTree = "<group>"; };
-		A8A81C1A1A3FBD0B005EA36C /* GeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocodeAnnotation.swift; sourceTree = "<group>"; };
-		A8A81C1D1A407DF5005EA36C /* CommonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtility.swift; sourceTree = "<group>"; };
-		A8A8D2B21AB5D0B7001DD630 /* mainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = mainTabBarController.swift; sourceTree = "<group>"; };
 		A8ABCCDF1A58115800965031 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A8B8A12019FF0D310000FB6F /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1261A07C7890000FB6F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		A8B8A1901A1250280000FB6F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A8B8A1931A14F9F90000FB6F /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
-		A8B991011A432A2700AB75DB /* ReGeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReGeocodeAnnotation.swift; sourceTree = "<group>"; };
 		A8B991031A4670BA00AB75DB /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		A8BA437B19FD446A004A8300 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A8BA6CB81A2D8613004A72A4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
@@ -143,6 +132,7 @@
 		A8D58A6819C1EB0F00EEFC98 /* WhereRUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereRUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A6D19C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereRUTests.swift; sourceTree = "<group>"; };
+		A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		A8F6656D1AA061690077A927 /* InviteViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		A8F6656F1AA066B90077A927 /* InviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
@@ -244,24 +234,6 @@
 			name = IBDesignableViews;
 			sourceTree = "<group>";
 		};
-		A8A81C191A3FBCCF005EA36C /* AMapModel */ = {
-			isa = PBXGroup;
-			children = (
-				A8A81C1A1A3FBD0B005EA36C /* GeocodeAnnotation.swift */,
-				A8B991011A432A2700AB75DB /* ReGeocodeAnnotation.swift */,
-				A8A0C0361A921371007160D6 /* LineDashPolyline.swift */,
-			);
-			name = AMapModel;
-			sourceTree = "<group>";
-		};
-		A8A81C1C1A407DD9005EA36C /* AmapUtility */ = {
-			isa = PBXGroup;
-			children = (
-				A8A81C1D1A407DF5005EA36C /* CommonUtility.swift */,
-			);
-			name = AmapUtility;
-			sourceTree = "<group>";
-		};
 		A8B8A12219FF0D470000FB6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,7 +242,7 @@
 				A8BB16921A6F794D00680CC6 /* Event */,
 				A8BB16931A6F799700680CC6 /* Contact */,
 				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
-				A8A8D2B21AB5D0B7001DD630 /* mainTabBarController.swift */,
+				A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -290,7 +262,6 @@
 		A8B8A18F1A124F0C0000FB6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A8A81C191A3FBCCF005EA36C /* AMapModel */,
 				A8B8A1901A1250280000FB6F /* User.swift */,
 				A8B991031A4670BA00AB75DB /* Participant.swift */,
 				A8BA6CB81A2D8613004A72A4 /* Friend.swift */,
@@ -302,9 +273,7 @@
 		A8B8A1921A14F8F00000FB6F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A8A81C1C1A407DD9005EA36C /* AmapUtility */,
 				A80CDDEC1A2FEF070007C345 /* RAMAnimatedTabBarController */,
-				A8B8A1931A14F9F90000FB6F /* SwiftyJSON.swift */,
 				A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */,
 			);
 			name = Utils;
@@ -653,19 +622,16 @@
 				A8BDE73B1A74E33900EC5785 /* MapDetailViewController.swift in Sources */,
 				A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */,
 				A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */,
-				A8B8A1941A14F9F90000FB6F /* SwiftyJSON.swift in Sources */,
 				A80CDE001A2FEF070007C345 /* RAMItemAnimationProtocol.swift in Sources */,
 				A8B991041A4670BA00AB75DB /* Participant.swift in Sources */,
 				A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */,
+				A8E51F9A1AD96A18000F2AFF /* MainTabBarController.swift in Sources */,
 				A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */,
 				A8C25CF31A7B456F001EFDE1 /* CommonConstant.swift in Sources */,
 				A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
-				A8A8D2B31AB5D0B7001DD630 /* mainTabBarController.swift in Sources */,
-				A8A81C1E1A407DF5005EA36C /* CommonUtility.swift in Sources */,
 				A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */,
-				A8A0C0371A921371007160D6 /* LineDashPolyline.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
 				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
 				A80CDDFE1A2FEF070007C345 /* RAMTransitionItemAnimation.swift in Sources */,
@@ -673,9 +639,7 @@
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8F6656E1AA061690077A927 /* InviteViewControllerTableViewController.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
-				A8A81C1B1A3FBD0B005EA36C /* GeocodeAnnotation.swift in Sources */,
 				A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */,
-				A8B991021A432A2700AB75DB /* ReGeocodeAnnotation.swift in Sources */,
 				A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */,
 				A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */,
 				A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */,
@@ -740,6 +704,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -753,6 +718,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -765,6 +731,7 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -774,6 +741,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

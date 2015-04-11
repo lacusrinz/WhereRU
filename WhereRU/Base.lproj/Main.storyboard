@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7531" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7520"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -898,7 +898,7 @@
         <!--Main Tab Bar Controller-->
         <scene sceneID="BmQ-5I-TiN">
             <objects>
-                <tabBarController id="Gkz-UB-kM1" customClass="mainTabBarController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="Gkz-UB-kM1" customClass="MainTabBarController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="vH4-8t-lGT">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -908,7 +908,6 @@
                     <connections>
                         <segue destination="dVF-jF-dFP" kind="relationship" relationship="viewControllers" id="mwe-Qc-UzS"/>
                         <segue destination="GVe-s8-hIb" kind="relationship" relationship="viewControllers" id="RBt-ze-L8g"/>
-                        <segue destination="ZRs-HO-PzU" kind="relationship" relationship="viewControllers" id="Lk6-M1-G0W"/>
                         <segue destination="7YY-ve-Htu" kind="relationship" relationship="viewControllers" id="oXH-40-Mw2"/>
                         <segue destination="xdX-ML-fzp" kind="relationship" relationship="viewControllers" id="4b6-N1-WZ7"/>
                     </connections>
@@ -1420,8 +1419,8 @@
         <image name="signup" width="374" height="211"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hJQ-bR-sTe"/>
         <segue reference="pOu-0Q-lSf"/>
+        <segue reference="hJQ-bR-sTe"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

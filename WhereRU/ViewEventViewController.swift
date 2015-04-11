@@ -31,7 +31,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
         mapTapGesture = UITapGestureRecognizer(target: self, action: "getMap")
         mapTapGesture.delegate = self
@@ -44,9 +44,6 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
             self.manager.GET(url,
                 parameters: nil,
                 success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    var response = JSONValue(object)
-                    var avatar:String = response["avatar"].string!
-                    self.avatarImage.setImageWithURL(NSURL(string: avatar), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
                 }) { (request:AFHTTPRequestOperation!, error:NSError!) -> Void in
                     println("get owner avatar failed: \(error.description)")
             }
@@ -68,15 +65,6 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         self.manager.GET(url,
             parameters: nil,
             success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                var response = JSONValue(object)
-                var sum:Int = response["count"].integer!
-                for var i=0; i<sum; ++i{
-                    var participant:Friend = Friend()
-                    participant.to_user = response["results"][i]["nickname"].string
-                    participant.from_user = User.shared.nickname
-                    participant.avatar = response["results"][i]["avatar"].string
-                    self.participators?.append(participant)
-                }
                 self.participantsCollection.reloadData()
             }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
                 print("Get Participants Failed: \(error.description)")
@@ -106,7 +94,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cellIdentifier:NSString = "ParticipatorCollectionViewCell"
-        var cell: ParticipatorCollectionViewCell = participantsCollection.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as ParticipatorCollectionViewCell
+        var cell: ParticipatorCollectionViewCell = participantsCollection.dequeueReusableCellWithReuseIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! ParticipatorCollectionViewCell
 
         cell.participatorAvatarImage.setImageWithURL(NSURL(string: participators![indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         cell.participatorAvatarImage.layer.borderWidth = 1
@@ -123,8 +111,8 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     //MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "getMap"{
-            let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
-            let mapDetailViewController:MapDetailViewController = navigationController.viewControllers[0] as MapDetailViewController
+            let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
+            let mapDetailViewController:MapDetailViewController = navigationController.viewControllers[0] as! MapDetailViewController
 //            mapDetailViewController.delegate = self
             mapDetailViewController.coordinate = event!.coordinate!
         }

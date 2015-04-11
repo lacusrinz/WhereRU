@@ -23,7 +23,7 @@ class AddParticipantsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
         tableData = User.shared.friends
         rowsCount = tableData.count
@@ -56,7 +56,7 @@ class AddParticipantsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell:AddParticipantTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as AddParticipantTableViewCell
+        var cell:AddParticipantTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! AddParticipantTableViewCell
         cell.tintColor = UIColor.blueColor()
         if cell.selectedFriend{
             cell.selectedFriend = false
@@ -71,7 +71,7 @@ class AddParticipantsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "AddParticipantTableViewCell"
-        var cell:AddParticipantTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as? AddParticipantTableViewCell
+        var cell:AddParticipantTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as? AddParticipantTableViewCell
         cell?.name.text = tableData[indexPath.row].to_user
         cell?.avatar.setImageWithURL(NSURL(string: tableData[indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         

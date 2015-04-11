@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>DDCE1559-176D-4CE5-8E41-C0225B1C56AB</string>
+	<string>FD906C48-8C36-4242-B702-566F29370CAA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>WhereRU</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/lacusrinz/WhereRU.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>WhereRU.xcworkspace</string>
+	<string>WhereRU.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>DBC810277C5E1F5793753DE43011CF679ABCDB56</key>
-		<string>..</string>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/lacusrinz/WhereRU.git</string>

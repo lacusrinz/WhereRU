@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactViewController: UITableViewController, SWTableViewCellDelegate {
+class ContactViewController: UITableViewController, SWTableViewCellDelegate, YALTabBarInteracting {
 
     var tableData = [Friend]()
     var rowsCount:NSInteger = 0
@@ -16,7 +16,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
         // Do any additional setup after loading the view.
         tableData = User.shared.friends
@@ -62,10 +62,10 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "contactTableViewCell"
-        var cell:ContactTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as ContactTableViewCell
+        var cell:ContactTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! ContactTableViewCell
         
         //        cell = EventTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellIdentifier)
-        cell.rightUtilityButtons = self.rightButtons()
+        cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
         cell.delegate = self
         
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)

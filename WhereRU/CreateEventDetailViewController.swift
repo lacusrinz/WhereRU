@@ -24,7 +24,7 @@ class CreateEventDetailViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.navigationController?.navigationBar.translucent = false
         
         self.tableView.tableFooterView = UIView()
