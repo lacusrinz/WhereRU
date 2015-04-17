@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting{
+class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting {
     
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
@@ -23,21 +23,17 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         self.navigationController?.navigationBar.translucent = false
         
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
-        self.tableView.tableFooterView = UIView()
+        
+        
         self.tableData = Array<Event>()
-        
-        
-        var refreshView:UIView = UIView()
-        var refreshImage:UIImage = UIImage(named: "icon_refresh")!
-        var refreshImageView:UIImageView = UIImageView(image: refreshImage)
-        refreshView.addSubview(refreshImageView)
     }
     
     override func viewDidAppear(animated: Bool) {
+        updateEvents()
     }
     
     //MARK: - UITableView Delegate
-    override func numberOfSectionsInTableView(tableView: UITableView)->NSInteger{
+    override func numberOfSectionsInTableView(tableView: UITableView)->NSInteger {
         return 1;
     }
     
@@ -88,7 +84,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     // MARK: - SWTableViewCell Delegate
-    func leftButtonsForParticipant()->NSArray{
+    func leftButtonsForParticipant()->NSArray {
         var leftUtilityButtons:NSMutableArray = NSMutableArray()
         leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), icon: UIImage(named: "icon_accept"))
         leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "icon_delete"))
@@ -185,14 +181,13 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     // MARK: - SVPullToRefresh func
-    func updateEvents(){
-        var query:AVQuery? = AVQuery(className: "event_invited")
+    func updateEvents() {
+        var query:AVQuery? = AVQuery(className: "Event_invited")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil){
-                println("YES!!!\(error!.description)")
             }else{
-                println("NO!!!")
+                println(objects[0])
             }
         }
 
@@ -219,7 +214,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     func CreateEventViewControllerDidBack(_: CreateEventViewController) {
         dismissViewControllerAnimated(true, completion: nil)
-
     }
     
     func CreateEventViewControllerDone(_: CreateEventViewController) {
