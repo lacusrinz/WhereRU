@@ -23,7 +23,7 @@ class MainTabBarController: YALFoldingTabBarController {
         self.tabBarView.extraTabBarItemHeight = YALExtraTabBarItemsDefaultHeight
         self.tabBarView.offsetForExtraTabBarItems = YALForExtraTabBarItemsDefaultOffset
         self.tabBarView.backgroundColor = UIColor(red: 255/255, green: 0/255, blue: 0/255, alpha: 1)
-        self.tabBarView.tabBarColor = UIColor(red: 72/255, green: 211/255, blue: 178/255, alpha: 1)
+        self.tabBarView.tabBarColor = UIColor(red: 222/255, green: 14/255, blue: 14/255, alpha: 1)
         self.tabBarViewHeight = YALTabBarViewDefaultHeight
         self.tabBarView.tabBarViewEdgeInsets = YALTabBarViewHDefaultEdgeInsets
         self.tabBarView.tabBarItemsEdgeInsets = YALTabBarViewItemsDefaultEdgeInsets

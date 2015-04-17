@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import avatarImageView
 
 class SigninViewController: UIViewController {
     
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
+    @IBOutlet weak var userAvatarImageView: avatarImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
