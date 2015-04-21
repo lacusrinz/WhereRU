@@ -29,18 +29,23 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         self.navigationController?.navigationBar.translucent = false
 
         name.text = _name
-        var avatarURL:NSURL? = nil
-        if User.shared.avatar != ""{
-             avatarURL = NSURL(string: User.shared.avatar!)
-        }
-        avatar.setImageWithURL(avatarURL, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        
+        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
+        var avatarData = avatarObject.getData()
+//        var avatarURL:NSURL? = nil
+//        if User.shared.avatar != ""{
+//             avatarURL = NSURL(string: User.shared.avatar!)
+//        }
+//        avatar.setImageWithURL(avatarURL, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        avatar.image = UIImage(data: avatarData)
         avatar.addGestureRecognizer(avatarTap)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func logout(sender: AnyObject) {
     }
     
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {
@@ -122,7 +127,10 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            //
+            var avatarData:NSData = UIImagePNGRepresentation(croppedImage)
+            var avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            AVUser.currentUser().setObject(avatarFile, forKey: "avatarFile")
+            AVUser.currentUser().saveInBackground()
         })
     }
     

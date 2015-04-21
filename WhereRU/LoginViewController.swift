@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, LoginViewControllerDelegate {
     
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -24,19 +24,19 @@ class LoginViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         var currentUser:AVUser? = AVUser.currentUser()
-        if (currentUser != nil){
+        if (currentUser != nil) {
             self.performSegueWithIdentifier("login", sender: self)
-        }else{
+        }else {
             println("no currentUser")
         }
     }
 
     @IBAction func login(sender: AnyObject) {
         AVUser.logInWithUsernameInBackground(nicknameTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
-            if (user != nil){
+            if (user != nil) {
                 println("login success")
                 self.performSegueWithIdentifier("login", sender: self)
-            }else{
+            }else {
                 println("failed:\(error!.description)")
             }
         }
@@ -44,7 +44,15 @@ class LoginViewController: UIViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        //
+        if segue.identifier == "goSignin" {
+            let signinViewController = segue.destinationViewController as! SigninViewController
+            signinViewController.delegate = self
+        }
+    }
+    
+    //MARK: - LoginViewControllerDelegate
+    func loginViewControllerBack() {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 }
 

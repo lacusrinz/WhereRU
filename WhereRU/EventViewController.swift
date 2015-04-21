@@ -26,10 +26,13 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         
         
         self.tableData = Array<Event>()
+        
+        self.tableView.addLegendHeaderWithRefreshingTarget(self, refreshingAction: "updateEvents")
+        self.tableView.header.beginRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
-        updateEvents()
+        //
     }
     
     //MARK: - UITableView Delegate
@@ -65,9 +68,9 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.delegate = self
         
-        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
-        cell.eventDateTime.text = (self.tableData![indexPath.row] as Event).date
-        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
+        cell.eventMessage.text = ""//(self.tableData![indexPath.row] as Event).Message
+        cell.eventDateTime.text = ""//(self.tableData![indexPath.row] as Event).date
+        cell.numberOfAccept.text = ""//"\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
         
         cell.eventStatus.hidden = true
         
@@ -113,23 +116,23 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                 parameters: params,
                 success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     
-                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
-                    params2.setObject(row_event.owner, forKey: "owner")
-                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
-                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
-                    params2.setObject(row_event.date!, forKey: "startdate")
-                    params2.setObject(row_event.Message!, forKey: "message")
-                    params2.setObject(row_event.AcceptMemberCount!+1, forKey: "AcceptMemberCount")
-                    params2.setObject(row_event.RefuseMemberCount!, forKey: "RefuseMemberCount")
-                    var url2 = String(format: updateEventURL, row_event.eventID!)
-                    self.manager.PUT(url2,
-                        parameters: params2,
-                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                            SVProgressHUD.dismiss()
-                            //
-                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                        println("put number failed:\(error.description)")
-                    })
+//                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
+//                    params2.setObject(row_event.owner, forKey: "owner")
+//                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
+//                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
+//                    params2.setObject(row_event.date!, forKey: "startdate")
+//                    params2.setObject(row_event.Message!, forKey: "message")
+//                    params2.setObject(row_event.AcceptMemberCount!+1, forKey: "AcceptMemberCount")
+//                    params2.setObject(row_event.RefuseMemberCount!, forKey: "RefuseMemberCount")
+//                    var url2 = String(format: updateEventURL, row_event.eventID!)
+//                    self.manager.PUT(url2,
+//                        parameters: params2,
+//                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+//                            SVProgressHUD.dismiss()
+//                            //
+//                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//                        println("put number failed:\(error.description)")
+//                    })
     
                 },
                 failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
@@ -150,23 +153,23 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                 parameters: params,
                 success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
                     
-                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
-                    params2.setObject(row_event.owner, forKey: "owner")
-                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
-                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
-                    params2.setObject(row_event.date!, forKey: "startdate")
-                    params2.setObject(row_event.Message!, forKey: "message")
-                    params2.setObject(row_event.AcceptMemberCount!, forKey: "AcceptMemberCount")
-                    params2.setObject(row_event.RefuseMemberCount!+1, forKey: "RefuseMemberCount")
-                    var url2 = String(format: updateEventURL, row_event.eventID!)
-                    self.manager.PUT(url2,
-                        parameters: params2,
-                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                            SVProgressHUD.dismiss()
-                            //
-                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                            //
-                    })
+//                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
+//                    params2.setObject(row_event.owner, forKey: "owner")
+//                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
+//                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
+//                    params2.setObject(row_event.date!, forKey: "startdate")
+//                    params2.setObject(row_event.Message!, forKey: "message")
+//                    params2.setObject(row_event.AcceptMemberCount!, forKey: "AcceptMemberCount")
+//                    params2.setObject(row_event.RefuseMemberCount!+1, forKey: "RefuseMemberCount")
+//                    var url2 = String(format: updateEventURL, row_event.eventID!)
+//                    self.manager.PUT(url2,
+//                        parameters: params2,
+//                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+//                            SVProgressHUD.dismiss()
+//                            //
+//                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//                            //
+//                    })
                     
                 },
                 failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
@@ -185,9 +188,11 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         var query:AVQuery? = AVQuery(className: "Event_invited")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
-            if (error != nil){
-            }else{
-                println(objects[0])
+            if (error != nil) {
+                //
+            }else {
+//                println(objects[0])
+                self.tableView.header.endRefreshing()
             }
         }
 

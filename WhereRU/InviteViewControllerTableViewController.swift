@@ -26,9 +26,13 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
         
         self.tableData = Array<Event>()
         
+        self.tableView.addLegendHeaderWithRefreshingTarget(self, refreshingAction: "updateEvents")
+        self.tableView.header.beginRefreshing()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
+        //
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,7 +40,16 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
     }
     
     // MARK: - SVPullToRefresh func
-    func updateEvents(){
+    func updateEvents() {
+        var query:AVQuery? = AVQuery(className: "Event_invite")
+        query!.whereKey("owner", equalTo: AVUser.currentUser())
+        query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
+            if (error != nil) {
+            }else {
+//                println(objects[0])
+                self.tableView.header.endRefreshing()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -61,11 +74,11 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
         let cellIdentifier:NSString = "InviteTableViewCell"
         var cell:InviteTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! InviteTableViewCell
         
-        cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
-        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
-        cell.eventDatetime.text = (self.tableData![indexPath.row] as Event).date
-        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
-        cell.numberOfRefuse.text = "\((self.tableData![indexPath.row] as Event).RefuseMemberCount!)"
+//        cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
+//        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
+//        cell.eventDatetime.text = (self.tableData![indexPath.row] as Event).date
+//        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
+//        cell.numberOfRefuse.text = "\((self.tableData![indexPath.row] as Event).RefuseMemberCount!)"
         
         cell.rightUtilityButtons = self.rightButtonsForOwner() as [AnyObject]
         cell.delegate = self
@@ -82,12 +95,13 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
     }
 
     // MARK: - SWTableViewCell Delegate
-    func rightButtonsForOwner()->NSArray{
+    func rightButtonsForOwner()->NSArray {
         var rightUtilityButtons:NSMutableArray = NSMutableArray()
         rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "修改")
         return rightUtilityButtons
     }
     
+
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
         cell.hideUtilityButtonsAnimated(true)
         if index == 0{

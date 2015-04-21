@@ -9,17 +9,27 @@
 import UIKit
 import avatarImageView
 
-class SigninViewController: UIViewController {
+protocol LoginViewControllerDelegate {
+    func loginViewControllerBack()
+}
+
+class SigninViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, RSKImageCropViewControllerDelegate {
     
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userAvatarImageView: avatarImageView!
+    @IBOutlet var avatarTap: UITapGestureRecognizer!
+    
+    var user:AVUser?
+    
+    var delegate:LoginViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        userAvatarImageView.addGestureRecognizer(avatarTap)
+        
+        user = AVUser()
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,14 +47,14 @@ class SigninViewController: UIViewController {
         if passwordTextField.text.isEmpty{
             TSMessage.showNotificationWithTitle("出错啦", subtitle: "请输入密码", type: .Error)
         }
-        var user:AVUser = AVUser()
-        user.username = nicknameTextField.text
-        user.email = emailTextField.text
-        user.password = passwordTextField.text
-        user.setObject("", forKey: "avatar")
-        user.setObject(true, forKey: "is_active")
         
-        user.signUpInBackgroundWithBlock { (succeeded:Bool, error:NSError!) -> Void in
+        self.user!.username = nicknameTextField.text
+        self.user!.email = emailTextField.text
+        self.user!.password = passwordTextField.text
+        self.user!.setObject("", forKey: "avatar")
+        self.user!.setObject(true, forKey: "is_active")
+        
+        self.user!.signUpInBackgroundWithBlock { (succeeded:Bool, error:NSError!) -> Void in
             if succeeded{
                 println("success!")
             }
@@ -53,6 +63,86 @@ class SigninViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func back(sender: AnyObject) {
+        self.delegate!.loginViewControllerBack()
+    }
+    
+    
+    @IBAction func uploadAvatar(sender: AnyObject) {
+        var choiceSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "拍照", "从照片库获取")
+        choiceSheet.showInView(self.view)
+    }
+    
+    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+        if(buttonIndex == 1){
+            if(self.isCameraAvailable()){
+                var controller: UIImagePickerController = UIImagePickerController()
+                controller.sourceType = UIImagePickerControllerSourceType.Camera
+                if(self.isFrontCameraAvailable()){
+                    controller.cameraDevice = UIImagePickerControllerCameraDevice.Front;
+                }
+                controller.delegate = self
+                self.presentViewController(controller, animated: true, completion: { () -> Void in
+                    NSLog("Picker View Controller is presented")
+                })
+            }
+        }
+        else if(buttonIndex == 2){
+            if(self.isPhotoLibraryAvailable()){
+                var controller: UIImagePickerController = UIImagePickerController()
+                controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
+                controller.delegate = self
+                self.presentViewController(controller, animated: true, completion: { () -> Void in
+                    NSLog("Picker View Controller is presented")
+                })
+            }
+        }
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+        picker.dismissViewControllerAnimated(true, completion: { () -> Void in
+            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
+            var imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
+            imageCropVC.delegate = self
+            self.presentViewController(imageCropVC, animated: true, completion: { () -> Void in
+                //
+            })
+        })
+    }
+    
+    func isCameraAvailable()->Bool{
+        return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+    }
+    
+    func isRearCameraAvailable()->Bool{
+        return UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear)
+    }
+    
+    func isFrontCameraAvailable()->Bool{
+        return UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)
+    }
+    
+    func isPhotoLibraryAvailable()->Bool{
+        return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
+    }
+    
+    // MARK: - RSKImageCropViewControllerDelegate
+    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
+        self.userAvatarImageView.image = croppedImage
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            var avatarData:NSData = UIImagePNGRepresentation(croppedImage)
+            var avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            self.user!.setObject(avatarFile, forKey: "avatarFile")
+        })
+    }
+    
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController!) {
+        self.dismissViewControllerAnimated(true, completion: { () -> Void in
+            //
+        })
+    }
+    
     /*
     // MARK: - Navigation
 

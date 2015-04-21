@@ -22,6 +22,7 @@
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "TSMessage.h"
+#import "MJRefresh.h"
 
 #import "YALTabBarItem.h"
 #import "YALFoldingTabBarController.h"
