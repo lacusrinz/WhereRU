@@ -40,7 +40,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         authToken = User.shared.token
         if event!.owner != User.shared.id{
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            var url = String(format: friendByIdURL, event!.owner)
+            var url = ""//String(format: friendByIdURL, event!.owner)
             self.manager.GET(url,
                 parameters: nil,
                 success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
@@ -51,7 +51,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
              self.avatarImage.setImageWithURL(NSURL(string: User.shared.avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         }
         
-        message.text = event!.Message
+        message.text = event!.message
         message.layer.borderColor = UIColor.blackColor().CGColor
         message.layer.borderWidth = 1
         message.editable = false

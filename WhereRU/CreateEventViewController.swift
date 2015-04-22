@@ -93,7 +93,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         if let myEvent = event{
             self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
-            eventTextView.text = myEvent.Message
+            eventTextView.text = myEvent.message
             var point: MAPointAnnotation = MAPointAnnotation()
             point.coordinate = myEvent.coordinate!
             point.title = "目的地"
@@ -353,9 +353,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if segue.identifier == "createEventDetail"{
             let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
             let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as! CreateEventDetailViewController
-            createEventDetailViewController.delegate = self
-            createEventDetailViewController.date = self.event?.date
-            createEventDetailViewController.need = self.event!.needLocation
+//            createEventDetailViewController.delegate = self
+//            createEventDetailViewController.date = self.event?.date
+//            createEventDetailViewController.need = self.event!.needLocation
         }
     }
 
@@ -386,7 +386,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     // MARK: - createEventDetailViewControllerDelegate
     func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: String, _ needLocation: Bool) {
-        event?.date = date
+//        event?.date = date
         event?.needLocation = needLocation
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -396,16 +396,16 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if let eventid = event!.eventID{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
-            params.setObject(User.shared.id, forKey: "owner")
-            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
-            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
-            params.setObject(event!.date!, forKey: "startdate")
-            params.setObject(event!.needLocation, forKey: "needLocation")
-            params.setObject(self.eventTextView.text!, forKey: "message")
-            params.setObject(User.shared.nickname!, forKey: "createdBy")
-            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
-            params.setObject(event!.AcceptMemberCount!, forKey: "AcceptMemberCount")
-            params.setObject(event!.RefuseMemberCount!, forKey: "RefuseMemberCount")
+//            params.setObject(User.shared.id, forKey: "owner")
+//            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
+//            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
+//            params.setObject(event!.date!, forKey: "startdate")
+//            params.setObject(event!.needLocation, forKey: "needLocation")
+//            params.setObject(self.eventTextView.text!, forKey: "message")
+//            params.setObject(User.shared.nickname!, forKey: "createdBy")
+//            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
+//            params.setObject(event!.AcceptMemberCount!, forKey: "AcceptMemberCount")
+//            params.setObject(event!.RefuseMemberCount!, forKey: "RefuseMemberCount")
             
             self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
             var url = String(format: updateEventURL, eventid)

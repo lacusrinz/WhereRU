@@ -46,7 +46,23 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
             }else {
-//                println(objects[0])
+                if objects.count != 0 {
+                    for (var i=0; i<objects.count; ++i) {
+                        var event:Event = Event()
+                        var obj = objects[i] as! AVObject
+                        event.owner = obj.objectForKey("owner") as? AVUser
+                        event.needLocation = obj.objectForKey("needLocation") as! Bool
+                        event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
+                        event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
+                        event.date = obj.objectForKey("date") as? NSDate
+                        event.eventID = obj.objectId as String
+                        var point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
+                        event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+                        event.message = obj.objectForKey("message") as? String
+                        self.tableData!.append(event)
+                    }
+                    self.tableView.reloadData();
+                }
                 self.tableView.header.endRefreshing()
             }
         }
@@ -74,11 +90,11 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
         let cellIdentifier:NSString = "InviteTableViewCell"
         var cell:InviteTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! InviteTableViewCell
         
-//        cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
-//        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).Message
-//        cell.eventDatetime.text = (self.tableData![indexPath.row] as Event).date
-//        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
-//        cell.numberOfRefuse.text = "\((self.tableData![indexPath.row] as Event).RefuseMemberCount!)"
+        cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
+        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).message
+        cell.eventDatetime.text = "\((self.tableData![indexPath.row] as Event).date)"
+        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).acceptMemberCount!)"
+        cell.numberOfRefuse.text = "\((self.tableData![indexPath.row] as Event).refuseMemberCount!)"
         
         cell.rightUtilityButtons = self.rightButtonsForOwner() as [AnyObject]
         cell.delegate = self

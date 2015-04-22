@@ -30,13 +30,10 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
 
         name.text = _name
         var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
-        var avatarData = avatarObject.getData()
-//        var avatarURL:NSURL? = nil
-//        if User.shared.avatar != ""{
-//             avatarURL = NSURL(string: User.shared.avatar!)
-//        }
-//        avatar.setImageWithURL(avatarURL, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        avatar.image = UIImage(data: avatarData)
+        if avatarObject != nil {
+            var avatarData = avatarObject.getData()
+            avatar.image = UIImage(data: avatarData)
+        }
         avatar.addGestureRecognizer(avatarTap)
     }
 
@@ -46,6 +43,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     }
     
     @IBAction func logout(sender: AnyObject) {
+        AVUser.logOut()
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {
