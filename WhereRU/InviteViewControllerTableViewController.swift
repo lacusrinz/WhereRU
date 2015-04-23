@@ -41,7 +41,7 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
     
     // MARK: - SVPullToRefresh func
     func updateEvents() {
-        var query:AVQuery? = AVQuery(className: "Event_invite")
+        var query:AVQuery? = AVQuery(className: "Event")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {

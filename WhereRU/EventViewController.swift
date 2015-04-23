@@ -63,26 +63,35 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
         var cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! EventTableViewCell
-//        cell.leftUtilityButtons = self.leftButtonsForParticipant()
+        
 
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.delegate = self
         
-        cell.eventMessage.text = ""//(self.tableData![indexPath.row] as Event).Message
-        cell.eventDateTime.text = ""//(self.tableData![indexPath.row] as Event).date
-        cell.numberOfAccept.text = ""//"\((self.tableData![indexPath.row] as Event).AcceptMemberCount!)"
+        cell.eventMessage.text = (self.tableData![indexPath.row] as Event).message
+        cell.eventDateTime.text = "\((self.tableData![indexPath.row] as Event).date)"
+        cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).acceptMemberCount!)"
         
         cell.eventStatus.hidden = true
         
-        self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-        var url = String(format: eventStatusURL, (self.tableData![indexPath.row] as Event).eventID!)
-        self.manager.GET(url,
-            parameters: nil,
-            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-            }) { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            println("Get event status failed \(error.description)")
+        var query:AVQuery = AVQuery(className: "UserStatusForEvent")
+        query.whereKey("user", equalTo: AVUser.currentUser())
+        query.getFirstObjectInBackgroundWithBlock { (object:AVObject!, error:NSError!) -> Void in
+            if object != nil {
+                var status: AnyObject! = object.objectForKey("status")
+                if status != nil {
+                    if status as! Bool == true {
+                        cell.eventStatus.image = UIImage(named: "icon_accept_invite")
+                        cell.eventStatus.hidden = false
+                    }else {
+                        cell.eventStatus.image = UIImage(named: "icon_refuse_invite")
+                        cell.eventStatus.hidden = false
+                    }
+                }else {
+                    cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
+                }
+            }
         }
-        
         return cell
     }
     
@@ -104,76 +113,53 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         if index == 0{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             
-            var params:NSMutableDictionary = NSMutableDictionary(capacity: 3)
-            params.setObject(row_event.eventID!, forKey:    "event")
-            params.setObject(User.shared.id, forKey: "participant")
-            params.setObject(1, forKey: "status")
-            var url = String(format: updateEventStatusURL, id)
-            
-            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-            
-            self.manager.PUT(url,
-                parameters: params,
-                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+            row_event.obj!.setObject(row_event.acceptMemberCount!+1, forKey: "acceptMemberCount")
+            row_event.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                if success {
+                    var cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
+                    var pvalues:[AnyObject!] = [row_event.obj, AVUser.currentUser()]
+                    AVQuery.doCloudQueryInBackgroundWithCQL(cql, pvalues: pvalues, callback: { (result:AVCloudQueryResult!, error:NSError!) -> Void in
+                        if !(error != nil) {
+                            var obj:AVObject = result.results[0] as! AVObject
+                            obj.setObject(true, forKey: "status")
+                            obj.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                                print("update success!!")
+                                SVProgressHUD.dismiss()
+                                self.tableView.header.beginRefreshing()
+                            })
+                        }else {
+                            print("\(error.description)")
+                        }
+                    })
                     
-//                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
-//                    params2.setObject(row_event.owner, forKey: "owner")
-//                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
-//                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
-//                    params2.setObject(row_event.date!, forKey: "startdate")
-//                    params2.setObject(row_event.Message!, forKey: "message")
-//                    params2.setObject(row_event.AcceptMemberCount!+1, forKey: "AcceptMemberCount")
-//                    params2.setObject(row_event.RefuseMemberCount!, forKey: "RefuseMemberCount")
-//                    var url2 = String(format: updateEventURL, row_event.eventID!)
-//                    self.manager.PUT(url2,
-//                        parameters: params2,
-//                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-//                            SVProgressHUD.dismiss()
-//                            //
-//                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-//                        println("put number failed:\(error.description)")
-//                    })
-    
-                },
-                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    println("Update event status failed: \(error.description)")
+                }else {
+                    print("\(error.description)")
+                }
             })
         }else{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             
-            var params:NSMutableDictionary = NSMutableDictionary(capacity: 3)
-            params.setObject(row_event.eventID!, forKey: "event")
-            params.setObject(User.shared.id, forKey: "participant")
-            params.setObject(0, forKey: "status")
-            var url = String(format: updateEventStatusURL, id)
-            
-            self.manager.requestSerializer.setValue("Token "+self.authToken!, forHTTPHeaderField: "Authorization")
-            
-            self.manager.PUT(url,
-                parameters: params,
-                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    
-//                    var params2:NSMutableDictionary = NSMutableDictionary(capacity: 7)
-//                    params2.setObject(row_event.owner, forKey: "owner")
-//                    params2.setObject(row_event.coordinate!.latitude, forKey: "latitude")
-//                    params2.setObject(row_event.coordinate!.longitude, forKey: "longitude")
-//                    params2.setObject(row_event.date!, forKey: "startdate")
-//                    params2.setObject(row_event.Message!, forKey: "message")
-//                    params2.setObject(row_event.AcceptMemberCount!, forKey: "AcceptMemberCount")
-//                    params2.setObject(row_event.RefuseMemberCount!+1, forKey: "RefuseMemberCount")
-//                    var url2 = String(format: updateEventURL, row_event.eventID!)
-//                    self.manager.PUT(url2,
-//                        parameters: params2,
-//                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-//                            SVProgressHUD.dismiss()
-//                            //
-//                        }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-//                            //
-//                    })
-                    
-                },
-                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    println("Update event status failed: \(error.description)")
+            row_event.obj!.setObject(row_event.refuseMemberCount!+1, forKey: "acceptMemberCount")
+            row_event.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                if success {
+                    var cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
+                    var pvalues:[AnyObject!] = [row_event.obj, AVUser.currentUser()]
+                    AVQuery.doCloudQueryInBackgroundWithCQL(cql, pvalues: pvalues, callback: { (result:AVCloudQueryResult!, error:NSError!) -> Void in
+                        if !(error != nil) {
+                            var obj:AVObject = result.results[0] as! AVObject
+                            obj.setObject(false, forKey: "status")
+                            obj.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                                print("update success!!")
+                                SVProgressHUD.dismiss()
+                                self.tableView.header.beginRefreshing()
+                            })
+                        }else {
+                            print("\(error.description)")
+                        }
+                    })
+                }else {
+                    print("\(error.description)")
+                }
             })
         }
     }
@@ -185,13 +171,31 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     // MARK: - SVPullToRefresh func
     func updateEvents() {
-        var query:AVQuery? = AVQuery(className: "Event_invited")
-        query!.whereKey("owner", equalTo: AVUser.currentUser())
+        self.tableData!.removeAll(keepCapacity: true)
+        var query:AVQuery? = AVQuery(className: "Event")
+        query!.whereKey("participater", equalTo: AVUser.currentUser())
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
                 //
             }else {
-//                println(objects[0])
+                if objects.count != 0 {
+                    for (var i=0; i<objects.count; ++i) {
+                        var event:Event = Event()
+                        var obj = objects[i] as! AVObject
+                        event.obj = obj
+                        event.owner = obj.objectForKey("owner") as? AVUser
+                        event.needLocation = obj.objectForKey("needLocation") as! Bool
+                        event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
+                        event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
+                        event.date = obj.objectForKey("date") as? NSDate
+                        event.eventID = obj.objectId as String
+                        var point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
+                        event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+                        event.message = obj.objectForKey("message") as? String
+                        self.tableData!.append(event)
+                    }
+                    self.tableView.reloadData();
+                }
                 self.tableView.header.endRefreshing()
             }
         }

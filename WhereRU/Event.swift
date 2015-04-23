@@ -18,4 +18,6 @@ class Event: NSObject {
     var message:String?
     var acceptMemberCount:Int?
     var refuseMemberCount:Int?
+    
+    var obj:AVObject?
 }
