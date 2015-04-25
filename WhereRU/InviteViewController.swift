@@ -1,5 +1,5 @@
 //
-//  InviteViewControllerTableViewController.swift
+//  InviteViewController.swift
 //  WhereRU
 //
 //  Created by RInz on 15/2/27.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InviteViewControllerTableViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting {
+class InviteViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting {
 
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
@@ -37,6 +37,11 @@ class InviteViewControllerTableViewController: UITableViewController, SWTableVie
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    //MARK: - YALTabBarInteracting
+    func extraRightItemDidPressed() {
+        self.performSegueWithIdentifier("createEvent", sender: self)
     }
     
     // MARK: - SVPullToRefresh func

@@ -63,8 +63,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
         var cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! EventTableViewCell
-        
-
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.delegate = self
         

@@ -33,7 +33,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         mapView.setZoomLevel(15.1, animated: true)
         
         mapView.showsUserLocation = true
-        mapView.userTrackingMode = MAUserTrackingMode.None
+        mapView.userTrackingMode = MAUserTrackingModeNone
         
 //        self.search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
     }

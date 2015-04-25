@@ -16,7 +16,7 @@ class CreateEventDetailViewController: UITableViewController{
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var needLocation: UISwitch!
-    var date:String?
+    var date:NSDate?
     var need:Bool = true
     
     var delegate:CreateEventDetailViewControllerDelegate?
@@ -29,10 +29,7 @@ class CreateEventDetailViewController: UITableViewController{
         
         self.tableView.tableFooterView = UIView()
         if date != nil{
-            var dateFormate:NSDateFormatter = NSDateFormatter()
-            dateFormate.dateFormat = "yyyy-MM-dd HH:mm"
-            var datetime = dateFormate.dateFromString(date!)
-            datePicker.setDate(datetime!, animated: true)
+            datePicker.setDate(date!, animated: true)
             needLocation.on = need
         }
     }

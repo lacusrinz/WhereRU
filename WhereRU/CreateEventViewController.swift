@@ -34,7 +34,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var authToken:String?
     private var manager = AFHTTPRequestOperationManager()
     
-    var participators:[Friend]?
+    var participators:[AVUser]?
     var event:Event?
     var delegate:CreateEventViewControllerDelegate?
     
@@ -55,7 +55,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         locationMapView.delegate = self
         locationMapView.setZoomLevel(15.1, animated: true)
         
-        myAvatarImageView.setImageWithURL(NSURL(string: User.shared.avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
+        if avatarObject != nil {
+            myAvatarImageView.image = UIImage(data: avatarObject.getData())
+        }else {
+            myAvatarImageView.image = UIImage(named: "default_avatar")
+        }
         
         createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
         createAnnotationLongPress!.delegate = self
@@ -88,8 +93,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         self.doneButton.setAttributedTitle(NSAttributedString(string: "完成", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
         
         tips = []
-        participators = []
-        authToken = User.shared.token
+        participators = [AVUser]()
         
         if let myEvent = event{
             self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
@@ -112,7 +116,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }else{
             event = Event()
             locationMapView.showsUserLocation = true
-            locationMapView.userTrackingMode = MAUserTrackingMode.Follow
+            locationMapView.userTrackingMode = MAUserTrackingModeFollow
         }
     }
     
@@ -164,6 +168,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
+        //TODO
 //        if annotation.isKindOfClass(GeocodeAnnotation){
 //            let geoCellIdentifier = "geoCellIdentifier"
 //            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as! MAPinAnnotationView?
@@ -204,6 +209,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if response.geocodes.count == 0{
             return
         }
+        //TODO
 //        var annotations = [GeocodeAnnotation]()
 //        (response.geocodes as NSArray).enumerateObjectsUsingBlock { (obj:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
 //            var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
@@ -219,7 +225,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
 //        self.locationMapView.addAnnotations(annotations)
     }
     
-    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
+    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {//TODO:
+        //TODO
 //        if response.regeocode != nil{
 //            println(request.location.latitude)
 //            println(request.location.longitude)
@@ -287,7 +294,13 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             cell.participatorAvatarImage.layer.borderWidth = 0
             cell.isParticipator = false
         }else{
-            cell.participatorAvatarImage.setImageWithURL(NSURL(string: participators![indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            var avatarObject: AnyObject! = participators![indexPath.row].objectForKey("avatarFile")
+            if avatarObject != nil {
+                var avatarData = avatarObject.getData()
+                cell.participatorAvatarImage.image = UIImage(data: avatarData)
+            }else {
+                cell.participatorAvatarImage.image = UIImage(named: "default_avatar")
+            }
             cell.participatorAvatarImage.layer.borderWidth = 1
             cell.isParticipator = true
         }
@@ -353,9 +366,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if segue.identifier == "createEventDetail"{
             let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
             let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as! CreateEventDetailViewController
-//            createEventDetailViewController.delegate = self
-//            createEventDetailViewController.date = self.event?.date
-//            createEventDetailViewController.need = self.event!.needLocation
+            createEventDetailViewController.delegate = self
+            createEventDetailViewController.date = self.event!.date
+            createEventDetailViewController.need = self.event!.needLocation
         }
     }
 
@@ -368,11 +381,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     // MARK: - addParticipantsDelegate
-    func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [Friend]) {
+    func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [AVUser]) {
         for friend in friends{
             var needAdd:Bool = true
             for participator in participators!{
-                if participator.to_user == friend.to_user{
+                if participator == friend{
                     needAdd = false
                 }
             }

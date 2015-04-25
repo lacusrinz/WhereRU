@@ -20,14 +20,14 @@ PODS:
   - AFNetworking/UIKit (2.3.1):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
-  - AMap2DMap (2.4.2)
-  - AMapSearch (2.4.1)
+  - AMap3DMap (2.5.0)
+  - AMapSearch (2.5.0)
   - AVOSCloud (3.0.2)
   - FoldingTabBar (1.0.0)
   - HexColors (2.2.1)
-  - IQKeyboardManager (3.2.2)
+  - IQKeyboardManager (3.2.3)
   - JSONKit-NoWarning (1.2)
-  - MJRefresh (1.4.4)
+  - MJRefresh (1.4.5)
   - Reachability (3.1.1)
   - RSKImageCropper (0.3.1)
   - SDWebImage (3.7.2):
@@ -42,7 +42,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.3.1)
-  - AMap2DMap
+  - AMap3DMap
   - AMapSearch
   - AVOSCloud
   - FoldingTabBar (~> 1.0.0)
@@ -59,14 +59,14 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 05b9f6e3aa5ac45bc383b4bb108ef338080a26c7
-  AMap2DMap: 6f19f93b3410c8105c34ef93dd9dbb537f7ea897
-  AMapSearch: e48c562fc7713f7e5f719863a15141a847e16c04
+  AMap3DMap: 9f6274e39cd8937b5651f868c35deef9a37edce3
+  AMapSearch: eafa5a749b1078a46f15e6108e88307f78f75e9b
   AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
   FoldingTabBar: 463d247453a2ba826ae79f5be1e6b8b93b6aa0ce
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
-  IQKeyboardManager: 99df8006864663a4126a77b9a2f7ea70077eff31
+  IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
   JSONKit-NoWarning: 3d27e6f9e6846ecf741e8c64dcadd7d5aa7193cb
-  MJRefresh: e4a25dd1f3afbe5c547ff0d434cb40997803bc81
+  MJRefresh: 4b24394e577ea399fbc926e5b6072317aae2c152
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   RSKImageCropper: d5cb67586af50470bf4e4d9fe8cff5a198ed26e5
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29

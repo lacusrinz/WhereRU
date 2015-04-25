@@ -3,17 +3,17 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "Bow-tie.png"
+      "filename" : "icon_visit.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "Bow-tie@2x.png"
+      "filename" : "icon_visit@2x.png"
     },
     {
       "idiom" : "universal",
       "scale" : "3x",
-      "filename" : "Bow-tie@3x.png"
+      "filename" : "icon_visit@3x.png"
     }
   ],
   "info" : {

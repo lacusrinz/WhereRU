@@ -10,7 +10,7 @@ import UIKit
 
 class ContactViewController: UITableViewController, SWTableViewCellDelegate, YALTabBarInteracting {
 
-    var tableData = [Friend]()
+    var tableData = [AVUser]()
     var rowsCount:NSInteger = 0
     
     override func viewDidLoad() {
@@ -18,19 +18,31 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
-        // Do any additional setup after loading the view.
-        tableData = User.shared.friends
-        rowsCount = tableData.count
+        var query = AVQuery(className: "Friends")
+        query.whereKey("from", equalTo: AVUser.currentUser())
+        query.findObjectsInBackgroundWithBlock { (obj:[AnyObject]!, error:NSError!) -> Void in
+            if (error == nil && obj.count > 0) {
+                var relation:AVRelation = (obj as! [AVObject])[0].objectForKey("to") as! AVRelation
+                var query = relation.query()
+                query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]!, error:NSError!) -> Void in
+                    if error == nil && friends.count > 0 {
+                        self.tableData = friends as! [AVUser]
+                        self.rowsCount = self.tableData.count
+                        self.tableView.reloadData()
+                    }
+                })
+                
+            }
+        }
+        
         
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         self.tableView.tableFooterView = UIView()
-//        self.tableView.delegate = self
-//        self.tableView.dataSource = self
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
         
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
-        
-        self.tableView.reloadData()
     }
     
     func rightButtons()->NSArray{
@@ -69,9 +81,15 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         cell.delegate = self
         
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
-        cell.name.text = tableData[indexPath.row].to_user
-        cell.avatar.setImageWithURL(NSURL(string: tableData[indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        
+        cell.name.text = tableData[indexPath.row].username
+        var avatarObject: AnyObject! = tableData[indexPath.row].objectForKey("avatarFile")
+        if avatarObject != nil {
+            var avatarData = avatarObject.getData()
+            cell.avatar.image = UIImage(data: avatarData)
+        }else {
+            cell.avatar.image = UIImage(named: "default_avatar")
+        }
+
         return cell
     }
     

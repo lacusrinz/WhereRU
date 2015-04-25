@@ -9,15 +9,15 @@
 import UIKit
 
 protocol AddParticipantsTableViewDelegate{
-    func AddParticipantsDidDone(AddParticipantsTableViewController, [Friend])
+    func AddParticipantsDidDone(AddParticipantsTableViewController, [AVUser])
 }
 
 class AddParticipantsTableViewController: UITableViewController {
 
     var delegate: AddParticipantsTableViewDelegate?
     
-    var tableData = [Friend]()
-    var selectedFriends: Dictionary<Int, Friend> = Dictionary<Int, Friend>()
+    var tableData = [AVUser]()
+    var selectedFriends: Dictionary<Int, AVUser> = Dictionary<Int, AVUser>()
     var rowsCount:NSInteger = 0
     
     override func viewDidLoad() {
@@ -25,15 +25,24 @@ class AddParticipantsTableViewController: UITableViewController {
         
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
-        tableData = User.shared.friends
-        rowsCount = tableData.count
-        
-//        selectedFriends = tableData
-        
+        var query = AVQuery(className: "Friends")
+        query.whereKey("from", equalTo: AVUser.currentUser())
+        query.findObjectsInBackgroundWithBlock { (obj:[AnyObject]!, error:NSError!) -> Void in
+            if (error == nil && obj.count > 0) {
+                var relation:AVRelation = (obj as! [AVObject])[0].objectForKey("to") as! AVRelation
+                var query = relation.query()
+                query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]!, error:NSError!) -> Void in
+                    if error == nil && friends.count > 0 {
+                        self.tableData = friends as! [AVUser]
+                        self.rowsCount = self.tableData.count
+                        self.tableView.reloadData()
+                    }
+                })
+                
+            }
+        }
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        
-        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,14 +81,20 @@ class AddParticipantsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "AddParticipantTableViewCell"
         var cell:AddParticipantTableViewCell? = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as? AddParticipantTableViewCell
-        cell?.name.text = tableData[indexPath.row].to_user
-        cell?.avatar.setImageWithURL(NSURL(string: tableData[indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        cell!.name.text = tableData[indexPath.row].username
+        var avatarObject: AnyObject! = tableData[indexPath.row].objectForKey("avatarFile")
+        if avatarObject != nil {
+            var avatarData = avatarObject.getData()
+            cell!.avatar.image = UIImage(data: avatarData)
+        }else {
+            cell!.avatar.image = UIImage(named: "default_avatar")
+        }
         
         return cell!
     }
 
     @IBAction func done(sender: AnyObject) {
-        var selected:[Friend] = [Friend]()
+        var selected:[AVUser] = [AVUser]()
         for _selected in selectedFriends.values{
             selected.append(_selected)
         }
