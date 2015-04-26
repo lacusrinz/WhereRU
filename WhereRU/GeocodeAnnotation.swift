@@ -9,34 +9,37 @@
 import UIKit
 
 class GeocodeAnnotation: NSObject, MAAnnotation {
-    var _geocode:AMapGeocode?
-    var geocode:AMapGeocode?{
-        get{
-            return self._geocode
-        }
-    }
+    var geocode:AMapGeocode?
     
     //MARK: - MAAnnotation Protocol
-    var title:NSString{
-        get{
-            return self._geocode!.formattedAddress
-        }
+//    var title:NSString{
+//        get{
+//            return self._geocode!.formattedAddress
+//        }
+//    }
+//    
+//    var subtitle:NSString{
+//        get{
+//            return self._geocode!.location.description
+//        }
+//    }
+
+    func title() -> String! {
+        return self.geocode!.formattedAddress
     }
     
-    var subtitle:NSString{
-        get{
-            return self._geocode!.location.description
-        }
+    func subtitle() -> String! {
+        return self.geocode!.location.description
     }
     
     var coordinate:CLLocationCoordinate2D{
         get{
-            return CLLocationCoordinate2DMake(Double(self._geocode!.location.latitude), Double(self._geocode!.location.longitude))
+            return CLLocationCoordinate2DMake(Double(self.geocode!.location.latitude), Double(self.geocode!.location.longitude))
         }
     }
     
     //MARK: - life circle
     init(geocode:AMapGeocode){
-        self._geocode = geocode
+        self.geocode = geocode
     }
 }

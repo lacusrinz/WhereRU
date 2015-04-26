@@ -40,6 +40,10 @@
 		A8D58A6019C1EB0F00EEFC98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A5F19C1EB0F00EEFC98 /* Images.xcassets */; };
 		A8D58A6319C1EB0F00EEFC98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A6119C1EB0F00EEFC98 /* LaunchScreen.xib */; };
 		A8D58A6F19C1EB0F00EEFC98 /* WhereRUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */; };
+		A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA181AECF13400836FDC /* GeocodeAnnotation.swift */; };
+		A8D8CA1B1AECF52100836FDC /* CommonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */; };
+		A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */; };
+		A8D8CA1F1AECFC2900836FDC /* ReGeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */; };
 		A8E51F9A1AD96A18000F2AFF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */; };
 		A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */; };
 		A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656D1AA061690077A927 /* InviteViewController.swift */; };
@@ -132,6 +136,10 @@
 		A8D58A6819C1EB0F00EEFC98 /* WhereRUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereRUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A6D19C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereRUTests.swift; sourceTree = "<group>"; };
+		A8D8CA181AECF13400836FDC /* GeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GeocodeAnnotation.swift; sourceTree = "<group>"; };
+		A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtility.swift; sourceTree = "<group>"; };
+		A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDashPolyline.swift; sourceTree = "<group>"; };
+		A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReGeocodeAnnotation.swift; sourceTree = "<group>"; };
 		A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		A8F6656D1AA061690077A927 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
@@ -262,6 +270,10 @@
 		A8B8A18F1A124F0C0000FB6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */,
+				A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */,
+				A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */,
+				A8D8CA181AECF13400836FDC /* GeocodeAnnotation.swift */,
 				A8B8A1901A1250280000FB6F /* User.swift */,
 				A8B991031A4670BA00AB75DB /* Participant.swift */,
 				A8BA6CB81A2D8613004A72A4 /* Friend.swift */,
@@ -277,13 +289,6 @@
 				A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */,
 			);
 			name = Utils;
-			sourceTree = "<group>";
-		};
-		A8BB168F1A6F6F1E00680CC6 /* API */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = API;
 			sourceTree = "<group>";
 		};
 		A8BB16921A6F794D00680CC6 /* Event */ = {
@@ -335,7 +340,6 @@
 		A8D58A5219C1EB0F00EEFC98 /* WhereRU */ = {
 			isa = PBXGroup;
 			children = (
-				A8BB168F1A6F6F1E00680CC6 /* API */,
 				A8B8A1921A14F8F00000FB6F /* Utils */,
 				A8B8A18F1A124F0C0000FB6F /* Model */,
 				A8B8A12219FF0D470000FB6F /* Controller */,
@@ -615,6 +619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */,
 				A80CDDFF1A2FEF070007C345 /* RAMAnimatedTabBarController.swift in Sources */,
 				A8B8A12119FF0D310000FB6F /* EventTableViewCell.swift in Sources */,
 				A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */,
@@ -632,14 +637,17 @@
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
 				A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */,
+				A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
 				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
 				A80CDDFE1A2FEF070007C345 /* RAMTransitionItemAnimation.swift in Sources */,
+				A8D8CA1B1AECF52100836FDC /* CommonUtility.swift in Sources */,
 				A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
 				A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */,
+				A8D8CA1F1AECFC2900836FDC /* ReGeocodeAnnotation.swift in Sources */,
 				A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */,
 				A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */,
 				A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */,

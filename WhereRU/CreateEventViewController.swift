@@ -27,12 +27,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var clLocationManager:CLLocationManager?
     private var displayController:UISearchDisplayController?
     private var tips:[AMapTip]?
-    private var createAnnotationLongPress:UILongPressGestureRecognizer?
+//    private var createAnnotationLongPress:UILongPressGestureRecognizer?
     private var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     private var addParticipatorByTapGesture:UITapGestureRecognizer?
-    
-    private var authToken:String?
-    private var manager = AFHTTPRequestOperationManager()
+    private var poiAnnotation:MAPointAnnotation?
     
     var participators:[AVUser]?
     var event:Event?
@@ -52,6 +50,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }
         
         locationMapView.frame = CGRectMake(locationMapView.frame.origin.x, locationMapView.frame.origin.y, self.view.bounds.width, locationMapView.frame.size.height)
+        var compassSize:CGSize = locationMapView.compassSize
+        locationMapView.compassOrigin = CGPointMake(locationMapView.frame.size.width-compassSize.width, locationMapView.frame.size.height-compassSize.height)
+        locationMapView.showsScale = false
+        
         locationMapView.delegate = self
         locationMapView.setZoomLevel(15.1, animated: true)
         
@@ -62,10 +64,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             myAvatarImageView.image = UIImage(named: "default_avatar")
         }
         
-        createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
-        createAnnotationLongPress!.delegate = self
-        createAnnotationLongPress!.minimumPressDuration = 0.5
-        self.view.addGestureRecognizer(createAnnotationLongPress!)
+        self.locationMapView.touchPOIEnabled = true
+//        createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
+//        createAnnotationLongPress!.delegate = self
+//        createAnnotationLongPress!.minimumPressDuration = 0.5
+//        self.view.addGestureRecognizer(createAnnotationLongPress!)
         
         deleteParticipatorByPanGesture = UILongPressGestureRecognizer(target: self, action: "deleteParticipator:")
         deleteParticipatorByPanGesture!.delegate = self
@@ -94,7 +97,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         tips = []
         participators = [AVUser]()
+        poiAnnotation = MAPointAnnotation()
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         if let myEvent = event{
             self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
             eventTextView.text = myEvent.message
@@ -103,22 +110,23 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             point.title = "目的地"
             self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
             self.locationMapView.addAnnotation(point)
-            
-            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            var url = String(format: participantsInEventURL, myEvent.eventID!)
-            self.manager.GET(url,
-                parameters: nil,
-                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    self.participatorCollectionView.reloadData()
-                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    print("Get Participants Failed: \(error.description)")
-            })
+            //TODO
+//            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+//            var url = String(format: participantsInEventURL, myEvent.eventID!)
+//            self.manager.GET(url,
+//                parameters: nil,
+//                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+//                    self.participatorCollectionView.reloadData()
+//                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//                    print("Get Participants Failed: \(error.description)")
+//            })
         }else{
             event = Event()
             locationMapView.showsUserLocation = true
             locationMapView.userTrackingMode = MAUserTrackingModeFollow
         }
     }
+
     
     //MARK: - MAMAP Util func
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -133,13 +141,24 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         self.search?.AMapGeocodeSearch(geo)
     }
     
-    func searchReGeocodeWithCoordinate(coordinate:CLLocationCoordinate2D){
-        self.clear()
-        var regeo = AMapReGeocodeSearchRequest()
-        regeo.location = AMapGeoPoint.locationWithLatitude(CGFloat(coordinate.latitude), longitude: CGFloat(coordinate.longitude))
-        regeo.requireExtension = true
-        self.search?.AMapReGoecodeSearch(regeo)
+    func annotationForTouchPoi(touchPoi:MATouchPoi?) -> MAPointAnnotation? {
+        if (touchPoi == nil)
+        {
+            return nil;
+        }
+        var annotation:MAPointAnnotation = MAPointAnnotation()
+        annotation.coordinate = touchPoi!.coordinate
+        annotation.title = touchPoi!.name
+        return annotation
     }
+    
+//    func searchReGeocodeWithCoordinate(coordinate:CLLocationCoordinate2D){
+//        self.clear()
+//        var regeo = AMapReGeocodeSearchRequest()
+//        regeo.location = AMapGeoPoint.locationWithLatitude(CGFloat(coordinate.latitude), longitude: CGFloat(coordinate.longitude))
+//        regeo.requireExtension = true
+//        self.search?.AMapReGoecodeSearch(regeo)
+//    }
     
     func searchTipsWithKey(key:NSString){
         if (key.length == 0)
@@ -166,42 +185,54 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         var view:MAAnnotationView = views[0] as! MAAnnotationView
         self.locationMapView.selectAnnotation(view.annotation, animated: true)
     }
+
+    func mapView(mapView: MAMapView!, didTouchPois pois: [AnyObject]!) {
+        if (pois.count == 0)
+        {
+            return;
+        }
+        var annotation:MAPointAnnotation = self.annotationForTouchPoi(pois[0] as? MATouchPoi)!
+        self.locationMapView.removeAnnotation(self.poiAnnotation)
+        self.locationMapView.addAnnotation(annotation)
+        self.locationMapView.selectAnnotation(annotation, animated: true)
+        self.poiAnnotation = annotation
+        self.locationMapView.showsUserLocation = false
+    }
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
-        //TODO
-//        if annotation.isKindOfClass(GeocodeAnnotation){
-//            let geoCellIdentifier = "geoCellIdentifier"
-//            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as! MAPinAnnotationView?
-//            if poiAnnotationView == nil{
-//                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: geoCellIdentifier)
-//            }
-//            poiAnnotationView?.canShowCallout = true
-//            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
-//            return poiAnnotationView
-//        }
-//        if annotation.isKindOfClass(ReGeocodeAnnotation){
-//            let invertGeoIdentifier = "invertGeoIdentifier"
-//            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(invertGeoIdentifier) as! MAPinAnnotationView?
-//            if poiAnnotationView == nil{
-//                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: invertGeoIdentifier)
-//            }
-//            poiAnnotationView?.animatesDrop = true
-//            poiAnnotationView?.canShowCallout = true
-//            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
-//            return poiAnnotationView
-//        }
-//        if annotation.isKindOfClass(MAPointAnnotation){
-//            let pointReuseIndetifier = "pointReuseIndetifier"
-//            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
-//            if poiAnnotationView == nil{
-//                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
-//            }
-//            poiAnnotationView?.animatesDrop = true
-//            poiAnnotationView?.canShowCallout = true
-//            poiAnnotationView?.draggable = true;
-//            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
-//            return poiAnnotationView
-//        }
+        if annotation.isKindOfClass(GeocodeAnnotation){
+            let geoCellIdentifier = "geoCellIdentifier"
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as! MAPinAnnotationView?
+            if poiAnnotationView == nil{
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: geoCellIdentifier)
+            }
+            poiAnnotationView?.canShowCallout = true
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            return poiAnnotationView
+        }
+        if annotation.isKindOfClass(ReGeocodeAnnotation){
+            let invertGeoIdentifier = "invertGeoIdentifier"
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(invertGeoIdentifier) as! MAPinAnnotationView?
+            if poiAnnotationView == nil{
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: invertGeoIdentifier)
+            }
+            poiAnnotationView?.animatesDrop = true
+            poiAnnotationView?.canShowCallout = true
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            return poiAnnotationView
+        }
+        if annotation.isKindOfClass(MAPointAnnotation){
+            let pointReuseIndetifier = "pointReuseIndetifier"
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
+            if poiAnnotationView == nil{
+                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            }
+            poiAnnotationView?.animatesDrop = true
+            poiAnnotationView?.canShowCallout = true
+            poiAnnotationView?.draggable = true;
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            return poiAnnotationView
+        }
         return nil
     }
     
@@ -209,32 +240,33 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if response.geocodes.count == 0{
             return
         }
-        //TODO
-//        var annotations = [GeocodeAnnotation]()
-//        (response.geocodes as NSArray).enumerateObjectsUsingBlock { (obj:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-//            var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
-//            annotations.append(geocodeAnnotation)
-//        }
-//        if annotations.count == 1{
-//            println((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
-//            println((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
-//            self.locationMapView.setCenterCoordinate(annotations[0].coordinate, animated: true)
-//        }else{
-//            self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
-//        }
-//        self.locationMapView.addAnnotations(annotations)
+        
+        var annotations = [GeocodeAnnotation]()
+        (response.geocodes as NSArray).enumerateObjectsUsingBlock { (obj:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
+            var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
+            annotations.append(geocodeAnnotation)
+        }
+        if annotations.count == 1{
+            println((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
+            println((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
+            self.locationMapView.setCenterCoordinate(annotations[0].coordinate, animated: true)
+        }else{
+            self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
+        }
+        self.locationMapView.addAnnotations(annotations)
+        self.locationMapView.showsUserLocation = false
     }
     
-    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {//TODO:
-        //TODO
+//    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
 //        if response.regeocode != nil{
 //            println(request.location.latitude)
 //            println(request.location.longitude)
 //            var coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(request.location.latitude), Double(request.location.longitude))
 //            var reGeocodeAnnotation:ReGeocodeAnnotation = ReGeocodeAnnotation(reGeocode: response.regeocode, coordinate: coordinate)
 //            self.locationMapView.addAnnotation(reGeocodeAnnotation)
+//            self.locationMapView.showsUserLocation = false
 //        }
-    }
+//    }
     
     func onInputTipsSearchDone(request: AMapInputTipsSearchRequest!, response: AMapInputTipsSearchResponse!) {
         self.tips = response.tips as? [AMapTip]
@@ -314,12 +346,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         return true
     }
     
-    func addAnnotationOnMapByLongPress(longPress: UILongPressGestureRecognizer) {
-        if longPress.state == UIGestureRecognizerState.Began{
-            var coordinate:CLLocationCoordinate2D = self.locationMapView.convertPoint(createAnnotationLongPress!.locationInView(self.view), toCoordinateFromView: self.locationMapView)
-            self.searchReGeocodeWithCoordinate(coordinate)
-        }
-    }
+//    func addAnnotationOnMapByLongPress(longPress: UILongPressGestureRecognizer) {
+//        if longPress.state == UIGestureRecognizerState.Began{
+//            var coordinate:CLLocationCoordinate2D = self.locationMapView.convertPoint(createAnnotationLongPress!.locationInView(self.view), toCoordinateFromView: self.locationMapView)
+//            self.searchReGeocodeWithCoordinate(coordinate)
+//        }
+//    }
     
     func deleteParticipator(sender:UIPanGestureRecognizer){
         if sender.state == UIGestureRecognizerState.Ended{
@@ -409,6 +441,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if let eventid = event!.eventID{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+            //TODO
 //            params.setObject(User.shared.id, forKey: "owner")
 //            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
 //            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
@@ -420,15 +453,15 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
 //            params.setObject(event!.AcceptMemberCount!, forKey: "AcceptMemberCount")
 //            params.setObject(event!.RefuseMemberCount!, forKey: "RefuseMemberCount")
             
-            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            var url = String(format: updateEventURL, eventid)
-            self.manager.PUT(url,
-                parameters: params,
-                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                },
-                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    println("update event failed:"+error.description)
-            })
+//            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+//            var url = String(format: updateEventURL, eventid)
+//            self.manager.PUT(url,
+//                parameters: params,
+//                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+//                },
+//                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//                    println("update event failed:"+error.description)
+//            })
         }else{
             if self.eventTextView.text.isEmpty && event?.date == nil{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请在详细界面设置时间", type: .Error)
@@ -450,15 +483,15 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 params.setObject(0, forKey: "AcceptMemberCount")
                 params.setObject(0, forKey: "RefuseMemberCount")
                 
-                self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-                
-                self.manager.POST(createEventURL,
-                    parameters: params,
-                    success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    },
-                    failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                        println("create event failed:"+error.description)
-                })
+//                self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+//                
+//                self.manager.POST(createEventURL,
+//                    parameters: params,
+//                    success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+//                    },
+//                    failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+//                        println("create event failed:"+error.description)
+//                })
             }
         }
     }
