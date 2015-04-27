@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CreateEventDetailViewControllerDelegate{
-    func CreateEventDetailViewControllerDone(CreateEventDetailViewController, String, Bool)
+    func CreateEventDetailViewControllerDone(CreateEventDetailViewController, NSDate, Bool)
 }
 
 class CreateEventDetailViewController: UITableViewController{
@@ -40,10 +40,7 @@ class CreateEventDetailViewController: UITableViewController{
     }
     
     @IBAction func Done(sender: AnyObject) {
-        var dateFormate:NSDateFormatter = NSDateFormatter()
-        dateFormate.dateFormat = "yyyy-MM-dd HH:mm"//.setLocalizedDateFormatFromTemplate("yyyy - MM - dd HH:mm")
-        var date:String = dateFormate.stringFromDate(datePicker.date)
-        self.delegate?.CreateEventDetailViewControllerDone(self, date, needLocation.on)
+        self.delegate?.CreateEventDetailViewControllerDone(self, datePicker.date, needLocation.on)
 //        self.dismissViewControllerAnimated(true, completion: nil)
     }
     

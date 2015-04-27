@@ -181,7 +181,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                         var event:Event = Event()
                         var obj = objects[i] as! AVObject
                         event.obj = obj
-                        event.owner = obj.objectForKey("owner") as? AVUser
+                        //TODO
+//                        event.owner = obj.objectForKey("owner") as? AVUser
                         event.needLocation = obj.objectForKey("needLocation") as! Bool
                         event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
                         event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int

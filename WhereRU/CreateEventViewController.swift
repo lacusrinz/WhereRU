@@ -99,9 +99,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         participators = [AVUser]()
         poiAnnotation = MAPointAnnotation()
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
         if let myEvent = event{
             self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
             eventTextView.text = myEvent.message
@@ -111,16 +108,20 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
             self.locationMapView.addAnnotation(point)
             //TODO
-//            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-//            var url = String(format: participantsInEventURL, myEvent.eventID!)
-//            self.manager.GET(url,
-//                parameters: nil,
-//                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-//                    self.participatorCollectionView.reloadData()
-//                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-//                    print("Get Participants Failed: \(error.description)")
-//            })
-        }else{
+            //            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+            //            var url = String(format: participantsInEventURL, myEvent.eventID!)
+            //            self.manager.GET(url,
+            //                parameters: nil,
+            //                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
+            //                    self.participatorCollectionView.reloadData()
+            //                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
+            //                    print("Get Participants Failed: \(error.description)")
+            //            })
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if event == nil {
             event = Event()
             locationMapView.showsUserLocation = true
             locationMapView.userTrackingMode = MAUserTrackingModeFollow
@@ -430,8 +431,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     // MARK: - createEventDetailViewControllerDelegate
-    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: String, _ needLocation: Bool) {
-//        event?.date = date
+    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: NSDate, _ needLocation: Bool) {
+        event?.date = date
         event?.needLocation = needLocation
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -440,28 +441,25 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBAction func CreateNewEvent(sender: AnyObject) {
         if let eventid = event!.eventID{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
-            var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
-            //TODO
-//            params.setObject(User.shared.id, forKey: "owner")
-//            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
-//            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
-//            params.setObject(event!.date!, forKey: "startdate")
-//            params.setObject(event!.needLocation, forKey: "needLocation")
-//            params.setObject(self.eventTextView.text!, forKey: "message")
-//            params.setObject(User.shared.nickname!, forKey: "createdBy")
-//            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
-//            params.setObject(event!.AcceptMemberCount!, forKey: "AcceptMemberCount")
-//            params.setObject(event!.RefuseMemberCount!, forKey: "RefuseMemberCount")
             
-//            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-//            var url = String(format: updateEventURL, eventid)
-//            self.manager.PUT(url,
-//                parameters: params,
-//                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-//                },
-//                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-//                    println("update event failed:"+error.description)
-//            })
+            event!.obj!.setObject(AVGeoPoint(latitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, longitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude), forKey: "coordinate")
+            event!.obj!.setObject(event!.date!, forKey: "date")
+            event!.obj!.setObject(event!.needLocation, forKey: "needLocation")
+            event!.obj!.setObject(self.eventTextView.text!, forKey: "message")
+            event!.obj!.setObject(event!.acceptMemberCount!, forKey: "acceptMemberCount")
+            event!.obj!.setObject(event!.refuseMemberCount!, forKey: "refuseMemberCount")
+            var ownerRelation:AVRelation = event!.obj!.relationforKey("owner")
+            ownerRelation.addObject(AVUser.currentUser())
+            var participatorsRelation:AVRelation = event!.obj!.relationforKey("participater")
+            for participator:AVUser in self.participators! {
+                participatorsRelation.addObject(participator)
+            }
+            
+            event!.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                SVProgressHUD.showSuccessWithStatus("跟新成功！")
+                self.delegate!.CreateEventViewControllerDone(self)
+            })
+
         }else{
             if self.eventTextView.text.isEmpty && event?.date == nil{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请在详细界面设置时间", type: .Error)
@@ -471,27 +469,27 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
             }else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
-                var params:NSMutableDictionary = NSMutableDictionary(capacity: 10)
-                params.setObject(User.shared.id, forKey: "owner")
-                params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
-                params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
-                params.setObject(event!.date!, forKey: "startdate")
+                var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+                params.setObject(AVGeoPoint(latitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, longitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude), forKey: "coordinate")
+                params.setObject(event!.date!, forKey: "date")
                 params.setObject(event!.needLocation, forKey: "needLocation")
                 params.setObject(self.eventTextView.text!, forKey: "message")
-                params.setObject(User.shared.nickname!, forKey: "createdBy")
-                params.setObject(User.shared.nickname!, forKey: "modifiedBy")
-                params.setObject(0, forKey: "AcceptMemberCount")
-                params.setObject(0, forKey: "RefuseMemberCount")
-                
-//                self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-//                
-//                self.manager.POST(createEventURL,
-//                    parameters: params,
-//                    success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-//                    },
-//                    failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-//                        println("create event failed:"+error.description)
-//                })
+                params.setObject(0, forKey: "acceptMemberCount")
+                params.setObject(0, forKey: "refuseMemberCount")
+                params.setObject(self.participators!, forKey: "participators")
+                var newEvent:AVObject = AVObject(className: "Event", dictionary: params as [NSObject : AnyObject])
+                var ownerRelation:AVRelation = newEvent.relationforKey("owner")
+                ownerRelation.addObject(AVUser.currentUser())
+                var participatorsRelation:AVRelation = newEvent.relationforKey("participater")
+                for participator:AVUser in self.participators! {
+                    participatorsRelation.addObject(participator)
+                }
+                newEvent.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                    if success {
+                        SVProgressHUD.showSuccessWithStatus("创建成功！")
+                        self.delegate!.CreateEventViewControllerDone(self)
+                    }
+                })
             }
         }
     }

@@ -55,7 +55,8 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
                     for (var i=0; i<objects.count; ++i) {
                         var event:Event = Event()
                         var obj = objects[i] as! AVObject
-                        event.owner = obj.objectForKey("owner") as? AVUser
+                        //TODO
+//                        event.owner = obj.objectForKey("owner") as? AVUser
                         event.needLocation = obj.objectForKey("needLocation") as! Bool
                         event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
                         event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
@@ -163,6 +164,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     
     func CreateEventViewControllerDone(_: CreateEventViewController) {
         dismissViewControllerAnimated(true, completion: nil)
+        self.tableView.header.beginRefreshing()
     }
     
     func ViewEventViewControllerDidBack(_: ViewEventViewController) {

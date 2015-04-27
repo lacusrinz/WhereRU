@@ -1197,9 +1197,22 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lDs-31-kGV" id="gfk-er-fya">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-bG-aiS">
+                                            <rect key="frame" x="56" y="8" width="247" height="27"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="247" id="9U3-49-OZe"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6MM-R4-5WA" customClass="avatarImageView" customModule="avatarImageView">
                                             <rect key="frame" x="8" y="2" width="40" height="40"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="EzY-cl-KU0"/>
+                                                <constraint firstAttribute="height" constant="40" id="tlA-M6-2uu"/>
+                                            </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                                     <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1214,24 +1227,13 @@
                                                 <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
                                             </userDefinedRuntimeAttributes>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gyE-bG-aiS">
-                                            <rect key="frame" x="56" y="13" width="245" height="21"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="245" id="QHF-mX-dX5"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="bottomMargin" secondItem="gyE-bG-aiS" secondAttribute="bottom" constant="1" id="1qF-PD-G5y"/>
-                                        <constraint firstItem="gyE-bG-aiS" firstAttribute="top" secondItem="gfk-er-fya" secondAttribute="topMargin" constant="5" id="27x-8w-c0e"/>
-                                        <constraint firstItem="6MM-R4-5WA" firstAttribute="leading" secondItem="gfk-er-fya" secondAttribute="leadingMargin" id="3cZ-YG-a98"/>
-                                        <constraint firstItem="gyE-bG-aiS" firstAttribute="leading" secondItem="6MM-R4-5WA" secondAttribute="trailing" constant="8" symbolic="YES" id="3j2-iU-I7c"/>
-                                        <constraint firstItem="gyE-bG-aiS" firstAttribute="leading" secondItem="gfk-er-fya" secondAttribute="leading" constant="56" id="eD2-pT-0Xs"/>
-                                        <constraint firstAttribute="bottomMargin" secondItem="6MM-R4-5WA" secondAttribute="bottom" constant="-7" id="fNm-St-24O"/>
-                                        <constraint firstItem="6MM-R4-5WA" firstAttribute="top" secondItem="gfk-er-fya" secondAttribute="topMargin" constant="-6" id="ycg-YP-zbe"/>
+                                        <constraint firstItem="gyE-bG-aiS" firstAttribute="leading" secondItem="6MM-R4-5WA" secondAttribute="trailing" constant="8" symbolic="YES" id="3bp-Bz-VpA"/>
+                                        <constraint firstItem="6MM-R4-5WA" firstAttribute="leading" secondItem="gfk-er-fya" secondAttribute="leadingMargin" id="TJ4-xx-X4C"/>
+                                        <constraint firstItem="6MM-R4-5WA" firstAttribute="top" secondItem="gfk-er-fya" secondAttribute="topMargin" constant="-6" id="adg-dR-6Mg"/>
+                                        <constraint firstItem="gyE-bG-aiS" firstAttribute="bottom" secondItem="gfk-er-fya" secondAttribute="bottomMargin" id="ba8-4w-AgG"/>
+                                        <constraint firstItem="gyE-bG-aiS" firstAttribute="top" secondItem="gfk-er-fya" secondAttribute="topMargin" id="dR4-OX-QcU"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
