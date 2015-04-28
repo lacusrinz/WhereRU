@@ -89,6 +89,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                     cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
                 }
             }
+            //TODO
         }
         return cell
     }

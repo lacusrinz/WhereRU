@@ -10,9 +10,6 @@
 		57BE627E684A45D69E5ECD76 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7DD70D1EB048628041DBA1 /* libPods.a */; };
 		A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */; };
 		A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */; };
-		A80CDDFE1A2FEF070007C345 /* RAMTransitionItemAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80CDDF71A2FEF070007C345 /* RAMTransitionItemAnimation.swift */; };
-		A80CDDFF1A2FEF070007C345 /* RAMAnimatedTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80CDDF81A2FEF070007C345 /* RAMAnimatedTabBarController.swift */; };
-		A80CDE001A2FEF070007C345 /* RAMItemAnimationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A80CDDF91A2FEF070007C345 /* RAMItemAnimationProtocol.swift */; };
 		A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A811A23819D407EC0079B7F8 /* MyViewController.swift */; };
 		A814C8D719CFECB600735E7B /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C8D619CFECB600735E7B /* SigninViewController.swift */; };
 		A814C8E219CFF47A00735E7B /* avatarImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A814C8E119CFF47A00735E7B /* avatarImageView.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -100,9 +97,6 @@
 		A33BB9B7AA719B13BE841C77 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventViewController.swift; sourceTree = "<group>"; };
 		A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipatorCollectionViewCell.swift; sourceTree = "<group>"; };
-		A80CDDF71A2FEF070007C345 /* RAMTransitionItemAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMTransitionItemAnimation.swift; sourceTree = "<group>"; };
-		A80CDDF81A2FEF070007C345 /* RAMAnimatedTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMAnimatedTabBarController.swift; sourceTree = "<group>"; };
-		A80CDDF91A2FEF070007C345 /* RAMItemAnimationProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RAMItemAnimationProtocol.swift; sourceTree = "<group>"; };
 		A811A23819D407EC0079B7F8 /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		A811A24019D40E4A0079B7F8 /* WhereRU-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhereRU-Bridging-Header.h"; sourceTree = "<group>"; };
 		A814C8D619CFECB600735E7B /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
@@ -190,32 +184,6 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		A80CDDEC1A2FEF070007C345 /* RAMAnimatedTabBarController */ = {
-			isa = PBXGroup;
-			children = (
-				A80CDDED1A2FEF070007C345 /* Animations */,
-				A80CDDF81A2FEF070007C345 /* RAMAnimatedTabBarController.swift */,
-				A80CDDF91A2FEF070007C345 /* RAMItemAnimationProtocol.swift */,
-			);
-			path = RAMAnimatedTabBarController;
-			sourceTree = "<group>";
-		};
-		A80CDDED1A2FEF070007C345 /* Animations */ = {
-			isa = PBXGroup;
-			children = (
-				A80CDDF61A2FEF070007C345 /* TransitionAniamtions */,
-			);
-			path = Animations;
-			sourceTree = "<group>";
-		};
-		A80CDDF61A2FEF070007C345 /* TransitionAniamtions */ = {
-			isa = PBXGroup;
-			children = (
-				A80CDDF71A2FEF070007C345 /* RAMTransitionItemAnimation.swift */,
-			);
-			path = TransitionAniamtions;
-			sourceTree = "<group>";
-		};
 		A814C8DE19CFF47A00735E7B /* avatarImageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,7 +253,6 @@
 		A8B8A1921A14F8F00000FB6F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				A80CDDEC1A2FEF070007C345 /* RAMAnimatedTabBarController */,
 				A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */,
 			);
 			name = Utils;
@@ -620,14 +587,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */,
-				A80CDDFF1A2FEF070007C345 /* RAMAnimatedTabBarController.swift in Sources */,
 				A8B8A12119FF0D310000FB6F /* EventTableViewCell.swift in Sources */,
 				A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */,
 				A814C8D719CFECB600735E7B /* SigninViewController.swift in Sources */,
 				A8BDE73B1A74E33900EC5785 /* MapDetailViewController.swift in Sources */,
 				A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */,
 				A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */,
-				A80CDE001A2FEF070007C345 /* RAMItemAnimationProtocol.swift in Sources */,
 				A8B991041A4670BA00AB75DB /* Participant.swift in Sources */,
 				A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */,
 				A8E51F9A1AD96A18000F2AFF /* MainTabBarController.swift in Sources */,
@@ -640,7 +605,6 @@
 				A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
 				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
-				A80CDDFE1A2FEF070007C345 /* RAMTransitionItemAnimation.swift in Sources */,
 				A8D8CA1B1AECF52100836FDC /* CommonUtility.swift in Sources */,
 				A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,

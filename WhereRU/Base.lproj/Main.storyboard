@@ -982,9 +982,6 @@
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="ZuT-94-hg3" id="u2Y-d7-zNT"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ldJ-Ni-Q9i">
@@ -997,16 +994,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9zJ-ez-R9p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="ZuT-94-hg3" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
-                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
-                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="4821" y="-2288"/>
         </scene>
@@ -1091,9 +1078,6 @@
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="06w-b8-Hrj" id="azU-xb-oFc"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xmf-5x-jaU">
@@ -1106,16 +1090,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iev-qX-39S" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="06w-b8-Hrj" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
-                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
-                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="4829" y="1231"/>
         </scene>
@@ -1129,9 +1103,6 @@
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="9yx-if-2pb" id="qyJ-C2-9xC"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7BE-P2-k1q">
@@ -1144,16 +1115,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xtg-5s-K3V" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="9yx-if-2pb" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
-                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
-                            <color key="value" red="0.11191682999999999" green="0.29817227200000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="4829" y="1961"/>
         </scene>
@@ -1426,9 +1387,6 @@
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
-                        <connections>
-                            <outlet property="animation" destination="Hco-ZU-m1z" id="AdB-9y-9Pv"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="7Uu-Ju-FKE">
@@ -1441,16 +1399,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HTb-eA-TaY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="Hco-ZU-m1z" customClass="RAMFlipLeftTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target">
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="color" keyPath="iconSelectedColor">
-                            <color key="value" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="color" keyPath="textSelectedColor">
-                            <color key="value" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </customObject>
             </objects>
             <point key="canvasLocation" x="4821" y="-1348"/>
         </scene>
