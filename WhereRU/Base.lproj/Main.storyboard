@@ -976,7 +976,7 @@
         <scene sceneID="2EE-WY-uZo">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="GVe-s8-hIb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="受邀" image="icon_visit" id="0IY-ms-GE0" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="受邀" image="icon_visit" id="0IY-ms-GE0">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1072,7 +1072,7 @@
         <scene sceneID="0CH-Uy-ayv">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="7YY-ve-Htu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="好友" image="icon_friends" id="ZnP-fk-fCC" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="好友" image="icon_friends" id="ZnP-fk-fCC">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1097,7 +1097,7 @@
         <scene sceneID="aKO-sc-MKK">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xdX-ML-fzp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="设置" image="icon_settings" id="zab-3y-b8o" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="设置" image="icon_settings" id="zab-3y-b8o">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -1125,9 +1125,6 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <tabBarItem key="tabBarItem" title="" image="Icon_center_add" id="MNk-ch-NG1" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
                         <inset key="imageInsets" minX="0.0" minY="7" maxX="0.0" maxY="-7"/>
-                        <connections>
-                            <outlet property="animation" destination="Lhm-ez-z9p" id="KhC-Fr-qwt"/>
-                        </connections>
                     </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8nm-LO-m4K">
@@ -1140,7 +1137,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4e-tX-KGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="Lhm-ez-z9p" customClass="RAMFlipBottomTransitionItemAniamtions" customModule="WhereRU" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="6266" y="135"/>
         </scene>
@@ -1381,7 +1377,7 @@
         <scene sceneID="3Et-vK-Ni3">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="dVF-jF-dFP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="邀请" image="icon_invite" id="p49-lA-rnF" customClass="RAMAnimatedTabBarItem" customModule="WhereRU" customModuleProvider="target">
+                    <tabBarItem key="tabBarItem" title="邀请" image="icon_invite" id="p49-lA-rnF">
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                 <color key="value" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
