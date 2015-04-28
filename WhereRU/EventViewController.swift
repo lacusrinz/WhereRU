@@ -90,6 +90,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                 }
             }
             //TODO
+            //[ci skip]
         }
         return cell
     }
