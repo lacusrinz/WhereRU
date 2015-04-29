@@ -44,8 +44,9 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         self.performSegueWithIdentifier("createEvent", sender: self)
     }
     
-    // MARK: - SVPullToRefresh func
+    // MARK: - MJRefresh func
     func updateEvents() {
+        self.tableData!.removeAll(keepCapacity: true)
         var query:AVQuery? = AVQuery(className: "Event")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
@@ -55,8 +56,18 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
                     for (var i=0; i<objects.count; ++i) {
                         var event:Event = Event()
                         var obj = objects[i] as! AVObject
-                        //TODO
-//                        event.owner = obj.objectForKey("owner") as? AVUser
+                        event.obj = obj
+                        
+                        var ownerRelation = obj.objectForKey("owner") as! AVRelation
+                        var ownerQuery = ownerRelation.query()
+                        event.owner = ownerQuery.getFirstObject() as? AVUser
+                        
+                        var participatersRelation = obj.objectForKey("participater") as! AVRelation
+                        var participatersQuery = participatersRelation.query()
+                        participatersQuery.findObjectsInBackgroundWithBlock({ (part:[AnyObject]!, error:NSError!) -> Void in
+                            event.participants = part as? [AVUser]
+                        })
+                        
                         event.needLocation = obj.objectForKey("needLocation") as! Bool
                         event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
                         event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int

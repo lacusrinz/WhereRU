@@ -27,7 +27,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var clLocationManager:CLLocationManager?
     private var displayController:UISearchDisplayController?
     private var tips:[AMapTip]?
-//    private var createAnnotationLongPress:UILongPressGestureRecognizer?
     private var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     private var addParticipatorByTapGesture:UITapGestureRecognizer?
     private var poiAnnotation:MAPointAnnotation?
@@ -64,11 +63,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             myAvatarImageView.image = UIImage(named: "default_avatar")
         }
         
+        
+        //Enable touch POI
         self.locationMapView.touchPOIEnabled = true
-//        createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
-//        createAnnotationLongPress!.delegate = self
-//        createAnnotationLongPress!.minimumPressDuration = 0.5
-//        self.view.addGestureRecognizer(createAnnotationLongPress!)
         
         deleteParticipatorByPanGesture = UILongPressGestureRecognizer(target: self, action: "deleteParticipator:")
         deleteParticipatorByPanGesture!.delegate = self
@@ -102,26 +99,19 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if let myEvent = event{
             self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
             eventTextView.text = myEvent.message
-            var point: MAPointAnnotation = MAPointAnnotation()
-            point.coordinate = myEvent.coordinate!
-            point.title = "目的地"
-            self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
-            self.locationMapView.addAnnotation(point)
-            //TODO
-            //            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            //            var url = String(format: participantsInEventURL, myEvent.eventID!)
-            //            self.manager.GET(url,
-            //                parameters: nil,
-            //                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-            //                    self.participatorCollectionView.reloadData()
-            //                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-            //                    print("Get Participants Failed: \(error.description)")
-            //            })
+            
+            participators = myEvent.participants
         }
     }
     
     override func viewDidAppear(animated: Bool) {
-        if event == nil {
+        if event != nil {
+            var point: MAPointAnnotation = MAPointAnnotation()
+            point.coordinate = event!.coordinate!
+            point.title = "目的地"
+            self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
+            self.locationMapView.addAnnotation(point)
+        }else {
             event = Event()
             locationMapView.showsUserLocation = true
             locationMapView.userTrackingMode = MAUserTrackingModeFollow
@@ -152,14 +142,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         annotation.title = touchPoi!.name
         return annotation
     }
-    
-//    func searchReGeocodeWithCoordinate(coordinate:CLLocationCoordinate2D){
-//        self.clear()
-//        var regeo = AMapReGeocodeSearchRequest()
-//        regeo.location = AMapGeoPoint.locationWithLatitude(CGFloat(coordinate.latitude), longitude: CGFloat(coordinate.longitude))
-//        regeo.requireExtension = true
-//        self.search?.AMapReGoecodeSearch(regeo)
-//    }
     
     func searchTipsWithKey(key:NSString){
         if (key.length == 0)
@@ -258,17 +240,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         self.locationMapView.showsUserLocation = false
     }
     
-//    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
-//        if response.regeocode != nil{
-//            println(request.location.latitude)
-//            println(request.location.longitude)
-//            var coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(request.location.latitude), Double(request.location.longitude))
-//            var reGeocodeAnnotation:ReGeocodeAnnotation = ReGeocodeAnnotation(reGeocode: response.regeocode, coordinate: coordinate)
-//            self.locationMapView.addAnnotation(reGeocodeAnnotation)
-//            self.locationMapView.showsUserLocation = false
-//        }
-//    }
-    
     func onInputTipsSearchDone(request: AMapInputTipsSearchRequest!, response: AMapInputTipsSearchResponse!) {
         self.tips = response.tips as? [AMapTip]
         self.displayController?.searchResultsTableView.reloadData()
@@ -346,13 +317,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     func gestureRecognizer(gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWithGestureRecognizer otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-    
-//    func addAnnotationOnMapByLongPress(longPress: UILongPressGestureRecognizer) {
-//        if longPress.state == UIGestureRecognizerState.Began{
-//            var coordinate:CLLocationCoordinate2D = self.locationMapView.convertPoint(createAnnotationLongPress!.locationInView(self.view), toCoordinateFromView: self.locationMapView)
-//            self.searchReGeocodeWithCoordinate(coordinate)
-//        }
-//    }
     
     func deleteParticipator(sender:UIPanGestureRecognizer){
         if sender.state == UIGestureRecognizerState.Ended{
@@ -477,17 +441,30 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 params.setObject(0, forKey: "acceptMemberCount")
                 params.setObject(0, forKey: "refuseMemberCount")
                 params.setObject(self.participators!, forKey: "participators")
+                
                 var newEvent:AVObject = AVObject(className: "Event", dictionary: params as [NSObject : AnyObject])
                 var ownerRelation:AVRelation = newEvent.relationforKey("owner")
                 ownerRelation.addObject(AVUser.currentUser())
+                
                 var participatorsRelation:AVRelation = newEvent.relationforKey("participater")
                 for participator:AVUser in self.participators! {
                     participatorsRelation.addObject(participator)
                 }
+                
                 newEvent.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                     if success {
-                        SVProgressHUD.showSuccessWithStatus("创建成功！")
-                        self.delegate!.CreateEventViewControllerDone(self)
+                        var status:AVObject = AVObject(className: "UserStatusForEvent")
+                        var eventRelation:AVRelation = status.relationforKey("event")
+                        eventRelation.addObject(newEvent)
+                        
+                        var userRelation:AVRelation = status.relationforKey("user")
+                        for participator:AVUser in self.participators! {
+                            userRelation.addObject(participator)
+                        }
+                        status.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                            SVProgressHUD.showSuccessWithStatus("创建成功！")
+                            self.delegate!.CreateEventViewControllerDone(self)
+                        })
                     }
                 })
             }

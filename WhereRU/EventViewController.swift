@@ -88,8 +88,9 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                 }else {
                     cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
                 }
+            }else {
+                cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
             }
-            //TODO
         }
         return cell
     }
@@ -168,7 +169,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         return true
     }
     
-    // MARK: - SVPullToRefresh func
+    // MARK: - MJRefresh func
     func updateEvents() {
         self.tableData!.removeAll(keepCapacity: true)
         var query:AVQuery? = AVQuery(className: "Event")
@@ -182,8 +183,17 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                         var event:Event = Event()
                         var obj = objects[i] as! AVObject
                         event.obj = obj
-                        //TODO
-//                        event.owner = obj.objectForKey("owner") as? AVUser
+                        
+                        var ownerRelation = obj.objectForKey("owner") as! AVRelation
+                        var ownerQuery = ownerRelation.query()
+                        event.owner = ownerQuery.getFirstObject() as? AVUser
+                        
+                        var participatersRelation = obj.objectForKey("participater") as! AVRelation
+                        var participatersQuery = participatersRelation.query()
+                        participatersQuery.findObjectsInBackgroundWithBlock({ (part:[AnyObject]!, error:NSError!) -> Void in
+                            event.participants = part as? [AVUser]
+                        })
+                        
                         event.needLocation = obj.objectForKey("needLocation") as! Bool
                         event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
                         event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
