@@ -30,10 +30,10 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         
         mapView.frame = self.view.bounds
         mapView.delegate = self
-        mapView.setZoomLevel(15.1, animated: true)
+        mapView.setZoomLevel(17.1, animated: true)
         
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = MAUserTrackingModeNone
+//        mapView.showsUserLocation = true
+//        mapView.userTrackingMode = MAUserTrackingModeNone
         
 //        self.search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
     }
@@ -170,6 +170,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = false
             poiAnnotationView?.draggable = false;
+            return poiAnnotationView
         }
         return nil
     }

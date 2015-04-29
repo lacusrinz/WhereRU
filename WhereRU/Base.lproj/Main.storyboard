@@ -142,6 +142,7 @@
                         <outlet property="nicknameTextField" destination="kfX-GW-wqW" id="rdZ-ck-wVe"/>
                         <outlet property="passwordTextField" destination="OjM-wm-Mzw" id="eKp-UZ-xm6"/>
                         <outlet property="userAvatarImageView" destination="snZ-tq-8Ph" id="IaO-GV-ZUG"/>
+                        <segue destination="Gkz-UB-kM1" kind="show" identifier="loginaftersignin" id="feN-bk-oyQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aTM-CG-1z0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -151,7 +152,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3219" y="895"/>
+            <point key="canvasLocation" x="3219" y="936"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="WVT-Qy-e42">
@@ -472,7 +473,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJm-aL-vCT" customClass="UIImageView">
+                            <view contentMode="scaleAspectFill" translatesAutoresizingMaskIntoConstraints="NO" id="PJm-aL-vCT" customClass="UIImageView">
                                 <rect key="frame" x="0.0" y="64" width="600" height="274"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1138,7 +1139,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H4e-tX-KGQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6266" y="135"/>
+            <point key="canvasLocation" x="6806" y="139"/>
         </scene>
         <!--好友列表-->
         <scene sceneID="tpq-LG-zaA">
@@ -1423,8 +1424,9 @@
         <image name="signup" width="374" height="211"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TD1-ij-O85"/>
+        <segue reference="feN-bk-oyQ"/>
         <segue reference="pOu-0Q-lSf"/>
+        <segue reference="TD1-ij-O85"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

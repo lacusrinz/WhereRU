@@ -54,11 +54,23 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.user!.setObject("", forKey: "avatar")
         self.user!.setObject(true, forKey: "is_active")
         
+        SVProgressHUD.show()
         self.user!.signUpInBackgroundWithBlock { (succeeded:Bool, error:NSError!) -> Void in
             if succeeded{
                 println("success!")
+                AVUser.logInWithUsernameInBackground(self.user!.username, password: self.user!.password) { (user:AVUser?, error:NSError?) -> Void in
+                    if (user != nil) {
+                        println("login success")
+                        SVProgressHUD.showSuccessWithStatus("")
+                        self.performSegueWithIdentifier("loginaftersignin", sender: self)
+                    }else {
+                        SVProgressHUD.showErrorWithStatus("登陆失败")
+                        println("failed:\(error!.description)")
+                    }
+                }
             }
             else{
+                SVProgressHUD.showErrorWithStatus("注册失败")
                 println("failed:\(error.description)")
             }
         }

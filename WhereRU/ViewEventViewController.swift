@@ -24,7 +24,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     private var authToken:String?
     private var manager = AFHTTPRequestOperationManager()
     
-    var participators:[Friend]?
+    var participators:[AVUser]?
     var event:Event?
     var delegate:ViewEventViewControllerDelegate?
     
@@ -37,19 +37,8 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         mapTapGesture.delegate = self
         mapImage.addGestureRecognizer(mapTapGesture)
         
-        authToken = User.shared.token
-        if event!.owner != User.shared.id{
-            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            var url = ""//String(format: friendByIdURL, event!.owner)
-            self.manager.GET(url,
-                parameters: nil,
-                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                }) { (request:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    println("get owner avatar failed: \(error.description)")
-            }
-        }else{
-             self.avatarImage.setImageWithURL(NSURL(string: User.shared.avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        }
+        var avatarObject: AnyObject! = event!.owner!.objectForKey("avatarFile")
+        self.avatarImage.image = UIImage(data: avatarObject.getData())
         
         message.text = event!.message
         message.layer.borderColor = UIColor.blackColor().CGColor
@@ -60,19 +49,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         participantsCollection.delegate = self
         participantsCollection.dataSource = self
         
-        self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-        var url = String(format: participantsInEventURL, event!.eventID!)
-        self.manager.GET(url,
-            parameters: nil,
-            success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                self.participantsCollection.reloadData()
-            }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                print("Get Participants Failed: \(error.description)")
-        })
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        participators = event!.participants
         
         var longitude = NSString(string: "\(event!.coordinate!.longitude)").substringToIndex(7)
         var latitude = NSString(string: "\(event!.coordinate!.latitude)").substringToIndex(7)
@@ -81,6 +58,10 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         
         var imageURL = "http://restapi.amap.com/v3/staticmap?location=\(longitude),\(latitude)&zoom=15&size=\(width)*\(height)&scale=2&markers=mid,,A:\(longitude),\(latitude)&key=992a5459adc4de286ea6e3acdda61f9f"
         mapImage.setImageWithURL(NSURL(string: imageURL), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     @IBAction func Back(sender: AnyObject) {
@@ -96,7 +77,12 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         let cellIdentifier:NSString = "ParticipatorCollectionViewCell"
         var cell: ParticipatorCollectionViewCell = participantsCollection.dequeueReusableCellWithReuseIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! ParticipatorCollectionViewCell
 
-        cell.participatorAvatarImage.setImageWithURL(NSURL(string: participators![indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        var avatarObj:AnyObject! = participators![indexPath.row].objectForKey("avatarFile")
+        if avatarObj != nil {
+            cell.participatorAvatarImage.image = UIImage(data: avatarObj.getData())
+        }else {
+            cell.participatorAvatarImage.image = UIImage(named: "default_avatar")
+        }
         cell.participatorAvatarImage.layer.borderWidth = 1
         cell.isParticipator = true
         

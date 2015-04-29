@@ -32,6 +32,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var poiAnnotation:MAPointAnnotation?
     
     var participators:[AVUser]?
+    var oldParticipators:[AVUser]?
     var event:Event?
     var delegate:CreateEventViewControllerDelegate?
     
@@ -97,10 +98,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         poiAnnotation = MAPointAnnotation()
         
         if let myEvent = event{
-            self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
+            self.doneButton.setAttributedTitle(NSAttributedString(string: "更新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
             eventTextView.text = myEvent.message
             
             participators = myEvent.participants
+            oldParticipators = myEvent.participants
         }
     }
     
@@ -412,9 +414,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             event!.obj!.setObject(self.eventTextView.text!, forKey: "message")
             event!.obj!.setObject(event!.acceptMemberCount!, forKey: "acceptMemberCount")
             event!.obj!.setObject(event!.refuseMemberCount!, forKey: "refuseMemberCount")
+            
             var ownerRelation:AVRelation = event!.obj!.relationforKey("owner")
             ownerRelation.addObject(AVUser.currentUser())
+            
             var participatorsRelation:AVRelation = event!.obj!.relationforKey("participater")
+            for participator:AVUser in self.oldParticipators! {
+                participatorsRelation.removeObject(participator)
+            }
             for participator:AVUser in self.participators! {
                 participatorsRelation.addObject(participator)
             }
