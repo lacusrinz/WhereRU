@@ -16,7 +16,7 @@
 
 #import "SVProgressHUD.h"
 #import "JSONKit.h"
-#import "AFNetworking.h"
+//#import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h"
 #import "TSMessage.h"
