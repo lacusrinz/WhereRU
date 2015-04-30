@@ -12,8 +12,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
-    private var manager = AFHTTPRequestOperationManager()
-    private var authToken:String?
     private var selectedRowNumber:Int = 0
 
     override func viewDidLoad() {

@@ -20,9 +20,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var participantsCollection: UICollectionView!
     @IBOutlet var mapTapGesture: UITapGestureRecognizer!
-    
-    private var authToken:String?
-    private var manager = AFHTTPRequestOperationManager()
+
     
     var participators:[AVUser]?
     var event:Event?
