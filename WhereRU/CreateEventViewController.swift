@@ -170,11 +170,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     //MARK: - MAMapViewDelegate
-    func mapView(mapView: MAMapView!, didAddAnnotationViews views: [AnyObject]!) {
-        var view:MAAnnotationView = views[0] as! MAAnnotationView
-        self.locationMapView.selectAnnotation(view.annotation, animated: true)
-    }
-
     func mapView(mapView: MAMapView!, didTouchPois pois: [AnyObject]!) {
         if (pois.count == 0)
         {
