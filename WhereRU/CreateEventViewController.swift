@@ -106,14 +106,18 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        //
+    }
+    
     override func viewDidAppear(animated: Bool) {
-        if event != nil {
+        if event != nil && event!.coordinate != nil {
             var point: MAPointAnnotation = MAPointAnnotation()
             point.coordinate = event!.coordinate!
             point.title = "目的地"
             self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
             self.locationMapView.addAnnotation(point)
-        }else {
+        }else if event == nil {
             event = Event()
             locationMapView.showsUserLocation = true
             locationMapView.userTrackingMode = MAUserTrackingModeFollow

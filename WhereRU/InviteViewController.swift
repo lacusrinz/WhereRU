@@ -122,6 +122,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         selectedRowNumber = indexPath.row
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: false)
         performSegueWithIdentifier("viewEvent", sender: self)
     }
 
@@ -172,8 +173,9 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     }
     
     func CreateEventViewControllerDone(_: CreateEventViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
-        self.tableView.header.beginRefreshing()
+        dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.tableView.header.beginRefreshing()
+        })
     }
     
     func ViewEventViewControllerDidBack(_: ViewEventViewController) {

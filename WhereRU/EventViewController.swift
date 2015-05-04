@@ -72,16 +72,19 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         
         var query:AVQuery = AVQuery(className: "UserStatusForEvent")
         query.whereKey("user", equalTo: AVUser.currentUser())
+        query.whereKey("event", equalTo: (self.tableData![indexPath.row] as Event).obj)
         query.getFirstObjectInBackgroundWithBlock { (object:AVObject!, error:NSError!) -> Void in
             if object != nil {
-                var status: AnyObject! = object.objectForKey("status")
+                var status: Bool! = object.objectForKey("status") as! Bool
                 if status != nil {
-                    if status as! Bool == true {
+                    if status == true {
                         cell.eventStatus.image = UIImage(named: "icon_accept_invite")
                         cell.eventStatus.hidden = false
+                        cell.leftUtilityButtons = nil
                     }else {
                         cell.eventStatus.image = UIImage(named: "icon_refuse_invite")
                         cell.eventStatus.hidden = false
+                        cell.leftUtilityButtons = nil
                     }
                 }else {
                     cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
