@@ -874,7 +874,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="6334" y="1228"/>
+            <point key="canvasLocation" x="7146" y="1228"/>
         </scene>
         <!--我-->
         <scene sceneID="CXx-FY-1Hd">
@@ -1062,7 +1062,13 @@
                         </connections>
                     </tableView>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="好友" id="nzi-70-dd9"/>
+                    <navigationItem key="navigationItem" title="好友" id="nzi-70-dd9">
+                        <barButtonItem key="rightBarButtonItem" image="plus_icon" id="Vmb-NF-M1F">
+                            <connections>
+                                <segue destination="j1x-id-idR" kind="showDetail" id="4ZK-ah-8Mp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BAl-tG-3a2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1399,6 +1405,24 @@
             </objects>
             <point key="canvasLocation" x="4821" y="-1348"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="CTB-j8-ziU">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="j1x-id-idR" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="26U-Wf-bKS">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="LBV-IX-PVo" kind="relationship" relationship="rootViewController" id="ZBs-GD-6tV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qUp-L4-sce" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6383" y="1228"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Icon_center_add" width="42" height="42"/>
@@ -1420,6 +1444,7 @@
         <image name="icon_username" width="19" height="18"/>
         <image name="icon_visit" width="31" height="18"/>
         <image name="login" width="370" height="145"/>
+        <image name="plus_icon" width="20" height="20"/>
         <image name="signInAvatar" width="232" height="232"/>
         <image name="signup" width="374" height="211"/>
     </resources>

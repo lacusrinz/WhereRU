@@ -10,4 +10,58 @@ import UIKit
 
 class AddContactViewController: UIViewController {
     @IBOutlet weak var contactSearchBar: UISearchBar!
+    var users:[AVUser]?
+    private var displayController:UISearchDisplayController?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        var query:AVQuery = AVUser.query()
+        query.whereKey("username", notEqualTo: AVUser.currentUser().username)
+        query.findObjectsInBackgroundWithBlock { (objs:[AnyObject]!, error:NSError!) -> Void in
+            if error == nil && objs.count>0 {
+                self.users = objs as? [AVUser]
+            }else {
+                self.users = [AVUser]()
+            }
+        }
+    }
+    
+    //MARK: - UISearchBarDelegate
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        var key = searchBar.text;
+        self.displayController?.setActive(false, animated: false)
+        self.contactSearchBar.placeholder = key;
+    }
+    
+    //MARK: - UISearchDisplayDelegate
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
+        self.searchUserWithKey(searchString)
+        return true
+    }
+    
+    func searchUserWithKey(searchString:String) {
+        //
+    }
+    
+    //MARK: - SearchBar UITableViewDataSource
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.users!.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let userCellIdentifier = "userCellIdentifier"
+        var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(userCellIdentifier) as? UITableViewCell
+        if cell == nil{
+            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: userCellIdentifier)
+        }
+        var user:AVUser = self.users![indexPath.row]
+        cell?.textLabel?.text = user.username
+        return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var user:AVUser = self.users![indexPath.row]
+        self.displayController?.setActive(false, animated: false)
+        self.contactSearchBar.placeholder = user.username
+    }
 }
