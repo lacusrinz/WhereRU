@@ -1,21 +1,7 @@
 machine:
   xcode:
     version: "6.3.1"
-  environment:
-    XCODE_SCHEME: WhereRU
-    XCODE_WORKSPACE: WhereRU.xcworkspace
 test:
   override:
-    - xctool
-      -reporter pretty
-      -reporter junit:$CIRCLE_TEST_REPORTS/xcode/results.xml
-      -reporter plain:$CIRCLE_ARTIFACTS/xctool.log
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      PROVISIONING_PROFILE=
-      -destination 'platform=iOS Simulator,name=iPhone 6,OS=latest'
-      -sdk iphonesimulator
-      -workspace $XCODE_WORKSPACE
-      -scheme $XCODE_SCHEME
-      ONLY_ACTIVE_ARCH=NO
-      build
+     - xctool -workspace WhereRU.xcworkspace -scheme WhereRU -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
+     - xctool test -workspace WhereRU.xcworkspace -scheme WhereRUTests -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
