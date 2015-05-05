@@ -18,4 +18,4 @@ test:
       -workspace $XCODE_WORKSPACE
       -scheme $XCODE_SCHEME
       ONLY_ACTIVE_ARCH=NO
-      build test
+      build
