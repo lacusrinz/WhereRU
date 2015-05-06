@@ -1072,7 +1072,7 @@
                     <navigationItem key="navigationItem" title="好友" id="nzi-70-dd9">
                         <barButtonItem key="rightBarButtonItem" image="plus_icon" id="Vmb-NF-M1F">
                             <connections>
-                                <segue destination="j1x-id-idR" kind="showDetail" id="4ZK-ah-8Mp"/>
+                                <segue destination="j1x-id-idR" kind="showDetail" identifier="addFriends" id="4ZK-ah-8Mp"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

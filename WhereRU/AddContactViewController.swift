@@ -8,12 +8,16 @@
 
 import UIKit
 
+protocol AddContactViewControllerDelegate {
+    func AddContactViewControllerBack(controller:AddContactViewController)
+}
+
 class AddContactViewController: UIViewController {
     @IBOutlet weak var contactSearchBar: UISearchBar!
     @IBOutlet var displayController: UISearchDisplayController!
     
     var users:[AVUser]?
-    
+    var delegate:AddContactViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,6 +65,7 @@ class AddContactViewController: UIViewController {
     }
     
     @IBAction func back(sender: AnyObject) {
+        self.delegate!.AddContactViewControllerBack(self)
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
