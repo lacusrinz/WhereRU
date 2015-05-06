@@ -830,7 +830,7 @@
             </objects>
             <point key="canvasLocation" x="7499" y="135"/>
         </scene>
-        <!--Add Contacts-->
+        <!--添加好友-->
         <scene sceneID="IqV-LT-gZB">
             <objects>
                 <viewController id="LBV-IX-PVo" customClass="AddContactViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
@@ -842,7 +842,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pha-Qu-nhB">
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="pha-Qu-nhB">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
@@ -857,9 +857,16 @@
                             <constraint firstAttribute="trailing" secondItem="pha-Qu-nhB" secondAttribute="trailing" id="maP-WY-7OG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Contacts" id="5ok-PC-Yqk"/>
+                    <navigationItem key="navigationItem" title="添加好友" id="5ok-PC-Yqk">
+                        <barButtonItem key="leftBarButtonItem" title="返回" id="bbq-NV-eXc">
+                            <connections>
+                                <action selector="back:" destination="LBV-IX-PVo" id="qcQ-UW-4fV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contactSearchBar" destination="pha-Qu-nhB" id="1Se-r8-RgT"/>
+                        <outlet property="displayController" destination="xAl-mf-nMQ" id="Zq8-R0-Ri0"/>
                         <outlet property="searchDisplayController" destination="xAl-mf-nMQ" id="FUK-ks-ivO"/>
                     </connections>
                 </viewController>
@@ -874,7 +881,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="7146" y="1228"/>
+            <point key="canvasLocation" x="7499" y="1228"/>
         </scene>
         <!--我-->
         <scene sceneID="CXx-FY-1Hd">
@@ -1421,7 +1428,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUp-L4-sce" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6383" y="1228"/>
+            <point key="canvasLocation" x="6806" y="1228"/>
         </scene>
     </scenes>
     <resources>

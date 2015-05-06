@@ -10,20 +10,14 @@ import UIKit
 
 class AddContactViewController: UIViewController {
     @IBOutlet weak var contactSearchBar: UISearchBar!
+    @IBOutlet var displayController: UISearchDisplayController!
+    
     var users:[AVUser]?
-    private var displayController:UISearchDisplayController?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        var query:AVQuery = AVUser.query()
-        query.whereKey("username", notEqualTo: AVUser.currentUser().username)
-        query.findObjectsInBackgroundWithBlock { (objs:[AnyObject]!, error:NSError!) -> Void in
-            if error == nil && objs.count>0 {
-                self.users = objs as? [AVUser]
-            }else {
-                self.users = [AVUser]()
-            }
-        }
+        self.users = [AVUser]()
     }
     
     //MARK: - UISearchBarDelegate
@@ -40,7 +34,14 @@ class AddContactViewController: UIViewController {
     }
     
     func searchUserWithKey(searchString:String) {
-        //
+        var query:AVQuery = AVUser.query()
+        query.whereKey("username", containsString: searchString)
+        query.findObjectsInBackgroundWithBlock { (objs:[AnyObject]!, error:NSError!) -> Void in
+            if error == nil && objs.count>0 {
+                self.users = objs as? [AVUser]
+                self.displayController!.searchResultsTableView.reloadData()
+            }
+        }
     }
     
     //MARK: - SearchBar UITableViewDataSource
@@ -57,6 +58,9 @@ class AddContactViewController: UIViewController {
         var user:AVUser = self.users![indexPath.row]
         cell?.textLabel?.text = user.username
         return cell!
+    }
+    
+    @IBAction func back(sender: AnyObject) {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

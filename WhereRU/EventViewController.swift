@@ -75,7 +75,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         query.whereKey("event", equalTo: (self.tableData![indexPath.row] as Event).obj)
         query.getFirstObjectInBackgroundWithBlock { (object:AVObject!, error:NSError!) -> Void in
             if object != nil {
-                var status: Bool! = object.objectForKey("status") as! Bool
+                var status: Bool? = object.objectForKey("status") as? Bool
                 if status != nil {
                     if status == true {
                         cell.eventStatus.image = UIImage(named: "icon_accept_invite")
