@@ -849,12 +849,20 @@
                                     <outlet property="delegate" destination="LBV-IX-PVo" id="FNR-3u-3R1"/>
                                 </connections>
                             </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="EKk-Jz-hc4">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="pha-Qu-nhB" firstAttribute="leading" secondItem="9vd-cK-niy" secondAttribute="leading" id="8aP-JQ-4wN"/>
+                            <constraint firstItem="EKk-Jz-hc4" firstAttribute="leading" secondItem="pha-Qu-nhB" secondAttribute="leading" id="Q9j-se-KBJ"/>
                             <constraint firstItem="pha-Qu-nhB" firstAttribute="top" secondItem="LDY-aE-WAQ" secondAttribute="bottom" id="itn-vu-Xqu"/>
+                            <constraint firstItem="EKk-Jz-hc4" firstAttribute="bottom" secondItem="ABm-nN-8NV" secondAttribute="top" id="kl2-aL-fNV"/>
                             <constraint firstAttribute="trailing" secondItem="pha-Qu-nhB" secondAttribute="trailing" id="maP-WY-7OG"/>
+                            <constraint firstItem="EKk-Jz-hc4" firstAttribute="trailing" secondItem="pha-Qu-nhB" secondAttribute="trailing" id="p2l-LX-lMW"/>
+                            <constraint firstItem="EKk-Jz-hc4" firstAttribute="top" secondItem="pha-Qu-nhB" secondAttribute="bottom" id="uqb-gW-9V5"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="添加好友" id="5ok-PC-Yqk">
@@ -868,6 +876,7 @@
                         <outlet property="contactSearchBar" destination="pha-Qu-nhB" id="1Se-r8-RgT"/>
                         <outlet property="displayController" destination="xAl-mf-nMQ" id="Zq8-R0-Ri0"/>
                         <outlet property="searchDisplayController" destination="xAl-mf-nMQ" id="FUK-ks-ivO"/>
+                        <outlet property="tableView" destination="EKk-Jz-hc4" id="X1j-Gi-mFL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXh-ec-1ZK" userLabel="First Responder" sceneMemberID="firstResponder"/>

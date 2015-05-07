@@ -102,7 +102,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         return true
     }
     
-    //MARK - AddContactViewControllerDelegate
+    // MARK: - AddContactViewControllerDelegate
     func AddContactViewControllerBack(controller: AddContactViewController) {
         dismissViewControllerAnimated(true, completion: nil)
     }
