@@ -27,14 +27,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var clLocationManager:CLLocationManager?
     private var displayController:UISearchDisplayController?
     private var tips:[AMapTip]?
-    private var createAnnotationLongPress:UILongPressGestureRecognizer?
     private var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     private var addParticipatorByTapGesture:UITapGestureRecognizer?
+    private var poiAnnotation:MAPointAnnotation?
     
-    private var authToken:String?
-    private var manager = AFHTTPRequestOperationManager()
-    
-    var participators:[Friend]?
+    var participators:[AVUser]?
+    var oldParticipators:[AVUser]?
     var event:Event?
     var delegate:CreateEventViewControllerDelegate?
     
@@ -43,7 +41,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         TSMessage.setDefaultViewController(self)
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.navigationController?.navigationBar.translucent = false
         
         if (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0{
@@ -52,15 +50,23 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }
         
         locationMapView.frame = CGRectMake(locationMapView.frame.origin.x, locationMapView.frame.origin.y, self.view.bounds.width, locationMapView.frame.size.height)
+        var compassSize:CGSize = locationMapView.compassSize
+        locationMapView.compassOrigin = CGPointMake(locationMapView.frame.size.width-compassSize.width, locationMapView.frame.size.height-compassSize.height)
+        locationMapView.showsScale = false
+        
         locationMapView.delegate = self
         locationMapView.setZoomLevel(15.1, animated: true)
         
-        myAvatarImageView.setImageWithURL(NSURL(string: User.shared.avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
+        if avatarObject != nil {
+            myAvatarImageView.image = UIImage(data: avatarObject.getData())
+        }else {
+            myAvatarImageView.image = UIImage(named: "default_avatar")
+        }
         
-        createAnnotationLongPress = UILongPressGestureRecognizer(target: self, action: "addAnnotationOnMapByLongPress:")
-        createAnnotationLongPress!.delegate = self
-        createAnnotationLongPress!.minimumPressDuration = 0.5
-        self.view.addGestureRecognizer(createAnnotationLongPress!)
+        
+        //Enable touch POI
+        self.locationMapView.touchPOIEnabled = true
         
         deleteParticipatorByPanGesture = UILongPressGestureRecognizer(target: self, action: "deleteParticipator:")
         deleteParticipatorByPanGesture!.delegate = self
@@ -85,45 +91,39 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         displayController?.searchResultsDataSource = self
         displayController?.searchResultsDelegate = self
         
-        self.doneButton.setAttributedTitle(NSAttributedString(string: "完成", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName)), forState: .Normal)
+        self.doneButton.setAttributedTitle(NSAttributedString(string: "完成", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
         
         tips = []
-        participators = []
-        authToken = User.shared.token
+        participators = [AVUser]()
+        poiAnnotation = MAPointAnnotation()
         
         if let myEvent = event{
-            self.doneButton.setAttributedTitle(NSAttributedString(string: "跟新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName)), forState: .Normal)
-            eventTextView.text = myEvent.Message
+            self.doneButton.setAttributedTitle(NSAttributedString(string: "更新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
+            eventTextView.text = myEvent.message
+            
+            participators = myEvent.participants
+            oldParticipators = myEvent.participants
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        //
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        if event != nil && event!.coordinate != nil {
             var point: MAPointAnnotation = MAPointAnnotation()
-            point.coordinate = myEvent.coordinate!
+            point.coordinate = event!.coordinate!
             point.title = "目的地"
             self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
             self.locationMapView.addAnnotation(point)
-            
-            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            var url = String(format: participantsInEventURL, myEvent.eventID!)
-            self.manager.GET(url,
-                parameters: nil,
-                success: { (request:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    var response = JSONValue(object)
-                    var sum:Int = response["count"].integer!
-                    for var i=0; i<sum; ++i{
-                        var participant:Friend = Friend()
-                        participant.to_user = response["results"][i]["nickname"].string
-                        participant.from_user = User.shared.nickname
-                        participant.avatar = response["results"][i]["avatar"].string
-                        self.participators?.append(participant)
-                    }
-                    self.participatorCollectionView.reloadData()
-                }, failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    print("Get Participants Failed: \(error.description)")
-            })
-        }else{
+        }else if event == nil {
             event = Event()
             locationMapView.showsUserLocation = true
-            locationMapView.userTrackingMode = MAUserTrackingMode.Follow
+            locationMapView.userTrackingMode = MAUserTrackingModeFollow
         }
     }
+
     
     //MARK: - MAMAP Util func
     func searchGeocodeWithKey(key:NSString, adcode:String?){
@@ -131,19 +131,22 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             return
         }
         var geo:AMapGeocodeSearchRequest = AMapGeocodeSearchRequest()
-        geo.address = key
-        if(adcode != nil && countElements(adcode!)>0){
+        geo.address = key as String
+        if(adcode != nil && count(adcode!)>0){
             geo.city = [adcode!]
         }
         self.search?.AMapGeocodeSearch(geo)
     }
     
-    func searchReGeocodeWithCoordinate(coordinate:CLLocationCoordinate2D){
-        self.clear()
-        var regeo = AMapReGeocodeSearchRequest()
-        regeo.location = AMapGeoPoint.locationWithLatitude(CGFloat(coordinate.latitude), longitude: CGFloat(coordinate.longitude))
-        regeo.requireExtension = true
-        self.search?.AMapReGoecodeSearch(regeo)
+    func annotationForTouchPoi(touchPoi:MATouchPoi?) -> MAPointAnnotation? {
+        if (touchPoi == nil)
+        {
+            return nil;
+        }
+        var annotation:MAPointAnnotation = MAPointAnnotation()
+        annotation.coordinate = touchPoi!.coordinate
+        annotation.title = touchPoi!.name
+        return annotation
     }
     
     func searchTipsWithKey(key:NSString){
@@ -153,7 +156,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }
         
         var tips = AMapInputTipsSearchRequest()
-        tips.keywords = key;
+        tips.keywords = key as String;
         self.search?.AMapInputTipsSearch(tips)
     }
     
@@ -167,43 +170,51 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     //MARK: - MAMapViewDelegate
-    func mapView(mapView: MAMapView!, didAddAnnotationViews views: [AnyObject]!) {
-        var view:MAAnnotationView = views[0] as MAAnnotationView
-        self.locationMapView.selectAnnotation(view.annotation, animated: true)
+    func mapView(mapView: MAMapView!, didTouchPois pois: [AnyObject]!) {
+        if (pois.count == 0)
+        {
+            return;
+        }
+        var annotation:MAPointAnnotation = self.annotationForTouchPoi(pois[0] as? MATouchPoi)!
+        self.locationMapView.removeAnnotation(self.poiAnnotation)
+        self.locationMapView.addAnnotation(annotation)
+        self.locationMapView.selectAnnotation(annotation, animated: true)
+        self.poiAnnotation = annotation
+        self.locationMapView.showsUserLocation = false
     }
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKindOfClass(GeocodeAnnotation){
             let geoCellIdentifier = "geoCellIdentifier"
-            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as MAPinAnnotationView?
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: geoCellIdentifier)
             }
             poiAnnotationView?.canShowCallout = true
-            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
             return poiAnnotationView
         }
         if annotation.isKindOfClass(ReGeocodeAnnotation){
             let invertGeoIdentifier = "invertGeoIdentifier"
-            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(invertGeoIdentifier) as MAPinAnnotationView?
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(invertGeoIdentifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: invertGeoIdentifier)
             }
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = true
-            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
             return poiAnnotationView
         }
         if annotation.isKindOfClass(MAPointAnnotation){
             let pointReuseIndetifier = "pointReuseIndetifier"
-            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as MAPinAnnotationView?
+            var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
             }
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = true
             poiAnnotationView?.draggable = true;
-            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as UIView
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
             return poiAnnotationView
         }
         return nil
@@ -213,9 +224,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if response.geocodes.count == 0{
             return
         }
+        
         var annotations = [GeocodeAnnotation]()
         (response.geocodes as NSArray).enumerateObjectsUsingBlock { (obj:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-            var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as AMapGeocode)
+            var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
             annotations.append(geocodeAnnotation)
         }
         if annotations.count == 1{
@@ -226,16 +238,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
         }
         self.locationMapView.addAnnotations(annotations)
-    }
-    
-    func onReGeocodeSearchDone(request: AMapReGeocodeSearchRequest!, response: AMapReGeocodeSearchResponse!) {
-        if response.regeocode != nil{
-            println(request.location.latitude)
-            println(request.location.longitude)
-            var coordinate:CLLocationCoordinate2D = CLLocationCoordinate2DMake(Double(request.location.latitude), Double(request.location.longitude))
-            var reGeocodeAnnotation:ReGeocodeAnnotation = ReGeocodeAnnotation(reGeocode: response.regeocode, coordinate: coordinate)
-            self.locationMapView.addAnnotation(reGeocodeAnnotation)
-        }
+        self.locationMapView.showsUserLocation = false
     }
     
     func onInputTipsSearchDone(request: AMapInputTipsSearchRequest!, response: AMapInputTipsSearchResponse!) {
@@ -289,14 +292,20 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cellIdentifier:NSString = "ParticipatorCollectionViewCell"
-        var cell: ParticipatorCollectionViewCell = participatorCollectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier, forIndexPath: indexPath) as ParticipatorCollectionViewCell
+        var cell: ParticipatorCollectionViewCell = participatorCollectionView.dequeueReusableCellWithReuseIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! ParticipatorCollectionViewCell
         
         if indexPath.row == participators!.count{
             cell.participatorAvatarImage.image = UIImage(named: "icon_add")
             cell.participatorAvatarImage.layer.borderWidth = 0
             cell.isParticipator = false
         }else{
-            cell.participatorAvatarImage.setImageWithURL(NSURL(string: participators![indexPath.row].avatar!), placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+            var avatarObject: AnyObject! = participators![indexPath.row].objectForKey("avatarFile")
+            if avatarObject != nil {
+                var avatarData = avatarObject.getData()
+                cell.participatorAvatarImage.image = UIImage(data: avatarData)
+            }else {
+                cell.participatorAvatarImage.image = UIImage(named: "default_avatar")
+            }
             cell.participatorAvatarImage.layer.borderWidth = 1
             cell.isParticipator = true
         }
@@ -310,19 +319,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         return true
     }
     
-    func addAnnotationOnMapByLongPress(longPress: UILongPressGestureRecognizer) {
-        if longPress.state == UIGestureRecognizerState.Began{
-            var coordinate:CLLocationCoordinate2D = self.locationMapView.convertPoint(createAnnotationLongPress!.locationInView(self.view), toCoordinateFromView: self.locationMapView)
-            self.searchReGeocodeWithCoordinate(coordinate)
-        }
-    }
-    
     func deleteParticipator(sender:UIPanGestureRecognizer){
         if sender.state == UIGestureRecognizerState.Ended{
             var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
             var panCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
             if panCellPath != nil{
-                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(panCellPath!) as ParticipatorCollectionViewCell
+                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(panCellPath!) as! ParticipatorCollectionViewCell
                 if cell.isParticipator{
                     var array:[NSIndexPath] = [panCellPath!]
                     participatorCollectionView.performBatchUpdates({
@@ -343,7 +345,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
             var tapCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
             if tapCellPath != nil{
-                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as ParticipatorCollectionViewCell
+                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as! ParticipatorCollectionViewCell
                 if !cell.isParticipator{
                     self.performSegueWithIdentifier("addParticipant", sender: self)
                 }
@@ -355,15 +357,15 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     // MARK: - Navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addParticipant"{
-            let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
-            let addParticipantsTableViewController:AddParticipantsTableViewController = navigationController.viewControllers[0] as AddParticipantsTableViewController
+            let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
+            let addParticipantsTableViewController:AddParticipantsTableViewController = navigationController.viewControllers[0] as! AddParticipantsTableViewController
             addParticipantsTableViewController.delegate = self
         }
         if segue.identifier == "createEventDetail"{
-            let navigationController:UINavigationController = segue.destinationViewController as UINavigationController
-            let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as CreateEventDetailViewController
+            let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
+            let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as! CreateEventDetailViewController
             createEventDetailViewController.delegate = self
-            createEventDetailViewController.date = self.event?.date
+            createEventDetailViewController.date = self.event!.date
             createEventDetailViewController.need = self.event!.needLocation
         }
     }
@@ -377,11 +379,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     // MARK: - addParticipantsDelegate
-    func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [Friend]) {
+    func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [AVUser]) {
         for friend in friends{
             var needAdd:Bool = true
             for participator in participators!{
-                if participator.to_user == friend.to_user{
+                if participator == friend{
                     needAdd = false
                 }
             }
@@ -394,7 +396,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     // MARK: - createEventDetailViewControllerDelegate
-    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: String, _ needLocation: Bool) {
+    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: NSDate, _ needLocation: Bool) {
         event?.date = date
         event?.needLocation = needLocation
         dismissViewControllerAnimated(true, completion: nil)
@@ -404,45 +406,30 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBAction func CreateNewEvent(sender: AnyObject) {
         if let eventid = event!.eventID{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
-            var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
-            params.setObject(User.shared.id, forKey: "owner")
-            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
-            params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
-            params.setObject(event!.date!, forKey: "startdate")
-            params.setObject(event!.needLocation, forKey: "needLocation")
-            params.setObject(self.eventTextView.text!, forKey: "message")
-            params.setObject(User.shared.nickname!, forKey: "createdBy")
-            params.setObject(User.shared.nickname!, forKey: "modifiedBy")
-            params.setObject(event!.AcceptMemberCount!, forKey: "AcceptMemberCount")
-            params.setObject(event!.RefuseMemberCount!, forKey: "RefuseMemberCount")
             
-            self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
-            var url = String(format: updateEventURL, eventid)
-            self.manager.PUT(url,
-                parameters: params,
-                success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                    var response = JSONValue(object)
-                    self.event!.eventID = response["id"].integer!
-                    
-                    var participantsParams:Dictionary = Dictionary<String, String>()
-                    for p:Friend in self.participators!{
-                        participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
-                    }
-                    var url = String(format: addParticipantsToEventURL, self.event!.eventID!)
-                    self.manager.POST(url,
-                        parameters: participantsParams,
-                        success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                            SVProgressHUD.showSuccessWithStatus("")
-                            self.delegate?.CreateEventViewControllerDone(self)
-//                            self.tabBarController!.selectedIndex = 0
-                        },
-                        failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                            println("set participant failed:"+error.description)
-                    })
-                },
-                failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                    println("update event failed:"+error.description)
+            event!.obj!.setObject(AVGeoPoint(latitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, longitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude), forKey: "coordinate")
+            event!.obj!.setObject(event!.date!, forKey: "date")
+            event!.obj!.setObject(event!.needLocation, forKey: "needLocation")
+            event!.obj!.setObject(self.eventTextView.text!, forKey: "message")
+            event!.obj!.setObject(event!.acceptMemberCount!, forKey: "acceptMemberCount")
+            event!.obj!.setObject(event!.refuseMemberCount!, forKey: "refuseMemberCount")
+            
+            var ownerRelation:AVRelation = event!.obj!.relationforKey("owner")
+            ownerRelation.addObject(AVUser.currentUser())
+            
+            var participatorsRelation:AVRelation = event!.obj!.relationforKey("participater")
+            for participator:AVUser in self.oldParticipators! {
+                participatorsRelation.removeObject(participator)
+            }
+            for participator:AVUser in self.participators! {
+                participatorsRelation.addObject(participator)
+            }
+            
+            event!.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                SVProgressHUD.showSuccessWithStatus("跟新成功！")
+                self.delegate!.CreateEventViewControllerDone(self)
             })
+
         }else{
             if self.eventTextView.text.isEmpty && event?.date == nil{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请在详细界面设置时间", type: .Error)
@@ -452,44 +439,39 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
             }else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
-                var params:NSMutableDictionary = NSMutableDictionary(capacity: 10)
-                params.setObject(User.shared.id, forKey: "owner")
-                params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, forKey: "latitude")
-                params.setObject((self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude, forKey: "longitude")
-                params.setObject(event!.date!, forKey: "startdate")
+                var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+                params.setObject(AVGeoPoint(latitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, longitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude), forKey: "coordinate")
+                params.setObject(event!.date!, forKey: "date")
                 params.setObject(event!.needLocation, forKey: "needLocation")
                 params.setObject(self.eventTextView.text!, forKey: "message")
-                params.setObject(User.shared.nickname!, forKey: "createdBy")
-                params.setObject(User.shared.nickname!, forKey: "modifiedBy")
-                params.setObject(0, forKey: "AcceptMemberCount")
-                params.setObject(0, forKey: "RefuseMemberCount")
+                params.setObject(0, forKey: "acceptMemberCount")
+                params.setObject(0, forKey: "refuseMemberCount")
+                params.setObject(self.participators!, forKey: "participators")
                 
-                self.manager.requestSerializer.setValue("Token "+authToken!, forHTTPHeaderField: "Authorization")
+                var newEvent:AVObject = AVObject(className: "Event", dictionary: params as [NSObject : AnyObject])
+                var ownerRelation:AVRelation = newEvent.relationforKey("owner")
+                ownerRelation.addObject(AVUser.currentUser())
                 
-                self.manager.POST(createEventURL,
-                    parameters: params,
-                    success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                        var response = JSONValue(object)
-                        self.event!.eventID = response["id"].integer!
+                var participatorsRelation:AVRelation = newEvent.relationforKey("participater")
+                for participator:AVUser in self.participators! {
+                    participatorsRelation.addObject(participator)
+                }
+                
+                newEvent.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                    if success {
+                        var status:AVObject = AVObject(className: "UserStatusForEvent")
+                        var eventRelation:AVRelation = status.relationforKey("event")
+                        eventRelation.addObject(newEvent)
                         
-                        var participantsParams:Dictionary = Dictionary<String, String>()
-                        for p:Friend in self.participators!{
-                            participantsParams[p.to_user!] = p.to_user!//.setObject(p.to_user!, forKey: p.to_user!)
+                        var userRelation:AVRelation = status.relationforKey("user")
+                        for participator:AVUser in self.participators! {
+                            userRelation.addObject(participator)
                         }
-                        var url = String(format: addParticipantsToEventURL, self.event!.eventID!)
-                        self.manager.POST(url,
-                            parameters: participantsParams,
-                            success: { (operation:AFHTTPRequestOperation!, object:AnyObject!) -> Void in
-                                SVProgressHUD.showSuccessWithStatus("")
-//                                self.delegate?.CreateEventViewControllerDone(self)
-                                self.tabBarController!.selectedIndex = 0
-                            },
-                            failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                                println("set participant failed:"+error.description)
+                        status.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                            SVProgressHUD.showSuccessWithStatus("创建成功！")
+                            self.delegate!.CreateEventViewControllerDone(self)
                         })
-                    },
-                    failure: { (operation:AFHTTPRequestOperation!, error:NSError!) -> Void in
-                        println("create event failed:"+error.description)
+                    }
                 })
             }
         }

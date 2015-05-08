@@ -24,16 +24,16 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         
 //        initToolBar()
         
         mapView.frame = self.view.bounds
         mapView.delegate = self
-        mapView.setZoomLevel(15.1, animated: true)
+        mapView.setZoomLevel(17.1, animated: true)
         
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = MAUserTrackingMode.None
+//        mapView.showsUserLocation = true
+//        mapView.userTrackingMode = MAUserTrackingModeNone
         
 //        self.search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
     }
@@ -163,13 +163,14 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKindOfClass(MAPointAnnotation){
             let pointReuseIndetifier = "pointReuseIndetifier"
-            var poiAnnotationView:MAPinAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as MAPinAnnotationView?
+            var poiAnnotationView:MAPinAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
             }
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = false
             poiAnnotationView?.draggable = false;
+            return poiAnnotationView
         }
         return nil
     }

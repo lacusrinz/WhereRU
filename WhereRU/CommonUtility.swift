@@ -64,12 +64,12 @@ class CommonUtility: NSObject {
         }
         var polylines:NSMutableArray = NSMutableArray()
         (path!.steps as NSArray).enumerateObjectsUsingBlock { (step:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-            var stepPolyline:MAPolyline? = self.polylineForStep(step as AMapStep!)
+            var stepPolyline:MAPolyline? = self.polylineForStep(step as! AMapStep!)
             if stepPolyline != nil{
                 println("lalala stepPolyline:\(stepPolyline)")
                 polylines.addObject(stepPolyline!)
                 if idx>0{
-                    self.replenishPolylinesForPathWith(stepPolyline!, lastPolyline: self.polylineForStep((path!.steps as NSArray).objectAtIndex(idx-1) as AMapStep)!, polylines: polylines)
+                    self.replenishPolylinesForPathWith(stepPolyline!, lastPolyline: self.polylineForStep((path!.steps as NSArray).objectAtIndex(idx-1) as! AMapStep)!, polylines: polylines)
                 }
             }
         }
@@ -81,7 +81,7 @@ class CommonUtility: NSObject {
         var endCoor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         var points:[CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
         stepPolyline.getCoordinates(&endCoor, range: NSMakeRange(0, 1))
-        stepPolyline.getCoordinates(&startCoor, range: NSMakeRange(lastPolyline.pointCount-1, 1))
+//        stepPolyline.getCoordinates(&startCoor, range: NSMakeRange(lastPolyline.pointCount - 1, 1))
         
         if(endCoor.latitude != startCoor.latitude || endCoor.longitude != startCoor.longitude){
 //            points[0] = startCoor
@@ -124,9 +124,9 @@ class CommonUtility: NSObject {
         }
         var str = ""
         if !token!.isEqualToString(","){
-            str = string!.stringByReplacingOccurrencesOfString(token!, withString: ",")
+            str = string!.stringByReplacingOccurrencesOfString(token! as String, withString: ",")
         }else{
-            str = string!
+            str = string! as String
         }
         var components:NSArray = str .componentsSeparatedByString(",")
         var count:Int = components.count/2

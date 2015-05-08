@@ -21,23 +21,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         MAMapServices.sharedServices().apiKey = apiKey
-        ShareSDK.registerApp("42b6ed554820")
-        //sina key:1349133812 secret:4bd6ac4bab2e283025407116806c2a6e
-        ShareSDK.connectSinaWeiboWithAppKey("568898243", appSecret: "38a4f8204cc784f81f9f0daaf31e02e3", redirectUri: "http://www.sharesdk.cn")
         
         var navBackgroundImage:UIImage = UIImage(named: "navigationBar_BackgroundColorPix")!
         UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
         
+        AVOSCloud.setApplicationId("939y6w6xb1a0q3u8a2up63re3xdmiis9d6mo8lq7l1pqop8v", clientKey: "vben8bjx52stj4yo81tnq50djpurxr5ptod1qtawq7u629m0")
+        AVAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
+        
         return true
     }
     
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
-        return ShareSDK.handleOpenURL(url, wxDelegate: nil)
-    }
-    
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject?) -> Bool {
-        return ShareSDK.handleOpenURL(url, sourceApplication: sourceApplication, annotation: annotation, wxDelegate: nil)
-    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -68,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.rinz.WhereRU" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -91,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")

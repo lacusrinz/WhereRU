@@ -12,13 +12,17 @@
 
 #import "SWTableViewCell.h"
 
-#import <ShareSDK/ShareSDK.h>
+#import <AVOSCloud/AVOSCloud.h>
 
 #import "SVProgressHUD.h"
-#import "JSONKit.h"
-#import "AFNetworking.h"
+//#import "JSONKit.h"
+//#import "AFNetworking.h"
 #import "SDWebImage/UIImageView+WebCache.h"
 #import "UIActivityIndicator-for-SDWebImage/UIImageView+UIActivityIndicatorForSDWebImage.h"
-#import "SVPullToRefresh.h"
-#import "UIScrollView+SVPullToRefresh.h"
 #import "TSMessage.h"
+#import "MJRefresh.h"
+
+#import "YALTabBarItem.h"
+#import "YALFoldingTabBarController.h"
+#import "YALAnimatingTabBarConstants.h"
+#import "YALTabBarInteracting.h"

@@ -9,28 +9,20 @@
 import UIKit
 
 class ReGeocodeAnnotation: NSObject, MAAnnotation {
-    var _reGeocode:AMapReGeocode?
-    var reGeocode:AMapReGeocode?{
-        get{
-            return _reGeocode
-        }
-    }
+    var reGeocode:AMapReGeocode?
     
     //MARK: - MAAnnotation Protocol
-    var title:NSString{
-        get{
-            println("1:"+reGeocode!.addressComponent.province)
-            println("2:"+reGeocode!.addressComponent.city)
-            println("3:"+reGeocode!.addressComponent.district)
-            println("4:"+reGeocode!.addressComponent.township)
-            return reGeocode!.addressComponent.province + reGeocode!.addressComponent.city + reGeocode!.addressComponent.district + reGeocode!.addressComponent.township
-        }
+    
+    func title() -> String! {
+        println("1:"+reGeocode!.addressComponent.province)
+        println("2:"+reGeocode!.addressComponent.city)
+        println("3:"+reGeocode!.addressComponent.district)
+        println("4:"+reGeocode!.addressComponent.township)
+        return reGeocode!.addressComponent.province + reGeocode!.addressComponent.city + reGeocode!.addressComponent.district + reGeocode!.addressComponent.township
     }
     
-    var subtitle:NSString{
-        get{
-            return reGeocode!.addressComponent.neighborhood + reGeocode!.addressComponent.building
-        }
+    func subtitle() -> String! {
+        return reGeocode!.addressComponent.neighborhood + reGeocode!.addressComponent.building
     }
     
     var _coordinate:CLLocationCoordinate2D
@@ -41,7 +33,7 @@ class ReGeocodeAnnotation: NSObject, MAAnnotation {
     }
     
     init(reGeocode:AMapReGeocode, coordinate:CLLocationCoordinate2D){
-        self._reGeocode = reGeocode
+        self.reGeocode = reGeocode
         self._coordinate = coordinate
     }
     

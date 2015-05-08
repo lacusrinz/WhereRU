@@ -9,13 +9,15 @@
 import UIKit
 
 class Event: NSObject {
-    var eventID:Int?
-    var owner:Int = 0
-    var participants:String?
+    var eventID:String?
+    var owner:AVUser?
+    var participants:[AVUser]?
     var coordinate:CLLocationCoordinate2D?
-    var date:String?// = NSDate(timeIntervalSinceNow: 0)
+    var date:NSDate?
     var needLocation:Bool = true
-    var Message:String?
-    var AcceptMemberCount:Int?
-    var RefuseMemberCount:Int?
+    var message:String?
+    var acceptMemberCount:Int?
+    var refuseMemberCount:Int?
+    
+    var obj:AVObject?
 }

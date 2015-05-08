@@ -9,7 +9,7 @@
 import UIKit
 import avatarImageView
 
-class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate {
+class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate, YALTabBarInteracting {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -17,33 +17,34 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
 
     @IBOutlet weak var avatar: avatarImageView!
     @IBOutlet weak var name: UILabel!
-    @IBOutlet weak var recognizeID: UILabel!
     @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = User.shared.nickname!
-    var _id:String = User.shared.from!
+    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName)
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
 
         name.text = _name
-        recognizeID.text = _id
-        var avatarURL:NSURL? = nil
-        if User.shared.avatar != ""{
-             avatarURL = NSURL(string: User.shared.avatar!)
+        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
+        if avatarObject != nil {
+            var avatarData = avatarObject.getData()
+            avatar.image = UIImage(data: avatarData)
         }
-        avatar.setImageWithURL(avatarURL, placeholderImage: UIImage(named: "default_avatar"), usingActivityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
-        
         avatar.addGestureRecognizer(avatarTap)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func logout(sender: AnyObject) {
+        AVUser.logOut()
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
     
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {
@@ -79,7 +80,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as UIImage
+            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
             var imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
             imageCropVC.delegate = self
             self.presentViewController(imageCropVC, animated: true, completion: { () -> Void in
@@ -125,7 +126,10 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            //
+            var avatarData:NSData = UIImagePNGRepresentation(croppedImage)
+            var avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            AVUser.currentUser().setObject(avatarFile, forKey: "avatarFile")
+            AVUser.currentUser().saveInBackground()
         })
     }
     
