@@ -17,9 +17,11 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
     @IBOutlet var displayController: UISearchDisplayController!
     @IBOutlet weak var tableView: UITableView!
     
-    var users:[AVUser]?
+    var queryUsers:[AVUser]?
     var delegate:AddContactViewControllerDelegate?
     var key = ""
+    var friends:[AVUser]?
+    var myFriendsObj:AVObject?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +29,7 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
-        self.users = [AVUser]()
+        self.queryUsers = [AVUser]()
     }
     
     //MARK: - UISearchBarDelegate
@@ -48,10 +50,10 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
         query.whereKey("username", containsString: searchString)
         query.findObjectsInBackgroundWithBlock { (objs:[AnyObject]!, error:NSError!) -> Void in
             if error == nil && objs.count>0 {
-                self.users = objs as? [AVUser]
+                self.queryUsers = objs as? [AVUser]
                 self.tableView.reloadData()
             }else {
-                self.users!.removeAll(keepCapacity: true)
+                self.queryUsers!.removeAll(keepCapacity: true)
                 self.tableView.reloadData()
             }
         }
@@ -62,7 +64,7 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
         if tableView == self.displayController.searchResultsTableView {
             return 1
         } else {
-            return self.users!.count
+            return self.queryUsers!.count
         }
     }
     
@@ -76,14 +78,25 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
             cell!.textLabel!.text = "搜索: \(self.key)"
             return cell!
         }else {
-            let userCellIdentifier = "userCellIdentifier"
-            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(userCellIdentifier) as? UITableViewCell
-            if cell == nil{
-                cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: userCellIdentifier)
+            self.tableView.registerNib(UINib(nibName: "AddFriendTableViewCell", bundle: nil), forCellReuseIdentifier: "addFriendCell")
+            var addFriendCell:AddFriendTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("addFriendCell", forIndexPath: indexPath) as! AddFriendTableViewCell
+            
+            var user:AVUser = self.queryUsers![indexPath.row]
+            addFriendCell.friend = user
+            addFriendCell.username.text = user.username
+            
+            var avatarObj:AnyObject? = user.objectForKey("avatarFile") as AnyObject?
+            if avatarObj != nil {
+                addFriendCell.avatarImage.image = UIImage(data: avatarObj!.getData())
             }
-            var user:AVUser = self.users![indexPath.row]
-            cell?.textLabel?.text = user.username
-            return cell!
+            
+            if self.friends != nil && contains(self.friends!, user) {
+                addFriendCell.addFriendButton.enabled = false
+                addFriendCell.addFriendButton.setBackgroundImage(UIImage(named: "button_addfrienddone"), forState: UIControlState.Disabled)
+            }
+            
+            addFriendCell.selectionStyle = UITableViewCellSelectionStyle.None
+            return addFriendCell
         }
     }
     
@@ -92,8 +105,6 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
             self.displayController?.setActive(false, animated: false)
             self.contactSearchBar.placeholder = self.key
             searchUserWithKey(self.key)
-        }else {
-            //
         }
     }
 

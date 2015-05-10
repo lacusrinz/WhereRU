@@ -12,30 +12,14 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
 
     var tableData = [AVUser]()
     var rowsCount:NSInteger = 0
+    var myFriendsObj:AVObject?
+    var myFriends:[AVUser]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
-        
-        var query = AVQuery(className: "Friends")
-        query.whereKey("from", equalTo: AVUser.currentUser())
-        query.findObjectsInBackgroundWithBlock { (obj:[AnyObject]!, error:NSError!) -> Void in
-            if (error == nil && obj.count > 0) {
-                var relation:AVRelation = (obj as! [AVObject])[0].objectForKey("to") as! AVRelation
-                var query = relation.query()
-                query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]!, error:NSError!) -> Void in
-                    if error == nil && friends.count > 0 {
-                        self.tableData = friends as! [AVUser]
-                        self.rowsCount = self.tableData.count
-                        self.tableView.reloadData()
-                    }
-                })
-                
-            }
-        }
-        
-        
+
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         self.tableView.tableFooterView = UIView()
         self.tableView.delegate = self
@@ -43,6 +27,33 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
+        
+        self.tableView.addLegendHeaderWithRefreshingTarget(self, refreshingAction: "updateFriends")
+        self.tableView.header.beginRefreshing()
+    }
+    
+    func updateFriends() {
+        var query = AVQuery(className: "Friends")
+        query.whereKey("from", equalTo: AVUser.currentUser())
+        query.findObjectsInBackgroundWithBlock { (obj:[AnyObject]!, error:NSError!) -> Void in
+            if (error == nil && obj.count > 0) {
+                self.myFriendsObj = (obj as! [AVObject])[0] as AVObject
+                var relation:AVRelation = (obj as! [AVObject])[0].objectForKey("to") as! AVRelation
+                var query = relation.query()
+                query.findObjectsInBackgroundWithBlock({ (friends:[AnyObject]!, error:NSError!) -> Void in
+                    if error == nil && friends.count > 0 {
+                        self.myFriends = friends as? [AVUser]
+                        self.tableData = friends as! [AVUser]
+                        self.rowsCount = self.tableData.count
+                        self.tableView.reloadData()
+                    }
+                })
+                
+            }else {
+                self.myFriendsObj = nil
+            }
+        }
+        self.tableView.header.endRefreshing()
     }
     
     func rightButtons()->NSArray{
@@ -104,7 +115,9 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     
     // MARK: - AddContactViewControllerDelegate
     func AddContactViewControllerBack(controller: AddContactViewController) {
-        dismissViewControllerAnimated(true, completion: nil)
+        dismissViewControllerAnimated(true, completion: { () -> Void in
+            self.tableView.header.beginRefreshing()
+        })
     }
 
     // MARK: - Navigation
@@ -113,6 +126,8 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
             let navigationController = segue.destinationViewController as! UINavigationController
             let addContactViewController = navigationController.viewControllers[0] as! AddContactViewController
             addContactViewController.delegate = self
+            addContactViewController.myFriendsObj = self.myFriendsObj
+            addContactViewController.friends = self.myFriends
         }
     }
 
