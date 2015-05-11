@@ -28,6 +28,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVOSCloud.setApplicationId("939y6w6xb1a0q3u8a2up63re3xdmiis9d6mo8lq7l1pqop8v", clientKey: "vben8bjx52stj4yo81tnq50djpurxr5ptod1qtawq7u629m0")
         AVAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        var storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        var welcomeBackViewController:WelcomeBackViewController = storyboard.instantiateViewControllerWithIdentifier("welcomeBackViewController") as! WelcomeBackViewController
+        var loginViewController:LoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! LoginViewController
+        
+        var currentUser:AVUser? = AVUser.currentUser()
+        if (currentUser != nil) {
+            self.window!.rootViewController = welcomeBackViewController
+            var avatarObject: AnyObject! = currentUser!.objectForKey("avatarFile")
+            if avatarObject != nil {
+                var avatarData = avatarObject.getData()
+                welcomeBackViewController.image = UIImage(data: avatarData)
+            }
+        }else {
+            self.window!.rootViewController = loginViewController
+        }
+        
         return true
     }
     

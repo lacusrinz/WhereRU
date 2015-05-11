@@ -21,15 +21,6 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        var currentUser:AVUser? = AVUser.currentUser()
-        if (currentUser != nil) {
-            self.performSegueWithIdentifier("login", sender: self)
-        }else {
-            println("no currentUser")
-        }
-    }
 
     @IBAction func login(sender: AnyObject) {
         AVUser.logInWithUsernameInBackground(nicknameTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in

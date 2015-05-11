@@ -16,6 +16,7 @@
 		A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; };
 		A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
+		A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */; };
 		A88A55A71AFBB9BE00514B13 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */; };
 		A88A55A81AFBB9BE00514B13 /* AddFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88A55A61AFBB9BE00514B13 /* AddFriendTableViewCell.xib */; };
 		A8ABCCE01A58115800965031 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ABCCDF1A58115800965031 /* Event.swift */; };
@@ -107,6 +108,7 @@
 		A814C8E119CFF47A00735E7B /* avatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatarImageView.h; sourceTree = "<group>"; };
 		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
+		A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		A88A55A61AFBB9BE00514B13 /* AddFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendTableViewCell.xib; sourceTree = "<group>"; };
 		A8ABCCDF1A58115800965031 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 		A8B8A12219FF0D470000FB6F /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */,
 				A814C8D619CFECB600735E7B /* SigninViewController.swift */,
 				A8D58A5A19C1EB0F00EEFC98 /* LoginViewController.swift */,
 				A8BB16921A6F794D00680CC6 /* Event */,
@@ -609,6 +612,7 @@
 				A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
+				A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */,
 				A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */,
 				A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,

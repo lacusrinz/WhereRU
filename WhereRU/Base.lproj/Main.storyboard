@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Wox-rm-888">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
@@ -154,10 +154,81 @@
             </objects>
             <point key="canvasLocation" x="3219" y="936"/>
         </scene>
+        <!--Welcome Back View Controller-->
+        <scene sceneID="XMy-Qg-zhh">
+            <objects>
+                <viewController storyboardIdentifier="welcomeBackViewController" id="3T5-JJ-Ql8" customClass="WelcomeBackViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qHC-9D-2mK"/>
+                        <viewControllerLayoutGuide type="bottom" id="Ql5-je-peQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="O9r-LN-bsX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="homepage" translatesAutoresizingMaskIntoConstraints="NO" id="1Bm-XM-XiD">
+                                <rect key="frame" x="0.0" y="-2" width="600" height="600"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30Q-wa-NeI" customClass="avatarImageView" customModule="avatarImageView">
+                                <rect key="frame" x="250" y="28" width="100" height="100"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="QpE-38-obT"/>
+                                    <constraint firstAttribute="height" constant="100" id="WL4-6l-vtC"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="50"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎回来" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAV-bp-s1H">
+                                <rect key="frame" x="250" y="199" width="100" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="30Q-wa-NeI" firstAttribute="leading" secondItem="QAV-bp-s1H" secondAttribute="leading" id="KAd-7y-Dui"/>
+                            <constraint firstItem="30Q-wa-NeI" firstAttribute="centerX" secondItem="1Bm-XM-XiD" secondAttribute="centerX" id="PVM-a0-fPG"/>
+                            <constraint firstItem="30Q-wa-NeI" firstAttribute="top" secondItem="qHC-9D-2mK" secondAttribute="bottom" constant="8" symbolic="YES" id="Q67-BS-hCI"/>
+                            <constraint firstItem="1Bm-XM-XiD" firstAttribute="top" secondItem="O9r-LN-bsX" secondAttribute="top" constant="-2" id="g8t-z4-LxO"/>
+                            <constraint firstItem="1Bm-XM-XiD" firstAttribute="leading" secondItem="O9r-LN-bsX" secondAttribute="leading" id="gBv-yr-4KQ"/>
+                            <constraint firstAttribute="trailing" secondItem="1Bm-XM-XiD" secondAttribute="trailing" id="kCK-u7-YKv"/>
+                            <constraint firstItem="Ql5-je-peQ" firstAttribute="top" secondItem="1Bm-XM-XiD" secondAttribute="bottom" constant="2" id="l0p-CO-eje"/>
+                            <constraint firstAttribute="bottom" secondItem="1Bm-XM-XiD" secondAttribute="bottom" constant="2" id="rCu-wo-hqa"/>
+                            <constraint firstItem="QAV-bp-s1H" firstAttribute="top" secondItem="30Q-wa-NeI" secondAttribute="bottom" constant="71" id="uY7-N1-qng"/>
+                            <constraint firstItem="QAV-bp-s1H" firstAttribute="trailing" secondItem="30Q-wa-NeI" secondAttribute="trailing" id="xys-i5-9b4"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="l0p-CO-eje"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="avatarImage" destination="30Q-wa-NeI" id="EBX-3I-EWX"/>
+                        <segue destination="Gkz-UB-kM1" kind="showDetail" identifier="welcome" id="FVB-Sp-k7E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ksz-wD-dnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3219" y="-558"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="WVT-Qy-e42">
             <objects>
-                <viewController id="Wox-rm-888" customClass="LoginViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="Wox-rm-888" customClass="LoginViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="qMa-yC-GWY"/>
                         <viewControllerLayoutGuide type="bottom" id="anL-uT-OyJ"/>
@@ -1465,8 +1536,8 @@
         <image name="signup" width="374" height="211"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="feN-bk-oyQ"/>
         <segue reference="pOu-0Q-lSf"/>
+        <segue reference="sYl-ur-Ych"/>
         <segue reference="TD1-ij-O85"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
