@@ -11,7 +11,6 @@ import UIKit
 class ContactViewController: UITableViewController, SWTableViewCellDelegate, YALTabBarInteracting, AddContactViewControllerDelegate {
 
     var tableData = [AVUser]()
-    var rowsCount:NSInteger = 0
     var myFriendsObj:AVObject?
     var myFriends:[AVUser]?
     
@@ -44,7 +43,6 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
                     if error == nil && friends.count > 0 {
                         self.myFriends = friends as? [AVUser]
                         self.tableData = friends as! [AVUser]
-                        self.rowsCount = self.tableData.count
                         self.tableView.reloadData()
                     }
                 })
@@ -58,8 +56,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     
     func rightButtons()->NSArray{
         var rightUtilityButtons:NSMutableArray = NSMutableArray()
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), title: "Disable")
-        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "Archive")
+        rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除好友")
         return rightUtilityButtons
     }
     
@@ -69,7 +66,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rowsCount
+        return self.tableData.count
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -86,8 +83,6 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "contactTableViewCell"
         var cell:ContactTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! ContactTableViewCell
-        
-        //        cell = EventTableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: cellIdentifier)
         cell.rightUtilityButtons = self.rightButtons() as [AnyObject]
         cell.delegate = self
         
@@ -105,7 +100,16 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     }
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
-        print("right button, index:%@",index)
+        var selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
+        var deletedFriend:AVUser = self.tableData[selectedRowNumber] as AVUser
+        var toRelation:AVRelation = myFriendsObj!.relationforKey("to")
+        toRelation.removeObject(deletedFriend)
+        myFriendsObj!.saveInBackgroundWithBlock { (success:Bool, error:NSError!) -> Void in
+            if success == true {
+                self.tableData.removeAtIndex(selectedRowNumber)
+                self.tableView.reloadData()
+            }
+        }
     }
     
     

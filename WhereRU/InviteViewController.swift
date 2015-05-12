@@ -107,7 +107,8 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.eventMessage.text = (self.tableData![indexPath.row] as Event).message
-        cell.eventDatetime.text = "\((self.tableData![indexPath.row] as Event).date)"
+        var date:String = NSDateFormatter.localizedStringFromDate((self.tableData![indexPath.row] as Event).date!, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
+        cell.eventDatetime.text = date
         cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).acceptMemberCount!)"
         cell.numberOfRefuse.text = "\((self.tableData![indexPath.row] as Event).refuseMemberCount!)"
         

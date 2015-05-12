@@ -94,7 +94,7 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
                 addFriendCell.addFriendButton.enabled = false
                 addFriendCell.addFriendButton.setBackgroundImage(UIImage(named: "button_addfrienddone"), forState: UIControlState.Disabled)
             }
-            
+            addFriendCell.myFriendsObj = self.myFriendsObj
             addFriendCell.selectionStyle = UITableViewCellSelectionStyle.None
             return addFriendCell
         }

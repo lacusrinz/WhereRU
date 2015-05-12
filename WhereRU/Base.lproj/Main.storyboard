@@ -170,7 +170,7 @@
                                 <rect key="frame" x="0.0" y="-2" width="600" height="600"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30Q-wa-NeI" customClass="avatarImageView" customModule="avatarImageView">
-                                <rect key="frame" x="250" y="28" width="100" height="100"/>
+                                <rect key="frame" x="250" y="202" width="100" height="100"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="QpE-38-obT"/>
@@ -190,8 +190,8 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎回来" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QAV-bp-s1H">
-                                <rect key="frame" x="250" y="199" width="100" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎回来" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0P-wF-PLE">
+                                <rect key="frame" x="250" y="341" width="100" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -199,16 +199,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="30Q-wa-NeI" firstAttribute="leading" secondItem="QAV-bp-s1H" secondAttribute="leading" id="KAd-7y-Dui"/>
+                            <constraint firstItem="x0P-wF-PLE" firstAttribute="leading" secondItem="30Q-wa-NeI" secondAttribute="leading" id="4y6-ns-TZs"/>
                             <constraint firstItem="30Q-wa-NeI" firstAttribute="centerX" secondItem="1Bm-XM-XiD" secondAttribute="centerX" id="PVM-a0-fPG"/>
-                            <constraint firstItem="30Q-wa-NeI" firstAttribute="top" secondItem="qHC-9D-2mK" secondAttribute="bottom" constant="8" symbolic="YES" id="Q67-BS-hCI"/>
+                            <constraint firstItem="30Q-wa-NeI" firstAttribute="top" secondItem="qHC-9D-2mK" secondAttribute="bottom" constant="182" id="Q67-BS-hCI"/>
+                            <constraint firstItem="x0P-wF-PLE" firstAttribute="trailing" secondItem="30Q-wa-NeI" secondAttribute="trailing" id="dnf-eG-0Qh"/>
                             <constraint firstItem="1Bm-XM-XiD" firstAttribute="top" secondItem="O9r-LN-bsX" secondAttribute="top" constant="-2" id="g8t-z4-LxO"/>
                             <constraint firstItem="1Bm-XM-XiD" firstAttribute="leading" secondItem="O9r-LN-bsX" secondAttribute="leading" id="gBv-yr-4KQ"/>
                             <constraint firstAttribute="trailing" secondItem="1Bm-XM-XiD" secondAttribute="trailing" id="kCK-u7-YKv"/>
                             <constraint firstItem="Ql5-je-peQ" firstAttribute="top" secondItem="1Bm-XM-XiD" secondAttribute="bottom" constant="2" id="l0p-CO-eje"/>
                             <constraint firstAttribute="bottom" secondItem="1Bm-XM-XiD" secondAttribute="bottom" constant="2" id="rCu-wo-hqa"/>
-                            <constraint firstItem="QAV-bp-s1H" firstAttribute="top" secondItem="30Q-wa-NeI" secondAttribute="bottom" constant="71" id="uY7-N1-qng"/>
-                            <constraint firstItem="QAV-bp-s1H" firstAttribute="trailing" secondItem="30Q-wa-NeI" secondAttribute="trailing" id="xys-i5-9b4"/>
+                            <constraint firstItem="x0P-wF-PLE" firstAttribute="top" secondItem="30Q-wa-NeI" secondAttribute="bottom" constant="39" id="sg5-HW-uNo"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -218,7 +218,8 @@
                     </view>
                     <connections>
                         <outlet property="avatarImage" destination="30Q-wa-NeI" id="EBX-3I-EWX"/>
-                        <segue destination="Gkz-UB-kM1" kind="showDetail" identifier="welcome" id="FVB-Sp-k7E"/>
+                        <outlet property="welcomeLabel" destination="x0P-wF-PLE" id="VpH-q7-Rzu"/>
+                        <segue destination="Gkz-UB-kM1" kind="presentation" identifier="welcome" modalTransitionStyle="flipHorizontal" id="FVB-Sp-k7E"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ksz-wD-dnb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1536,9 +1537,9 @@
         <image name="signup" width="374" height="211"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pOu-0Q-lSf"/>
-        <segue reference="sYl-ur-Ych"/>
+        <segue reference="FVB-Sp-k7E"/>
         <segue reference="TD1-ij-O85"/>
+        <segue reference="pOu-0Q-lSf"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

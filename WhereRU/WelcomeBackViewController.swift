@@ -12,6 +12,8 @@ import avatarImageView
 class WelcomeBackViewController: UIViewController {
 
     @IBOutlet weak var avatarImage: avatarImageView!
+    @IBOutlet weak var welcomeLabel: UILabel!
+    
     var image:UIImage?
     
     override func viewDidLoad() {
@@ -22,21 +24,15 @@ class WelcomeBackViewController: UIViewController {
     }
 
     override func viewDidAppear(animated: Bool) {
-        self.performSegueWithIdentifier("welcome", sender: self)
+        var pause:NSTimer = NSTimer.scheduledTimerWithTimeInterval(1.25, target: self, selector: "pause", userInfo: nil, repeats: false)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-
-    // MARK: - Navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func pause() {
+        self.performSegueWithIdentifier("welcome", sender: self)
     }
-
 
 }

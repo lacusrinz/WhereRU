@@ -24,7 +24,6 @@ class AddFriendTableViewCell: UITableViewCell {
     }
     
     @IBAction func addFriend(sender: AnyObject) {
-        println("add friend")
         if myFriendsObj != nil {
             var toRelation:AVRelation = myFriendsObj!.relationforKey("to")
             toRelation.addObject(friend)

@@ -65,7 +65,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         cell.delegate = self
         
         cell.eventMessage.text = (self.tableData![indexPath.row] as Event).message
-        cell.eventDateTime.text = "\((self.tableData![indexPath.row] as Event).date)"
+        var date:String = NSDateFormatter.localizedStringFromDate((self.tableData![indexPath.row] as Event).date!, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
+        cell.eventDateTime.text = date
         cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).acceptMemberCount!)"
         
         cell.eventStatus.hidden = true
@@ -140,7 +141,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         }else{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             
-            row_event.obj!.setObject(row_event.refuseMemberCount!+1, forKey: "acceptMemberCount")
+            row_event.obj!.setObject(row_event.refuseMemberCount!+1, forKey: "refuseMemberCount")
             row_event.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                 if success {
                     var cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
