@@ -32,7 +32,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         mapView.delegate = self
         mapView.setZoomLevel(17.1, animated: true)
         
-//        mapView.showsUserLocation = true
+        mapView.showsUserLocation = true
 //        mapView.userTrackingMode = MAUserTrackingModeNone
         
 //        self.search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
@@ -55,8 +55,16 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         var point: MAPointAnnotation = MAPointAnnotation()
         point.coordinate = coordinate!
         point.title = "A"
-        mapView.setCenterCoordinate(point.coordinate, animated: true)
+//        mapView.setCenterCoordinate(point.coordinate, animated: true)
         mapView.addAnnotation(point)
+        myLocationCoordinate = mapView.userLocation.location.coordinate
+        
+        var mapPoints = Array<MAMapPoint>()
+        mapPoints.append(MAMapPointForCoordinate(myLocationCoordinate!))
+        mapPoints.append(MAMapPointForCoordinate(coordinate!))
+        self.mapView.visibleMapRect = CommonUtility.minMapRectForMapPoints(mapPoints, count: 2)
+        
+        self.mapView.pausesLocationUpdatesAutomatically = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,23 +72,15 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         // Dispose of any resources that can be recreated.
     }
     
-//    func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!, updatingLocation: Bool) {
-//        if updatingLocation{
-//            mapView.showsUserLocation = false
-//            println("location:\(userLocation.description)")
-//            myLocationCoordinate = userLocation.location.coordinate
-//            
-////            var point: MAPointAnnotation = MAPointAnnotation()
-////            point.coordinate = myLocationCoordinate!
-////            point.title = "Me"
-////            mapView.addAnnotation(point)
-//            var mapPoints = Array<MAMapPoint>()
-//            mapPoints.append(MAMapPointForCoordinate(myLocationCoordinate!))
-//            mapPoints.append(MAMapPointForCoordinate(coordinate!))
-//            self.mapView.visibleMapRect = CommonUtility.minMapRectForMapPoints(mapPoints, count: 2)
-////            self.searchNaviDrive()
-//        }
-//    }
+    func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!, updatingLocation: Bool) {
+        if updatingLocation{
+            println("location:\(userLocation.description)")
+            var userLocationPoint:AVGeoPoint = AVGeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            AVUser.currentUser().setObject(userLocationPoint, forKey: "location")
+            AVUser.currentUser().save()
+//            self.searchNaviDrive()
+        }
+    }
     
 //    func searchNaviDrive(){
 //        var navi:AMapNavigationSearchRequest = AMapNavigationSearchRequest()
