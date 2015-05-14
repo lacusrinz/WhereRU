@@ -2,7 +2,7 @@
 //  WelcomeBackViewController.swift
 //  WhereRU
 //
-//  Created by 钱志浩 on 15/5/11.
+//  Created by RInz on 15/5/11.
 //  Copyright (c) 2015年 RInz. All rights reserved.
 //
 

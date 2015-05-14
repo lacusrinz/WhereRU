@@ -62,7 +62,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         var mapPoints = Array<MAMapPoint>()
         mapPoints.append(MAMapPointForCoordinate(myLocationCoordinate!))
         mapPoints.append(MAMapPointForCoordinate(coordinate!))
-        self.mapView.visibleMapRect = CommonUtility.minMapRectForMapPoints(mapPoints, count: 2)
+        self.mapView.setVisibleMapRect(CommonUtility.minMapRectForMapPoints(mapPoints, count: 2), edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
         
         self.mapView.pausesLocationUpdatesAutomatically = false
     }

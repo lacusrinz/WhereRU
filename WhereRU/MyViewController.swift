@@ -123,7 +123,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         // Pass the selected object to the new view controller.
     }
     
-    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
+    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect) {
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             var avatarData:NSData = UIImagePNGRepresentation(croppedImage)

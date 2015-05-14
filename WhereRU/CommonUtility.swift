@@ -36,7 +36,7 @@ class CommonUtility: NSObject {
                 maxY = point.y;
             }
         }
-        return MAMapRectMake(minX - (maxX - minX)*0.1, minY - (maxY - minY)*0.2, fabs((maxX - minX)*1.2), fabs((maxY - minY)*1.4))
+        return MAMapRectMake(minX, minY, fabs(maxX - minX), fabs(maxY - minY))
     }
     
     class func minMapRectForAnnotations(annotations:[GeocodeAnnotation]) -> MAMapRect{

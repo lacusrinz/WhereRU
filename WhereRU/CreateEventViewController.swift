@@ -446,7 +446,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 params.setObject(self.eventTextView.text!, forKey: "message")
                 params.setObject(0, forKey: "acceptMemberCount")
                 params.setObject(0, forKey: "refuseMemberCount")
-                params.setObject(self.participators!, forKey: "participators")
                 
                 var newEvent:AVObject = AVObject(className: "Event", dictionary: params as [NSObject : AnyObject])
                 var ownerRelation:AVRelation = newEvent.relationforKey("owner")

@@ -36,7 +36,11 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         mapImage.addGestureRecognizer(mapTapGesture)
         
         var avatarObject: AnyObject! = event!.owner!.objectForKey("avatarFile")
-        self.avatarImage.image = UIImage(data: avatarObject.getData())
+        if avatarObject != nil {
+            self.avatarImage.image = UIImage(data: avatarObject.getData())
+        }else {
+            self.avatarImage.image = UIImage(named: "default_avatar")
+        }
         
         message.text = event!.message
         message.layer.borderColor = UIColor.blackColor().CGColor

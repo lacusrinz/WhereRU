@@ -140,7 +140,7 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     // MARK: - RSKImageCropViewControllerDelegate
-    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!) {
+    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect) {
         self.userAvatarImageView.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             var avatarData:NSData = UIImagePNGRepresentation(croppedImage)
