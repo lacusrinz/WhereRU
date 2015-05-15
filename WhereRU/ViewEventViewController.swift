@@ -103,6 +103,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
             let mapDetailViewController:MapDetailViewController = navigationController.viewControllers[0] as! MapDetailViewController
 //            mapDetailViewController.delegate = self
             mapDetailViewController.coordinate = event!.coordinate!
+            mapDetailViewController.participators = participators
         }
     }
 }

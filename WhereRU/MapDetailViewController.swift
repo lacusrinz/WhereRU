@@ -21,6 +21,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     var route:AMapRoute?
     var searchType:AMapSearchType?
     var participatorsPaintTimer:NSTimer?
+    var participators:[AVUser]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     }
     
     func startPaint() {
-        self.participatorsPaintTimer = NSTimer(timeInterval: 15, target: self, selector: "paint:", userInfo: nil, repeats: true)
+        self.participatorsPaintTimer = NSTimer(timeInterval: 3, target: self, selector: "paint", userInfo: nil, repeats: true)
     }
     
     func stopPaint() {
@@ -47,8 +48,18 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         }
     }
     
-    func paint(paramTimer:NSTimer) {
-        //
+    func paint() {
+        for user in self.participators! {
+            var query:AVQuery? = AVQuery(className: "_User")
+            query!.whereKey("username", equalTo: user.username)
+            var userObj:AVUser = query!.getFirstObject() as! AVUser
+            var hisCoordinate:AVGeoPoint? = userObj.objectForKey("location") as? AVGeoPoint
+            if hisCoordinate != nil {
+                var point: MAPointAnnotation = MAPointAnnotation()
+                point.coordinate = CLLocationCoordinate2D(latitude: hisCoordinate!.latitude, longitude: hisCoordinate!.longitude)
+                mapView.addAnnotation(point)
+            }
+        }
     }
     
 //    func initToolBar(){
@@ -79,7 +90,12 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         
         self.mapView.pausesLocationUpdatesAutomatically = false
         
-        
+        self.startPaint()
+        NSRunLoop.currentRunLoop().addTimer(self.participatorsPaintTimer!, forMode: NSDefaultRunLoopMode)
+    }
+    
+    override func viewDidDisappear(animated: Bool) {
+        self.stopPaint()
     }
 
     override func didReceiveMemoryWarning() {
