@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 var avatarData = avatarObject.getData()
                 welcomeBackViewController.image = UIImage(data: avatarData)
             }
-        }else {
+        } else {
             self.window!.rootViewController = loginViewController
         }
         

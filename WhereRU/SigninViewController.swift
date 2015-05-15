@@ -21,6 +21,7 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var userAvatarImageView: avatarImageView!
     @IBOutlet var avatarTap: UITapGestureRecognizer!
     
+//    var returnKeyHandler: IQKeyboardReturnKeyHandler?
     var user:AVUser?
     
     var delegate:LoginViewControllerDelegate?
@@ -28,6 +29,8 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
         userAvatarImageView.addGestureRecognizer(avatarTap)
+        
+//        returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
         
         user = AVUser()
     }
@@ -63,7 +66,7 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
                         println("login success")
                         SVProgressHUD.showSuccessWithStatus("")
                         self.performSegueWithIdentifier("loginaftersignin", sender: self)
-                    }else {
+                    } else {
                         SVProgressHUD.showErrorWithStatus("登陆失败")
                         println("failed:\(error!.description)")
                     }
@@ -87,11 +90,11 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if(buttonIndex == 1){
+        if(buttonIndex == 1) {
             if(self.isCameraAvailable()){
                 var controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.Camera
-                if(self.isFrontCameraAvailable()){
+                if(self.isFrontCameraAvailable()) {
                     controller.cameraDevice = UIImagePickerControllerCameraDevice.Front;
                 }
                 controller.delegate = self
@@ -100,8 +103,8 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
                 })
             }
         }
-        else if(buttonIndex == 2){
-            if(self.isPhotoLibraryAvailable()){
+        else if(buttonIndex == 2) {
+            if(self.isPhotoLibraryAvailable()) {
                 var controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 controller.delegate = self
@@ -123,19 +126,19 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
         })
     }
     
-    func isCameraAvailable()->Bool{
+    func isCameraAvailable()->Bool {
         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
     }
     
-    func isRearCameraAvailable()->Bool{
+    func isRearCameraAvailable()->Bool {
         return UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Rear)
     }
     
-    func isFrontCameraAvailable()->Bool{
+    func isFrontCameraAvailable()->Bool {
         return UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.Front)
     }
     
-    func isPhotoLibraryAvailable()->Bool{
+    func isPhotoLibraryAvailable()->Bool {
         return UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.PhotoLibrary)
     }
     
@@ -154,6 +157,17 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
             //
         })
     }
+    
+//    func textFieldShouldReturn(textField: UITextField) -> Bool {
+//        var nextTag = textField.tag + 1
+//        var nextResponder:UIResponder? = textField.superview?.viewWithTag(nextTag)
+//        if (nextResponder != nil) {
+//            nextResponder!.becomeFirstResponder()
+//        } else {
+//            textField.resignFirstResponder()
+//        }
+//        return false
+//    }
     
     /*
     // MARK: - Navigation

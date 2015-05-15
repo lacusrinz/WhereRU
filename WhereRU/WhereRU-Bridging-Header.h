@@ -26,3 +26,5 @@
 #import "YALFoldingTabBarController.h"
 #import "YALAnimatingTabBarConstants.h"
 #import "YALTabBarInteracting.h"
+
+#import "IQKeyboardReturnKeyHandler.h"

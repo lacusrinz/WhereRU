@@ -125,7 +125,7 @@ class CommonUtility: NSObject {
         var str = ""
         if !token!.isEqualToString(","){
             str = string!.stringByReplacingOccurrencesOfString(token! as String, withString: ",")
-        }else{
+        } else{
             str = string! as String
         }
         var components:NSArray = str .componentsSeparatedByString(",")

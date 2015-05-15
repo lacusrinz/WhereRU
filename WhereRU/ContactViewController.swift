@@ -47,7 +47,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
                     }
                 })
                 
-            }else {
+            } else {
                 self.myFriendsObj = nil
             }
         }
@@ -75,7 +75,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //TODO
-        if(!tableView.editing){
+        if(!tableView.editing) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
@@ -92,7 +92,7 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         if avatarObject != nil {
             var avatarData = avatarObject.getData()
             cell.avatar.image = UIImage(data: avatarData)
-        }else {
+        } else {
             cell.avatar.image = UIImage(named: "default_avatar")
         }
 

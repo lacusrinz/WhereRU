@@ -60,7 +60,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
         if avatarObject != nil {
             myAvatarImageView.image = UIImage(data: avatarObject.getData())
-        }else {
+        } else {
             myAvatarImageView.image = UIImage(named: "default_avatar")
         }
         
@@ -97,7 +97,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         participators = [AVUser]()
         poiAnnotation = MAPointAnnotation()
         
-        if let myEvent = event{
+        if let myEvent = event {
             self.doneButton.setAttributedTitle(NSAttributedString(string: "更新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
             eventTextView.text = myEvent.message
             
@@ -117,7 +117,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             point.title = "目的地"
             self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
             self.locationMapView.addAnnotation(point)
-        }else if event == nil {
+        } else if event == nil {
             event = Event()
             locationMapView.showsUserLocation = true
             locationMapView.userTrackingMode = MAUserTrackingModeFollow
@@ -126,13 +126,13 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
 
     
     //MARK: - MAMAP Util func
-    func searchGeocodeWithKey(key:NSString, adcode:String?){
+    func searchGeocodeWithKey(key:NSString, adcode:String?) {
         if key.length == 0{
             return
         }
         var geo:AMapGeocodeSearchRequest = AMapGeocodeSearchRequest()
         geo.address = key as String
-        if(adcode != nil && count(adcode!)>0){
+        if(adcode != nil && count(adcode!)>0) {
             geo.city = [adcode!]
         }
         self.search?.AMapGeocodeSearch(geo)
@@ -149,7 +149,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         return annotation
     }
     
-    func searchTipsWithKey(key:NSString){
+    func searchTipsWithKey(key:NSString) {
         if (key.length == 0)
         {
             return;
@@ -160,19 +160,18 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         self.search?.AMapInputTipsSearch(tips)
     }
     
-    func clear(){
+    func clear() {
         self.locationMapView.removeAnnotations(self.locationMapView.annotations)
     }
     
-    func clearAndSearchGeocodeWithKey(key:NSString, adcode:String?){
+    func clearAndSearchGeocodeWithKey(key:NSString, adcode:String?) {
         self.clear()
         self.searchGeocodeWithKey(key, adcode: adcode)
     }
     
     //MARK: - MAMapViewDelegate
     func mapView(mapView: MAMapView!, didTouchPois pois: [AnyObject]!) {
-        if (pois.count == 0)
-        {
+        if (pois == nil || pois.count == 0) {
             return;
         }
         var annotation:MAPointAnnotation = self.annotationForTouchPoi(pois[0] as? MATouchPoi)!
@@ -184,7 +183,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
-        if annotation.isKindOfClass(GeocodeAnnotation){
+        if annotation.isKindOfClass(GeocodeAnnotation) {
             let geoCellIdentifier = "geoCellIdentifier"
             var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
@@ -194,7 +193,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
             return poiAnnotationView
         }
-        if annotation.isKindOfClass(ReGeocodeAnnotation){
+        if annotation.isKindOfClass(ReGeocodeAnnotation) {
             let invertGeoIdentifier = "invertGeoIdentifier"
             var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(invertGeoIdentifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
@@ -205,7 +204,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
             return poiAnnotationView
         }
-        if annotation.isKindOfClass(MAPointAnnotation){
+        if annotation.isKindOfClass(MAPointAnnotation) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{
@@ -234,7 +233,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             println((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
             println((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
             self.locationMapView.setCenterCoordinate(annotations[0].coordinate, animated: true)
-        }else{
+        } else{
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
         }
         self.locationMapView.addAnnotations(annotations)
@@ -298,12 +297,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             cell.participatorAvatarImage.image = UIImage(named: "icon_add")
             cell.participatorAvatarImage.layer.borderWidth = 0
             cell.isParticipator = false
-        }else{
+        } else{
             var avatarObject: AnyObject! = participators![indexPath.row].objectForKey("avatarFile")
             if avatarObject != nil {
                 var avatarData = avatarObject.getData()
                 cell.participatorAvatarImage.image = UIImage(data: avatarData)
-            }else {
+            } else {
                 cell.participatorAvatarImage.image = UIImage(named: "default_avatar")
             }
             cell.participatorAvatarImage.layer.borderWidth = 1
@@ -319,7 +318,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         return true
     }
     
-    func deleteParticipator(sender:UIPanGestureRecognizer){
+    func deleteParticipator(sender:UIPanGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.Ended{
             var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
             var panCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
@@ -340,7 +339,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         }
     }
     
-    func addParticipator(sender:UITapGestureRecognizer){
+    func addParticipator(sender:UITapGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.Ended{
             var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
             var tapCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
@@ -373,7 +372,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBAction func Back(sender: AnyObject) {
         if let tabBarController = self.tabBarController{
             self.tabBarController!.selectedIndex = 0
-        }else{
+        } else{
             self.delegate?.CreateEventViewControllerDidBack(self)
         }
     }
@@ -430,14 +429,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 self.delegate!.CreateEventViewControllerDone(self)
             })
 
-        }else{
+        } else{
             if self.eventTextView.text.isEmpty && event?.date == nil{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请在详细界面设置时间", type: .Error)
-            }else if self.eventTextView.text == ""{
+            } else if self.eventTextView.text == ""{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话", type: .Error)
-            }else if event?.date == nil{
+            } else if event?.date == nil{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
-            }else{
+            } else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
                 var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
                 params.setObject(AVGeoPoint(latitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, longitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude), forKey: "coordinate")

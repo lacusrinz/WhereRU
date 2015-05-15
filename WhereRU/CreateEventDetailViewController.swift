@@ -12,7 +12,7 @@ protocol CreateEventDetailViewControllerDelegate{
     func CreateEventDetailViewControllerDone(CreateEventDetailViewController, NSDate, Bool)
 }
 
-class CreateEventDetailViewController: UITableViewController{
+class CreateEventDetailViewController: UITableViewController {
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var needLocation: UISwitch!

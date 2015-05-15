@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
             if (user != nil) {
                 println("login success")
                 self.performSegueWithIdentifier("login", sender: self)
-            }else {
+            } else {
                 println("failed:\(error!.description)")
             }
         }

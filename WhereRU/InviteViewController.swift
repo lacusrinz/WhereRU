@@ -49,7 +49,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
-            }else {
+            } else {
                 if objects.count != 0 {
                     for (var i=0; i<objects.count; ++i) {
                         var event:Event = Event()
@@ -96,7 +96,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableData != nil{
             return tableData!.count
-        }else{
+        } else{
             return 0
         }
     }
@@ -119,7 +119,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if(!tableView.editing){
+        if(!tableView.editing) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         selectedRowNumber = indexPath.row

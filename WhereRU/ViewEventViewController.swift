@@ -38,7 +38,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         var avatarObject: AnyObject! = event!.owner!.objectForKey("avatarFile")
         if avatarObject != nil {
             self.avatarImage.image = UIImage(data: avatarObject.getData())
-        }else {
+        } else {
             self.avatarImage.image = UIImage(named: "default_avatar")
         }
         
@@ -82,7 +82,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         var avatarObj:AnyObject! = participators![indexPath.row].objectForKey("avatarFile")
         if avatarObj != nil {
             cell.participatorAvatarImage.image = UIImage(data: avatarObj.getData())
-        }else {
+        } else {
             cell.participatorAvatarImage.image = UIImage(named: "default_avatar")
         }
         cell.participatorAvatarImage.layer.borderWidth = 1
@@ -92,7 +92,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     //MARK: - handle gesture
-    func getMap(){
+    func getMap() {
         performSegueWithIdentifier("getMap", sender: self)
     }
     

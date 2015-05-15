@@ -20,6 +20,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     var search:AMapSearchAPI?
     var route:AMapRoute?
     var searchType:AMapSearchType?
+    var participatorsPaintTimer:NSTimer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +34,21 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         mapView.setZoomLevel(17.1, animated: true)
         
         mapView.showsUserLocation = true
-//        mapView.userTrackingMode = MAUserTrackingModeNone
-        
 //        self.search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
+    }
+    
+    func startPaint() {
+        self.participatorsPaintTimer = NSTimer(timeInterval: 15, target: self, selector: "paint:", userInfo: nil, repeats: true)
+    }
+    
+    func stopPaint() {
+        if self.participatorsPaintTimer != nil {
+            self.participatorsPaintTimer!.invalidate()
+        }
+    }
+    
+    func paint(paramTimer:NSTimer) {
+        //
     }
     
 //    func initToolBar(){
@@ -65,6 +78,8 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         self.mapView.setVisibleMapRect(CommonUtility.minMapRectForMapPoints(mapPoints, count: 2), edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
         
         self.mapView.pausesLocationUpdatesAutomatically = false
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -161,7 +176,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
 //    }
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
-        if annotation.isKindOfClass(MAPointAnnotation){
+        if annotation.isKindOfClass(MAPointAnnotation) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             var poiAnnotationView:MAPinAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
             if poiAnnotationView == nil{

@@ -39,7 +39,7 @@ class GeocodeAnnotation: NSObject, MAAnnotation {
     }
     
     //MARK: - life circle
-    init(geocode:AMapGeocode){
+    init(geocode:AMapGeocode) {
         self.geocode = geocode
     }
 }

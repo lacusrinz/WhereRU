@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol AddParticipantsTableViewDelegate{
+protocol AddParticipantsTableViewDelegate {
     func AddParticipantsDidDone(AddParticipantsTableViewController, [AVUser])
 }
 
@@ -67,11 +67,11 @@ class AddParticipantsTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var cell:AddParticipantTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! AddParticipantTableViewCell
         cell.tintColor = UIColor.blueColor()
-        if cell.selectedFriend{
+        if cell.selectedFriend {
             cell.selectedFriend = false
             cell.accessoryType = UITableViewCellAccessoryType.None
             selectedFriends.removeValueForKey(indexPath.row)
-        }else{
+        } else {
             cell.selectedFriend = true
             cell.accessoryType = UITableViewCellAccessoryType.Checkmark
             selectedFriends[indexPath.row] = tableData[indexPath.row]
@@ -86,7 +86,7 @@ class AddParticipantsTableViewController: UITableViewController {
         if avatarObject != nil {
             var avatarData = avatarObject.getData()
             cell!.avatar.image = UIImage(data: avatarData)
-        }else {
+        } else {
             cell!.avatar.image = UIImage(named: "default_avatar")
         }
         
@@ -95,7 +95,7 @@ class AddParticipantsTableViewController: UITableViewController {
 
     @IBAction func done(sender: AnyObject) {
         var selected:[AVUser] = [AVUser]()
-        for _selected in selectedFriends.values{
+        for _selected in selectedFriends.values {
             selected.append(_selected)
         }
         self.delegate?.AddParticipantsDidDone(self, selected)

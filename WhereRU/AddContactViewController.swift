@@ -52,7 +52,7 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
             if error == nil && objs.count>0 {
                 self.queryUsers = objs as? [AVUser]
                 self.tableView.reloadData()
-            }else {
+            } else {
                 self.queryUsers!.removeAll(keepCapacity: true)
                 self.tableView.reloadData()
             }
@@ -77,7 +77,7 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
             }
             cell!.textLabel!.text = "搜索: \(self.key)"
             return cell!
-        }else {
+        } else {
             self.tableView.registerNib(UINib(nibName: "AddFriendTableViewCell", bundle: nil), forCellReuseIdentifier: "addFriendCell")
             var addFriendCell:AddFriendTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("addFriendCell", forIndexPath: indexPath) as! AddFriendTableViewCell
             

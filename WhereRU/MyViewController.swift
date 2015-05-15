@@ -53,11 +53,11 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        if(buttonIndex == 1){
-            if(self.isCameraAvailable()){
+        if(buttonIndex == 1) {
+            if(self.isCameraAvailable()) {
                 var controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.Camera
-                if(self.isFrontCameraAvailable()){
+                if(self.isFrontCameraAvailable()) {
                     controller.cameraDevice = UIImagePickerControllerCameraDevice.Front;
                 }
                 controller.delegate = self
@@ -67,7 +67,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
             }
         }
         else if(buttonIndex == 2){
-            if(self.isPhotoLibraryAvailable()){
+            if(self.isPhotoLibraryAvailable()) {
                 var controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 controller.delegate = self

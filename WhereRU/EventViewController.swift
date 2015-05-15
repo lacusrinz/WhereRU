@@ -41,7 +41,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableData != nil{
             return tableData!.count
-        }else{
+        } else{
             return 0
         }
     }
@@ -51,7 +51,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if(!tableView.editing){
+        if(!tableView.editing) {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
         selectedRowNumber = indexPath.row
@@ -82,15 +82,15 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                         cell.eventStatus.image = UIImage(named: "icon_accept_invite")
                         cell.eventStatus.hidden = false
                         cell.leftUtilityButtons = nil
-                    }else {
+                    } else {
                         cell.eventStatus.image = UIImage(named: "icon_refuse_invite")
                         cell.eventStatus.hidden = false
                         cell.leftUtilityButtons = nil
                     }
-                }else {
+                } else {
                     cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
                 }
-            }else {
+            } else {
                 cell.leftUtilityButtons = self.leftButtonsForParticipant() as [AnyObject]
             }
         }
@@ -129,16 +129,16 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                                 SVProgressHUD.dismiss()
                                 self.tableView.header.beginRefreshing()
                             })
-                        }else {
+                        } else {
                             print("\(error.description)")
                         }
                     })
                     
-                }else {
+                } else {
                     print("\(error.description)")
                 }
             })
-        }else{
+        } else{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
             
             row_event.obj!.setObject(row_event.refuseMemberCount!+1, forKey: "refuseMemberCount")
@@ -155,11 +155,11 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                                 SVProgressHUD.dismiss()
                                 self.tableView.header.beginRefreshing()
                             })
-                        }else {
+                        } else {
                             print("\(error.description)")
                         }
                     })
-                }else {
+                } else {
                     print("\(error.description)")
                 }
             })
@@ -179,7 +179,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
                 //
-            }else {
+            } else {
                 if objects.count != 0 {
                     for (var i=0; i<objects.count; ++i) {
                         var event:Event = Event()

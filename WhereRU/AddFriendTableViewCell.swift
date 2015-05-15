@@ -31,7 +31,7 @@ class AddFriendTableViewCell: UITableViewCell {
                 self.addFriendButton.enabled = false
                 self.addFriendButton.setBackgroundImage(UIImage(named: "button_addfrienddone"), forState: UIControlState.Disabled)
             })
-        }else {
+        } else {
             myFriendsObj = AVObject(className: "Friends")
             var fromRelation:AVRelation = myFriendsObj!.relationforKey("from")
             fromRelation.addObject(AVUser.currentUser())
