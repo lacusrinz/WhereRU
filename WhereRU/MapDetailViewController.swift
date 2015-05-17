@@ -49,15 +49,20 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     }
     
     func paint() {
+        var lastPoint:MAPointAnnotation?
         for user in self.participators! {
             var query:AVQuery? = AVQuery(className: "_User")
             query!.whereKey("username", equalTo: user.username)
             var userObj:AVUser = query!.getFirstObject() as! AVUser
             var hisCoordinate:AVGeoPoint? = userObj.objectForKey("location") as? AVGeoPoint
             if hisCoordinate != nil {
+                if lastPoint != nil {
+                    mapView.removeAnnotation(lastPoint)
+                }
                 var point: MAPointAnnotation = MAPointAnnotation()
                 point.coordinate = CLLocationCoordinate2D(latitude: hisCoordinate!.latitude, longitude: hisCoordinate!.longitude)
                 mapView.addAnnotation(point)
+                lastPoint = point
             }
         }
     }
@@ -88,7 +93,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         mapPoints.append(MAMapPointForCoordinate(coordinate!))
         self.mapView.setVisibleMapRect(CommonUtility.minMapRectForMapPoints(mapPoints, count: 2), edgePadding: UIEdgeInsets(top: 100, left: 100, bottom: 100, right: 100), animated: true)
         
-        self.mapView.pausesLocationUpdatesAutomatically = false
+//        self.mapView.pausesLocationUpdatesAutomatically = false
         
         self.startPaint()
         NSRunLoop.currentRunLoop().addTimer(self.participatorsPaintTimer!, forMode: NSDefaultRunLoopMode)
