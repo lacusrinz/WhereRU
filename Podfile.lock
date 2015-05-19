@@ -4,6 +4,7 @@ PODS:
   - AVOSCloud (3.0.3)
   - FoldingTabBar (1.0.0)
   - HexColors (2.2.1)
+  - HSDatePickerViewController (1.0.1)
   - IQKeyboardManager (3.2.3)
   - MJRefresh (1.4.5)
   - Reachability (3.1.1)
@@ -23,6 +24,7 @@ DEPENDENCIES:
   - AMapSearch
   - AVOSCloud
   - FoldingTabBar (~> 1.0.0)
+  - HSDatePickerViewController (~> 1.0.1)
   - IQKeyboardManager
   - MJRefresh (~> 1.4.5)
   - Reachability (~> 3.1.1)
@@ -39,6 +41,7 @@ SPEC CHECKSUMS:
   AVOSCloud: 48b94343601a582928e560d734caa0c8dc75a612
   FoldingTabBar: 463d247453a2ba826ae79f5be1e6b8b93b6aa0ce
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
+  HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
   IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
   MJRefresh: 4b24394e577ea399fbc926e5b6072317aae2c152
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893

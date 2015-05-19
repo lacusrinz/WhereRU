@@ -25,3 +25,5 @@ pod 'AMapSearch'
 
 pod 'AVOSCloud'
 pod 'FoldingTabBar', '~> 1.0.0'
+
+pod 'HSDatePickerViewController', '~> 1.0.1'
