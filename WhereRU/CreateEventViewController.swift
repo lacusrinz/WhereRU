@@ -14,7 +14,7 @@ protocol CreateEventViewControllerDelegate{
     func CreateEventViewControllerDone(CreateEventViewController)
 }
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, CreateEventDetailViewControllerDelegate {
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, HSDatePickerViewControllerDelegate{
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
@@ -22,6 +22,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBOutlet weak var participatorCollectionView: UICollectionView!
     @IBOutlet weak var locationSearchBar: UISearchBar!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var timeButton: UIButton!
     
     private var search:AMapSearchAPI?
     private var clLocationManager:CLLocationManager?
@@ -79,6 +80,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         eventTextView.layer.borderColor = UIColor.blackColor().CGColor
         eventTextView.layer.borderWidth = 1
         
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "YYYY年mm月dd hh:mm"
+        timeButton.setTitle(dateFormatter.stringFromDate(NSDate()), forState: UIControlState.Normal)
+        
         participatorCollectionView.delegate = self
         participatorCollectionView.dataSource = self
         
@@ -110,6 +115,24 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         //
     }
     
+    @IBAction func chooseTime(sender: AnyObject) {
+        var hsdpvc:HSDatePickerViewController = HSDatePickerViewController()
+        hsdpvc.delegate = self
+        hsdpvc.date = NSDate()
+        presentViewController(hsdpvc, animated: true, completion: nil)
+    }
+    
+    @IBAction func setNeedLocation(sender: AnyObject) {
+        var switchButton:UISwitch = sender as! UISwitch
+        if  self.event != nil {
+            if switchButton.on {
+                self.event!.needLocation = true
+            } else {
+                self.event!.needLocation = false
+            }
+        }
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if event != nil && event!.coordinate != nil {
             var point: MAPointAnnotation = MAPointAnnotation()
@@ -122,6 +145,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             locationMapView.showsUserLocation = true
             locationMapView.userTrackingMode = MAUserTrackingModeFollow
         }
+    }
+    
+    //MARK: - HSDatePickerDelegate
+    func hsDatePickerPickedDate(date: NSDate!) {
+        var dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "YYYY年mm月dd hh:mm"
+        self.timeButton.setTitle(dateFormatter.stringFromDate(date), forState: UIControlState.Normal)
+        self.event!.date = date
     }
 
     
@@ -360,13 +391,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             let addParticipantsTableViewController:AddParticipantsTableViewController = navigationController.viewControllers[0] as! AddParticipantsTableViewController
             addParticipantsTableViewController.delegate = self
         }
-        if segue.identifier == "createEventDetail"{
-            let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
-            let createEventDetailViewController:CreateEventDetailViewController = navigationController.viewControllers[0] as! CreateEventDetailViewController
-            createEventDetailViewController.delegate = self
-            createEventDetailViewController.date = self.event!.date
-            createEventDetailViewController.need = self.event!.needLocation
-        }
     }
 
     @IBAction func Back(sender: AnyObject) {
@@ -391,13 +415,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             }
         }
         self.participatorCollectionView.reloadData()
-        dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    // MARK: - createEventDetailViewControllerDelegate
-    func CreateEventDetailViewControllerDone(controller: CreateEventDetailViewController, _ date: NSDate, _ needLocation: Bool) {
-        event?.date = date
-        event?.needLocation = needLocation
         dismissViewControllerAnimated(true, completion: nil)
     }
     

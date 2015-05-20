@@ -14,7 +14,7 @@ class Event: NSObject {
     var participants:[AVUser]?
     var coordinate:CLLocationCoordinate2D?
     var date:NSDate?
-    var needLocation:Bool = true
+    var needLocation:Bool = false
     var message:String?
     var acceptMemberCount:Int?
     var refuseMemberCount:Int?
