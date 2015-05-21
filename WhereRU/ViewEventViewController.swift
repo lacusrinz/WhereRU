@@ -20,6 +20,8 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var message: UITextView!
     @IBOutlet weak var participantsCollection: UICollectionView!
     @IBOutlet var mapTapGesture: UITapGestureRecognizer!
+    @IBOutlet weak var locationSwitch: UISwitch!
+    @IBOutlet weak var timeLabel: UILabel!
 
     
     var participators:[AVUser]?
@@ -52,6 +54,11 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
         participantsCollection.dataSource = self
         
         participators = event!.participants
+        
+        self.locationSwitch.on = event!.needLocation
+        var formatter:NSDateFormatter = NSDateFormatter()
+        formatter.dateFormat = "MM月dd日 hh:mm"
+        self.timeLabel.text = formatter.stringFromDate(event!.date!)
         
         var longitude = NSString(string: "\(event!.coordinate!.longitude)").substringToIndex(7)
         var latitude = NSString(string: "\(event!.coordinate!.latitude)").substringToIndex(7)
