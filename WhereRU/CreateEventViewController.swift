@@ -9,12 +9,12 @@
 import UIKit
 import avatarImageView
 
-protocol CreateEventViewControllerDelegate{
+protocol CreateEventViewControllerDelegate {
     func CreateEventViewControllerDidBack(CreateEventViewController)
     func CreateEventViewControllerDone(CreateEventViewController)
 }
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, HSDatePickerViewControllerDelegate{
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, HSDatePickerViewControllerDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
@@ -23,6 +23,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     @IBOutlet weak var locationSearchBar: UISearchBar!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var timeButton: UIButton!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     private var search:AMapSearchAPI?
     private var clLocationManager:CLLocationManager?
@@ -45,7 +46,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.navigationController?.navigationBar.translucent = false
         
-        if (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0{
+        if (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 {
             self.clLocationManager = CLLocationManager()
             self.clLocationManager?.requestAlwaysAuthorization()
         }
@@ -81,7 +82,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         eventTextView.layer.borderWidth = 1
         
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "YYYY年mm月dd hh:mm"
+        dateFormatter.dateFormat = "YYYY年MM月dd hh:mm"
         timeButton.setTitle(dateFormatter.stringFromDate(NSDate()), forState: UIControlState.Normal)
         
         participatorCollectionView.delegate = self
@@ -150,7 +151,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     //MARK: - HSDatePickerDelegate
     func hsDatePickerPickedDate(date: NSDate!) {
         var dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "YYYY年mm月dd hh:mm"
+        dateFormatter.dateFormat = "YYYY年MM月dd hh:mm"
         self.timeButton.setTitle(dateFormatter.stringFromDate(date), forState: UIControlState.Normal)
         self.event!.date = date
     }
@@ -158,7 +159,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     //MARK: - MAMAP Util func
     func searchGeocodeWithKey(key:NSString, adcode:String?) {
-        if key.length == 0{
+        if key.length == 0 {
             return
         }
         var geo:AMapGeocodeSearchRequest = AMapGeocodeSearchRequest()
@@ -170,8 +171,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func annotationForTouchPoi(touchPoi:MATouchPoi?) -> MAPointAnnotation? {
-        if (touchPoi == nil)
-        {
+        if (touchPoi == nil) {
             return nil;
         }
         var annotation:MAPointAnnotation = MAPointAnnotation()
@@ -181,8 +181,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func searchTipsWithKey(key:NSString) {
-        if (key.length == 0)
-        {
+        if (key.length == 0) {
             return;
         }
         
@@ -217,7 +216,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if annotation.isKindOfClass(GeocodeAnnotation) {
             let geoCellIdentifier = "geoCellIdentifier"
             var poiAnnotationView:MAPinAnnotationView? = self.locationMapView.dequeueReusableAnnotationViewWithIdentifier(geoCellIdentifier) as! MAPinAnnotationView?
-            if poiAnnotationView == nil{
+            if poiAnnotationView == nil {
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: geoCellIdentifier)
             }
             poiAnnotationView?.canShowCallout = true
@@ -251,7 +250,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     func onGeocodeSearchDone(request: AMapGeocodeSearchRequest!, response: AMapGeocodeSearchResponse!) {
-        if response.geocodes.count == 0{
+        if response.geocodes.count == 0 {
             return
         }
         
@@ -260,11 +259,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
             annotations.append(geocodeAnnotation)
         }
-        if annotations.count == 1{
+        if annotations.count == 1 {
             println((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
             println((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
             self.locationMapView.setCenterCoordinate(annotations[0].coordinate, animated: true)
-        } else{
+        } else {
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
         }
         self.locationMapView.addAnnotations(annotations)
@@ -448,11 +447,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
 
         } else{
             if self.eventTextView.text.isEmpty && event?.date == nil{
-                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请在详细界面设置时间", type: .Error)
+                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话\n请设置时间", type: .Error)
             } else if self.eventTextView.text == ""{
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请添加您要说的话", type: .Error)
             } else if event?.date == nil{
-                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请在详细界面设置时间", type: .Error)
+                TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请设置时间", type: .Error)
             } else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
                 var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)

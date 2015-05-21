@@ -42,13 +42,16 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     @IBAction func signin(sender: AnyObject) {
         if nicknameTextField.text.isEmpty{
-            TSMessage.showNotificationWithTitle("出错啦", subtitle: "请输入昵称", type: .Error)
+            TSMessage.showNotificationInViewController(self, title: "出错啦！", subtitle: "请输入昵称", type: .Error)
+            return
         }
         if emailTextField.text.isEmpty{
-            TSMessage.showNotificationWithTitle("出错啦", subtitle: "请输入邮箱", type: .Error)
+            TSMessage.showNotificationInViewController(self, title: "出错啦！", subtitle: "请输入邮箱", type: .Error)
+            return
         }
         if passwordTextField.text.isEmpty{
-            TSMessage.showNotificationWithTitle("出错啦", subtitle: "请输入密码", type: .Error)
+            TSMessage.showNotificationInViewController(self, title: "出错啦！", subtitle: "请输入密码", type: .Error)
+            return
         }
         
         self.user!.username = nicknameTextField.text

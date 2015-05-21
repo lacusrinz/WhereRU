@@ -31,7 +31,6 @@
 		A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */; };
 		A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */; };
 		A8BDE73B1A74E33900EC5785 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDE73A1A74E33900EC5785 /* MapDetailViewController.swift */; };
-		A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */; };
 		A8C25CF31A7B456F001EFDE1 /* CommonConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */; };
 		A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */; };
 		A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */; };
@@ -123,7 +122,6 @@
 		A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantsTableViewController.swift; sourceTree = "<group>"; };
 		A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		A8BDE73A1A74E33900EC5785 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
-		A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateEventDetailViewController.swift; sourceTree = "<group>"; };
 		A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstant.swift; sourceTree = "<group>"; };
 		A8D58A5019C1EB0F00EEFC98 /* WhereRU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereRU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A5419C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -283,7 +281,6 @@
 				A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */,
 				A8BDE73A1A74E33900EC5785 /* MapDetailViewController.swift */,
 				A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */,
-				A8C0E6681A5050020014D33A /* CreateEventDetailViewController.swift */,
 				A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */,
 			);
 			name = Event;
@@ -621,7 +618,6 @@
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
 				A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */,
-				A8C0E6691A5050020014D33A /* CreateEventDetailViewController.swift in Sources */,
 				A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
 				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
