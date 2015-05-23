@@ -39,7 +39,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     }
     
     func startPaint() {
-        self.participatorsPaintTimer = NSTimer(timeInterval: 3, target: self, selector: "paint", userInfo: nil, repeats: true)
+        self.participatorsPaintTimer = NSTimer(timeInterval: 15, target: self, selector: "paint", userInfo: nil, repeats: true)
     }
     
     func stopPaint() {
@@ -117,6 +117,8 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
 //            self.searchNaviDrive()
         }
     }
+    
+
     
 //    func searchNaviDrive(){
 //        var navi:AMapNavigationSearchRequest = AMapNavigationSearchRequest()
@@ -198,15 +200,15 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {
         if annotation.isKindOfClass(MAPointAnnotation) {
-            let pointReuseIndetifier = "pointReuseIndetifier"
-            var poiAnnotationView:MAPinAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(pointReuseIndetifier) as! MAPinAnnotationView?
-            if poiAnnotationView == nil{
-                poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            let customReuseIndetifier = "customReuseIndetifier"
+            var customAnnotationView:CustomAnnotationView? = self.mapView.dequeueReusableAnnotationViewWithIdentifier(customReuseIndetifier) as! CustomAnnotationView?
+            if customAnnotationView == nil{
+                customAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: customReuseIndetifier)
             }
-            poiAnnotationView?.animatesDrop = true
-            poiAnnotationView?.canShowCallout = false
-            poiAnnotationView?.draggable = false;
-            return poiAnnotationView
+            //
+            customAnnotationView!.canShowCallout = false
+            customAnnotationView!.draggable = false;
+            return customAnnotationView
         }
         return nil
     }

@@ -44,7 +44,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     
     @IBAction func logout(sender: AnyObject) {
         AVUser.logOut()
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        self.performSegueWithIdentifier("logout", sender: self)
     }
     
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {

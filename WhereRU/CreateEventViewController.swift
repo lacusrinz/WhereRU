@@ -31,7 +31,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     private var tips:[AMapTip]?
     private var deleteParticipatorByPanGesture:UILongPressGestureRecognizer?
     private var addParticipatorByTapGesture:UITapGestureRecognizer?
-    private var poiAnnotation:MAPointAnnotation?
     
     var participators:[AVUser]?
     var oldParticipators:[AVUser]?
@@ -101,7 +100,6 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         tips = []
         participators = [AVUser]()
-        poiAnnotation = MAPointAnnotation()
         
         if let myEvent = event {
             self.doneButton.setAttributedTitle(NSAttributedString(string: "更新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
@@ -204,12 +202,13 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if (pois == nil || pois.count == 0) {
             return;
         }
+        self.locationMapView.showsUserLocation = false
+        if self.locationMapView.annotations.count > 0 {
+            self.locationMapView.removeAnnotation(self.locationMapView.annotations[0] as! MAPointAnnotation)
+        }
         var annotation:MAPointAnnotation = self.annotationForTouchPoi(pois[0] as? MATouchPoi)!
-        self.locationMapView.removeAnnotation(self.poiAnnotation)
         self.locationMapView.addAnnotation(annotation)
         self.locationMapView.selectAnnotation(annotation, animated: true)
-        self.poiAnnotation = annotation
-        self.locationMapView.showsUserLocation = false
     }
     
     func mapView(mapView: MAMapView!, viewForAnnotation annotation: MAAnnotation!) -> MAAnnotationView! {

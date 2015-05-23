@@ -886,6 +886,7 @@
                         <outlet property="avatar" destination="Mtq-m5-Vxi" id="euL-5W-dUE"/>
                         <outlet property="avatarTap" destination="8aJ-1W-ffe" id="xBT-DS-8Yz"/>
                         <outlet property="name" destination="ehf-8F-bbK" id="TaV-ih-2vJ"/>
+                        <segue destination="Wox-rm-888" kind="presentation" identifier="logout" id="gAM-bq-SKj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0JP-t5-Sje" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -948,7 +949,7 @@
             <objects>
                 <tableViewController extendedLayoutIncludesOpaqueBars="YES" id="ouX-Fw-6Uh" customClass="ContactViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="aS6-3P-a2I">
-                        <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="72" minY="0.0" maxX="0.0" maxY="0.0"/>
