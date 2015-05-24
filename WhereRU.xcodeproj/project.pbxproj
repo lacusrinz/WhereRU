@@ -16,6 +16,7 @@
 		A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; };
 		A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
+		A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */; };
 		A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */; };
 		A88A55A71AFBB9BE00514B13 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */; };
 		A88A55A81AFBB9BE00514B13 /* AddFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88A55A61AFBB9BE00514B13 /* AddFriendTableViewCell.xib */; };
@@ -44,6 +45,7 @@
 		A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */; };
 		A8D8CA1F1AECFC2900836FDC /* ReGeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */; };
 		A8E42AE71B10CD0F00D05FAE /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */; };
+		A8E42AEA1B116FCC00D05FAE /* TargetAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */; };
 		A8E51F9A1AD96A18000F2AFF /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */; };
 		A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */; };
 		A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656D1AA061690077A927 /* InviteViewController.swift */; };
@@ -108,6 +110,7 @@
 		A814C8E119CFF47A00735E7B /* avatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatarImageView.h; sourceTree = "<group>"; };
 		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
+		A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantAnnotation.swift; sourceTree = "<group>"; };
 		A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		A88A55A61AFBB9BE00514B13 /* AddFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendTableViewCell.xib; sourceTree = "<group>"; };
@@ -140,6 +143,7 @@
 		A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDashPolyline.swift; sourceTree = "<group>"; };
 		A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReGeocodeAnnotation.swift; sourceTree = "<group>"; };
 		A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
+		A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAnnotation.swift; sourceTree = "<group>"; };
 		A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		A8F6656D1AA061690077A927 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
@@ -256,10 +260,9 @@
 		A8B8A18F1A124F0C0000FB6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */,
+				A8E42AE81B116F9000D05FAE /* Annotations */,
 				A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */,
 				A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */,
-				A8D8CA181AECF13400836FDC /* GeocodeAnnotation.swift */,
 				A8B8A1901A1250280000FB6F /* User.swift */,
 				A8B991031A4670BA00AB75DB /* Participant.swift */,
 				A8BA6CB81A2D8613004A72A4 /* Friend.swift */,
@@ -362,6 +365,17 @@
 				A8D58A6D19C1EB0F00EEFC98 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A8E42AE81B116F9000D05FAE /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */,
+				A8D8CA181AECF13400836FDC /* GeocodeAnnotation.swift */,
+				A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */,
+				A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */,
+			);
+			name = Annotations;
 			sourceTree = "<group>";
 		};
 		FEE12FCDBF1E43C69B3E5840 /* Frameworks */ = {
@@ -623,12 +637,14 @@
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
 				A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */,
 				A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */,
+				A8E42AEA1B116FCC00D05FAE /* TargetAnnotation.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,
 				A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */,
 				A8D8CA1B1AECF52100836FDC /* CommonUtility.swift in Sources */,
 				A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */,
+				A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
 				A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */,
 				A8D8CA1F1AECFC2900836FDC /* ReGeocodeAnnotation.swift in Sources */,
