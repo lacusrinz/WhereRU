@@ -280,7 +280,7 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_subtitle" translatesAutoresizingMaskIntoConstraints="NO" id="Mad-JH-Eoi">
-                                <rect key="frame" x="229" y="206" width="143" height="21"/>
+                                <rect key="frame" x="229" y="126" width="143" height="21"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wal-Hj-B3i">
                                 <rect key="frame" x="405" y="270" width="60" height="60"/>
@@ -301,6 +301,7 @@
                                     <constraint firstAttribute="width" constant="158" id="RaC-Am-sbn"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="icon_signup">
+                                    <color key="titleColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -329,7 +330,7 @@
                             <constraint firstAttribute="trailing" secondItem="MSQ-bj-ECu" secondAttribute="trailing" id="PI1-iq-dnT"/>
                             <constraint firstItem="tZY-AY-RCn" firstAttribute="leading" secondItem="qpl-JP-kVr" secondAttribute="trailing" constant="8" id="TiK-il-6KV"/>
                             <constraint firstItem="H1H-am-nZP" firstAttribute="leading" secondItem="tZY-AY-RCn" secondAttribute="trailing" constant="-250" id="UKE-GV-qvr"/>
-                            <constraint firstItem="H1H-am-nZP" firstAttribute="top" secondItem="Mad-JH-Eoi" secondAttribute="bottom" constant="8" symbolic="YES" id="Xja-xL-ilq"/>
+                            <constraint firstItem="H1H-am-nZP" firstAttribute="top" secondItem="Mad-JH-Eoi" secondAttribute="bottom" constant="88" id="Xja-xL-ilq"/>
                             <constraint firstItem="VEK-Mz-eOU" firstAttribute="leading" secondItem="FA0-Oi-Gds" secondAttribute="trailing" constant="8" id="chn-JR-nVF"/>
                             <constraint firstItem="H1H-am-nZP" firstAttribute="top" secondItem="VEK-Mz-eOU" secondAttribute="bottom" constant="-51" id="grT-0t-7vB"/>
                             <constraint firstItem="anL-uT-OyJ" firstAttribute="top" secondItem="Jm7-so-f6u" secondAttribute="bottom" constant="482" id="i10-A5-Llc"/>
@@ -1526,7 +1527,7 @@
         <image name="icon_friends" width="31" height="30"/>
         <image name="icon_invite" width="29" height="28"/>
         <image name="icon_settings" width="31" height="30"/>
-        <image name="icon_signup" width="316" height="67"/>
+        <image name="icon_signup" width="316" height="66"/>
         <image name="icon_subtitle" width="143" height="21"/>
         <image name="icon_titile" width="189" height="83"/>
         <image name="icon_user_accept" width="30" height="27"/>
@@ -1539,9 +1540,9 @@
         <image name="signup" width="374" height="211"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pOu-0Q-lSf"/>
-        <segue reference="feN-bk-oyQ"/>
+        <segue reference="sYl-ur-Ych"/>
         <segue reference="aHM-u8-bUA"/>
+        <segue reference="jh8-af-kMz"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

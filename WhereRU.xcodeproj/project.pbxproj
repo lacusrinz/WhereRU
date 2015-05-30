@@ -220,6 +220,14 @@
 			name = IBDesignableViews;
 			sourceTree = "<group>";
 		};
+		A8760B201B1A079C007D39ED /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		A87C80721B00FDAB00A8B6B4 /* Login&Signin */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,7 +244,7 @@
 				A87C80721B00FDAB00A8B6B4 /* Login&Signin */,
 				A8BB16921A6F794D00680CC6 /* Event */,
 				A8BB16931A6F799700680CC6 /* Contact */,
-				A811A23819D407EC0079B7F8 /* MyViewController.swift */,
+				A8760B201B1A079C007D39ED /* Setting */,
 				A8E51F991AD96A18000F2AFF /* MainTabBarController.swift */,
 			);
 			name = Controller;

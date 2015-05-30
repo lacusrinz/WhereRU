@@ -95,10 +95,17 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableData != nil{
+            if tableData!.count == 0 {
+                var emptyMessageLable:UILabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
+                emptyMessageLable.text = "您还没有收到任何邀请\n点击右下角的笔去邀请好友吧！"
+                emptyMessageLable.numberOfLines = 2
+                emptyMessageLable.textAlignment = NSTextAlignment.Center
+                emptyMessageLable.textColor = UIColor.redColor()
+                self.tableView.backgroundView = emptyMessageLable
+            }
             return tableData!.count
-        } else{
-            return 0
         }
+        return 0
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

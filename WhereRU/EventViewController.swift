@@ -27,6 +27,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         
         self.tableView.addLegendHeaderWithRefreshingTarget(self, refreshingAction: "updateEvents")
         self.tableView.header.beginRefreshing()
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -40,10 +41,17 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableData != nil{
+            if tableData!.count == 0 {
+                var emptyMessageLable:UILabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
+                emptyMessageLable.text = "您还没有收到任何邀请\n去加好友接受邀请吧！"
+                emptyMessageLable.numberOfLines = 2
+                emptyMessageLable.textAlignment = NSTextAlignment.Center
+                emptyMessageLable.textColor = UIColor.redColor()
+                self.tableView.backgroundView = emptyMessageLable
+            }
             return tableData!.count
-        } else{
-            return 0
         }
+        return 0
     }
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

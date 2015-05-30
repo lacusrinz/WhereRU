@@ -66,6 +66,14 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.tableData.count == 0 {
+            var emptyMessageLable:UILabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
+            emptyMessageLable.text = "点击右上角按钮，快去添加好友吧！"
+            emptyMessageLable.numberOfLines = 2
+            emptyMessageLable.textAlignment = NSTextAlignment.Center
+            emptyMessageLable.textColor = UIColor.redColor()
+            self.tableView.backgroundView = emptyMessageLable
+        }
         return self.tableData.count
     }
     
