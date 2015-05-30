@@ -88,6 +88,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         participatorCollectionView.dataSource = self
         
         locationSearchBar.delegate = self
+        locationSearchBar.tintColor = UIColor.blackColor()
         
         search = AMapSearchAPI(searchKey: MAMapServices.sharedServices().apiKey, delegate: self)
         
