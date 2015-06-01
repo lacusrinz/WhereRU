@@ -67,7 +67,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     }
     
     func startPaint() {
-        self.participatorsPaintTimer = NSTimer(timeInterval: 3, target: self, selector: "paint", userInfo: nil, repeats: true)
+        self.participatorsPaintTimer = NSTimer(timeInterval: 15, target: self, selector: "paint", userInfo: nil, repeats: true)
     }
     
     func stopPaint() {
@@ -91,6 +91,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
                     var point: ParticipantAnnotation = ParticipantAnnotation()
                     point._coordinate = CLLocationCoordinate2D(latitude: hisCoordinate!.latitude, longitude: hisCoordinate!.longitude)
                     point._avatarImage = self.allParticipantsAvatars![i]
+                    point._name = self.participators![i].username
                     allParticipantsPoints!.append(point)
                 }
             }
@@ -154,6 +155,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
                 customAnnotationView = CustomAnnotationView(annotation: annotation, reuseIdentifier: customReuseIndetifier)
             }
             customAnnotationView!.avatarImageView.image = (annotation as! ParticipantAnnotation)._avatarImage
+            customAnnotationView!.name = (annotation as! ParticipantAnnotation)._name
             customAnnotationView!.canShowCallout = false
             customAnnotationView!.draggable = false;
             return customAnnotationView
@@ -171,4 +173,5 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         }
         return nil
     }
+    
 }

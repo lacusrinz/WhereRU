@@ -13,6 +13,7 @@ class ParticipantAnnotation: NSObject, MAAnnotation {
     var _subtitle:String?
     var _coordinate:CLLocationCoordinate2D?
     var _avatarImage:UIImage?
+    var _name:String?
     
     func title() -> String! {
         return self._title!

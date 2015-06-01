@@ -14,6 +14,8 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     private var rowsCount:NSInteger = 0
     private var selectedRowNumber:Int = 0
     
+    private var emptyMessageLabel:UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
@@ -26,6 +28,12 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         
         self.tableView.addLegendHeaderWithRefreshingTarget(self, refreshingAction: "updateEvents")
         self.tableView.header.beginRefreshing()
+        
+        self.emptyMessageLabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
+        self.emptyMessageLabel!.text = "您还没有收到任何邀请\n点击右下角的笔去邀请好友吧！"
+        self.emptyMessageLabel!.numberOfLines = 2
+        self.emptyMessageLabel!.textAlignment = NSTextAlignment.Center
+        self.emptyMessageLabel!.textColor = UIColor.redColor()
         
     }
     
@@ -96,12 +104,9 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableData != nil{
             if tableData!.count == 0 {
-                var emptyMessageLable:UILabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
-                emptyMessageLable.text = "您还没有收到任何邀请\n点击右下角的笔去邀请好友吧！"
-                emptyMessageLable.numberOfLines = 2
-                emptyMessageLable.textAlignment = NSTextAlignment.Center
-                emptyMessageLable.textColor = UIColor.redColor()
-                self.tableView.backgroundView = emptyMessageLable
+                self.tableView.backgroundView = self.emptyMessageLabel
+            } else {
+                self.tableView.backgroundView = UIView()
             }
             return tableData!.count
         }

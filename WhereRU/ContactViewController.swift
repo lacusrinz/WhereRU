@@ -14,6 +14,8 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     var myFriendsObj:AVObject?
     var myFriends:[AVUser]?
     
+    private var emptyMessageLabel:UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +31,12 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         
         self.tableView.addLegendHeaderWithRefreshingTarget(self, refreshingAction: "updateFriends")
         self.tableView.header.beginRefreshing()
+        
+        self.emptyMessageLabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
+        self.emptyMessageLabel!.text = "点击右上角按钮，快去添加好友吧！"
+        self.emptyMessageLabel!.numberOfLines = 2
+        self.emptyMessageLabel!.textAlignment = NSTextAlignment.Center
+        self.emptyMessageLabel!.textColor = UIColor.redColor()
     }
     
     func updateFriends() {
@@ -46,7 +54,6 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
                         self.tableView.reloadData()
                     }
                 })
-                
             } else {
                 self.myFriendsObj = nil
             }
@@ -67,12 +74,9 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.tableData.count == 0 {
-            var emptyMessageLable:UILabel = UILabel(frame: CGRectMake(0, self.tableView.frame.origin.y/2-5, self.tableView.frame.width, 10))
-            emptyMessageLable.text = "点击右上角按钮，快去添加好友吧！"
-            emptyMessageLable.numberOfLines = 2
-            emptyMessageLable.textAlignment = NSTextAlignment.Center
-            emptyMessageLable.textColor = UIColor.redColor()
-            self.tableView.backgroundView = emptyMessageLable
+            self.tableView.backgroundView = emptyMessageLabel
+        } else {
+            self.tableView.backgroundView = UIView()
         }
         return self.tableData.count
     }
