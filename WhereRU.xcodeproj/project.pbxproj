@@ -18,6 +18,7 @@
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
 		A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */; };
 		A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */; };
+		A87ED7971B1E00DA0059A1A3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87ED7961B1E00DA0059A1A3 /* Friend.swift */; };
 		A88A55A71AFBB9BE00514B13 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */; };
 		A88A55A81AFBB9BE00514B13 /* AddFriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A88A55A61AFBB9BE00514B13 /* AddFriendTableViewCell.xib */; };
 		A8ABCCE01A58115800965031 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8ABCCDF1A58115800965031 /* Event.swift */; };
@@ -25,9 +26,7 @@
 		A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */; };
 		A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1261A07C7890000FB6F /* ContactViewController.swift */; };
 		A8B8A1911A1250280000FB6F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1901A1250280000FB6F /* User.swift */; };
-		A8B991041A4670BA00AB75DB /* Participant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B991031A4670BA00AB75DB /* Participant.swift */; };
 		A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA437B19FD446A004A8300 /* EventViewController.swift */; };
-		A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA6CB81A2D8613004A72A4 /* Friend.swift */; };
 		A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */; };
 		A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */; };
 		A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */; };
@@ -112,6 +111,7 @@
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
 		A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantAnnotation.swift; sourceTree = "<group>"; };
 		A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
+		A87ED7961B1E00DA0059A1A3 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
 		A88A55A61AFBB9BE00514B13 /* AddFriendTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddFriendTableViewCell.xib; sourceTree = "<group>"; };
 		A8ABCCDF1A58115800965031 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -119,9 +119,7 @@
 		A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1261A07C7890000FB6F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		A8B8A1901A1250280000FB6F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		A8B991031A4670BA00AB75DB /* Participant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Participant.swift; sourceTree = "<group>"; };
 		A8BA437B19FD446A004A8300 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
-		A8BA6CB81A2D8613004A72A4 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventViewController.swift; sourceTree = "<group>"; };
 		A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantsTableViewController.swift; sourceTree = "<group>"; };
 		A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantTableViewCell.swift; sourceTree = "<group>"; };
@@ -268,12 +266,11 @@
 		A8B8A18F1A124F0C0000FB6F /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A87ED7961B1E00DA0059A1A3 /* Friend.swift */,
 				A8E42AE81B116F9000D05FAE /* Annotations */,
 				A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */,
 				A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */,
 				A8B8A1901A1250280000FB6F /* User.swift */,
-				A8B991031A4670BA00AB75DB /* Participant.swift */,
-				A8BA6CB81A2D8613004A72A4 /* Friend.swift */,
 				A8ABCCDF1A58115800965031 /* Event.swift */,
 			);
 			name = Model;
@@ -628,13 +625,11 @@
 			files = (
 				A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */,
 				A8B8A12119FF0D310000FB6F /* EventTableViewCell.swift in Sources */,
-				A8BA6CB91A2D8613004A72A4 /* Friend.swift in Sources */,
 				A814C8D719CFECB600735E7B /* SigninViewController.swift in Sources */,
 				A8BDE73B1A74E33900EC5785 /* MapDetailViewController.swift in Sources */,
 				A8E42AE71B10CD0F00D05FAE /* CustomAnnotationView.swift in Sources */,
 				A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */,
 				A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */,
-				A8B991041A4670BA00AB75DB /* Participant.swift in Sources */,
 				A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */,
 				A8E51F9A1AD96A18000F2AFF /* MainTabBarController.swift in Sources */,
 				A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */,
@@ -659,6 +654,7 @@
 				A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */,
 				A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */,
 				A806B91C1A341F11004C8D9F /* CreateEventViewController.swift in Sources */,
+				A87ED7971B1E00DA0059A1A3 /* Friend.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

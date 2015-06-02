@@ -119,6 +119,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         var hsdpvc:HSDatePickerViewController = HSDatePickerViewController()
         hsdpvc.delegate = self
         hsdpvc.date = NSDate()
+        hsdpvc.confirmButtonTitle = "确定"
+        hsdpvc.backButtonTitle = "返回"
         presentViewController(hsdpvc, animated: true, completion: nil)
     }
     
@@ -441,8 +443,24 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             }
             
             event!.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
-                SVProgressHUD.showSuccessWithStatus("跟新成功！")
-                self.delegate!.CreateEventViewControllerDone(self)
+                if success {
+                    var query:AVQuery = AVQuery(className: "UserStatusForEvent")
+                    query.whereKey("event", equalTo: self.event!.obj)
+                    query.deleteAllInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
+                        if success {
+                            for participator:AVUser in self.participators! {
+                                var status:AVObject = AVObject(className: "UserStatusForEvent")
+                                var userRelation:AVRelation = status.relationforKey("user")
+                                userRelation.addObject(participator)
+                                var eventRelation:AVRelation = status.relationforKey("event")
+                                eventRelation.addObject(self.event!.obj)
+                                status.save()
+                            }
+                            SVProgressHUD.showSuccessWithStatus("跟新成功！")
+                            self.delegate!.CreateEventViewControllerDone(self)
+                        }
+                    })
+                }
             })
 
         } else{
@@ -473,18 +491,16 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 
                 newEvent.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                     if success {
-                        var status:AVObject = AVObject(className: "UserStatusForEvent")
-                        var eventRelation:AVRelation = status.relationforKey("event")
-                        eventRelation.addObject(newEvent)
-                        
-                        var userRelation:AVRelation = status.relationforKey("user")
                         for participator:AVUser in self.participators! {
+                            var status:AVObject = AVObject(className: "UserStatusForEvent")
+                            var userRelation:AVRelation = status.relationforKey("user")
                             userRelation.addObject(participator)
+                            var eventRelation:AVRelation = status.relationforKey("event")
+                            eventRelation.addObject(newEvent)
+                            status.save()
                         }
-                        status.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
-                            SVProgressHUD.showSuccessWithStatus("创建成功！")
-                            self.delegate!.CreateEventViewControllerDone(self)
-                        })
+                        SVProgressHUD.showSuccessWithStatus("创建成功！")
+                        self.delegate!.CreateEventViewControllerDone(self)
                     }
                 })
             }
