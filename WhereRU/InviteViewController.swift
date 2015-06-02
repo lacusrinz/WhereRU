@@ -55,6 +55,8 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         self.tableData!.removeAll(keepCapacity: true)
         var query:AVQuery? = AVQuery(className: "Event")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
+        query!.whereKey("date", greaterThanOrEqualTo: NSDate())
+        query!.orderByAscending("date")
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
             } else {
