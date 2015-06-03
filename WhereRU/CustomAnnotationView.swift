@@ -2,7 +2,7 @@
 //  CustomAnnotationView.swift
 //  WhereRU
 //
-//  Created by 钱志浩 on 15/5/23.
+//  Created by RInz on 15/5/23.
 //  Copyright (c) 2015年 RInz. All rights reserved.
 //
 

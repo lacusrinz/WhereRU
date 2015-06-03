@@ -2,7 +2,7 @@
 //  MainTabBarController.swift
 //  WhereRU
 //
-//  Created by 钱志浩 on 15/4/11.
+//  Created by RInz on 15/4/11.
 //  Copyright (c) 2015年 RInz. All rights reserved.
 //
 
