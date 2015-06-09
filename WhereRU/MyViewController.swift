@@ -44,6 +44,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     
     @IBAction func logout(sender: AnyObject) {
         AVUser.logOut()
+        //TODO: delete archive files
         self.performSegueWithIdentifier("logout", sender: self)
     }
     

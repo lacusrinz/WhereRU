@@ -1,14 +1,14 @@
 PODS:
-  - AMap3DMap (2.5.0)
+  - AMap3DMap (2.5.1)
   - AMapSearch (2.5.0)
-  - AVOSCloud (3.0.3)
+  - AVOSCloud (3.1.2.2)
   - FoldingTabBar (1.0.0)
   - HexColors (2.2.1)
   - HSDatePickerViewController (1.0.1)
-  - IQKeyboardManager (3.2.3)
-  - MJRefresh (1.4.5)
+  - IQKeyboardManager (3.2.4)
+  - MJRefresh (1.4.7)
   - Reachability (3.1.1)
-  - RSKImageCropper (1.1.3)
+  - RSKImageCropper (1.1.5)
   - SDWebImage (3.7.2):
     - SDWebImage/Core (= 3.7.2)
   - SDWebImage/Core (3.7.2)
@@ -36,16 +36,16 @@ DEPENDENCIES:
   - UIActivityIndicator-for-SDWebImage (~> 1.2)
 
 SPEC CHECKSUMS:
-  AMap3DMap: 9f6274e39cd8937b5651f868c35deef9a37edce3
+  AMap3DMap: 63349e4f7b6f097bce63853b24fe92ea0603a8f8
   AMapSearch: eafa5a749b1078a46f15e6108e88307f78f75e9b
-  AVOSCloud: 48b94343601a582928e560d734caa0c8dc75a612
+  AVOSCloud: bdcd5f3ad4e56bc9027006b4d40f19d16998d1ba
   FoldingTabBar: 463d247453a2ba826ae79f5be1e6b8b93b6aa0ce
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
-  IQKeyboardManager: 6ca5c54e3776eb54af4c7caf515833f3cd761d59
-  MJRefresh: 4b24394e577ea399fbc926e5b6072317aae2c152
+  IQKeyboardManager: 555b1231fefafb21b19278d7cca72986a27b748b
+  MJRefresh: 6b140993028fa30f1fcb88e82925a7c7911415cf
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
-  RSKImageCropper: 283bb4f39ced96cc9023ad3b7bc7bc68755845bb
+  RSKImageCropper: 603833e59d3bd9836fd66b466f7f457b7cd671a1
   SDWebImage: 71b7cdc1d1721d6a82ed62889030225f2c249e29
   SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579

@@ -16,8 +16,20 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     
     private var emptyMessageLabel:UILabel?
     
+    private var documentPath:String?
+    
+    func filePath(filename: NSString) -> String {
+        var mypaths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
+        var mydocpath:NSString = mypaths.objectAtIndex(0) as! NSString
+        var filepath = mydocpath.stringByAppendingPathComponent(filename as String)
+        return filepath
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        TSMessage.setDefaultViewController(self)
+        
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
@@ -35,6 +47,40 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         self.emptyMessageLabel!.textAlignment = NSTextAlignment.Center
         self.emptyMessageLabel!.textColor = UIColor.redColor()
         
+        documentPath = self.filePath("invite.plist")
+        
+        var fileManage:NSFileManager = NSFileManager()
+        if fileManage.fileExistsAtPath(documentPath!) {
+            var allObjs:[NSDictionary] = NSKeyedUnarchiver.unarchiveObjectWithFile(documentPath!) as! [NSDictionary]
+            println("read:\(allObjs)")
+            for allObj in allObjs {
+                var obj:AVObject = AVObject(className: "Event")
+                obj.objectFromDictionary(allObj as [NSObject : AnyObject])
+                var event:Event = Event()
+                event.obj = obj
+                
+                //FIXME: cannot work when offline
+                var ownerRelation = obj.objectForKey("owner") as! AVRelation
+                var ownerQuery = ownerRelation.query()
+                event.owner = ownerQuery.getFirstObject() as? AVUser
+                
+                var participatersRelation = obj.objectForKey("participater") as! AVRelation
+                var participatersQuery = participatersRelation.query()
+                participatersQuery.findObjectsInBackgroundWithBlock({ (part:[AnyObject]!, error:NSError!) -> Void in
+                    event.participants = part as? [AVUser]
+                })
+                
+                event.needLocation = obj.objectForKey("needLocation") as! Bool
+                event.acceptMemberCount = obj.objectForKey("acceptMemberCount") as? Int
+                event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
+                event.date = obj.objectForKey("date") as? NSDate
+                event.eventID = obj.objectId as String
+                var point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
+                event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+                event.message = obj.objectForKey("message") as? String
+                self.tableData!.append(event)
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -52,15 +98,19 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     
     // MARK: - MJRefresh func
     func updateEvents() {
-        self.tableData!.removeAll(keepCapacity: true)
+        var allObjs:Array = [NSDictionary]()
+        
         var query:AVQuery? = AVQuery(className: "Event")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.whereKey("date", greaterThanOrEqualTo: NSDate())
         query!.orderByAscending("date")
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
+                TSMessage.showNotificationWithTitle("错误", subtitle: error!.localizedDescription, type: TSMessageNotificationType.Error)
+                self.tableView.header.endRefreshing()
             } else {
                 if objects.count != 0 {
+                    self.tableData!.removeAll(keepCapacity: true)
                     for (var i=0; i<objects.count; ++i) {
                         var event:Event = Event()
                         var obj = objects[i] as! AVObject
@@ -85,8 +135,12 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
                         event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
                         event.message = obj.objectForKey("message") as? String
                         self.tableData!.append(event)
+                        //prepare archive
+                        allObjs.append(obj.dictionaryForObject())
                     }
                     self.tableView.reloadData();
+                    //archive
+                    NSKeyedArchiver.archiveRootObject(allObjs, toFile: self.documentPath!)
                 }
                 self.tableView.header.endRefreshing()
             }
