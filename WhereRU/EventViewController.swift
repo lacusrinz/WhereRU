@@ -15,13 +15,6 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     private var selectedRowNumber:Int = 0
     private var emptyMessageLabel:UILabel?
     private var documentPath:String?
-    
-    func filePath(filename: NSString) -> String {
-        var mypaths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        var mydocpath:NSString = mypaths.objectAtIndex(0) as! NSString
-        var filepath = mydocpath.stringByAppendingPathComponent(filename as String)
-        return filepath
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +39,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
         self.emptyMessageLabel!.textAlignment = NSTextAlignment.Center
         self.emptyMessageLabel!.textColor = UIColor.redColor()
 
-        documentPath = self.filePath("invited.plist")
+        documentPath = Utility.filePath("invited.plist")
         
         var fileManage:NSFileManager = NSFileManager()
         if fileManage.fileExistsAtPath(documentPath!) {

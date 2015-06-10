@@ -18,13 +18,6 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     
     private var documentPath:String?
     
-    func filePath(filename: NSString) -> String {
-        var mypaths:NSArray = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        var mydocpath:NSString = mypaths.objectAtIndex(0) as! NSString
-        var filepath = mydocpath.stringByAppendingPathComponent(filename as String)
-        return filepath
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,7 +40,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         self.emptyMessageLabel!.textAlignment = NSTextAlignment.Center
         self.emptyMessageLabel!.textColor = UIColor.redColor()
         
-        documentPath = self.filePath("invite.plist")
+        documentPath = Utility.filePath("invite.plist")
         
         var fileManage:NSFileManager = NSFileManager()
         if fileManage.fileExistsAtPath(documentPath!) {
