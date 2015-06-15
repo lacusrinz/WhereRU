@@ -21,8 +21,6 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        TSMessage.setDefaultViewController(self)
-        
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
@@ -99,7 +97,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         query!.orderByAscending("date")
         query!.findObjectsInBackgroundWithBlock { (objects:[AnyObject]!, error:NSError?) -> Void in
             if (error != nil) {
-                TSMessage.showNotificationWithTitle("错误", subtitle: error!.localizedDescription, type: TSMessageNotificationType.Error)
+                TSMessage.showNotificationInViewController(self, title: "错误", subtitle: "断网啦", type:TSMessageNotificationType.Error)
                 self.tableView.header.endRefreshing()
             } else {
                 if objects.count != 0 {

@@ -14,6 +14,8 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
     var myFriendsObj:AVObject?
     var myFriends:[AVUser]?
     
+    private var documentPath:String?
+    
     private var emptyMessageLabel:UILabel?
     
     override func viewDidLoad() {
@@ -37,9 +39,29 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
         self.emptyMessageLabel!.numberOfLines = 2
         self.emptyMessageLabel!.textAlignment = NSTextAlignment.Center
         self.emptyMessageLabel!.textColor = UIColor.redColor()
+        
+        documentPath = Utility.filePath("friends.plist")
+        
+        var fileManage:NSFileManager = NSFileManager()
+        if fileManage.fileExistsAtPath(documentPath!) {
+            var allObjs:[NSDictionary] = NSKeyedUnarchiver.unarchiveObjectWithFile(documentPath!) as! [NSDictionary]
+            var allFriends = [AVUser]()
+            for allObj in allObjs {
+                var obj:AVUser = AVUser()
+                obj.objectFromDictionary(allObj as [NSObject : AnyObject])
+                allFriends.append(obj)
+            }
+            self.myFriends = allFriends
+            self.tableData = allFriends
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        //
     }
     
     func updateFriends() {
+        var allObjs:Array = [NSDictionary]()
         var query = AVQuery(className: "Friends")
         query.whereKey("from", equalTo: AVUser.currentUser())
         query.findObjectsInBackgroundWithBlock { (obj:[AnyObject]!, error:NSError!) -> Void in
@@ -52,9 +74,15 @@ class ContactViewController: UITableViewController, SWTableViewCellDelegate, YAL
                         self.myFriends = friends as? [AVUser]
                         self.tableData = friends as! [AVUser]
                         self.tableView.reloadData()
+                        
+                        for friend:AVUser in self.myFriends! {
+                            allObjs.append(friend.dictionaryForObject())
+                        }
+                        NSKeyedArchiver.archiveRootObject(allObjs, toFile: self.documentPath!)
                     }
                 })
             } else {
+                TSMessage.showNotificationInViewController(self, title: "错误", subtitle: "断网啦", type:TSMessageNotificationType.Error)
                 self.myFriendsObj = nil
             }
         }
