@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AVOSCloud.setApplicationId("939y6w6xb1a0q3u8a2up63re3xdmiis9d6mo8lq7l1pqop8v", clientKey: "vben8bjx52stj4yo81tnq50djpurxr5ptod1qtawq7u629m0")
         AVAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
+        var setting:UIUserNotificationSettings = UIUserNotificationSettings(forTypes:UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, categories: nil)
+        application.registerUserNotificationSettings(setting)
+        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         var storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         var welcomeBackViewController:WelcomeBackViewController = storyboard.instantiateViewControllerWithIdentifier("welcomeBackViewController") as! WelcomeBackViewController
@@ -48,6 +51,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(application: UIApplication, didRegisterUserNotificationSettings notificationSettings: UIUserNotificationSettings) {
+        application.registerForRemoteNotifications()
+    }
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        var currentInstallation:AVInstallation = AVInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.saveInBackground()
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+        print("cena\(error)")
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
