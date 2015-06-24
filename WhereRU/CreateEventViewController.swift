@@ -40,6 +40,8 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        AVPush.setProductionMode(false)
+        
         TSMessage.setDefaultViewController(self)
         
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
@@ -456,6 +458,15 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                                 eventRelation.addObject(self.event!.obj)
                                 status.save()
                             }
+                            
+                            var pushQuery:AVQuery = AVInstallation.query()
+                            pushQuery.whereKey("deviceOwner", containedIn: self.participators)
+                            
+                            var push:AVPush = AVPush()
+                            push.setQuery(pushQuery)
+                            push.setMessage("您收到了新的邀约！请注意查收")
+                            push.sendPushInBackground()
+                            
                             SVProgressHUD.showSuccessWithStatus("跟新成功！")
                             self.delegate!.CreateEventViewControllerDone(self)
                         }
@@ -499,6 +510,14 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                             eventRelation.addObject(newEvent)
                             status.save()
                         }
+                        
+                        var pushQuery:AVQuery = AVInstallation.query()
+                        pushQuery.whereKey("deviceOwner", containedIn: self.participators)
+                        var push:AVPush = AVPush()
+                        push.setQuery(pushQuery)
+                        push.setMessage("您收到了新的邀约！请注意查收")
+                        push.sendPushInBackground()
+                        
                         SVProgressHUD.showSuccessWithStatus("创建成功！")
                         self.delegate!.CreateEventViewControllerDone(self)
                     }

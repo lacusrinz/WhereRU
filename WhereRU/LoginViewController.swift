@@ -26,6 +26,10 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
         AVUser.logInWithUsernameInBackground(nicknameTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
             if (user != nil) {
                 println("login success")
+                
+                var currentInstallation:AVInstallation = AVInstallation.currentInstallation()
+                currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")
+                
                 self.performSegueWithIdentifier("login", sender: self)
             } else {
                 println("failed:\(error!.description)")

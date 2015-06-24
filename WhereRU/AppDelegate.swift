@@ -58,11 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         var currentInstallation:AVInstallation = AVInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")
         currentInstallation.saveInBackground()
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("cena\(error)")
+        //
     }
 
     func applicationWillResignActive(application: UIApplication) {
