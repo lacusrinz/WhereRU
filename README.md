@@ -7,4 +7,9 @@ Writing by swift with StoryBoard.
 
 ![gif](http://7xj2sb.com1.z0.glb.clouddn.com/0.0.6.gif)
 
-This APP now in internal testing, if you want to join the test, just send me your email and I'll add you to testfligth testing.  
+#ToDo:  
+Redesign UI and UX and new UI resource is keeping uploading.  
+
+#Participate:
+If you have interesting to work with me for this project, just Email me.
+
