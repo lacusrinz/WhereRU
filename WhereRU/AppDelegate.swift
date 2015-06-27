@@ -31,22 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var setting:UIUserNotificationSettings = UIUserNotificationSettings(forTypes:UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, categories: nil)
         application.registerUserNotificationSettings(setting)
         
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        var storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var welcomeBackViewController:WelcomeBackViewController = storyboard.instantiateViewControllerWithIdentifier("welcomeBackViewController") as! WelcomeBackViewController
-        var loginViewController:LoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! LoginViewController
-        
-        var currentUser:AVUser? = AVUser.currentUser()
-        if (currentUser != nil) {
-            self.window!.rootViewController = welcomeBackViewController
-            var avatarObject: AnyObject! = currentUser!.objectForKey("avatarFile")
-            if avatarObject != nil {
-                var avatarData = avatarObject.getData()
-                welcomeBackViewController.image = UIImage(data: avatarData)
-            }
-        } else {
-            self.window!.rootViewController = loginViewController
-        }
+//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//        var storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        var welcomeBackViewController:WelcomeBackViewController = storyboard.instantiateViewControllerWithIdentifier("welcomeBackViewController") as! WelcomeBackViewController
+//        var loginViewController:LoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! LoginViewController
+//        
+//        var currentUser:AVUser? = AVUser.currentUser()
+//        if (currentUser != nil) {
+//            self.window!.rootViewController = welcomeBackViewController
+//            var avatarObject: AnyObject! = currentUser!.objectForKey("avatarFile")
+//            if avatarObject != nil {
+//                var avatarData = avatarObject.getData()
+//                welcomeBackViewController.image = UIImage(data: avatarData)
+//            }
+//        } else {
+//            self.window!.rootViewController = loginViewController
+//        }
         
         return true
     }
