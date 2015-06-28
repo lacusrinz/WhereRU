@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         MAMapServices.sharedServices().apiKey = apiKey
         
-        var navBackgroundImage:UIImage = UIImage(named: "navigationBar_BackgroundColorPix")!
+        var navBackgroundImage:UIImage = UIImage(named: "white")!
         UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
         
         AVOSCloud.setApplicationId("939y6w6xb1a0q3u8a2up63re3xdmiis9d6mo8lq7l1pqop8v", clientKey: "vben8bjx52stj4yo81tnq50djpurxr5ptod1qtawq7u629m0")
