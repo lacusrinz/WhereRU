@@ -48,6 +48,20 @@
                ReferencedContainer = "container:WhereRU.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A8C30DC01B419B2E009435CB"
+               BuildableName = "calendarViewTests.xctest"
+               BlueprintName = "calendarViewTests"
+               ReferencedContainer = "container:WhereRU.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -73,6 +87,16 @@
                BlueprintIdentifier = "A814C8E619CFF47A00735E7B"
                BuildableName = "avatarImageViewTests.xctest"
                BlueprintName = "avatarImageViewTests"
+               ReferencedContainer = "container:WhereRU.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A8C30DC01B419B2E009435CB"
+               BuildableName = "calendarViewTests.xctest"
+               BlueprintName = "calendarViewTests"
                ReferencedContainer = "container:WhereRU.xcodeproj">
             </BuildableReference>
          </TestableReference>

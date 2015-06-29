@@ -32,6 +32,9 @@
 		A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */; };
 		A8BDE73B1A74E33900EC5785 /* MapDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDE73A1A74E33900EC5785 /* MapDetailViewController.swift */; };
 		A8C25CF31A7B456F001EFDE1 /* CommonConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */; };
+		A8C30DBC1B419B2E009435CB /* calendarView.h in Headers */ = {isa = PBXBuildFile; fileRef = A8C30DBB1B419B2E009435CB /* calendarView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A8C30DCE1B419B2E009435CB /* calendarView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8C30DB71B419B2E009435CB /* calendarView.framework */; };
+		A8C30DCF1B419B2E009435CB /* calendarView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A8C30DB71B419B2E009435CB /* calendarView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */; };
 		A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */; };
 		A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A5A19C1EB0F00EEFC98 /* LoginViewController.swift */; };
@@ -53,13 +56,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		A814C8E819CFF47A00735E7B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A8D58A4819C1EB0F00EEFC98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A8D58A4F19C1EB0F00EEFC98;
-			remoteInfo = WhereRU;
-		};
 		A814C8EF19CFF47A00735E7B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A8D58A4819C1EB0F00EEFC98 /* Project object */;
@@ -73,6 +69,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = A814C8DC19CFF47A00735E7B;
 			remoteInfo = avatarImageView;
+		};
+		A8C30DCC1B419B2E009435CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A8D58A4819C1EB0F00EEFC98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A8C30DB61B419B2E009435CB;
+			remoteInfo = calendarView;
 		};
 		A8D58A6919C1EB0F00EEFC98 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -91,6 +94,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */,
+				A8C30DCF1B419B2E009435CB /* calendarView.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -108,7 +112,6 @@
 		A814C8DD19CFF47A00735E7B /* avatarImageView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = avatarImageView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C8E019CFF47A00735E7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A814C8E119CFF47A00735E7B /* avatarImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = avatarImageView.h; sourceTree = "<group>"; };
-		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
 		A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantAnnotation.swift; sourceTree = "<group>"; };
 		A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +129,9 @@
 		A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantTableViewCell.swift; sourceTree = "<group>"; };
 		A8BDE73A1A74E33900EC5785 /* MapDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailViewController.swift; sourceTree = "<group>"; };
 		A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonConstant.swift; sourceTree = "<group>"; };
+		A8C30DB71B419B2E009435CB /* calendarView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = calendarView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8C30DBA1B419B2E009435CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A8C30DBB1B419B2E009435CB /* calendarView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = calendarView.h; sourceTree = "<group>"; };
 		A8D58A5019C1EB0F00EEFC98 /* WhereRU.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WhereRU.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A5419C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -159,7 +165,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A814C8E419CFF47A00735E7B /* Frameworks */ = {
+		A8C30DB31B419B2E009435CB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -171,6 +177,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */,
+				A8C30DCE1B419B2E009435CB /* calendarView.framework in Frameworks */,
 				57BE627E684A45D69E5ECD76 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,6 +222,7 @@
 		A814C90419D01BF100735E7B /* IBDesignableViews */ = {
 			isa = PBXGroup;
 			children = (
+				A8C30DB81B419B2E009435CB /* calendarView */,
 				A814C8DE19CFF47A00735E7B /* avatarImageView */,
 			);
 			name = IBDesignableViews;
@@ -309,6 +317,23 @@
 			name = Contact;
 			sourceTree = "<group>";
 		};
+		A8C30DB81B419B2E009435CB /* calendarView */ = {
+			isa = PBXGroup;
+			children = (
+				A8C30DBB1B419B2E009435CB /* calendarView.h */,
+				A8C30DB91B419B2E009435CB /* Supporting Files */,
+			);
+			path = calendarView;
+			sourceTree = "<group>";
+		};
+		A8C30DB91B419B2E009435CB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A8C30DBA1B419B2E009435CB /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		A8D58A4719C1EB0F00EEFC98 = {
 			isa = PBXGroup;
 			children = (
@@ -327,7 +352,7 @@
 				A8D58A5019C1EB0F00EEFC98 /* WhereRU.app */,
 				A8D58A6819C1EB0F00EEFC98 /* WhereRUTests.xctest */,
 				A814C8DD19CFF47A00735E7B /* avatarImageView.framework */,
-				A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */,
+				A8C30DB71B419B2E009435CB /* calendarView.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -405,6 +430,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A8C30DB41B419B2E009435CB /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A8C30DBC1B419B2E009435CB /* calendarView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -426,23 +459,23 @@
 			productReference = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		A814C8E619CFF47A00735E7B /* avatarImageViewTests */ = {
+		A8C30DB61B419B2E009435CB /* calendarView */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A814C8F919CFF47A00735E7B /* Build configuration list for PBXNativeTarget "avatarImageViewTests" */;
+			buildConfigurationList = A8C30DD41B419B2E009435CB /* Build configuration list for PBXNativeTarget "calendarView" */;
 			buildPhases = (
-				A814C8E319CFF47A00735E7B /* Sources */,
-				A814C8E419CFF47A00735E7B /* Frameworks */,
-				A814C8E519CFF47A00735E7B /* Resources */,
+				A8C30DB21B419B2E009435CB /* Sources */,
+				A8C30DB31B419B2E009435CB /* Frameworks */,
+				A8C30DB41B419B2E009435CB /* Headers */,
+				A8C30DB51B419B2E009435CB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A814C8E919CFF47A00735E7B /* PBXTargetDependency */,
 			);
-			name = avatarImageViewTests;
-			productName = avatarImageViewTests;
-			productReference = A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
+			name = calendarView;
+			productName = calendarView;
+			productReference = A8C30DB71B419B2E009435CB /* calendarView.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 		A8D58A4F19C1EB0F00EEFC98 /* WhereRU */ = {
 			isa = PBXNativeTarget;
@@ -460,6 +493,7 @@
 			dependencies = (
 				A814C8F019CFF47A00735E7B /* PBXTargetDependency */,
 				A814C8F419CFF47A00735E7B /* PBXTargetDependency */,
+				A8C30DCD1B419B2E009435CB /* PBXTargetDependency */,
 			);
 			name = WhereRU;
 			productName = WhereRU;
@@ -497,9 +531,9 @@
 						CreatedOnToolsVersion = 6.0.1;
 						DevelopmentTeam = SNC6RGUH57;
 					};
-					A814C8E619CFF47A00735E7B = {
-						CreatedOnToolsVersion = 6.0.1;
-						TestTargetID = A8D58A4F19C1EB0F00EEFC98;
+					A8C30DB61B419B2E009435CB = {
+						CreatedOnToolsVersion = 6.3.2;
+						DevelopmentTeam = SNC6RGUH57;
 					};
 					A8D58A4F19C1EB0F00EEFC98 = {
 						CreatedOnToolsVersion = 6.0;
@@ -533,7 +567,7 @@
 				A8D58A4F19C1EB0F00EEFC98 /* WhereRU */,
 				A8D58A6719C1EB0F00EEFC98 /* WhereRUTests */,
 				A814C8DC19CFF47A00735E7B /* avatarImageView */,
-				A814C8E619CFF47A00735E7B /* avatarImageViewTests */,
+				A8C30DB61B419B2E009435CB /* calendarView */,
 			);
 		};
 /* End PBXProject section */
@@ -546,7 +580,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A814C8E519CFF47A00735E7B /* Resources */ = {
+		A8C30DB51B419B2E009435CB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -615,7 +649,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A814C8E319CFF47A00735E7B /* Sources */ = {
+		A8C30DB21B419B2E009435CB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -673,11 +707,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A814C8E919CFF47A00735E7B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A8D58A4F19C1EB0F00EEFC98 /* WhereRU */;
-			targetProxy = A814C8E819CFF47A00735E7B /* PBXContainerItemProxy */;
-		};
 		A814C8F019CFF47A00735E7B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = A814C8DC19CFF47A00735E7B /* avatarImageView */;
@@ -687,6 +716,11 @@
 			isa = PBXTargetDependency;
 			target = A814C8DC19CFF47A00735E7B /* avatarImageView */;
 			targetProxy = A814C8F319CFF47A00735E7B /* PBXContainerItemProxy */;
+		};
+		A8C30DCD1B419B2E009435CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A8C30DB61B419B2E009435CB /* calendarView */;
+			targetProxy = A8C30DCC1B419B2E009435CB /* PBXContainerItemProxy */;
 		};
 		A8D58A6A19C1EB0F00EEFC98 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -764,35 +798,54 @@
 			};
 			name = Release;
 		};
-		A814C8FA19CFF47A00735E7B /* Debug */ = {
+		A8C30DD01B419B2E009435CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = avatarImageViewTests/Info.plist;
+				INFOPLIST_FILE = calendarView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereRU.app/WhereRU";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		A814C8FB19CFF47A00735E7B /* Release */ = {
+		A8C30DD11B419B2E009435CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = avatarImageViewTests/Info.plist;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = calendarView/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WhereRU.app/WhereRU";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -972,14 +1025,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A814C8F919CFF47A00735E7B /* Build configuration list for PBXNativeTarget "avatarImageViewTests" */ = {
+		A8C30DD41B419B2E009435CB /* Build configuration list for PBXNativeTarget "calendarView" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A814C8FA19CFF47A00735E7B /* Debug */,
-				A814C8FB19CFF47A00735E7B /* Release */,
+				A8C30DD01B419B2E009435CB /* Debug */,
+				A8C30DD11B419B2E009435CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 		A8D58A4B19C1EB0F00EEFC98 /* Build configuration list for PBXProject "WhereRU" */ = {
 			isa = XCConfigurationList;
