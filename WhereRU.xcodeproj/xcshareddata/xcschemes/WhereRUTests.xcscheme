@@ -20,20 +20,6 @@
                ReferencedContainer = "container:WhereRU.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A8C30DC01B419B2E009435CB"
-               BuildableName = "calendarViewTests.xctest"
-               BlueprintName = "calendarViewTests"
-               ReferencedContainer = "container:WhereRU.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -49,16 +35,6 @@
                BlueprintIdentifier = "A8D58A6719C1EB0F00EEFC98"
                BuildableName = "WhereRUTests.xctest"
                BlueprintName = "WhereRUTests"
-               ReferencedContainer = "container:WhereRU.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A8C30DC01B419B2E009435CB"
-               BuildableName = "calendarViewTests.xctest"
-               BlueprintName = "calendarViewTests"
                ReferencedContainer = "container:WhereRU.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -100,6 +76,15 @@
       useCustomWorkingDirectory = "NO"
       buildConfiguration = "Release"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "A8D58A6719C1EB0F00EEFC98"
+            BuildableName = "WhereRUTests.xctest"
+            BlueprintName = "WhereRUTests"
+            ReferencedContainer = "container:WhereRU.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">
