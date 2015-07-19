@@ -21,9 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         MAMapServices.sharedServices().apiKey = apiKey
-        
-        var navBackgroundImage:UIImage = UIImage(named: "white")!
-        UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
+
+//        var navBackgroundImage:UIImage = UIImage(named: "white")!
+//        UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
         
         AVOSCloud.setApplicationId("939y6w6xb1a0q3u8a2up63re3xdmiis9d6mo8lq7l1pqop8v", clientKey: "vben8bjx52stj4yo81tnq50djpurxr5ptod1qtawq7u629m0")
         AVAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)

@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, LoginViewControllerDelegate {
     
-    @IBOutlet weak var nicknameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
     required init(coder aDecoder: NSCoder) {
@@ -23,7 +23,7 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
     }
 
     @IBAction func login(sender: AnyObject) {
-        AVUser.logInWithUsernameInBackground(nicknameTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
+        AVUser.logInWithUsernameInBackground(emailTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
             if (user != nil) {
                 println("login success")
                 
