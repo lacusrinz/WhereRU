@@ -27,10 +27,6 @@ class CalendarWeekView: UIView {
     
     func commonInit() {
         var views = NSMutableArray()
-        
-        for (var i:Int=0; i<7; ++i) {
-            //
-        }
     }
 
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias CalendarMonthBlock = (NSDate, CalendarView)->Void
+typealias CalendarMonthBlock = (NSDate, CalendarView)-> String
 
 class CalendarAppearance: NSObject {
     
@@ -47,6 +47,8 @@ class CalendarAppearance: NSObject {
     var dayBorderColor:UIColor?
     var dayCircleRatio:CGFloat?
     var dayDotRation:CGFloat?
+    
+    var calendar: NSCalendar?
     
     override init () {
         super.init()
@@ -92,9 +94,27 @@ class CalendarAppearance: NSObject {
         self.dayTextColorTodayOtherMonth = self.dayTextColorToday
         self.dayDotColorTodayOtherMonth = self.dayDotColorToday
         
+        self.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        self.calendar!.timeZone = NSTimeZone.localTimeZone()
+        
         self.monthBlock = {
-            (date:NSDate, calendar:CalendarView) -> () in
-            var newCalendar:NSCalendar = //
+            (date:NSDate, calendar:CalendarView) -> String in
+            var newCalendar: NSCalendar = calendar.calendarAppearance!.calendar!
+            var comps: NSDateComponents = newCalendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth, fromDate: date)
+            var currentMonthIndex = comps.month
+            
+            var dateFormatter:NSDateFormatter?
+            
+            if(dateFormatter == nil) {
+                dateFormatter = NSDateFormatter.new()
+                dateFormatter!.timeZone = calendar.calendarAppearance!.calendar!.timeZone
+            }
+            
+            while(currentMonthIndex <= 0) {
+                currentMonthIndex += 12
+            }
+            
+            return (dateFormatter!.standaloneMonthSymbols[currentMonthIndex - 1]).capitalizedString
         }
     }
     
