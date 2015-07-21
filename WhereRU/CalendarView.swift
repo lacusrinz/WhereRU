@@ -27,10 +27,5 @@ class CalendarView: UIView, UIScrollViewDelegate {
         self.dataCache = CalendarDataCache.new()
         self.dataCache!.calendarManager = self
     }
-    
-    func setContentView(contentView:CalendarContentView) {
-        self.contentView?.delegate = nil
-        self.contentView
-    }
 
 }

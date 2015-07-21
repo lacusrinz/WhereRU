@@ -10,7 +10,36 @@ import UIKit
 
 class CalendarContentView: UIScrollView {
     var calendarManager: CalendarView?
-    var currentDate: NSDate?
+    
+    var _currentDate: NSDate?
+    var currentDate: NSDate? {
+        get {
+            return _currentDate
+        }
+        set {
+            self._currentDate = newValue
+            var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
+            
+            for(var i: Int = 0; i < 5; ++i) {
+                var monthView: CalendarMonthView = monthsViews![i] as! CalendarMonthView
+                var dayComponent: NSDateComponents = NSDateComponents.new()
+                if(self.calendarManager!.calendarAppearance!.isWeekMode != false) {
+                    dayComponent.month = i - 5 / 2
+                    var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: nil)!
+                    monthDate = self.beginningOfMonth(monthDate)
+                    //
+                }
+                else {
+                    dayComponent.day = 7 * (i - 5 / 2)
+                    var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: nil)!
+                    monthDate = self.beginningOfMonth(monthDate)
+                    //
+                }
+            }
+        }
+    }
+    
+    private var monthsViews: NSMutableArray?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -23,10 +52,18 @@ class CalendarContentView: UIScrollView {
     }
     
     func commonInit() {
+        monthsViews = NSMutableArray.new()
+        
         self.showsHorizontalScrollIndicator = false
         self.showsVerticalScrollIndicator = false
         self.pagingEnabled = true
         self.clipsToBounds = true
+        
+        for(var i: Int = 0; i < 5; ++i) {
+            var monthView: CalendarMonthView = CalendarMonthView.new()
+            self.addSubview(monthView)
+            monthsViews!.addObject(monthView)
+        }
     }
     
     override func layoutSubviews() {
@@ -37,11 +74,23 @@ class CalendarContentView: UIScrollView {
     func configureConstrainsForSubviews() {
         self.contentOffset = CGPointMake(self.contentOffset.x, 0)
         
+        var x: CGFloat = 0
         var width: CGFloat = self.frame.size.width
         var height: CGFloat = self.frame.size.height
+        
+        for view in monthsViews! {
+            (view as! UIView).frame = CGRectMake(x, 0, width, height)
+            x = CGRectGetMaxX((view as! UIView).frame)
+        }
         
         self.contentSize = CGSizeMake(width * 5, height)
     }
     
+    func beginningOfMonth(date: NSDate) -> NSDate {
+        //
+    }
     
+    func beginningOfWeek(date: NSDate) -> NSDate {
+        //
+    }
 }

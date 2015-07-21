@@ -24,7 +24,15 @@ class CalendarMonthWeekDaysView: UIView {
     }
     
     func commonInit() {
-        
+        for day in daysOfWeek() {
+            var view:UILabel = UILabel.new()
+            view.font = self.calendarManager!.calendarAppearance!.weekDayTextFont
+            view.textColor = self.calendarManager!.calendarAppearance!.weekDayTextColor
+            view.textAlignment = NSTextAlignment.Center
+            view.text = day as? String
+            
+            self.addSubview(view)
+        }
     }
     
     func daysOfWeek() -> NSArray {
@@ -54,5 +62,27 @@ class CalendarMonthWeekDaysView: UIView {
         
         self.cacheDaysOfWeeks = days
         return self.cacheDaysOfWeeks!
+    }
+    
+    override func layoutSubviews() {
+        var x: CGFloat = 0;
+        var width: CGFloat = self.frame.size.width / 7
+        var height: CGFloat = self.frame.size.height
+        
+        for view in self.subviews {
+            (view as! UIView).frame = CGRectMake(x, 0, width, height)
+            x = CGRectGetMaxX(view.frame)
+        }
+    }
+    
+    func reloadAppearance() {
+        for(var i:Int = 0; i < self.subviews.count; ++i) {
+            var view: UILabel = (self.subviews as NSArray).objectAtIndex(i) as! UILabel
+            
+            view.font = self.calendarManager!.calendarAppearance!.weekDayTextFont
+            view.textColor = self.calendarManager!.calendarAppearance!.weekDayTextColor
+            
+            view.text = self.daysOfWeek().objectAtIndex(i) as? String
+        }
     }
 }
