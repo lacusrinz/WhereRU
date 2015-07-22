@@ -10,7 +10,19 @@ import UIKit
 
 class CalendarMonthView: UIView {
 
-    var calendarManager: CalendarView?
+    var _calendarManager: CalendarView?
+    var calendarManager: CalendarView? {
+        get {
+            return _calendarManager
+        }
+        set {
+            self._calendarManager = newValue
+            weekdaysView!.calendarManager = newValue
+            for view in weeksViews! {
+                (view as! CalendarWeekView).calendarManager = newValue
+            }
+        }
+    }
     
     private var weekdaysView: CalendarMonthWeekDaysView?
     private var weeksViews: NSArray?
@@ -50,7 +62,48 @@ class CalendarMonthView: UIView {
     }
     
     func configureConstraintsForSubviews() {
-        //
+        var weeksToDisplay: CGFloat = 0
+        if(cacheLastWeekMode != false) {
+            weeksToDisplay = 2
+        }
+        else {
+            weeksToDisplay = 7
+        }
+        var y: CGFloat = 0
+        var width: CGFloat = self.frame.size.width
+        var height: CGFloat = self.frame.size.height
+        
+        for(var i: Int = 0; i < self.subviews.count; ++i) {
+            var view: UIView = self.subviews[i] as! UIView
+            view.frame = CGRectMake(0, y, width, height)
+            if(cacheLastWeekMode == true && i == 5) {
+                height = 0
+            }
+        }
+    }
+    
+    func setBeginningOfMonth(date:NSDate) {
+        var currentDate: NSDate = date
+        var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
+        var comps: NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitMonth, fromDate: currentDate)
+        currentMonthIndex = comps.month
+        if(comps.day > 7) {
+            currentMonthIndex = (currentMonthIndex! % 12) + 1
+        }
+        for view in weeksViews! {
+            (view as! CalendarMonthView).currentMonthIndex = currentMonthIndex
+            view.setBeginningOfMonth(currentDate)
+            var dayComponent: NSDateComponents = NSDateComponents.new()
+            dayComponent.day = 7
+            currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: nil)!
+            if(self.calendarManager!.calendarAppearance!.isWeekMode == true) {
+                break;
+            }
+        }
+    }
+    
+    func reloadData() {
+        
     }
 
 }

@@ -87,10 +87,12 @@ class CalendarContentView: UIScrollView {
     }
     
     func beginningOfMonth(date: NSDate) -> NSDate {
-        //
+        //TODO
+        return NSDate()
     }
     
     func beginningOfWeek(date: NSDate) -> NSDate {
-        //
+        //TODO
+        return NSDate()
     }
 }

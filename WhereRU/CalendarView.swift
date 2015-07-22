@@ -10,7 +10,15 @@ import UIKit
 
 class CalendarView: UIView, UIScrollViewDelegate {
     
-    var contentView:CalendarContentView?
+    private var _contentView: CalendarContentView?
+    var contentView:CalendarContentView? {
+        get {
+            return _contentView
+        }
+        set {
+            //TODO
+        }
+    }
     
     var dataSource:CalendarDataSource?
     
@@ -19,6 +27,9 @@ class CalendarView: UIView, UIScrollViewDelegate {
     
     var dataCache:CalendarDataCache?
     var calendarAppearance:CalendarAppearance?
+    
+    private var cacheLastWeekMode: Bool?
+    private var cacheFirstWeekDay: UInt?
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
