@@ -10,7 +10,7 @@ import UIKit
 
 class CalendarMonthView: UIView {
 
-    var _calendarManager: CalendarView?
+    private var _calendarManager: CalendarView?
     var calendarManager: CalendarView? {
         get {
             return _calendarManager
@@ -103,7 +103,25 @@ class CalendarMonthView: UIView {
     }
     
     func reloadData() {
+        for view in weeksViews! {
+            (view as! CalendarWeekView).reloadData()
+            if self.calendarManager!.calendarAppearance!.isWeekMode! {
+                break
+            }
+        }
+    }
+    
+    func reloadAppearance() {
+        if cacheLastWeekMode != self.calendarManager!.calendarAppearance!.isWeekMode! {
+            cacheLastWeekMode = self.calendarManager!.calendarAppearance!.isWeekMode!
+            self.configureConstraintsForSubviews()
+        }
         
+        weekdaysView!.reloadAppearance()
+        
+        for view in weeksViews! {
+            (view as! CalendarWeekView).reloadAppearance()
+        }
     }
 
 }

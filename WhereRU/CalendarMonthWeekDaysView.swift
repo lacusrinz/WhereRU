@@ -76,6 +76,8 @@ class CalendarMonthWeekDaysView: UIView {
     }
     
     func reloadAppearance() {
+        cacheDaysOfWeeks = nil
+        
         for(var i:Int = 0; i < self.subviews.count; ++i) {
             var view: UILabel = (self.subviews as NSArray).objectAtIndex(i) as! UILabel
             

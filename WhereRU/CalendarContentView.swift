@@ -9,9 +9,20 @@
 import UIKit
 
 class CalendarContentView: UIScrollView {
-    var calendarManager: CalendarView?
+    private var _calendarManager: CalendarView?
+    var calendarManager: CalendarView? {
+        get {
+            return _calendarManager
+        }
+        set {
+            self._calendarManager = newValue
+            for view in monthsViews! {
+                (view as! CalendarMonthView).calendarManager = newValue
+            }
+        }
+    }
     
-    var _currentDate: NSDate?
+    private var _currentDate: NSDate?
     var currentDate: NSDate? {
         get {
             return _currentDate
@@ -27,13 +38,13 @@ class CalendarContentView: UIScrollView {
                     dayComponent.month = i - 5 / 2
                     var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: nil)!
                     monthDate = self.beginningOfMonth(monthDate)
-                    //
+                    monthView.setBeginningOfMonth(monthDate)
                 }
                 else {
                     dayComponent.day = 7 * (i - 5 / 2)
                     var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: nil)!
                     monthDate = self.beginningOfMonth(monthDate)
-                    //
+                    monthView.setBeginningOfMonth(monthDate)
                 }
             }
         }
@@ -87,12 +98,43 @@ class CalendarContentView: UIScrollView {
     }
     
     func beginningOfMonth(date: NSDate) -> NSDate {
-        //TODO
-        return NSDate()
+        var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
+        var componentsCurrentDate: NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday | NSCalendarUnit.CalendarUnitWeekOfMonth, fromDate: date)
+        
+        var componentsNewDate: NSDateComponents = NSDateComponents.new()
+        
+        componentsNewDate.year = componentsCurrentDate.year
+        componentsNewDate.month = componentsCurrentDate.month
+        componentsNewDate.weekOfMonth = 1
+        componentsNewDate.weekday = calendar.firstWeekday
+        
+        return calendar.dateFromComponents(componentsNewDate)!
     }
     
     func beginningOfWeek(date: NSDate) -> NSDate {
-        //TODO
-        return NSDate()
+        var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
+        var componentsCurrentDate: NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth | NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitWeekday | NSCalendarUnit.CalendarUnitWeekOfMonth, fromDate: date)
+        
+        var componentsNewDate: NSDateComponents = NSDateComponents.new()
+        
+        componentsNewDate.year = componentsCurrentDate.year
+        componentsNewDate.month = componentsCurrentDate.month
+        componentsNewDate.weekOfMonth = componentsCurrentDate.weekOfMonth
+        componentsNewDate.weekday = calendar.firstWeekday
+        
+        return calendar.dateFromComponents(componentsNewDate)!
+    }
+    
+    func reloadData() {
+        for monthView in monthsViews! {
+            (monthView as! CalendarMonthView).reloadData()
+        }
+    }
+    
+    func reloadAppearance() {
+        self.scrollEnabled = true
+        for monthView in monthsViews! {
+            (monthView as! CalendarMonthView).reloadAppearance()
+        }
     }
 }

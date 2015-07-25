@@ -12,7 +12,7 @@ class CalendarDayView: UIView {
 
     var calendarManager:CalendarView?
     
-    var _date: NSDate?
+    private var _date: NSDate?
     var date: NSDate? {
         get {
             return _date
@@ -30,13 +30,22 @@ class CalendarDayView: UIView {
             cacheCurrentDateText = nil
         }
     }
-    var isOtherMonth:Bool?
+    
+    private var _isOtherMonth: Bool?
+    var isOtherMonth: Bool? {
+        get {
+            return _isOtherMonth
+        }
+        set {
+            self._isOtherMonth = newValue
+            self.setSelected(isSelected!, animated: false)
+        }
+    }
     
     private var backgroundView:UIView?
     private var circleView:CircleView?
     private var textLabel:UILabel?
     private var dotView:CircleView?
-    
     private var isSelected:Bool?
     private var cacheIsToday:Int?
     private var cacheCurrentDateText:String?
@@ -52,7 +61,7 @@ class CalendarDayView: UIView {
     }
     
     deinit {
-        //
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func commonInit() {
@@ -110,7 +119,16 @@ class CalendarDayView: UIView {
             return
         }
         self.setSelected(true, animated: true)
-        //TODO
+        self.calendarManager!.currentDateSelected = self.date
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("CalendarDaySelected", object: self.date)
+        
+        self.calendarManager!.dataSource!.calendarDidDateSelected(self.calendarManager!, date: self.date!)
+        
+        if(self.isOtherMonth != true || self.calendarManager!.calendarAppearance!.autoChangeMonth != true) {
+            return
+        }
+        
     }
     
     func didDaySelected(notification: NSNotification) {
@@ -127,22 +145,101 @@ class CalendarDayView: UIView {
     }
     
     func setSelected(selected: Bool, animated: Bool) {
-        //
-    }
-    
-    func setIsOtherMonth(isOtherMonth: Bool) {
-        //
+        var _animated = animated
+        if isSelected == selected {
+            _animated = false
+        }
+        isSelected = selected
+        
+        circleView!.transform = CGAffineTransformIdentity
+        var tr: CGAffineTransform = CGAffineTransformIdentity
+        var opacity: CGFloat = 1
+        
+        if selected {
+            if self.isOtherMonth == false {
+                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorSelected
+                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorSelected
+                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorSelected
+            }
+            else {
+                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorSelectedOtherMonth
+                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorSelectedOtherMonth
+                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorSelectedOtherMonth
+            }
+            circleView!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
+            tr = CGAffineTransformIdentity
+        }
+        else if self.isToday() {
+            if self.isOtherMonth == false {
+                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorToday
+                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorToday
+                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorToday
+            }
+            else {
+                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorTodayOtherMonth
+                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorTodayOtherMonth
+                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorTodayOtherMonth
+            }
+        }
+        else {
+            if self.isOtherMonth == false {
+                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColor
+                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColor
+            }
+            else {
+                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorOtherMonth
+                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorOtherMonth
+            }
+            opacity = 0
+        }
+        
+        if animated {
+            UIView.animateWithDuration(0.3, animations: { () -> Void in
+                self.circleView!.layer.opacity = Float(opacity)
+                self.circleView!.transform = tr
+            })
+        }
     }
     
     func reloadData() {
-        //
+        dotView!.hidden = !self.calendarManager!.dataCache!.haveEvent(self.date!)
+        var selected: Bool = self.isSameDate(self.calendarManager!.currentDateSelected!)
+        self.setSelected(selected, animated: false)
     }
     
     func isToday() -> Bool {
-        return false
+        if cacheIsToday == 0 {
+            return false
+        }
+        else if cacheIsToday == 1 {
+            return true
+        }
+        else {
+            if self.isSameDate(NSDate()) {
+                cacheIsToday = 1
+                return true
+            }
+            else {
+                cacheIsToday = 0
+                return false
+            }
+        }
     }
     
     func isSameDate(date: NSDate) -> Bool {
+        var dateFormatter: NSDateFormatter?
+        if dateFormatter == nil {
+            dateFormatter = NSDateFormatter.new()
+            dateFormatter!.timeZone = self.calendarManager!.calendarAppearance!.calendar!.timeZone
+            dateFormatter!.dateFormat = "dd-MM-yyyy"
+        }
+        if cacheCurrentDateText == nil {
+            cacheCurrentDateText = dateFormatter!.stringFromDate(self.date!)
+        }
+        var dateText2: String = dateFormatter!.stringFromDate(date)
+        if cacheCurrentDateText == dateText2 {
+            return true
+        }
         return false
     }
     
