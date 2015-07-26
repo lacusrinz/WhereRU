@@ -26,8 +26,8 @@ class CalendarMonthView: UIView {
     
     private var weekdaysView: CalendarMonthWeekDaysView?
     private var weeksViews: NSArray?
-    private var currentMonthIndex: Int?
-    private var cacheLastWeekMode:Bool?
+    private var currentMonthIndex: Int = 0
+    private var cacheLastWeekMode: Bool?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -53,7 +53,7 @@ class CalendarMonthView: UIView {
         
         weeksViews = views as NSArray
         
-        cacheLastWeekMode = self.calendarManager!.calendarAppearance!.isWeekMode
+        cacheLastWeekMode = self.calendarManager?.calendarAppearance?.isWeekMode
     }
     
     override func layoutSubviews() {
@@ -71,11 +71,12 @@ class CalendarMonthView: UIView {
         }
         var y: CGFloat = 0
         var width: CGFloat = self.frame.size.width
-        var height: CGFloat = self.frame.size.height
+        var height: CGFloat = self.frame.size.height / weeksToDisplay
         
         for(var i: Int = 0; i < self.subviews.count; ++i) {
             var view: UIView = self.subviews[i] as! UIView
             view.frame = CGRectMake(0, y, width, height)
+            y = CGRectGetMaxY(view.frame)
             if(cacheLastWeekMode == true && i == 5) {
                 height = 0
             }
@@ -88,11 +89,11 @@ class CalendarMonthView: UIView {
         var comps: NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitDay | NSCalendarUnit.CalendarUnitMonth, fromDate: currentDate)
         currentMonthIndex = comps.month
         if(comps.day > 7) {
-            currentMonthIndex = (currentMonthIndex! % 12) + 1
+            currentMonthIndex = (currentMonthIndex % 12) + 1
         }
         for view in weeksViews! {
-            (view as! CalendarMonthView).currentMonthIndex = currentMonthIndex
-            view.setBeginningOfMonth(currentDate)
+            (view as! CalendarWeekView).currentMonthIndex = currentMonthIndex
+            (view as! CalendarWeekView).setBeginningOfWeek(currentDate)
             var dayComponent: NSDateComponents = NSDateComponents.new()
             dayComponent.day = 7
             currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: nil)!

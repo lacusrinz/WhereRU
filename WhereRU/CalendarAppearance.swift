@@ -56,14 +56,14 @@ class CalendarAppearance: NSObject {
         self.isWeekMode = false
         self.useCacheSystem = true
         self.focusSelectedDayChangeMode = false
-        
+        self.readFromRightToLeft = false
         self.autoChangeMonth = true
         
         self.dayCircleRatio = 1
         self.dayDotRation = 1/9
         
         self.weekDayTextFont = UIFont.systemFontOfSize(11)
-        self.dayTextFont!.fontWithSize(UIFont.systemFontSize())
+        self.dayTextFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
         
         self.dayFormat = "dd"
         

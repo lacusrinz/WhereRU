@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AuR-sE-8ua">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="CeK-fk-7n4">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -800,10 +800,10 @@
             </objects>
             <point key="canvasLocation" x="4540" y="134"/>
         </scene>
-        <!--View Controller-->
+        <!--Calendar View Controller-->
         <scene sceneID="Yqi-3S-1Nb">
             <objects>
-                <viewController id="df0-F9-h32" sceneMemberID="viewController">
+                <viewController id="df0-F9-h32" customClass="CalendarViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1tA-HV-fqW"/>
                         <viewControllerLayoutGuide type="bottom" id="PPY-HM-eCe"/>
@@ -812,18 +812,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FhR-vj-Q8F">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UVt-ca-er8">
+                                <rect key="frame" x="0.0" y="322" width="600" height="278"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="278" id="uzD-3z-b11"/>
+                                </constraints>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FhR-vj-Q8F" customClass="CalendarContentView" customModule="WhereRU" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UVt-ca-er8">
-                                <rect key="frame" x="0.0" y="322" width="600" height="278"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UVt-ca-er8" firstAttribute="top" secondItem="FhR-vj-Q8F" secondAttribute="bottom" constant="8" symbolic="YES" id="1Vl-WO-4O4"/>
+                            <constraint firstItem="FhR-vj-Q8F" firstAttribute="top" secondItem="1tA-HV-fqW" secondAttribute="bottom" id="57G-9E-idq"/>
+                            <constraint firstItem="FhR-vj-Q8F" firstAttribute="leading" secondItem="2aF-VE-Fqm" secondAttribute="leading" id="JU4-Gr-Aev"/>
+                            <constraint firstItem="UVt-ca-er8" firstAttribute="bottom" secondItem="PPY-HM-eCe" secondAttribute="top" id="Msk-pI-Mo6"/>
+                            <constraint firstAttribute="trailing" secondItem="FhR-vj-Q8F" secondAttribute="trailing" id="bBj-xs-aer"/>
+                            <constraint firstItem="UVt-ca-er8" firstAttribute="leading" secondItem="FhR-vj-Q8F" secondAttribute="leading" id="cnF-S6-PuB"/>
+                            <constraint firstItem="FhR-vj-Q8F" firstAttribute="trailing" secondItem="UVt-ca-er8" secondAttribute="trailing" id="trZ-We-Tfp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DbN-SP-EGR"/>
+                    <connections>
+                        <outlet property="calendarContentView" destination="FhR-vj-Q8F" id="seu-4G-Imi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yU4-mp-iz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

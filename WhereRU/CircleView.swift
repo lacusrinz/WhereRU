@@ -11,14 +11,17 @@ import UIKit
 class CircleView: UIView {
 
     var color: UIColor?
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        
+
+    init() {
+        super.init(frame: CGRectZero)
         self.backgroundColor = UIColor.clearColor()
         self.color = UIColor.whiteColor()
     }
 
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func drawRect(rect: CGRect) {
         let ctx: CGContextRef = UIGraphicsGetCurrentContext()
         

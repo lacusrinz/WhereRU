@@ -50,15 +50,19 @@ class CalendarView: UIView, UIScrollViewDelegate {
     private var cacheLastWeekMode: Bool?
     private var cacheFirstWeekDay: Int?
 
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.currentDate = NSDate()
+    required init() {
+        super.init(frame: CGRectZero)
+        self._currentDate = NSDate()
         self.calendarAppearance = CalendarAppearance.new()
         self.dataCache = CalendarDataCache.new()
         self.dataCache!.calendarManager = self
         
         cacheLastWeekMode = self.calendarAppearance!.isWeekMode
         cacheFirstWeekDay = self.calendarAppearance!.calendar!.firstWeekday
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     func reloadData() {

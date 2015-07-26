@@ -42,13 +42,13 @@ class CalendarDayView: UIView {
         }
     }
     
-    private var backgroundView:UIView?
-    private var circleView:CircleView?
-    private var textLabel:UILabel?
-    private var dotView:CircleView?
-    private var isSelected:Bool?
-    private var cacheIsToday:Int?
-    private var cacheCurrentDateText:String?
+    private var backgroundView: UIView?
+    private var circleView: CircleView?
+    private var textLabel: UILabel?
+    private var dotView: CircleView?
+    private var isSelected: Bool?
+    private var cacheIsToday: Int = 0
+    private var cacheCurrentDateText: String?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -151,52 +151,52 @@ class CalendarDayView: UIView {
         }
         isSelected = selected
         
-        circleView!.transform = CGAffineTransformIdentity
+        circleView?.transform = CGAffineTransformIdentity
         var tr: CGAffineTransform = CGAffineTransformIdentity
         var opacity: CGFloat = 1
         
         if selected {
             if self.isOtherMonth == false {
-                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorSelected
-                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorSelected
-                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorSelected
+                circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorSelected
+                textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorSelected
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelected
             }
             else {
-                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorSelectedOtherMonth
-                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorSelectedOtherMonth
-                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorSelectedOtherMonth
+                circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorSelectedOtherMonth
+                textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorSelectedOtherMonth
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelectedOtherMonth
             }
-            circleView!.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
+            circleView?.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
             tr = CGAffineTransformIdentity
         }
         else if self.isToday() {
             if self.isOtherMonth == false {
-                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorToday
-                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorToday
-                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorToday
+                circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorToday
+                textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorToday
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorToday
             }
             else {
-                circleView!.color = self.calendarManager!.calendarAppearance!.dayCircleColorTodayOtherMonth
-                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorTodayOtherMonth
-                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorTodayOtherMonth
+                circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorTodayOtherMonth
+                textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorTodayOtherMonth
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorTodayOtherMonth
             }
         }
         else {
             if self.isOtherMonth == false {
-                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColor
-                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColor
+                textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColor
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColor
             }
             else {
-                textLabel!.textColor = self.calendarManager!.calendarAppearance!.dayTextColorOtherMonth
-                dotView!.color = self.calendarManager!.calendarAppearance!.dayDotColorOtherMonth
+                textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorOtherMonth
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorOtherMonth
             }
             opacity = 0
         }
         
         if animated {
             UIView.animateWithDuration(0.3, animations: { () -> Void in
-                self.circleView!.layer.opacity = Float(opacity)
-                self.circleView!.transform = tr
+                self.circleView?.layer.opacity = Float(opacity)
+                self.circleView?.transform = tr
             })
         }
     }
@@ -230,7 +230,7 @@ class CalendarDayView: UIView {
         var dateFormatter: NSDateFormatter?
         if dateFormatter == nil {
             dateFormatter = NSDateFormatter.new()
-            dateFormatter!.timeZone = self.calendarManager!.calendarAppearance!.calendar!.timeZone
+            dateFormatter!.timeZone = self.calendarManager?.calendarAppearance?.calendar?.timeZone
             dateFormatter!.dateFormat = "dd-MM-yyyy"
         }
         if cacheCurrentDateText == nil {

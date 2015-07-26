@@ -26,8 +26,8 @@ class CalendarMonthWeekDaysView: UIView {
     func commonInit() {
         for day in daysOfWeek() {
             var view:UILabel = UILabel.new()
-            view.font = self.calendarManager!.calendarAppearance!.weekDayTextFont
-            view.textColor = self.calendarManager!.calendarAppearance!.weekDayTextColor
+            view.font = self.calendarManager?.calendarAppearance?.weekDayTextFont
+            view.textColor = self.calendarManager?.calendarAppearance?.weekDayTextColor
             view.textAlignment = NSTextAlignment.Center
             view.text = day as? String
             
@@ -44,16 +44,20 @@ class CalendarMonthWeekDaysView: UIView {
         dateFormatter = NSDateFormatter.new()
         var days = NSMutableArray()
         
-        days = dateFormatter!.shortStandaloneWeekdaySymbols as NSArray as! NSMutableArray
+        days = (dateFormatter!.shortStandaloneWeekdaySymbols as NSArray).mutableCopy() as! NSMutableArray
         
         for(var i: Int = 0; i < days.count; i++) {
             var day: String = days[i] as! String
             days.replaceObjectAtIndex(i, withObject: day.uppercaseString)
         }
-        
-        var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
-        var firstWeekday = (calendar.firstWeekday + 6) % 7
-        
+        var firstWeekday: Int = 0
+        var calendar: NSCalendar? = self.calendarManager?.calendarAppearance?.calendar
+        if calendar != nil {
+            firstWeekday = (calendar!.firstWeekday + 6) % 7
+        }
+        else {
+            firstWeekday = 6
+        }
         for(var i: Int = 0; i < firstWeekday; ++i) {
             var day: AnyObject? = days.firstObject
             days.removeObjectAtIndex(0)

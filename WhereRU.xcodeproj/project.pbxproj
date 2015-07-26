@@ -21,6 +21,7 @@
 		A814C8F219CFF47A00735E7B /* avatarImageView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A814C8DD19CFF47A00735E7B /* avatarImageView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
 		A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */; };
+		A84CD40D1B634E750030214B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD40C1B634E750030214B /* CalendarViewController.swift */; };
 		A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */; };
 		A87ED7971B1E00DA0059A1A3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87ED7961B1E00DA0059A1A3 /* Friend.swift */; };
 		A88A55A71AFBB9BE00514B13 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */; };
@@ -133,6 +134,7 @@
 		A814C8E719CFF47A00735E7B /* avatarImageViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = avatarImageViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
 		A83E640E1B12148B008223A5 /* ParticipantAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipantAnnotation.swift; sourceTree = "<group>"; };
+		A84CD40C1B634E750030214B /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		A87ED7961B1E00DA0059A1A3 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -348,6 +350,7 @@
 				A8BDE73A1A74E33900EC5785 /* MapDetailViewController.swift */,
 				A806B91B1A341F11004C8D9F /* CreateEventViewController.swift */,
 				A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */,
+				A84CD40C1B634E750030214B /* CalendarViewController.swift */,
 			);
 			name = Event;
 			sourceTree = "<group>";
@@ -742,6 +745,7 @@
 				A80D9DB21B4A663800CAF88A /* GuillotineMenuTransitionAnimation.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */,
+				A84CD40D1B634E750030214B /* CalendarViewController.swift in Sources */,
 				A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
 				A8E1E7681B4AC66500B7C6AF /* CalendarMonthView.swift in Sources */,

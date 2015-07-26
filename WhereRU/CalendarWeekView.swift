@@ -51,7 +51,7 @@ class CalendarWeekView: UIView {
         var width: CGFloat = self.frame.size.width / 7
         var height: CGFloat = self.frame.size.height
         
-        if self.calendarManager!.calendarAppearance!.readFromRightToLeft! {
+        if self.calendarManager?.calendarAppearance?.readFromRightToLeft != nil && self.calendarManager!.calendarAppearance!.readFromRightToLeft! {
             for view in self.subviews.reverse() {
                 (view as! UIView).frame = CGRectMake(x, 0, width, height)
                 x = CGRectGetMaxX(view.frame)
