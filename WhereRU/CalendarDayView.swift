@@ -38,7 +38,7 @@ class CalendarDayView: UIView {
         }
         set {
             self._isOtherMonth = newValue
-            self.setSelected(isSelected!, animated: false)
+            self.setSelected(isSelected, animated: false)
         }
     }
     
@@ -46,7 +46,7 @@ class CalendarDayView: UIView {
     private var circleView: CircleView?
     private var textLabel: UILabel?
     private var dotView: CircleView?
-    private var isSelected: Bool?
+    private var isSelected: Bool = false
     private var cacheIsToday: Int = 0
     private var cacheCurrentDateText: String?
     
@@ -128,7 +128,15 @@ class CalendarDayView: UIView {
         if(self.isOtherMonth != true || self.calendarManager!.calendarAppearance!.autoChangeMonth != true) {
             return
         }
+        var currentMonthIndex: Int = self.monthIndexForDate(self.date!)
+        var calendarMonthIndex: Int = self.monthIndexForDate(self.calendarManager!.currentDate!)
         
+        if(currentMonthIndex == (calendarMonthIndex + 1) % 12) {
+            self.calendarManager!.loadNextPage()
+        }
+        else if(currentMonthIndex == (calendarMonthIndex + 12 - 1) % 12) {
+            self.calendarManager!.loadPreviousPage()
+        }
     }
     
     func didDaySelected(notification: NSNotification) {
@@ -159,12 +167,12 @@ class CalendarDayView: UIView {
             if self.isOtherMonth == false {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorSelected
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorSelected
-                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelected
+//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelected
             }
             else {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorSelectedOtherMonth
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorSelectedOtherMonth
-                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelectedOtherMonth
+//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelectedOtherMonth
             }
             circleView?.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
             tr = CGAffineTransformIdentity
@@ -173,22 +181,22 @@ class CalendarDayView: UIView {
             if self.isOtherMonth == false {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorToday
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorToday
-                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorToday
+//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorToday
             }
             else {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorTodayOtherMonth
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorTodayOtherMonth
-                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorTodayOtherMonth
+//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorTodayOtherMonth
             }
         }
         else {
             if self.isOtherMonth == false {
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColor
-                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColor
+//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColor
             }
             else {
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorOtherMonth
-                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorOtherMonth
+//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorOtherMonth
             }
             opacity = 0
         }
@@ -203,7 +211,7 @@ class CalendarDayView: UIView {
     
     func reloadData() {
         dotView!.hidden = !self.calendarManager!.dataCache!.haveEvent(self.date!)
-        var selected: Bool = self.isSameDate(self.calendarManager!.currentDateSelected!)
+        var selected: Bool = self.isSameDate(self.calendarManager!.currentDateSelected)
         self.setSelected(selected, animated: false)
     }
     
@@ -226,19 +234,21 @@ class CalendarDayView: UIView {
         }
     }
     
-    func isSameDate(date: NSDate) -> Bool {
-        var dateFormatter: NSDateFormatter?
-        if dateFormatter == nil {
-            dateFormatter = NSDateFormatter.new()
-            dateFormatter!.timeZone = self.calendarManager?.calendarAppearance?.calendar?.timeZone
-            dateFormatter!.dateFormat = "dd-MM-yyyy"
-        }
-        if cacheCurrentDateText == nil {
-            cacheCurrentDateText = dateFormatter!.stringFromDate(self.date!)
-        }
-        var dateText2: String = dateFormatter!.stringFromDate(date)
-        if cacheCurrentDateText == dateText2 {
-            return true
+    func isSameDate(date: NSDate?) -> Bool {
+        if date != nil {
+            var dateFormatter: NSDateFormatter?
+            if dateFormatter == nil {
+                dateFormatter = NSDateFormatter.new()
+                dateFormatter!.timeZone = self.calendarManager?.calendarAppearance?.calendar?.timeZone
+                dateFormatter!.dateFormat = "dd-MM-yyyy"
+            }
+            if cacheCurrentDateText == nil {
+                cacheCurrentDateText = dateFormatter!.stringFromDate(self.date!)
+            }
+            var dateText2: String = dateFormatter!.stringFromDate(date!)
+            if cacheCurrentDateText == dateText2 {
+                return true
+            }
         }
         return false
     }
@@ -257,6 +267,6 @@ class CalendarDayView: UIView {
         backgroundView!.layer.borderColor = self.calendarManager!.calendarAppearance!.dayBorderColor!.CGColor
         
         self.configureConstrainsForSubview()
-        self.setSelected(isSelected!, animated: false)
+        self.setSelected(isSelected, animated: false)
     }
 }

@@ -96,7 +96,7 @@ class CalendarMonthView: UIView {
             (view as! CalendarWeekView).setBeginningOfWeek(currentDate)
             var dayComponent: NSDateComponents = NSDateComponents.new()
             dayComponent.day = 7
-            currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: nil)!
+            currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: NSCalendarOptions(0))!
             if(self.calendarManager!.calendarAppearance!.isWeekMode == true) {
                 break;
             }

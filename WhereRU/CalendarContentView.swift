@@ -31,18 +31,18 @@ class CalendarContentView: UIScrollView {
             self._currentDate = newValue
             var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
             
-            for(var i: Int = 0; i < 5; ++i) {
+            for(var i: Int = 0; i < NUMBER_PAGES_LOADED; ++i) {
                 var monthView: CalendarMonthView = monthsViews![i] as! CalendarMonthView
                 var dayComponent: NSDateComponents = NSDateComponents.new()
-                if(self.calendarManager!.calendarAppearance!.isWeekMode != false) {
-                    dayComponent.month = i - 5 / 2
-                    var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: nil)!
+                if(self.calendarManager!.calendarAppearance!.isWeekMode == false) {
+                    dayComponent.month = i - Int(NUMBER_PAGES_LOADED / 2)
+                    var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: NSCalendarOptions(0))!
                     monthDate = self.beginningOfMonth(monthDate)
                     monthView.setBeginningOfMonth(monthDate)
                 }
                 else {
-                    dayComponent.day = 7 * (i - 5 / 2)
-                    var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: nil)!
+                    dayComponent.day = 7 * (i - Int(NUMBER_PAGES_LOADED / 2))
+                    var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: NSCalendarOptions(0))!
                     monthDate = self.beginningOfMonth(monthDate)
                     monthView.setBeginningOfMonth(monthDate)
                 }
@@ -70,7 +70,7 @@ class CalendarContentView: UIScrollView {
         self.pagingEnabled = true
         self.clipsToBounds = true
         
-        for(var i: Int = 0; i < 5; ++i) {
+        for(var i: Int = 0; i < NUMBER_PAGES_LOADED; ++i) {
             var monthView: CalendarMonthView = CalendarMonthView.new()
             self.addSubview(monthView)
             monthsViews!.addObject(monthView)
@@ -94,7 +94,7 @@ class CalendarContentView: UIScrollView {
             x = CGRectGetMaxX((view as! UIView).frame)
         }
         
-        self.contentSize = CGSizeMake(width * 5, height)
+        self.contentSize = CGSizeMake(width * CGFloat(NUMBER_PAGES_LOADED), height)
     }
     
     func beginningOfMonth(date: NSDate) -> NSDate {

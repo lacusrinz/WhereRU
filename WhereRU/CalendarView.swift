@@ -8,6 +8,8 @@
 
 import UIKit
 
+let NUMBER_PAGES_LOADED = 3
+
 class CalendarView: UIView, UIScrollViewDelegate {
     
     private var _contentView: CalendarContentView?
@@ -107,7 +109,7 @@ class CalendarView: UIView, UIScrollViewDelegate {
         var pageWidth: CGFloat = CGRectGetWidth(self.contentView!.frame)
         var fractionalPage: CGFloat = self.contentView!.contentOffset.x / pageWidth
         var currentPage = Int(round(fractionalPage))
-        if (currentPage == (5 / 2)) {
+        if (currentPage == Int(NUMBER_PAGES_LOADED / 2)) {
             self.contentView!.scrollEnabled = true;
             return;
         }
@@ -118,10 +120,10 @@ class CalendarView: UIView, UIScrollViewDelegate {
         dayComponent.day = 0
         
         if(self.calendarAppearance!.isWeekMode != true){
-            dayComponent.month = currentPage - (5 / 2);
+            dayComponent.month = currentPage - Int(NUMBER_PAGES_LOADED / 2);
         }
         else{
-            dayComponent.day = 7 * (currentPage - (5 / 2));
+            dayComponent.day = 7 * (currentPage - Int(NUMBER_PAGES_LOADED / 2));
         }
         
         if(self.calendarAppearance!.readFromRightToLeft!){
@@ -129,12 +131,12 @@ class CalendarView: UIView, UIScrollViewDelegate {
             dayComponent.day *= -1;
         }
         
-        var currentDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self.currentDate!, options: nil)!
+        var currentDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self.currentDate!, options: NSCalendarOptions(0))!
         self.currentDate = currentDate
         
         self.contentView!.scrollEnabled = true
         
-        if(currentPage < 5 / 2) {
+        if(currentPage < NUMBER_PAGES_LOADED / 2) {
             self.dataSource?.calendarDidLoadPreviousPage()
         }
         else {
@@ -144,7 +146,7 @@ class CalendarView: UIView, UIScrollViewDelegate {
     
     func repositionViews() {
         var pageWidth: CGFloat = CGRectGetWidth(self.contentView!.frame)
-        self.contentView!.contentOffset = CGPointMake(pageWidth * (5 / 2), self.contentView!.contentOffset.y)
+        self.contentView!.contentOffset = CGPointMake(pageWidth * CGFloat(Int(NUMBER_PAGES_LOADED / 2)), self.contentView!.contentOffset.y)
     }
     
     func loadNextMonth() {
@@ -157,14 +159,14 @@ class CalendarView: UIView, UIScrollViewDelegate {
     
     func loadNextPage() {
         var frame: CGRect = self.contentView!.frame
-        frame.origin.x = frame.size.width * (5 / 2 + 1)
+        frame.origin.x = frame.size.width * CGFloat(Int(NUMBER_PAGES_LOADED / 2) + 1)
         frame.origin.y = 0
         self.contentView!.scrollRectToVisible(frame, animated: true)
     }
     
     func loadPreviousPage() {
         var frame: CGRect = self.contentView!.frame
-        frame.origin.x = frame.size.width * (5 / 2 - 1)
+        frame.origin.x = frame.size.width * CGFloat(Int(NUMBER_PAGES_LOADED / 2) - 1)
         frame.origin.y = 0
         self.contentView!.scrollRectToVisible(frame, animated: true)
     }

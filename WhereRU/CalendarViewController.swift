@@ -23,11 +23,17 @@ class CalendarViewController: UIViewController, CalendarDataSource {
         self.calendar!.calendarAppearance!.focusSelectedDayChangeMode = true
         self.calendar!.contentView = self.calendarContentView
         self.calendar!.dataSource = self
+        
+//        self.calendar!.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidLayoutSubviews() {
+        self.calendar!.repositionViews()
     }
     
     // MARK: - JTCalendarDataSource
@@ -45,7 +51,7 @@ class CalendarViewController: UIViewController, CalendarDataSource {
     }
     
     func calendarDidLoadPreviousPage() {
-        //
+        println("xxxx")
     }
     
     func calendarCanSelectDate(calendar: CalendarView, date: NSDate) -> Bool {

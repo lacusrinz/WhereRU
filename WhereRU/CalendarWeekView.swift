@@ -40,7 +40,7 @@ class CalendarWeekView: UIView {
         
         for (var i: Int = 0; i < 7; ++i) {
             var view: UIView = CalendarDayView.new()
-            views .addObject(view)
+            views.addObject(view)
             self.addSubview(view)
         }
         daysViews = views
@@ -82,7 +82,7 @@ class CalendarWeekView: UIView {
             (view as! CalendarDayView).date = currentDate
             var dayComponent: NSDateComponents = NSDateComponents.new()
             dayComponent.day = 1
-            currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: nil)!
+            currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: NSCalendarOptions(0))!
         }
     }
 

@@ -10,7 +10,16 @@ import UIKit
 
 class CircleView: UIView {
 
-    var color: UIColor?
+    private var _color: UIColor?
+    var color: UIColor? {
+        get {
+            return _color
+        }
+        set {
+            _color = newValue
+            self.setNeedsDisplay()
+        }
+    }
 
     init() {
         super.init(frame: CGRectZero)
