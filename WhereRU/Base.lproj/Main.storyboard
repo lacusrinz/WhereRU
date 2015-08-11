@@ -52,6 +52,7 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
                                 <state key="normal" title="登录" backgroundImage="red">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -238,19 +239,6 @@
                                     <constraint firstAttribute="height" constant="1" id="tb9-Ks-ZpS"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM5-2I-xQv">
-                                <rect key="frame" x="44" y="490" width="512" height="55"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="55" id="znp-hl-cDo"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
-                                <state key="normal" title="注册" backgroundImage="red">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="signin:" destination="q8U-rJ-zvK" eventType="touchUpInside" id="LzN-y2-3Tj"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已有账号" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWC-5Z-gHK">
                                 <rect key="frame" x="228" y="556" width="85" height="21"/>
                                 <constraints>
@@ -297,6 +285,20 @@
                                 <state key="normal" backgroundImage="Icon_close">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FM5-2I-xQv">
+                                <rect key="frame" x="44" y="490" width="512" height="55"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="55" id="znp-hl-cDo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
+                                <state key="normal" title="注册" backgroundImage="red">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="signin:" destination="q8U-rJ-zvK" eventType="touchUpInside" id="LzN-y2-3Tj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -822,6 +824,9 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FhR-vj-Q8F" customClass="CalendarContentView" customModule="WhereRU" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="64" width="600" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Dcb-fI-NDx"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -835,9 +840,12 @@
                             <constraint firstItem="FhR-vj-Q8F" firstAttribute="trailing" secondItem="UVt-ca-er8" secondAttribute="trailing" id="trZ-We-Tfp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DbN-SP-EGR"/>
+                    <navigationItem key="navigationItem" id="DbN-SP-EGR">
+                        <barButtonItem key="rightBarButtonItem" title="展开" id="ubr-pA-kzg"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="calendarContentView" destination="FhR-vj-Q8F" id="seu-4G-Imi"/>
+                        <outlet property="calendarContentViewHeight" destination="Dcb-fI-NDx" id="RH4-Tr-B5F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yU4-mp-iz9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -899,5 +907,4 @@
         <image name="signInAvatar" width="232" height="232"/>
         <image name="团·聚" width="416" height="101"/>
     </resources>
-    <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
 </document>

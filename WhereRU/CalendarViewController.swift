@@ -11,6 +11,7 @@ import UIKit
 class CalendarViewController: UIViewController, CalendarDataSource {
 
     @IBOutlet weak var calendarContentView: CalendarContentView!
+    @IBOutlet weak var calendarContentViewHeight: NSLayoutConstraint!
     
     var calendar: CalendarView?
     
@@ -24,7 +25,7 @@ class CalendarViewController: UIViewController, CalendarDataSource {
         self.calendar!.contentView = self.calendarContentView
         self.calendar!.dataSource = self
         
-//        self.calendar!.reloadData()
+        self.calendar!.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,5 +69,27 @@ class CalendarViewController: UIViewController, CalendarDataSource {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    func changeMode() {
+        println("balabala")
+        self.calendar?.calendarAppearance?.isWeekMode = !self.calendar!.calendarAppearance!.isWeekMode!
+        var newHeight: CGFloat = 300
+        if(self.calendar!.calendarAppearance!.isWeekMode!) {
+            newHeight = 75
+        }
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            self.calendarContentViewHeight.constant = newHeight
+            self.view.layoutIfNeeded()
+        })
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
+            self.calendarContentView.layer.opacity = 0
+            }) { (finished: Bool) -> Void in
+                self.calendar?.reloadAppearance()
+                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    self.calendarContentView.layer.opacity = 1
+                })
+        }
+    }
 
 }

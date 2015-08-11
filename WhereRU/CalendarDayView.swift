@@ -167,12 +167,12 @@ class CalendarDayView: UIView {
             if self.isOtherMonth == false {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorSelected
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorSelected
-//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelected
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelected
             }
             else {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorSelectedOtherMonth
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorSelectedOtherMonth
-//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelectedOtherMonth
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorSelectedOtherMonth
             }
             circleView?.transform = CGAffineTransformScale(CGAffineTransformIdentity, 0.1, 0.1)
             tr = CGAffineTransformIdentity
@@ -181,22 +181,22 @@ class CalendarDayView: UIView {
             if self.isOtherMonth == false {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorToday
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorToday
-//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorToday
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorToday
             }
             else {
                 circleView?.color = self.calendarManager?.calendarAppearance?.dayCircleColorTodayOtherMonth
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorTodayOtherMonth
-//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorTodayOtherMonth
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorTodayOtherMonth
             }
         }
         else {
             if self.isOtherMonth == false {
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColor
-//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColor
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColor
             }
             else {
                 textLabel?.textColor = self.calendarManager?.calendarAppearance?.dayTextColorOtherMonth
-//                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorOtherMonth
+                dotView?.color = self.calendarManager?.calendarAppearance?.dayDotColorOtherMonth
             }
             opacity = 0
         }
@@ -206,6 +206,10 @@ class CalendarDayView: UIView {
                 self.circleView?.layer.opacity = Float(opacity)
                 self.circleView?.transform = tr
             })
+        }
+        else {
+            self.circleView?.layer.opacity = Float(opacity)
+            self.circleView?.transform = tr
         }
     }
     
