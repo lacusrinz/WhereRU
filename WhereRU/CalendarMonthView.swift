@@ -77,7 +77,7 @@ class CalendarMonthView: UIView {
             var view: UIView = self.subviews[i] as! UIView
             view.frame = CGRectMake(0, y, width, height)
             y = CGRectGetMaxY(view.frame)
-            if(cacheLastWeekMode == true && i == 5) {
+            if(cacheLastWeekMode == true && i == Int(weeksToDisplay - 1)) {
                 height = 0
             }
         }

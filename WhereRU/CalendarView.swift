@@ -83,7 +83,8 @@ class CalendarView: UIView, UIScrollViewDelegate {
             self.currentDate = self.currentDateSelected
         }
         else {
-            //???
+            var date = self.currentDate
+            self.currentDate = date
         }
     }
     

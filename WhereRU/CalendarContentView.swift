@@ -8,7 +8,13 @@
 
 import UIKit
 
+protocol CalendarContentViewDelegate {
+    func changeMode(gesture: UISwipeGestureRecognizer)
+}
+
 class CalendarContentView: UIScrollView {
+    var contentDelegate: CalendarContentViewDelegate?
+    
     private var _calendarManager: CalendarView?
     var calendarManager: CalendarView? {
         get {
@@ -43,7 +49,7 @@ class CalendarContentView: UIScrollView {
                 else {
                     dayComponent.day = 7 * (i - Int(NUMBER_PAGES_LOADED / 2))
                     var monthDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self._currentDate!, options: NSCalendarOptions(0))!
-                    monthDate = self.beginningOfMonth(monthDate)
+                    monthDate = self.beginningOfWeek(monthDate)
                     monthView.setBeginningOfMonth(monthDate)
                 }
             }
@@ -75,6 +81,10 @@ class CalendarContentView: UIScrollView {
             self.addSubview(monthView)
             monthsViews!.addObject(monthView)
         }
+        
+        var swipe: UISwipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "changeMode:")
+        swipe.direction = UISwipeGestureRecognizerDirection.Down | UISwipeGestureRecognizerDirection.Up
+        self.addGestureRecognizer(swipe)
     }
     
     override func layoutSubviews() {
@@ -95,6 +105,10 @@ class CalendarContentView: UIScrollView {
         }
         
         self.contentSize = CGSizeMake(width * CGFloat(NUMBER_PAGES_LOADED), height)
+    }
+    
+    func changeMode(gesture: UISwipeGestureRecognizer) {
+        self.contentDelegate?.changeMode(gesture)
     }
     
     func beginningOfMonth(date: NSDate) -> NSDate {

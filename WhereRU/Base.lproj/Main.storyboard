@@ -815,23 +815,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UVt-ca-er8">
-                                <rect key="frame" x="0.0" y="322" width="600" height="278"/>
+                                <rect key="frame" x="0.0" y="372" width="600" height="228"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="278" id="uzD-3z-b11"/>
-                                </constraints>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FhR-vj-Q8F" customClass="CalendarContentView" customModule="WhereRU" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="64" width="600" height="250"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Dcb-fI-NDx"/>
+                                    <constraint firstAttribute="height" constant="300" id="Dcb-fI-NDx"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UVt-ca-er8" firstAttribute="top" secondItem="FhR-vj-Q8F" secondAttribute="bottom" constant="8" symbolic="YES" id="1Vl-WO-4O4"/>
+                            <constraint firstItem="UVt-ca-er8" firstAttribute="top" secondItem="FhR-vj-Q8F" secondAttribute="bottom" constant="8" id="1Vl-WO-4O4"/>
                             <constraint firstItem="FhR-vj-Q8F" firstAttribute="top" secondItem="1tA-HV-fqW" secondAttribute="bottom" id="57G-9E-idq"/>
                             <constraint firstItem="FhR-vj-Q8F" firstAttribute="leading" secondItem="2aF-VE-Fqm" secondAttribute="leading" id="JU4-Gr-Aev"/>
                             <constraint firstItem="UVt-ca-er8" firstAttribute="bottom" secondItem="PPY-HM-eCe" secondAttribute="top" id="Msk-pI-Mo6"/>
@@ -840,12 +837,11 @@
                             <constraint firstItem="FhR-vj-Q8F" firstAttribute="trailing" secondItem="UVt-ca-er8" secondAttribute="trailing" id="trZ-We-Tfp"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="DbN-SP-EGR">
-                        <barButtonItem key="rightBarButtonItem" title="展开" id="ubr-pA-kzg"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="DbN-SP-EGR"/>
                     <connections>
                         <outlet property="calendarContentView" destination="FhR-vj-Q8F" id="seu-4G-Imi"/>
                         <outlet property="calendarContentViewHeight" destination="Dcb-fI-NDx" id="RH4-Tr-B5F"/>
+                        <outlet property="tableView" destination="UVt-ca-er8" id="xTu-mk-zY5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yU4-mp-iz9" userLabel="First Responder" sceneMemberID="firstResponder"/>

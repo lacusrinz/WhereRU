@@ -8,15 +8,20 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, CalendarDataSource {
+class CalendarViewController: UIViewController, CalendarDataSource, CalendarContentViewDelegate {
 
     @IBOutlet weak var calendarContentView: CalendarContentView!
     @IBOutlet weak var calendarContentViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var tableView: UITableView!
     
     var calendar: CalendarView?
     
+    private var height: CGFloat = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.height = calendarContentViewHeight.constant
         
         self.calendar = CalendarView.new()
         self.calendar!.calendarAppearance!.calendar!.firstWeekday = 2
@@ -24,6 +29,8 @@ class CalendarViewController: UIViewController, CalendarDataSource {
         self.calendar!.calendarAppearance!.focusSelectedDayChangeMode = true
         self.calendar!.contentView = self.calendarContentView
         self.calendar!.dataSource = self
+        
+        self.calendar!.contentView!.contentDelegate = self
         
         self.calendar!.reloadData()
     }
@@ -71,10 +78,9 @@ class CalendarViewController: UIViewController, CalendarDataSource {
     */
     
     
-    func changeMode() {
-        println("balabala")
+    func changeMode(gesture: UISwipeGestureRecognizer) {
         self.calendar?.calendarAppearance?.isWeekMode = !self.calendar!.calendarAppearance!.isWeekMode!
-        var newHeight: CGFloat = 300
+        var newHeight: CGFloat = self.height
         if(self.calendar!.calendarAppearance!.isWeekMode!) {
             newHeight = 75
         }
