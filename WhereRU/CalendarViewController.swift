@@ -30,6 +30,8 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         self.calendar!.contentView = self.calendarContentView
         self.calendar!.dataSource = self
         
+        self.navigationItem.titleView = CalendarTitleView.new()
+        
         self.calendar!.contentView!.contentDelegate = self
         
         self.calendar!.reloadData()

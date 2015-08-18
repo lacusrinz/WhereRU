@@ -31,6 +31,7 @@
 		A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */; };
 		A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1261A07C7890000FB6F /* ContactViewController.swift */; };
 		A8B8A1911A1250280000FB6F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B8A1901A1250280000FB6F /* User.swift */; };
+		A8B975291B82246900B2A288 /* CalendarTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8B975281B82246900B2A288 /* CalendarTitleView.swift */; };
 		A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BA437B19FD446A004A8300 /* EventViewController.swift */; };
 		A8BB16911A6F78E900680CC6 /* ViewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */; };
 		A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */; };
@@ -61,6 +62,7 @@
 		A8E2FEF11B497F59009F3608 /* CalendarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E2FEF01B497F59009F3608 /* CalendarContentView.swift */; };
 		A8E42AE71B10CD0F00D05FAE /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */; };
 		A8E42AEA1B116FCC00D05FAE /* TargetAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */; };
+		A8E548101B837B98006763A2 /* CalendarDropDownMonthMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E5480F1B837B98006763A2 /* CalendarDropDownMonthMenuView.swift */; };
 		A8E7A4EE1A1ECBA700C4DCA9 /* AddContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */; };
 		A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656D1AA061690077A927 /* InviteViewController.swift */; };
 		A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656F1AA066B90077A927 /* InviteTableViewCell.swift */; };
@@ -144,6 +146,7 @@
 		A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactTableViewCell.swift; sourceTree = "<group>"; };
 		A8B8A1261A07C7890000FB6F /* ContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
 		A8B8A1901A1250280000FB6F /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A8B975281B82246900B2A288 /* CalendarTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarTitleView.swift; sourceTree = "<group>"; };
 		A8BA437B19FD446A004A8300 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		A8BB16901A6F78E900680CC6 /* ViewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewEventViewController.swift; sourceTree = "<group>"; };
 		A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddParticipantsTableViewController.swift; sourceTree = "<group>"; };
@@ -178,6 +181,7 @@
 		A8E2FEF01B497F59009F3608 /* CalendarContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarContentView.swift; sourceTree = "<group>"; };
 		A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAnnotation.swift; sourceTree = "<group>"; };
+		A8E5480F1B837B98006763A2 /* CalendarDropDownMonthMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDropDownMonthMenuView.swift; sourceTree = "<group>"; };
 		A8E7A4ED1A1ECBA700C4DCA9 /* AddContactViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddContactViewController.swift; sourceTree = "<group>"; };
 		A8F6656D1AA061690077A927 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
 		A8F6656F1AA066B90077A927 /* InviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
@@ -443,6 +447,8 @@
 				A8E1E76D1B4AC6AB00B7C6AF /* CalendarWeekView.swift */,
 				A8E1E76F1B4AC71500B7C6AF /* CircleView.swift */,
 				A8C4BB251B5BE72A00ACDA01 /* CalendarDataSource.swift */,
+				A8B975281B82246900B2A288 /* CalendarTitleView.swift */,
+				A8E5480F1B837B98006763A2 /* CalendarDropDownMonthMenuView.swift */,
 			);
 			name = Calendar;
 			sourceTree = "<group>";
@@ -730,6 +736,7 @@
 				A8BA437C19FD446A004A8300 /* EventViewController.swift in Sources */,
 				A80D9DB41B4A663800CAF88A /* UIViewExtension.swift in Sources */,
 				A8C4BB261B5BE72A00ACDA01 /* CalendarDataSource.swift in Sources */,
+				A8B975291B82246900B2A288 /* CalendarTitleView.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8E0FD5B1B27D3E5005102C1 /* Utility.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
@@ -745,6 +752,7 @@
 				A80D9DB21B4A663800CAF88A /* GuillotineMenuTransitionAnimation.swift in Sources */,
 				A8B8A1271A07C7890000FB6F /* ContactViewController.swift in Sources */,
 				A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */,
+				A8E548101B837B98006763A2 /* CalendarDropDownMonthMenuView.swift in Sources */,
 				A84CD40D1B634E750030214B /* CalendarViewController.swift in Sources */,
 				A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
