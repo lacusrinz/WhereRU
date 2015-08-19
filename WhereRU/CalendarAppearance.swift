@@ -114,7 +114,7 @@ class CalendarAppearance: NSObject {
                 currentMonthIndex += 12
             }
             
-            return (dateFormatter!.standaloneMonthSymbols[currentMonthIndex - 1]).capitalizedString
+            return "\((dateFormatter!.standaloneMonthSymbols[currentMonthIndex - 1]) as! String)  \(comps.year)"
         }
     }
     

@@ -30,6 +30,18 @@ class CalendarView: UIView, UIScrollViewDelegate {
         }
     }
     
+    private var _titleView: CalendarTitleView?
+    var titleView: CalendarTitleView? {
+        get {
+            return _titleView
+        }
+        set {
+            self._titleView = newValue
+            self._titleView?.calendarManager = self
+            self._titleView?.currentDate = self.currentDate
+        }
+    }
+    
     private var _currentDate:NSDate?
     var currentDate:NSDate? {
         get {
@@ -39,6 +51,7 @@ class CalendarView: UIView, UIScrollViewDelegate {
             assert(currentDate != nil, "Calendar currentDate cannot be nil")
             self._currentDate = newValue
             self.contentView?.currentDate = currentDate
+            self.titleView?.currentDate = currentDate
             self.repositionViews()
             self.contentView?.reloadData()
         }

@@ -9,12 +9,29 @@
 import UIKit
 
 class CalendarTitleView: UIView {
-
+    
+    var currentDateString: String?
+    var calendarManager: CalendarView?
+    
+    private var title: UIButton?
+    
+    private var _currentDate: NSDate?
+    var currentDate: NSDate? {
+        get {
+            return _currentDate
+        }
+        set {
+            _currentDate = newValue
+            self.currentDateString = self.calendarManager!.calendarAppearance!.monthBlock!(self.currentDate!, self.calendarManager!)
+            self.title?.removeFromSuperview()
+            self.title = titleButtonWithDateTime(self.currentDateString!)
+            self.addSubview(self.title!)
+        }
+    }
+    
     init() {
         super.init(frame: CGRectZero)
         self.frame = CGRectMake(0, 0, 170, 66)
-        var title: UIButton = self.titleButtonWithDateTime("十二月 2015")
-        self.addSubview(title)
     }
 
     required init(coder aDecoder: NSCoder) {
@@ -35,7 +52,7 @@ class CalendarTitleView: UIView {
     }
     
     func titleClick() {
-        //
+        //TODO
     }
 
 }

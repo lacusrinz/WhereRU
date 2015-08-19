@@ -29,17 +29,15 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         self.calendar!.calendarAppearance!.focusSelectedDayChangeMode = true
         self.calendar!.contentView = self.calendarContentView
         self.calendar!.dataSource = self
+
         
-        self.navigationItem.titleView = CalendarTitleView.new()
+        var titleView: CalendarTitleView = CalendarTitleView.new()
+        self.calendar!.titleView = titleView
+        self.navigationItem.titleView = titleView
         
         self.calendar!.contentView!.contentDelegate = self
         
         self.calendar!.reloadData()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func viewDidLayoutSubviews() {
