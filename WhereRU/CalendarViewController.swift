@@ -27,6 +27,33 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         self.calendar!.calendarAppearance!.calendar!.firstWeekday = 2
         self.calendar!.calendarAppearance!.dayCircleRatio = 9 / 10
         self.calendar!.calendarAppearance!.focusSelectedDayChangeMode = true
+        
+        self.calendar!.calendarAppearance!.weekDayBackgroundColor = UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
+        self.calendar!.calendarAppearance!.weekDayTextColor = UIColor.whiteColor()
+        
+        self.calendar!.calendarAppearance!.dayBackgroundColor = UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
+        
+        self.calendar!.calendarAppearance!.dayCircleColorSelected = UIColor.whiteColor()
+        self.calendar!.calendarAppearance!.dayCircleColorSelectedOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.5)
+        self.calendar!.calendarAppearance!.dayCircleColorToday = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.8)
+        self.calendar!.calendarAppearance!.dayCircleColorTodayOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.5)
+        
+        self.calendar!.calendarAppearance!.dayDotColor = UIColor.whiteColor()
+        self.calendar!.calendarAppearance!.dayDotColorOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.5)
+        self.calendar!.calendarAppearance!.dayDotColorSelected = UIColor(hue: 173, saturation: 62, brightness: 82, alpha: 1)
+        self.calendar!.calendarAppearance!.dayDotColorSelectedOtherMonth = UIColor(hue: 173, saturation: 62, brightness: 82, alpha: 0.5)
+        self.calendar!.calendarAppearance!.dayDotColorToday = UIColor.whiteColor()
+        self.calendar!.calendarAppearance!.dayDotColorTodayOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.5)
+        
+        self.calendar!.calendarAppearance!.dayTextColor = UIColor.whiteColor()
+        self.calendar!.calendarAppearance!.dayTextColorOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.3)
+        self.calendar!.calendarAppearance!.dayTextColorSelected = UIColor.blackColor()
+        self.calendar!.calendarAppearance!.dayTextColorSelectedOtherMonth = UIColor(hue: 173, saturation: 62, brightness: 82, alpha: 1)
+        self.calendar!.calendarAppearance!.dayTextColorToday = UIColor(hue: 173, saturation: 62, brightness: 82, alpha: 1)
+        self.calendar!.calendarAppearance!.dayTextColorTodayOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.5)
+        
+        
+        
         self.calendar!.contentView = self.calendarContentView
         self.calendar!.dataSource = self
 

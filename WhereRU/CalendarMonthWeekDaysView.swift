@@ -81,13 +81,12 @@ class CalendarMonthWeekDaysView: UIView {
     
     func reloadAppearance() {
         cacheDaysOfWeeks = nil
-        
+        self.backgroundColor = self.calendarManager!.calendarAppearance!.weekDayBackgroundColor!
         for(var i:Int = 0; i < self.subviews.count; ++i) {
             var view: UILabel = (self.subviews as NSArray).objectAtIndex(i) as! UILabel
             
             view.font = self.calendarManager!.calendarAppearance!.weekDayTextFont
             view.textColor = self.calendarManager!.calendarAppearance!.weekDayTextColor
-            
             view.text = self.daysOfWeek().objectAtIndex(i) as? String
         }
     }

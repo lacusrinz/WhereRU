@@ -12,41 +12,42 @@ typealias CalendarMonthBlock = (NSDate, CalendarView)-> String
 
 class CalendarAppearance: NSObject {
     
-    var isWeekMode:Bool?
-    var useCacheSystem:Bool?
-    var focusSelectedDayChangeMode:Bool?
-    var readFromRightToLeft:Bool?
-    var autoChangeMonth:Bool?
-    var monthBlock:CalendarMonthBlock?
+    var isWeekMode: Bool?
+    var useCacheSystem: Bool?
+    var focusSelectedDayChangeMode: Bool?
+    var readFromRightToLeft: Bool?
+    var autoChangeMonth: Bool?
+    var monthBlock: CalendarMonthBlock?
     
-    var weekDayTextColor:UIColor?
-    var weekDayTextFont:UIFont?
+    var weekDayTextColor: UIColor?
+    var weekDayTextFont: UIFont?
+    var weekDayBackgroundColor: UIColor?
     
-    var dayCircleColorSelected:UIColor?
-    var dayCircleColorSelectedOtherMonth:UIColor?
-    var dayCircleColorToday:UIColor?
-    var dayCircleColorTodayOtherMonth:UIColor?
+    var dayCircleColorSelected: UIColor?
+    var dayCircleColorSelectedOtherMonth: UIColor?
+    var dayCircleColorToday: UIColor?
+    var dayCircleColorTodayOtherMonth: UIColor?
     
-    var dayDotColor:UIColor?
-    var dayDotColorSelected:UIColor?
-    var dayDotColorOtherMonth:UIColor?
-    var dayDotColorSelectedOtherMonth:UIColor?
-    var dayDotColorToday:UIColor?
-    var dayDotColorTodayOtherMonth:UIColor?
+    var dayDotColor: UIColor?
+    var dayDotColorSelected: UIColor?
+    var dayDotColorOtherMonth: UIColor?
+    var dayDotColorSelectedOtherMonth: UIColor?
+    var dayDotColorToday: UIColor?
+    var dayDotColorTodayOtherMonth: UIColor?
     
-    var dayTextColor:UIColor?
-    var dayTextColorSelected:UIColor?
-    var dayTextColorOtherMonth:UIColor?
-    var dayTextColorSelectedOtherMonth:UIColor?
-    var dayTextColorToday:UIColor?
-    var dayTextColorTodayOtherMonth:UIColor?
-    var dayTextFont:UIFont?
-    var dayFormat:String?
-    var dayBackgroundColor:UIColor?
-    var dayBorderWidth:CGFloat?
-    var dayBorderColor:UIColor?
-    var dayCircleRatio:CGFloat?
-    var dayDotRation:CGFloat?
+    var dayTextColor: UIColor?
+    var dayTextColorSelected: UIColor?
+    var dayTextColorOtherMonth: UIColor?
+    var dayTextColorSelectedOtherMonth: UIColor?
+    var dayTextColorToday: UIColor?
+    var dayTextColorTodayOtherMonth: UIColor?
+    var dayTextFont: UIFont?
+    var dayFormat: String?
+    var dayBackgroundColor: UIColor?
+    var dayBorderWidth: CGFloat?
+    var dayBorderColor: UIColor?
+    var dayCircleRatio: CGFloat?
+    var dayDotRation: CGFloat?
     
     var calendar: NSCalendar?
     
@@ -62,12 +63,13 @@ class CalendarAppearance: NSObject {
         self.dayCircleRatio = 1
         self.dayDotRation = 1/9
         
+        self.weekDayBackgroundColor = UIColor.clearColor()//UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
         self.weekDayTextFont = UIFont.systemFontOfSize(11)
         self.dayTextFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
         
         self.dayFormat = "dd"
         
-        self.dayBackgroundColor = UIColor.clearColor()
+        self.dayBackgroundColor = UIColor.clearColor()//UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
         self.dayBorderWidth = 0
         self.dayBorderColor = UIColor.clearColor()
         
