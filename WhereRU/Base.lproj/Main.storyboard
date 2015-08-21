@@ -841,7 +841,7 @@
                     <connections>
                         <outlet property="calendarContentView" destination="FhR-vj-Q8F" id="seu-4G-Imi"/>
                         <outlet property="calendarContentViewHeight" destination="Dcb-fI-NDx" id="RH4-Tr-B5F"/>
-                        <outlet property="tableView" destination="UVt-ca-er8" id="xTu-mk-zY5"/>
+                        <outlet property="eventTableView" destination="UVt-ca-er8" id="9t0-Y9-Kme"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yU4-mp-iz9" userLabel="First Responder" sceneMemberID="firstResponder"/>

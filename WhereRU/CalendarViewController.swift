@@ -12,7 +12,7 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
 
     @IBOutlet weak var calendarContentView: CalendarContentView!
     @IBOutlet weak var calendarContentViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var eventTableView: UITableView!
     
     var calendar: CalendarView?
     
@@ -20,6 +20,10 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        self.eventTableView.delegate = self
+        self.eventTableView.dataSource = self
+        self.eventTableView.contentInset = UIEdgeInsets(top: -60, left: 0, bottom: 0, right: 0)
         
         self.height = calendarContentViewHeight.constant
         
@@ -125,4 +129,31 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         }
     }
 
+}
+
+extension CalendarViewController: UITableViewDataSource {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4;
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        tableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "eventCell")
+        let cell:EventCell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as! EventCell
+        return cell
+    }
+}
+
+extension CalendarViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 80
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //
+    }
 }
