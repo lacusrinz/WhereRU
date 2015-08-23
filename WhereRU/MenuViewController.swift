@@ -53,6 +53,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else if indexPath.row == 1 {
             cell.menuImage.image = UIImage(named:"Icon_calendar")
             cell.menuName.text = "日 程"
+            cell.nemuNumber.text = ""
         }else if indexPath.row == 2 {
             cell.menuImage.image = UIImage(named:"Icon_followee")
             cell.menuName.text = "关 注"
@@ -64,19 +65,54 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }else if indexPath.row == 4 {
             cell.menuImage.image = UIImage(named:"Icon_profile")
             cell.menuName.text = "我"
+            cell.nemuNumber.text = ""
         }else if indexPath.row == 5 {
             cell.menuImage.image = UIImage(named:"Icon_setting")
             cell.menuName.text = "设 置"
+            cell.nemuNumber.text = ""
         }else if indexPath.row == 6 {
             cell.menuImage.image = UIImage(named:"Icon_logout")
             cell.menuName.text = "登 出"
+            cell.nemuNumber.text = ""
         }
-        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        switch (indexPath.row) {
+        case 0:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        case 1:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("calendarViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        case 2:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        case 3:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        case 4:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        case 5:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        case 6:
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.hideMenuViewController()
+            break
+        default:
+            break
+        }
     }
     
     /*
