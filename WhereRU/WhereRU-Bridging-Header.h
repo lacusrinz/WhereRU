@@ -22,10 +22,7 @@
 #import "TSMessage.h"
 #import "MJRefresh.h"
 
-#import "YALTabBarItem.h"
-#import "YALFoldingTabBarController.h"
-#import "YALAnimatingTabBarConstants.h"
-#import "YALTabBarInteracting.h"
-
 #import "IQKeyboardReturnKeyHandler.h"
 #import "HSDatePickerViewController.h"
+
+#import "RESideMenu.h"

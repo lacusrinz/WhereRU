@@ -9,7 +9,7 @@
 import UIKit
 import avatarImageView
 
-class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate, YALTabBarInteracting {
+class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

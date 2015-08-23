@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ContactViewController: UITableViewController, SWTableViewCellDelegate, YALTabBarInteracting, AddContactViewControllerDelegate {
+class ContactViewController: UITableViewController, SWTableViewCellDelegate, AddContactViewControllerDelegate {
 
     var tableData = [AVUser]()
     var myFriendsObj:AVObject?

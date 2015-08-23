@@ -42,17 +42,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0lS-N3-dqK" customClass="avatarImageView" customModule="avatarImageView">
-                        <rect key="frame" x="232" y="8" width="36" height="36"/>
+                        <rect key="frame" x="252" y="17" width="26" height="26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="36" id="3u9-Q5-mJa"/>
-                            <constraint firstAttribute="width" constant="36" id="NHG-pm-yyB"/>
+                            <constraint firstAttribute="height" constant="26" id="3u9-Q5-mJa"/>
+                            <constraint firstAttribute="width" constant="26" id="NHG-pm-yyB"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="18"/>
+                                <real key="value" value="13"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -63,17 +63,17 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfL-Eq-DYg" customClass="avatarImageView" customModule="avatarImageView">
-                        <rect key="frame" x="276" y="8" width="36" height="36"/>
+                        <rect key="frame" x="286" y="17" width="26" height="26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="36" id="VSo-GJ-1YP"/>
-                            <constraint firstAttribute="height" constant="36" id="hEv-V0-Jrh"/>
+                            <constraint firstAttribute="width" constant="26" id="VSo-GJ-1YP"/>
+                            <constraint firstAttribute="height" constant="26" id="hEv-V0-Jrh"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="18"/>
+                                <real key="value" value="13"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -84,17 +84,38 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECC-MG-r8S" customClass="avatarImageView" customModule="avatarImageView">
-                        <rect key="frame" x="188" y="8" width="36" height="36"/>
+                        <rect key="frame" x="218" y="17" width="26" height="26"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="36" id="2C1-qm-RVf"/>
-                            <constraint firstAttribute="height" constant="36" id="61l-Xh-GVc"/>
+                            <constraint firstAttribute="width" constant="26" id="2C1-qm-RVf"/>
+                            <constraint firstAttribute="height" constant="26" id="61l-Xh-GVc"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="18"/>
+                                <real key="value" value="13"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                <real key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2In-HC-LwO" customClass="avatarImageView" customModule="avatarImageView">
+                        <rect key="frame" x="184" y="17" width="26" height="26"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="26" id="8ya-qv-fBe"/>
+                            <constraint firstAttribute="height" constant="26" id="wDq-cg-jeM"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="13"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
@@ -106,11 +127,13 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="hfL-Eq-DYg" secondAttribute="bottom" constant="27" id="9Wk-ag-t2P"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ECC-MG-r8S" secondAttribute="bottom" constant="27" id="Qlg-40-I3t"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="hfL-Eq-DYg" secondAttribute="bottom" constant="28.5" id="9Wk-ag-t2P"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="ECC-MG-r8S" secondAttribute="bottom" constant="28.5" id="Qlg-40-I3t"/>
+                    <constraint firstItem="ECC-MG-r8S" firstAttribute="leading" secondItem="2In-HC-LwO" secondAttribute="trailing" constant="8" id="iIv-fj-JLh"/>
+                    <constraint firstItem="2In-HC-LwO" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="klO-Ux-d0k"/>
                     <constraint firstItem="hfL-Eq-DYg" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="me9-b0-f7N"/>
                     <constraint firstItem="hfL-Eq-DYg" firstAttribute="leading" secondItem="0lS-N3-dqK" secondAttribute="trailing" constant="8" id="nLd-uq-mgJ"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="0lS-N3-dqK" secondAttribute="bottom" constant="27" id="nQo-y8-Arl"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="0lS-N3-dqK" secondAttribute="bottom" constant="28.5" id="nQo-y8-Arl"/>
                     <constraint firstItem="0lS-N3-dqK" firstAttribute="leading" secondItem="ECC-MG-r8S" secondAttribute="trailing" constant="8" id="nor-QN-awv"/>
                 </constraints>
             </tableViewCellContentView>

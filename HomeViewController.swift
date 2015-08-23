@@ -60,12 +60,7 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let destinationVC = segue.destinationViewController as! GuillotineMenuViewController
-        destinationVC.hostNavigationBarHeight = self.navigationController!.navigationBar.frame.size.height
-        destinationVC.hostTitleText = self.navigationItem.title!
-        print(self.navigationItem.title!)
-        destinationVC.view.backgroundColor = self.navigationController!.navigationBar.barTintColor
-        destinationVC.setMenuButtonWithImage(UIImage(named: "Icon_close")!)
+        //
     }
 
 }

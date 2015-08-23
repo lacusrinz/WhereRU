@@ -9,7 +9,7 @@
 import UIKit
 import avatarImageView
 
-class MenuViewController: GuillotineMenuViewController, UITableViewDataSource, UITableViewDelegate {
+class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var userAvatarImageView: avatarImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -79,10 +79,6 @@ class MenuViewController: GuillotineMenuViewController, UITableViewDataSource, U
         //
     }
     
-
-    @IBAction func closeMenu(sender: AnyObject) {
-        //
-    }
     /*
     // MARK: - Navigation
 

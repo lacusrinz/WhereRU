@@ -137,12 +137,13 @@ extension CalendarViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4;
+        return 7;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         tableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "eventCell")
         let cell:EventCell = tableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as! EventCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
         return cell
     }
 }

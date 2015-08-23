@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting {
+class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate {
     
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0

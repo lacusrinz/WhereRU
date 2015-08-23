@@ -24,6 +24,8 @@ pod 'AMap3DMap'
 pod 'AMapSearch'
 
 pod 'AVOSCloud'
-pod 'FoldingTabBar', '~> 1.0.0'
+#pod 'FoldingTabBar', '~> 1.0.0'
 
 pod 'HSDatePickerViewController', '~> 1.0.1'
+
+pod 'RESideMenu', '~> 4.0.7'
