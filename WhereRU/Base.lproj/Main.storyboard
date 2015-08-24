@@ -715,10 +715,10 @@
             </objects>
             <point key="canvasLocation" x="5071" y="280"/>
         </scene>
-        <!--View Controller-->
+        <!--Following View Controller-->
         <scene sceneID="wvE-JH-W1G">
             <objects>
-                <viewController id="jMP-Jj-jh1" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="followingViewController" id="jMP-Jj-jh1" customClass="FollowingViewController" customModule="WhereRU" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Whc-Eh-xrh"/>
                         <viewControllerLayoutGuide type="bottom" id="AhW-Px-JVL"/>
@@ -726,7 +726,29 @@
                     <view key="view" contentMode="scaleToFill" id="DTE-p9-9R2">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6xs-c5-Kja">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="jMP-Jj-jh1" id="SHl-90-1Ys"/>
+                                </connections>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="fW9-rq-wpM">
+                                <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fW9-rq-wpM" firstAttribute="top" secondItem="6xs-c5-Kja" secondAttribute="bottom" id="2iF-aP-Cyd"/>
+                            <constraint firstItem="fW9-rq-wpM" firstAttribute="leading" secondItem="DTE-p9-9R2" secondAttribute="leading" id="KUN-Uy-KJ4"/>
+                            <constraint firstItem="fW9-rq-wpM" firstAttribute="bottom" secondItem="AhW-Px-JVL" secondAttribute="top" id="M2H-7I-eDX"/>
+                            <constraint firstItem="6xs-c5-Kja" firstAttribute="leading" secondItem="fW9-rq-wpM" secondAttribute="leading" id="f5z-pH-StZ"/>
+                            <constraint firstItem="6xs-c5-Kja" firstAttribute="top" secondItem="Whc-Eh-xrh" secondAttribute="bottom" id="gnc-1S-bJZ"/>
+                            <constraint firstItem="6xs-c5-Kja" firstAttribute="trailing" secondItem="fW9-rq-wpM" secondAttribute="trailing" id="h0d-Cv-MQl"/>
+                            <constraint firstAttribute="trailing" secondItem="fW9-rq-wpM" secondAttribute="trailing" id="wFQ-gX-WEl"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="VlM-Vc-ZGq">
                         <barButtonItem key="leftBarButtonItem" image="Icon_menu" id="Plr-yx-rSo">
@@ -736,8 +758,21 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="followingTableView" destination="fW9-rq-wpM" id="oRi-9K-ptt"/>
+                        <outlet property="searchDisplayController" destination="Hg6-O1-dkU" id="C8A-7i-MIg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qNu-O0-xHH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="Hg6-O1-dkU">
+                    <connections>
+                        <outlet property="delegate" destination="jMP-Jj-jh1" id="uCh-AL-aWI"/>
+                        <outlet property="searchBar" destination="6xs-c5-Kja" id="iuQ-r9-dvK"/>
+                        <outlet property="searchContentsController" destination="jMP-Jj-jh1" id="CGb-IZ-QdW"/>
+                        <outlet property="searchResultsDataSource" destination="jMP-Jj-jh1" id="Vfl-4q-HtE"/>
+                        <outlet property="searchResultsDelegate" destination="jMP-Jj-jh1" id="alq-ac-PjI"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
             <point key="canvasLocation" x="5071" y="1028"/>
         </scene>

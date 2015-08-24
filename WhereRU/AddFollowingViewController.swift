@@ -1,5 +1,5 @@
 //
-//  AddContactViewController.swift
+//  AddFollowingViewController.swift
 //  WhereRU
 //
 //  Created by RInz on 14/11/21.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol AddContactViewControllerDelegate {
-    func AddContactViewControllerBack(controller:AddContactViewController)
+protocol AddFollowingViewControllerDelegate {
+    func AddFollowingViewControllerBack(controller:AddFollowingViewController)
 }
 
-class AddContactViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class AddFollowingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var contactSearchBar: UISearchBar!
     @IBOutlet var displayController: UISearchDisplayController!
     @IBOutlet weak var tableView: UITableView!
     
     var queryUsers:[AVUser]?
-    var delegate:AddContactViewControllerDelegate?
+    var delegate:AddFollowingViewControllerDelegate?
     var key = ""
     var friends:[AVUser]?
     var myFriendsObj:AVObject?
@@ -110,6 +110,6 @@ class AddContactViewController: UIViewController, UITableViewDataSource, UITable
 
     
     @IBAction func back(sender: AnyObject) {
-        self.delegate!.AddContactViewControllerBack(self)
+        self.delegate!.AddFollowingViewControllerBack(self)
     }
 }

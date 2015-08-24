@@ -91,7 +91,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.sideMenuViewController.hideMenuViewController()
             break
         case 2:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("followingViewController") as! UIViewController), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 3:
