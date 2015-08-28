@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: "6.3.1"
+    version: "6.4"
 test:
   override:
      - xctool -workspace WhereRU.xcworkspace -scheme WhereRU -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
