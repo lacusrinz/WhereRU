@@ -50,6 +50,7 @@
 		A8D8CA1B1AECF52100836FDC /* CommonUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */; };
 		A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */; };
 		A8D8CA1F1AECFC2900836FDC /* ReGeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */; };
+		A8DBE1961B8ED93D00A32EEE /* ChineseNameIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */; };
 		A8E0FD5B1B27D3E5005102C1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0FD5A1B27D3E5005102C1 /* Utility.swift */; };
 		A8E1E7621B4AC45100B7C6AF /* CalendarDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E1E7611B4AC45100B7C6AF /* CalendarDataCache.swift */; };
 		A8E1E7641B4AC47E00B7C6AF /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E1E7631B4AC47E00B7C6AF /* CalendarDayView.swift */; };
@@ -63,6 +64,7 @@
 		A8E42AE71B10CD0F00D05FAE /* CustomAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */; };
 		A8E42AEA1B116FCC00D05FAE /* TargetAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */; };
 		A8E548101B837B98006763A2 /* CalendarDropDownMonthMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E5480F1B837B98006763A2 /* CalendarDropDownMonthMenuView.swift */; };
+		A8E64E4D1B8E111700D7B75A /* pinyin.c in Sources */ = {isa = PBXBuildFile; fileRef = A8E64E4C1B8E111700D7B75A /* pinyin.c */; };
 		A8E7A4EE1A1ECBA700C4DCA9 /* AddFollowingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E7A4ED1A1ECBA700C4DCA9 /* AddFollowingViewController.swift */; };
 		A8F6656E1AA061690077A927 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656D1AA061690077A927 /* InviteViewController.swift */; };
 		A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6656F1AA066B90077A927 /* InviteTableViewCell.swift */; };
@@ -168,6 +170,7 @@
 		A8D8CA1A1AECF52100836FDC /* CommonUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtility.swift; sourceTree = "<group>"; };
 		A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDashPolyline.swift; sourceTree = "<group>"; };
 		A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReGeocodeAnnotation.swift; sourceTree = "<group>"; };
+		A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseNameIndex.swift; sourceTree = "<group>"; };
 		A8E0FD5A1B27D3E5005102C1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		A8E1E7611B4AC45100B7C6AF /* CalendarDataCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDataCache.swift; sourceTree = "<group>"; };
 		A8E1E7631B4AC47E00B7C6AF /* CalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
@@ -181,6 +184,8 @@
 		A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomAnnotationView.swift; sourceTree = "<group>"; };
 		A8E42AE91B116FCC00D05FAE /* TargetAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TargetAnnotation.swift; sourceTree = "<group>"; };
 		A8E5480F1B837B98006763A2 /* CalendarDropDownMonthMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDropDownMonthMenuView.swift; sourceTree = "<group>"; };
+		A8E64E4B1B8E111700D7B75A /* pinyin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = pinyin.h; sourceTree = "<group>"; };
+		A8E64E4C1B8E111700D7B75A /* pinyin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = pinyin.c; sourceTree = "<group>"; };
 		A8E7A4ED1A1ECBA700C4DCA9 /* AddFollowingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFollowingViewController.swift; sourceTree = "<group>"; };
 		A8F6656D1AA061690077A927 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
 		A8F6656F1AA066B90077A927 /* InviteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
@@ -335,6 +340,7 @@
 		A8B8A1921A14F8F00000FB6F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A8DBE1921B8EB62D00A32EEE /* ChineseNameIndex */,
 				A8C25CF21A7B456F001EFDE1 /* CommonConstant.swift */,
 			);
 			name = Utils;
@@ -427,6 +433,16 @@
 				A8D58A6D19C1EB0F00EEFC98 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A8DBE1921B8EB62D00A32EEE /* ChineseNameIndex */ = {
+			isa = PBXGroup;
+			children = (
+				A8E64E4B1B8E111700D7B75A /* pinyin.h */,
+				A8E64E4C1B8E111700D7B75A /* pinyin.c */,
+				A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */,
+			);
+			name = ChineseNameIndex;
 			sourceTree = "<group>";
 		};
 		A8E2FEEC1B497665009F3608 /* Calendar */ = {
@@ -734,9 +750,11 @@
 				A8C4BB261B5BE72A00ACDA01 /* CalendarDataSource.swift in Sources */,
 				A8B975291B82246900B2A288 /* CalendarTitleView.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
+				A8DBE1961B8ED93D00A32EEE /* ChineseNameIndex.swift in Sources */,
 				A8E0FD5B1B27D3E5005102C1 /* Utility.swift in Sources */,
 				A8ABCCE01A58115800965031 /* Event.swift in Sources */,
 				A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */,
+				A8E64E4D1B8E111700D7B75A /* pinyin.c in Sources */,
 				A8D8CA191AECF13400836FDC /* GeocodeAnnotation.swift in Sources */,
 				A8E42AEA1B116FCC00D05FAE /* TargetAnnotation.swift in Sources */,
 				A8D58A5619C1EB0F00EEFC98 /* AppDelegate.swift in Sources */,

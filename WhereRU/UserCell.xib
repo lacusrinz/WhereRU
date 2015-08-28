@@ -1,28 +1,43 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="112" id="KGk-i7-Jjw" customClass="UserCell" customModule="WhereRU" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="112"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="userCell" id="KGk-i7-Jjw" customClass="UserCell" customModule="WhereRU" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="60"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VnA-gU-bMb" customClass="avatarImageView" customModule="avatarImageView">
-                        <rect key="frame" x="8" y="16" width="80" height="80"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="德赫亚" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jf5-Gf-ejF">
+                        <rect key="frame" x="66" y="5" width="221" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="221" id="KaX-Il-pAT"/>
+                            <constraint firstAttribute="height" constant="50" id="jRN-7U-UsL"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VnA-gU-bMb" customClass="avatarImageView" customModule="avatarImageView">
+                        <rect key="frame" x="8" y="10" width="40" height="40"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="MSc-tK-ZWY"/>
+                            <constraint firstAttribute="height" constant="40" id="jwY-Ol-f6c"/>
+                        </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                 <real key="value" value="1"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="40"/>
+                                <real key="value" value="20"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
@@ -30,15 +45,19 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="德赫亚" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jf5-Gf-ejF">
-                        <rect key="frame" x="96" y="39" width="191" height="34"/>
-                        <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="28"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="jf5-Gf-ejF" firstAttribute="leading" secondItem="VnA-gU-bMb" secondAttribute="trailing" constant="18" id="B2u-s0-f6I"/>
+                    <constraint firstItem="jf5-Gf-ejF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-3" id="OVj-On-lV2"/>
+                    <constraint firstItem="VnA-gU-bMb" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="bdd-2F-R3Q"/>
+                    <constraint firstItem="VnA-gU-bMb" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nAO-1d-NbD"/>
+                </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="778" y="519"/>
+            <connections>
+                <outlet property="avatar" destination="VnA-gU-bMb" id="SvY-mo-l8f"/>
+                <outlet property="name" destination="jf5-Gf-ejF" id="2hk-dK-pOe"/>
+            </connections>
+            <point key="canvasLocation" x="1471" y="887"/>
         </tableViewCell>
     </objects>
     <resources>

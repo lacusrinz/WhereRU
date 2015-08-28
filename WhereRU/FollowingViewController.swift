@@ -15,6 +15,7 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
     var tableData = [AVUser]()
     var myFriendsObj:AVObject?
     var myFriends:[AVUser]?
+    var list:[AnyObject]?
     
     private var documentPath:String?
     
@@ -56,6 +57,39 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
 //            self.myFriends = allFriends
 //            self.tableData = allFriends
 //        }
+        
+        self.list = [AnyObject]()
+        var theCollation: UILocalizedIndexedCollation = UILocalizedIndexedCollation.currentCollation() as! UILocalizedIndexedCollation
+        
+        var temp: [ChineseNameIndex] = Array()
+        var nameArray: [String] = ["Jone白飞","andy Lili","张冲","林峰","kylin","王磊","emily","陈标","billy","韦丽"]
+        
+        for var i: Int = 0; i < nameArray.count; ++i {
+            var item: ChineseNameIndex = ChineseNameIndex()
+            item.name = nameArray[i]
+            item.lastName = (nameArray[i] as NSString).substringToIndex(1)
+            item.originIndex = i
+            temp.append(item)
+        }
+        
+        for item: ChineseNameIndex in temp {
+            var sect: Int = theCollation.sectionForObject(item, collationStringSelector: "getName")
+            item.sectionNum = sect
+        }
+
+        var highSection = theCollation.sectionTitles.count
+        var sectionArrays = [[ChineseNameIndex]]()
+        for var i: Int = 0; i <= highSection; ++i {
+            var sectionArray: [ChineseNameIndex] = Array()
+            sectionArrays.append(sectionArray)
+        }
+        for item: ChineseNameIndex in temp {
+            sectionArrays[item.sectionNum].append(item)
+        }
+        for sectionArray: [ChineseNameIndex] in sectionArrays {
+            var sortedSection = theCollation.sortedArrayFromArray(sectionArray, collationStringSelector: "getName")
+            self.list!.append(sortedSection)
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -141,29 +175,47 @@ extension FollowingViewController : UITableViewDelegate {
             tableView.deselectRowAtIndexPath(indexPath, animated: true)
         }
     }
+    
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
+        var existTitles = [AnyObject]()
+        var allTitles = UILocalizedIndexedCollation.currentCollation().sectionIndexTitles
+        for var i: Int = 0; i < allTitles.count; ++i {
+            if (self.list?[i].count > 0) {
+                existTitles.append(allTitles![i])
+            }
+        }
+        return existTitles
+    }
+    
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if (self.list![section].count > 0) {
+            return UILocalizedIndexedCollation.currentCollation().sectionTitles[section] as? String
+        }
+        return nil
+    }
+    
+    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+        return UILocalizedIndexedCollation.currentCollation().sectionForSectionIndexTitleAtIndex(index)
+    }
 }
 
 extension FollowingViewController : UITableViewDataSource {
     func numberOfSectionsInTableView(tableView: UITableView)->NSInteger{
-        return 1;
+        return self.list!.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if self.tableData.count == 0 {
-            self.followingTableView.backgroundView = emptyMessageLabel
-        } else {
-            self.followingTableView.backgroundView = UIView()
-        }
-        return self.tableData.count
+        return self.list![section].count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 64
+        return 60
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        self.followingTableView.registerNib(UINib(nibName: "EventCell", bundle: nil), forCellReuseIdentifier: "eventCell")
-        let cell:EventCell = self.followingTableView.dequeueReusableCellWithIdentifier("eventCell", forIndexPath: indexPath) as! EventCell
+        self.followingTableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCell")
+        let cell:UserCell = self.followingTableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UserCell
+        cell.name.text = "\((self.list![indexPath.section][indexPath.row] as! ChineseNameIndex).name!)"
         return cell
     }
 }

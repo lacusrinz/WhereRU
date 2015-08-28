@@ -26,3 +26,5 @@
 #import "HSDatePickerViewController.h"
 
 #import "RESideMenu.h"
+
+#import "pinyin.h"
