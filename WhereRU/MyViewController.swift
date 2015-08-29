@@ -11,15 +11,15 @@ import avatarImageView
 
 class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var avatar: avatarImageView!
+    @IBOutlet var avatarTap: UITapGestureRecognizer!
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    @IBOutlet weak var avatar: avatarImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
+//    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,26 +28,17 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
 
-        name.text = _name
-        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
-        if avatarObject != nil {
-            var avatarData = avatarObject.getData()
-            avatar.image = UIImage(data: avatarData)
-        }
+//        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
+//        if avatarObject != nil {
+//            var avatarData = avatarObject.getData()
+//            avatar.image = UIImage(data: avatarData)
+//        }
         avatar.addGestureRecognizer(avatarTap)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @IBAction func logout(sender: AnyObject) {
-        AVUser.logOut()
-        var fileManager:NSFileManager = NSFileManager()
-        fileManager.removeItemAtPath(Utility.filePath("invited.plist"), error: nil)
-        fileManager.removeItemAtPath(Utility.filePath("invite.plist"), error: nil)
-        self.performSegueWithIdentifier("logout", sender: self)
     }
     
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {
