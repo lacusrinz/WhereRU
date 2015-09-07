@@ -22,7 +22,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="q2y-eb-1xZ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="密码" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vig-om-6LK">
@@ -30,7 +30,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="ne2-b1-c5R"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -177,7 +177,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="0bb-Il-0l2"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Lacus Rinz" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yBl-H4-dhf">
@@ -199,7 +199,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="aDB-wn-HDa"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="lacusrinz@gmail.com" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tKo-Mc-ar2">
@@ -221,7 +221,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="zsc-dA-g48"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="STHeitiSC-Light" family="Heiti SC" pointSize="15"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -847,13 +847,6 @@
                                     <constraint firstAttribute="height" constant="1" id="EPd-fe-thV"/>
                                 </constraints>
                             </imageView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lcd-cP-3Wm">
-                                <rect key="frame" x="501" y="440" width="55" height="29"/>
-                                <segments>
-                                    <segment title="女"/>
-                                    <segment title="男"/>
-                                </segments>
-                            </segmentedControl>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lJ4-21-lq4">
                                 <rect key="frame" x="507" y="495" width="51" height="31"/>
                             </switch>
@@ -865,6 +858,14 @@
                                 <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="lcd-cP-3Wm">
+                                <rect key="frame" x="501" y="440" width="55" height="29"/>
+                                <segments>
+                                    <segment title="女"/>
+                                    <segment title="男"/>
+                                </segments>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -939,6 +940,12 @@
                     <connections>
                         <outlet property="avatar" destination="rlC-HF-uc7" id="3FH-IR-709"/>
                         <outlet property="avatarTap" destination="hbS-lz-qhh" id="vKy-5D-vTJ"/>
+                        <outlet property="birthday" destination="YdX-Yo-KpA" id="Zqs-JG-0sZ"/>
+                        <outlet property="desc" destination="a6p-xB-fzd" id="fmG-uo-c1F"/>
+                        <outlet property="email" destination="4BO-5s-HO7" id="Z5v-0F-Ksm"/>
+                        <outlet property="isPush" destination="lJ4-21-lq4" id="wcI-g6-JPv"/>
+                        <outlet property="name" destination="cCp-do-STu" id="8DN-Fa-fpq"/>
+                        <outlet property="sex" destination="lcd-cP-3Wm" id="y3Q-fe-4YQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QtB-S4-0Ky" userLabel="First Responder" sceneMemberID="firstResponder"/>

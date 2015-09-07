@@ -51,6 +51,10 @@
 		A8D8CA1D1AECF57200836FDC /* LineDashPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */; };
 		A8D8CA1F1AECFC2900836FDC /* ReGeocodeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */; };
 		A8DBE1961B8ED93D00A32EEE /* ChineseNameIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */; };
+		A8E0F7341B9A895300F8FA68 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0F7331B9A895300F8FA68 /* Token.swift */; };
+		A8E0F7361B9A898500F8FA68 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0F7351B9A898500F8FA68 /* TokenView.swift */; };
+		A8E0F7381B9A89A300F8FA68 /* TokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0F7371B9A89A300F8FA68 /* TokenInputView.swift */; };
+		A8E0F73A1B9A89EA00F8FA68 /* BackspaceDetectingTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0F7391B9A89EA00F8FA68 /* BackspaceDetectingTextField.swift */; };
 		A8E0FD5B1B27D3E5005102C1 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0FD5A1B27D3E5005102C1 /* Utility.swift */; };
 		A8E1E7621B4AC45100B7C6AF /* CalendarDataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E1E7611B4AC45100B7C6AF /* CalendarDataCache.swift */; };
 		A8E1E7641B4AC47E00B7C6AF /* CalendarDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E1E7631B4AC47E00B7C6AF /* CalendarDayView.swift */; };
@@ -171,6 +175,10 @@
 		A8D8CA1C1AECF57200836FDC /* LineDashPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LineDashPolyline.swift; sourceTree = "<group>"; };
 		A8D8CA1E1AECFC2900836FDC /* ReGeocodeAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReGeocodeAnnotation.swift; sourceTree = "<group>"; };
 		A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseNameIndex.swift; sourceTree = "<group>"; };
+		A8E0F7331B9A895300F8FA68 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		A8E0F7351B9A898500F8FA68 /* TokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
+		A8E0F7371B9A89A300F8FA68 /* TokenInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenInputView.swift; sourceTree = "<group>"; };
+		A8E0F7391B9A89EA00F8FA68 /* BackspaceDetectingTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackspaceDetectingTextField.swift; sourceTree = "<group>"; };
 		A8E0FD5A1B27D3E5005102C1 /* Utility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
 		A8E1E7611B4AC45100B7C6AF /* CalendarDataCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDataCache.swift; sourceTree = "<group>"; };
 		A8E1E7631B4AC47E00B7C6AF /* CalendarDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarDayView.swift; sourceTree = "<group>"; };
@@ -309,6 +317,7 @@
 		A8B8A12319FF0D520000FB6F /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A8E0F7321B9A461000F8FA68 /* Token */,
 				A8E42AE61B10CD0F00D05FAE /* CustomAnnotationView.swift */,
 				A8BDD0CC1A553224006DFD7B /* AddParticipantTableViewCell.swift */,
 				A8B8A1241A07C7520000FB6F /* ContactTableViewCell.swift */,
@@ -443,6 +452,17 @@
 				A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */,
 			);
 			name = ChineseNameIndex;
+			sourceTree = "<group>";
+		};
+		A8E0F7321B9A461000F8FA68 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				A8E0F7331B9A895300F8FA68 /* Token.swift */,
+				A8E0F7351B9A898500F8FA68 /* TokenView.swift */,
+				A8E0F7371B9A89A300F8FA68 /* TokenInputView.swift */,
+				A8E0F7391B9A89EA00F8FA68 /* BackspaceDetectingTextField.swift */,
+			);
+			name = Token;
 			sourceTree = "<group>";
 		};
 		A8E2FEEC1B497665009F3608 /* Calendar */ = {
@@ -738,8 +758,10 @@
 				A8D58A5B19C1EB0F00EEFC98 /* LoginViewController.swift in Sources */,
 				A8F665701AA066B90077A927 /* InviteTableViewCell.swift in Sources */,
 				A8E2FEF11B497F59009F3608 /* CalendarContentView.swift in Sources */,
+				A8E0F7341B9A895300F8FA68 /* Token.swift in Sources */,
 				A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */,
 				A8E1E7641B4AC47E00B7C6AF /* CalendarDayView.swift in Sources */,
+				A8E0F7361B9A898500F8FA68 /* TokenView.swift in Sources */,
 				A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */,
 				A8E2FEEB1B4975A2009F3608 /* CalendarView.swift in Sources */,
 				A8F6D1AB1B47C48A00C87556 /* MenuTableViewCell.swift in Sources */,
@@ -770,6 +792,8 @@
 				A84CD40D1B634E750030214B /* CalendarViewController.swift in Sources */,
 				A83E640F1B12148B008223A5 /* ParticipantAnnotation.swift in Sources */,
 				A8B77A081B8B647E0012EE16 /* UserCell.swift in Sources */,
+				A8E0F73A1B9A89EA00F8FA68 /* BackspaceDetectingTextField.swift in Sources */,
+				A8E0F7381B9A89A300F8FA68 /* TokenInputView.swift in Sources */,
 				A8B8A1911A1250280000FB6F /* User.swift in Sources */,
 				A8E1E7681B4AC66500B7C6AF /* CalendarMonthView.swift in Sources */,
 				A8131B801B88041B00BFE3FD /* RootViewController.swift in Sources */,

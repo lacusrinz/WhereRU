@@ -13,6 +13,12 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
 
     @IBOutlet weak var avatar: avatarImageView!
     @IBOutlet var avatarTap: UITapGestureRecognizer!
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var desc: UITextField!
+    @IBOutlet weak var birthday: UITextField!
+    @IBOutlet weak var sex: UISegmentedControl!
+    @IBOutlet weak var isPush: UISwitch!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
