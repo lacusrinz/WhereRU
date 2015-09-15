@@ -20,7 +20,7 @@ class CalendarDayView: UIView {
         set {
             var dateFormatter: NSDateFormatter?
             if(dateFormatter == nil) {
-                dateFormatter = NSDateFormatter.new()
+                dateFormatter = NSDateFormatter()
                 dateFormatter!.timeZone = self.calendarManager!.calendarAppearance!.calendar!.timeZone
                 dateFormatter!.dateFormat = self.calendarManager!.calendarAppearance!.dayFormat
             }
@@ -55,7 +55,7 @@ class CalendarDayView: UIView {
         commonInit()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -71,17 +71,17 @@ class CalendarDayView: UIView {
         backgroundView = UIView()
         self.addSubview(backgroundView!)
         
-        circleView = CircleView.new()
+        circleView = CircleView()
         self.addSubview(circleView!)
         
         textLabel = UILabel()
         self.addSubview(textLabel!)
         
-        dotView = CircleView.new()
+        dotView = CircleView()
         self.addSubview(dotView!)
         dotView!.hidden = true
         
-        var gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTouch")
+        let gesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "didTouch")
         self.userInteractionEnabled = true
         self.addGestureRecognizer(gesture)
         
@@ -128,8 +128,8 @@ class CalendarDayView: UIView {
         if(self.isOtherMonth != true || self.calendarManager!.calendarAppearance!.autoChangeMonth != true) {
             return
         }
-        var currentMonthIndex: Int = self.monthIndexForDate(self.date!)
-        var calendarMonthIndex: Int = self.monthIndexForDate(self.calendarManager!.currentDate!)
+        let currentMonthIndex: Int = self.monthIndexForDate(self.date!)
+        let calendarMonthIndex: Int = self.monthIndexForDate(self.calendarManager!.currentDate!)
         
         if(currentMonthIndex == (calendarMonthIndex + 1) % 12) {
             self.calendarManager!.loadNextPage()
@@ -140,7 +140,7 @@ class CalendarDayView: UIView {
     }
     
     func didDaySelected(notification: NSNotification) {
-        var dateSelected: NSDate = notification.object as! NSDate
+        let dateSelected: NSDate = notification.object as! NSDate
         
         if(self.isSameDate(dateSelected)) {
             if(isSelected == false) {
@@ -215,7 +215,7 @@ class CalendarDayView: UIView {
     
     func reloadData() {
         dotView!.hidden = !self.calendarManager!.dataCache!.haveEvent(self.date!)
-        var selected: Bool = self.isSameDate(self.calendarManager!.currentDateSelected)
+        let selected: Bool = self.isSameDate(self.calendarManager!.currentDateSelected)
         self.setSelected(selected, animated: false)
     }
     
@@ -242,14 +242,14 @@ class CalendarDayView: UIView {
         if date != nil {
             var dateFormatter: NSDateFormatter?
             if dateFormatter == nil {
-                dateFormatter = NSDateFormatter.new()
+                dateFormatter = NSDateFormatter()
                 dateFormatter!.timeZone = self.calendarManager?.calendarAppearance?.calendar?.timeZone
                 dateFormatter!.dateFormat = "dd-MM-yyyy"
             }
             if cacheCurrentDateText == nil {
                 cacheCurrentDateText = dateFormatter!.stringFromDate(self.date!)
             }
-            var dateText2: String = dateFormatter!.stringFromDate(date!)
+            let dateText2: String = dateFormatter!.stringFromDate(date!)
             if cacheCurrentDateText == dateText2 {
                 return true
             }
@@ -258,8 +258,8 @@ class CalendarDayView: UIView {
     }
     
     func monthIndexForDate(date: NSDate) -> Int {
-        var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
-        var comps: NSDateComponents = calendar.components(NSCalendarUnit.CalendarUnitMonth, fromDate: date)
+        let calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
+        let comps: NSDateComponents = calendar.components(NSCalendarUnit.Month, fromDate: date)
         return comps.month
     }
     

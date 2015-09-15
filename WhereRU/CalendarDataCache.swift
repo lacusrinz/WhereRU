@@ -17,7 +17,7 @@ class CalendarDataCache: NSObject {
     override init() {
         super.init()
         
-        dateFormatter = NSDateFormatter.new()
+        dateFormatter = NSDateFormatter()
         dateFormatter!.dateFormat = "yyyy-MM-dd"
         events = [String : Bool]()
     }
@@ -35,7 +35,7 @@ class CalendarDataCache: NSObject {
         }
         
         var haveEvent:Bool = false
-        var key:String = dateFormatter!.stringFromDate(date)
+        let key:String = dateFormatter!.stringFromDate(date)
         
         if(events![key] != nil) {
             haveEvent = events![key]!

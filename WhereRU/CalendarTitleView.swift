@@ -34,12 +34,12 @@ class CalendarTitleView: UIView {
         self.frame = CGRectMake(0, 0, 170, 66)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     func titleButtonWithDateTime(dateTime: String) -> UIButton {
-        var titleButton: UIButton = UIButton.new()
+        let titleButton: UIButton = UIButton()
         titleButton.setTitle(dateTime, forState: UIControlState.Normal)
         titleButton.setTitleColor(UIColor.blackColor(), forState: UIControlState.Normal)
         titleButton.setImage(UIImage(named: "Icon_arrow_normal"), forState: UIControlState.Normal)

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddParticipantsTableViewDelegate {
-    func AddParticipantsDidDone(AddParticipantsTableViewController, [AVUser])
+    func AddParticipantsDidDone(_: AddParticipantsTableViewController, _: [AVUser])
 }
 
 class AddParticipantsTableViewController: UITableViewController {
@@ -23,7 +23,7 @@ class AddParticipantsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         
         var query = AVQuery(className: "Friends")
         query.whereKey("from", equalTo: AVUser.currentUser())
@@ -65,7 +65,7 @@ class AddParticipantsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell:AddParticipantTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! AddParticipantTableViewCell
+        let cell:AddParticipantTableViewCell = tableView.cellForRowAtIndexPath(indexPath) as! AddParticipantTableViewCell
         cell.tintColor = UIColor.blueColor()
         if cell.selectedFriend {
             cell.selectedFriend = false

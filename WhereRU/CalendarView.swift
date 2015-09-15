@@ -68,15 +68,15 @@ class CalendarView: UIView, UIScrollViewDelegate {
     required init() {
         super.init(frame: CGRectZero)
         self._currentDate = NSDate()
-        self.calendarAppearance = CalendarAppearance.new()
-        self.dataCache = CalendarDataCache.new()
+        self.calendarAppearance = CalendarAppearance()
+        self.dataCache = CalendarDataCache()
         self.dataCache!.calendarManager = self
         
         cacheLastWeekMode = self.calendarAppearance!.isWeekMode
         cacheFirstWeekDay = self.calendarAppearance!.calendar!.firstWeekday
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -96,7 +96,7 @@ class CalendarView: UIView, UIScrollViewDelegate {
             self.currentDate = self.currentDateSelected
         }
         else {
-            var date = self.currentDate
+            let date = self.currentDate
             self.currentDate = date
         }
     }
@@ -120,16 +120,16 @@ class CalendarView: UIView, UIScrollViewDelegate {
     }
     
     func updatePage() {
-        var pageWidth: CGFloat = CGRectGetWidth(self.contentView!.frame)
-        var fractionalPage: CGFloat = self.contentView!.contentOffset.x / pageWidth
-        var currentPage = Int(round(fractionalPage))
+        let pageWidth: CGFloat = CGRectGetWidth(self.contentView!.frame)
+        let fractionalPage: CGFloat = self.contentView!.contentOffset.x / pageWidth
+        let currentPage = Int(round(fractionalPage))
         if (currentPage == Int(NUMBER_PAGES_LOADED / 2)) {
             self.contentView!.scrollEnabled = true;
             return;
         }
         
-        var calendar: NSCalendar = self.calendarAppearance!.calendar!
-        var dayComponent: NSDateComponents = NSDateComponents.new()
+        let calendar: NSCalendar = self.calendarAppearance!.calendar!
+        let dayComponent: NSDateComponents = NSDateComponents()
         dayComponent.month = 0
         dayComponent.day = 0
         
@@ -145,7 +145,7 @@ class CalendarView: UIView, UIScrollViewDelegate {
             dayComponent.day *= -1;
         }
         
-        var currentDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self.currentDate!, options: NSCalendarOptions(0))!
+        let currentDate: NSDate = calendar.dateByAddingComponents(dayComponent, toDate: self.currentDate!, options: NSCalendarOptions(rawValue: 0))!
         self.currentDate = currentDate
         
         self.contentView!.scrollEnabled = true
@@ -159,7 +159,7 @@ class CalendarView: UIView, UIScrollViewDelegate {
     }
     
     func repositionViews() {
-        var pageWidth: CGFloat = CGRectGetWidth(self.contentView!.frame)
+        let pageWidth: CGFloat = CGRectGetWidth(self.contentView!.frame)
         self.contentView!.contentOffset = CGPointMake(pageWidth * CGFloat(Int(NUMBER_PAGES_LOADED / 2)), self.contentView!.contentOffset.y)
     }
     

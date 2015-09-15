@@ -13,7 +13,7 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -25,14 +25,14 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
     @IBAction func login(sender: AnyObject) {
         AVUser.logInWithUsernameInBackground(emailTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
             if (user != nil) {
-                println("login success")
+                print("login success")
                 
-                var currentInstallation:AVInstallation = AVInstallation.currentInstallation()
+                let currentInstallation:AVInstallation = AVInstallation.currentInstallation()
                 currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")
                 
                 self.performSegueWithIdentifier("login", sender: self)
             } else {
-                println("failed:\(error!.description)")
+                print("failed:\(error!.description)")
             }
         }
         

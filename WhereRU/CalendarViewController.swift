@@ -27,7 +27,7 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         
         self.height = calendarContentViewHeight.constant
         
-        self.calendar = CalendarView.new()
+        self.calendar = CalendarView()
         self.calendar!.calendarAppearance!.calendar!.firstWeekday = 2
         self.calendar!.calendarAppearance!.dayCircleRatio = 9 / 10
         self.calendar!.calendarAppearance!.focusSelectedDayChangeMode = true
@@ -62,7 +62,7 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         self.calendar!.dataSource = self
 
         
-        var titleView: CalendarTitleView = CalendarTitleView.new()
+        let titleView: CalendarTitleView = CalendarTitleView()
         self.calendar!.titleView = titleView
         self.navigationItem.titleView = titleView
         
@@ -90,7 +90,7 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
     }
     
     func calendarDidLoadPreviousPage() {
-        println("xxxx")
+        print("xxxx")
     }
     
     func calendarCanSelectDate(calendar: CalendarView, date: NSDate) -> Bool {

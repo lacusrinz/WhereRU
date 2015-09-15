@@ -10,7 +10,7 @@ import UIKit
 import avatarImageView
 
 protocol ViewEventViewControllerDelegate{
-    func ViewEventViewControllerDidBack(ViewEventViewController)
+    func ViewEventViewControllerDidBack(_: ViewEventViewController)
 }
 
 class ViewEventViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UIGestureRecognizerDelegate {
@@ -31,7 +31,7 @@ class ViewEventViewController: UIViewController, UICollectionViewDataSource, UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         
         mapTapGesture = UITapGestureRecognizer(target: self, action: "getMap")
         mapTapGesture.delegate = self

@@ -17,8 +17,8 @@ class RootViewController: RESideMenu {
         self.contentViewShadowRadius = 12
         self.contentViewShadowEnabled = true
         
-        self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("contentViewController")! as! UIViewController
-        self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("leftMenuViewController")! as! UIViewController
+        self.contentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("contentViewController") as! UIViewController
+        self.leftMenuViewController = self.storyboard!.instantiateViewControllerWithIdentifier("leftMenuViewController") as! UIViewController
         self.delegate = self
     }
 }

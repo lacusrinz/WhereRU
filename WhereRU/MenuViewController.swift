@@ -83,31 +83,31 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch (indexPath.row) {
         case 0:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 1:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("calendarViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("calendarViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 2:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("followingViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("followingViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 3:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 4:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 5:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("myViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("myViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         case 6:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") as! UIViewController), animated: true)
+            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
         default:

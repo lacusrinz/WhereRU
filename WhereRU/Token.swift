@@ -2,7 +2,7 @@
 //  Token.swift
 //  WhereRU
 //
-//  Created by 钱志浩 on 15/9/5.
+//  Created by RInz on 15/9/5.
 //  Copyright (c) 2015年 RInz. All rights reserved.
 //
 
@@ -36,7 +36,7 @@ class Token: NSObject {
             return false
         }
         
-        var otherObject: Token = object as! Token
+        let otherObject: Token = object as! Token
         if(otherObject.displayText == self.displayText && otherObject.context!.isEqual(self.context)) {
             return true
         }

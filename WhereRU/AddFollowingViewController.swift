@@ -46,7 +46,7 @@ class AddFollowingViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     func searchUserWithKey(searchString:String) {
-        var query:AVQuery = AVUser.query()
+        let query:AVQuery = AVUser.query()
         query.whereKey("username", containsString: searchString)
         query.findObjectsInBackgroundWithBlock { (objs:[AnyObject]!, error:NSError!) -> Void in
             if error == nil && objs.count>0 {
@@ -71,7 +71,7 @@ class AddFollowingViewController: UIViewController, UITableViewDataSource, UITab
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if tableView == self.displayController.searchResultsTableView {
             let userCellIdentifier = "userCellIdentifier"
-            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(userCellIdentifier) as? UITableViewCell
+            var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(userCellIdentifier)
             if cell == nil{
                 cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: userCellIdentifier)
             }
@@ -79,18 +79,18 @@ class AddFollowingViewController: UIViewController, UITableViewDataSource, UITab
             return cell!
         } else {
             self.tableView.registerNib(UINib(nibName: "AddFriendTableViewCell", bundle: nil), forCellReuseIdentifier: "addFriendCell")
-            var addFriendCell:AddFriendTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("addFriendCell", forIndexPath: indexPath) as! AddFriendTableViewCell
+            let addFriendCell:AddFriendTableViewCell = self.tableView.dequeueReusableCellWithIdentifier("addFriendCell", forIndexPath: indexPath) as! AddFriendTableViewCell
             
-            var user:AVUser = self.queryUsers![indexPath.row]
+            let user:AVUser = self.queryUsers![indexPath.row]
             addFriendCell.friend = user
             addFriendCell.username.text = user.username
             
-            var avatarObj:AnyObject? = user.objectForKey("avatarFile") as AnyObject?
+            let avatarObj:AnyObject? = user.objectForKey("avatarFile") as AnyObject?
             if avatarObj != nil {
                 addFriendCell.avatarImage.image = UIImage(data: avatarObj!.getData())
             }
             
-            if self.friends != nil && contains(self.friends!, user) {
+            if self.friends != nil && (self.friends!).contains(user) {
                 addFriendCell.addFriendButton.enabled = false
                 addFriendCell.addFriendButton.setBackgroundImage(UIImage(named: "button_addfrienddone"), forState: UIControlState.Disabled)
             }

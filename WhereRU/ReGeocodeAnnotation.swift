@@ -14,10 +14,10 @@ class ReGeocodeAnnotation: NSObject, MAAnnotation {
     //MARK: - MAAnnotation Protocol
     
     func title() -> String! {
-        println("1:"+reGeocode!.addressComponent.province)
-        println("2:"+reGeocode!.addressComponent.city)
-        println("3:"+reGeocode!.addressComponent.district)
-        println("4:"+reGeocode!.addressComponent.township)
+        print("1:"+reGeocode!.addressComponent.province)
+        print("2:"+reGeocode!.addressComponent.city)
+        print("3:"+reGeocode!.addressComponent.district)
+        print("4:"+reGeocode!.addressComponent.township)
         return reGeocode!.addressComponent.province + reGeocode!.addressComponent.city + reGeocode!.addressComponent.district + reGeocode!.addressComponent.township
     }
     

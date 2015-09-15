@@ -2,7 +2,7 @@
 //  TokenView.swift
 //  WhereRU
 //
-//  Created by 钱志浩 on 15/9/5.
+//  Created by RInz on 15/9/5.
 //  Copyright (c) 2015年 RInz. All rights reserved.
 //
 
@@ -38,7 +38,7 @@ class TokenView: UIView, UIKeyInput {
     
     init(token: Token) {
         super.init(frame: CGRectZero)
-        var tintColor: UIColor = self.tintColor
+        let tintColor: UIColor = self.tintColor
         
         self.label = UILabel(frame: CGRectMake(PADDING_X, PADDING_Y, 0, 0))
         self.label!.font = UIFont.systemFontOfSize(17)
@@ -62,29 +62,29 @@ class TokenView: UIView, UIKeyInput {
         self.displayText = token.displayText
         
         // Configure for the token, unselected shows "displayText," and selected is "[displayText]"
-        var labelString: String = self.displayText!
-        var attrString: NSMutableAttributedString = NSMutableAttributedString(string: labelString, attributes: [NSFontAttributeName: self.label!.font, NSForegroundColorAttributeName: tintColor])
+        let labelString: String = self.displayText!
+        let attrString: NSMutableAttributedString = NSMutableAttributedString(string: labelString, attributes: [NSFontAttributeName: self.label!.font, NSForegroundColorAttributeName: tintColor])
         self.label!.attributedText = attrString
         self.selectedLabel!.text = token.displayText!
         
-        var tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer")
+        let tapRecognizer: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "handleTapGestureRecognizer")
         self.addGestureRecognizer(tapRecognizer)
         
         self.setNeedsLayout()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func intrinsicContentSize() -> CGSize {
-        var labelIntrinsicSize: CGSize = self.selectedLabel!.intrinsicContentSize()
+        let labelIntrinsicSize: CGSize = self.selectedLabel!.intrinsicContentSize()
         return CGSizeMake(labelIntrinsicSize.width+(2.0*PADDING_X), labelIntrinsicSize.height+(2.0*PADDING_Y))
     }
 
     override func sizeThatFits(size: CGSize) -> CGSize {
-        var fittingSize: CGSize = CGSizeMake(size.width-(2.0*PADDING_X), size.height-(2.0*PADDING_Y))
-        var labelSize: CGSize = self.selectedLabel!.sizeThatFits(fittingSize)
+        let fittingSize: CGSize = CGSizeMake(size.width-(2.0*PADDING_X), size.height-(2.0*PADDING_Y))
+        let labelSize: CGSize = self.selectedLabel!.sizeThatFits(fittingSize)
         return CGSizeMake(labelSize.width+(2.0*PADDING_X), labelSize.height+(2.0*PADDING_Y))
     }
     
@@ -102,7 +102,7 @@ class TokenView: UIView, UIKeyInput {
         if(selected) {
             self.becomeFirstResponder()
         }
-        var selectedAlpha: CGFloat = _selected! ? 1.0 : 0.0
+        let selectedAlpha: CGFloat = _selected! ? 1.0 : 0.0
         if(animated) {
             if (_selected!) {
                 self.selectedBackgroundView!.alpha = 0.0
@@ -131,7 +131,7 @@ class TokenView: UIView, UIKeyInput {
     // MARK: - Layout
     override func layoutSubviews() {
         super.layoutSubviews()
-        var bounds: CGRect = self.bounds
+        let bounds: CGRect = self.bounds
         
         self.backgroundView!.frame = bounds
         self.selectedBackgroundView!.frame = bounds

@@ -2,7 +2,7 @@
 //  BackspaceDetectingTextField.swift
 //  WhereRU
 //
-//  Created by 钱志浩 on 15/9/5.
+//  Created by RInz on 15/9/5.
 //  Copyright (c) 2015年 RInz. All rights reserved.
 //
 
@@ -29,17 +29,11 @@ class BackspaceDetectingTextField: UITextField {
         
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func deleteBackward() {
-        //
-    }
-    
-    func keyboardInputShouldDelete(textField: UITextField) -> Bool {
-        var shouldDelete: Bool = true
-        //TODO
-        return shouldDelete
+        self.backspaceDetectingTextFielddelegate!.textFieldDidDeleteBackwards(self)
     }
 }

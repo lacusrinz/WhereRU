@@ -24,7 +24,7 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
 
         self.followingTableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         self.followingTableView.tableFooterView = UIView()
@@ -59,13 +59,13 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
 //        }
         
         self.list = [AnyObject]()
-        var theCollation: UILocalizedIndexedCollation = UILocalizedIndexedCollation.currentCollation() as! UILocalizedIndexedCollation
+        let theCollation: UILocalizedIndexedCollation = UILocalizedIndexedCollation.currentCollation()
         
         var temp: [ChineseNameIndex] = Array()
         var nameArray: [String] = ["Jone白飞","andy Lili","张冲","林峰","kylin","王磊","emily","陈标","billy","韦丽"]
         
         for var i: Int = 0; i < nameArray.count; ++i {
-            var item: ChineseNameIndex = ChineseNameIndex()
+            let item: ChineseNameIndex = ChineseNameIndex()
             item.name = nameArray[i]
             item.lastName = (nameArray[i] as NSString).substringToIndex(1)
             item.originIndex = i
@@ -73,21 +73,21 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
         }
         
         for item: ChineseNameIndex in temp {
-            var sect: Int = theCollation.sectionForObject(item, collationStringSelector: "getName")
+            let sect: Int = theCollation.sectionForObject(item, collationStringSelector: "getName")
             item.sectionNum = sect
         }
 
-        var highSection = theCollation.sectionTitles.count
+        let highSection = theCollation.sectionTitles.count
         var sectionArrays = [[ChineseNameIndex]]()
         for var i: Int = 0; i <= highSection; ++i {
-            var sectionArray: [ChineseNameIndex] = Array()
+            let sectionArray: [ChineseNameIndex] = Array()
             sectionArrays.append(sectionArray)
         }
         for item: ChineseNameIndex in temp {
             sectionArrays[item.sectionNum].append(item)
         }
         for sectionArray: [ChineseNameIndex] in sectionArrays {
-            var sortedSection = theCollation.sortedArrayFromArray(sectionArray, collationStringSelector: "getName")
+            let sortedSection = theCollation.sortedArrayFromArray(sectionArray, collationStringSelector: "getName")
             self.list!.append(sortedSection)
         }
     }
@@ -126,15 +126,15 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
     }
     
     func rightButtons()->NSArray{
-        var rightUtilityButtons:NSMutableArray = NSMutableArray()
+        let rightUtilityButtons:NSMutableArray = NSMutableArray()
         rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), title: "删除好友")
         return rightUtilityButtons
     }  
     
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerRightUtilityButtonWithIndex index: Int) {
-        var selectedRowNumber = self.followingTableView.indexPathForCell(cell)!.row
-        var deletedFriend:AVUser = self.tableData[selectedRowNumber] as AVUser
-        var toRelation:AVRelation = myFriendsObj!.relationforKey("to")
+        let selectedRowNumber = self.followingTableView.indexPathForCell(cell)!.row
+        let deletedFriend:AVUser = self.tableData[selectedRowNumber] as AVUser
+        let toRelation:AVRelation = myFriendsObj!.relationforKey("to")
         toRelation.removeObject(deletedFriend)
         myFriendsObj!.saveInBackgroundWithBlock { (success:Bool, error:NSError!) -> Void in
             if success == true {
@@ -176,12 +176,12 @@ extension FollowingViewController : UITableViewDelegate {
         }
     }
     
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [AnyObject]! {
-        var existTitles = [AnyObject]()
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]! {
+        var existTitles = [String]()
         var allTitles = UILocalizedIndexedCollation.currentCollation().sectionIndexTitles
         for var i: Int = 0; i < allTitles.count; ++i {
             if (self.list?[i].count > 0) {
-                existTitles.append(allTitles![i])
+                existTitles.append(allTitles[i])
             }
         }
         return existTitles
@@ -189,7 +189,7 @@ extension FollowingViewController : UITableViewDelegate {
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if (self.list![section].count > 0) {
-            return UILocalizedIndexedCollation.currentCollation().sectionTitles[section] as? String
+            return UILocalizedIndexedCollation.currentCollation().sectionTitles[section]
         }
         return nil
     }
@@ -215,7 +215,7 @@ extension FollowingViewController : UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         self.followingTableView.registerNib(UINib(nibName: "UserCell", bundle: nil), forCellReuseIdentifier: "userCell")
         let cell:UserCell = self.followingTableView.dequeueReusableCellWithIdentifier("userCell", forIndexPath: indexPath) as! UserCell
-        cell.name.text = "\((self.list![indexPath.section][indexPath.row] as! ChineseNameIndex).name!)"
+        cell.name.text = "\(((self.list![indexPath.section] as! [AnyObject])[indexPath.row] as! ChineseNameIndex).name!)"
         return cell
     }
 }

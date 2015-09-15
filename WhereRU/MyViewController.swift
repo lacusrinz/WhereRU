@@ -20,7 +20,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     @IBOutlet weak var sex: UISegmentedControl!
     @IBOutlet weak var isPush: UISwitch!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -30,7 +30,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
 
@@ -48,14 +48,14 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     }
     
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {
-        var choiceSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Photo", "Take from Libray")
+        let choiceSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Photo", "Take from Libray")
         choiceSheet.showInView(self.view)
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if(buttonIndex == 1) {
             if(self.isCameraAvailable()) {
-                var controller: UIImagePickerController = UIImagePickerController()
+                let controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.Camera
                 if(self.isFrontCameraAvailable()) {
                     controller.cameraDevice = UIImagePickerControllerCameraDevice.Front;
@@ -68,7 +68,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         }
         else if(buttonIndex == 2){
             if(self.isPhotoLibraryAvailable()) {
-                var controller: UIImagePickerController = UIImagePickerController()
+                let controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 controller.delegate = self
                 self.presentViewController(controller, animated: true, completion: { () -> Void in
@@ -78,10 +78,10 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
-            var imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
+            let portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
+            let imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
             imageCropVC.delegate = self
             self.presentViewController(imageCropVC, animated: true, completion: { () -> Void in
                 //
@@ -126,8 +126,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect) {
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var avatarData:NSData = UIImagePNGRepresentation(croppedImage)
-            var avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            let avatarData:NSData = UIImagePNGRepresentation(croppedImage)!
+            let avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
             AVUser.currentUser().setObject(avatarFile, forKey: "avatarFile")
             AVUser.currentUser().saveInBackground()
         })

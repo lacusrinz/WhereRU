@@ -19,7 +19,7 @@ class CommonUtility: NSObject {
         var maxX = minX
         var maxY = minY
         for(var i:Int=1;i<count;i++){
-            var point:MAMapPoint = mapPoints[i]
+            let point:MAMapPoint = mapPoints[i]
             if (point.x < minX){
                 minX = point.x;
             }
@@ -53,7 +53,7 @@ class CommonUtility: NSObject {
             mapPoints.append(MAMapPointForCoordinate((obj.coordinate)))
         }
         
-        var minMapRect:MAMapRect = self.minMapRectForMapPoints(mapPoints, count: annotations.count)
+        let minMapRect:MAMapRect = self.minMapRectForMapPoints(mapPoints, count: annotations.count)
         
         return minMapRect;
     }
@@ -62,11 +62,11 @@ class CommonUtility: NSObject {
         if (path == nil || path!.steps.count == 0){
             return nil
         }
-        var polylines:NSMutableArray = NSMutableArray()
+        let polylines:NSMutableArray = NSMutableArray()
         (path!.steps as NSArray).enumerateObjectsUsingBlock { (step:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-            var stepPolyline:MAPolyline? = self.polylineForStep(step as! AMapStep!)
+            let stepPolyline:MAPolyline? = self.polylineForStep(step as! AMapStep!)
             if stepPolyline != nil{
-                println("lalala stepPolyline:\(stepPolyline)")
+                print("lalala stepPolyline:\(stepPolyline)")
                 polylines.addObject(stepPolyline!)
                 if idx>0{
                     self.replenishPolylinesForPathWith(stepPolyline!, lastPolyline: self.polylineForStep((path!.steps as NSArray).objectAtIndex(idx-1) as! AMapStep)!, polylines: polylines)
@@ -77,7 +77,7 @@ class CommonUtility: NSObject {
     }
     
     class func replenishPolylinesForPathWith(stepPolyline:MAPolyline,lastPolyline:MAPolyline,polylines:NSMutableArray){
-        var startCoor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+        let startCoor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         var endCoor:CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
         var points:[CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
         stepPolyline.getCoordinates(&endCoor, range: NSMakeRange(0, 1))
@@ -89,8 +89,8 @@ class CommonUtility: NSObject {
             points.append(startCoor)
             points.append(endCoor)
             
-            var polyline:MAPolyline = MAPolyline(coordinates: &points, count: 2)
-            var dathPolyline:LineDashPolyline = LineDashPolyline(polyline: polyline)
+            let polyline:MAPolyline = MAPolyline(coordinates: &points, count: 2)
+            let dathPolyline:LineDashPolyline = LineDashPolyline(polyline: polyline)
             polylines.addObject(dathPolyline)
         }
     }
@@ -110,7 +110,7 @@ class CommonUtility: NSObject {
         let coordinatesTotal = coordinatesForString(coordinateString, parseToken: ";")
         count = coordinatesTotal.coordinateCount
         var coordinates:[CLLocationCoordinate2D] = coordinatesTotal.coordinates!
-        var polyline:MAPolyline = MAPolyline(coordinates: &coordinates, count: UInt(count))
+        let polyline:MAPolyline = MAPolyline(coordinates: &coordinates, count: UInt(count))
         return polyline
     }
     
@@ -128,11 +128,11 @@ class CommonUtility: NSObject {
         } else{
             str = string! as String
         }
-        var components:NSArray = str .componentsSeparatedByString(",")
-        var count:Int = components.count/2
+        let components:NSArray = str .componentsSeparatedByString(",")
+        let count:Int = components.count/2
         var coordinates:[CLLocationCoordinate2D] = [CLLocationCoordinate2D]()
         for var i:Int = 0; i<count; ++i{
-            var coordinate = CLLocationCoordinate2D(latitude: components.objectAtIndex(2*i).doubleValue, longitude: components.objectAtIndex(2*i+1).doubleValue)
+            let coordinate = CLLocationCoordinate2D(latitude: components.objectAtIndex(2*i).doubleValue, longitude: components.objectAtIndex(2*i+1).doubleValue)
             coordinates.append(coordinate)
         }
         return (coordinates, count)
@@ -140,7 +140,7 @@ class CommonUtility: NSObject {
     
     class func mapRectForOverlays(overlays:NSArray) -> MAMapRect{
         if overlays.count == 0{
-            println("Wrong param\(__FUNCTION__)")
+            print("Wrong param\(__FUNCTION__)")
             return MAMapRectZero
         }
         var mapRect:MAMapRect?
@@ -170,9 +170,9 @@ class CommonUtility: NSObject {
     }
     
     class func unionMapRect1(mapRect1:MAMapRect, mapRect2:MAMapRect) -> MAMapRect{
-        var rect1 = CGRectMake(CGFloat(mapRect1.origin.x), CGFloat(mapRect1.origin.y), CGFloat(mapRect1.size.width), CGFloat(mapRect1.size.height));
-        var rect2 = CGRectMake(CGFloat(mapRect2.origin.x), CGFloat(mapRect2.origin.y), CGFloat(mapRect2.size.width), CGFloat(mapRect2.size.height));
-        var unionRect:CGRect = CGRectUnion(rect1, rect2)
+        let rect1 = CGRectMake(CGFloat(mapRect1.origin.x), CGFloat(mapRect1.origin.y), CGFloat(mapRect1.size.width), CGFloat(mapRect1.size.height));
+        let rect2 = CGRectMake(CGFloat(mapRect2.origin.x), CGFloat(mapRect2.origin.y), CGFloat(mapRect2.size.width), CGFloat(mapRect2.size.height));
+        let unionRect:CGRect = CGRectUnion(rect1, rect2)
         
         return MAMapRectMake(Double(unionRect.origin.x), Double(unionRect.origin.y), Double(unionRect.size.width), Double(unionRect.size.height))
     }

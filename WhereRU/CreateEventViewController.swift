@@ -10,8 +10,8 @@ import UIKit
 import avatarImageView
 
 protocol CreateEventViewControllerDelegate {
-    func CreateEventViewControllerDidBack(CreateEventViewController)
-    func CreateEventViewControllerDone(CreateEventViewController)
+    func CreateEventViewControllerDidBack(_: CreateEventViewController)
+    func CreateEventViewControllerDone(_: CreateEventViewController)
 }
 
 class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, HSDatePickerViewControllerDelegate {
@@ -44,7 +44,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         TSMessage.setDefaultViewController(self)
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         self.navigationController?.navigationBar.translucent = false
         
         if (UIDevice.currentDevice().systemVersion as NSString).doubleValue >= 8.0 {
@@ -99,13 +99,13 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         displayController?.searchResultsDataSource = self
         displayController?.searchResultsDelegate = self
         
-        self.doneButton.setAttributedTitle(NSAttributedString(string: "完成", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
+        self.doneButton.setAttributedTitle(NSAttributedString(string: "完成", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]), forState: .Normal)
         
         tips = []
         participators = [AVUser]()
         
         if let myEvent = event {
-            self.doneButton.setAttributedTitle(NSAttributedString(string: "更新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]), forState: .Normal)
+            self.doneButton.setAttributedTitle(NSAttributedString(string: "更新", attributes:NSDictionary(object: UIColor.redColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]), forState: .Normal)
             eventTextView.text = myEvent.message
             
             participators = myEvent.participants
@@ -118,7 +118,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     @IBAction func chooseTime(sender: AnyObject) {
-        var hsdpvc:HSDatePickerViewController = HSDatePickerViewController()
+        let hsdpvc:HSDatePickerViewController = HSDatePickerViewController()
         hsdpvc.delegate = self
         hsdpvc.date = NSDate()
         hsdpvc.confirmButtonTitle = "确定"
@@ -127,7 +127,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     @IBAction func setNeedLocation(sender: AnyObject) {
-        var switchButton:UISwitch = sender as! UISwitch
+        let switchButton:UISwitch = sender as! UISwitch
         if  self.event != nil {
             if switchButton.on {
                 self.event!.needLocation = true
@@ -139,7 +139,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     override func viewDidAppear(animated: Bool) {
         if event != nil && event!.coordinate != nil {
-            var point: MAPointAnnotation = MAPointAnnotation()
+            let point: MAPointAnnotation = MAPointAnnotation()
             point.coordinate = event!.coordinate!
             point.title = "目的地"
             self.locationMapView.setCenterCoordinate(point.coordinate, animated: true)
@@ -153,7 +153,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     //MARK: - HSDatePickerDelegate
     func hsDatePickerPickedDate(date: NSDate!) {
-        var dateFormatter = NSDateFormatter()
+        let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "YYYY年MM月dd hh:mm"
         self.timeButton.setTitle(dateFormatter.stringFromDate(date), forState: UIControlState.Normal)
         self.event!.date = date
@@ -165,9 +165,9 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if key.length == 0 {
             return
         }
-        var geo:AMapGeocodeSearchRequest = AMapGeocodeSearchRequest()
+        let geo:AMapGeocodeSearchRequest = AMapGeocodeSearchRequest()
         geo.address = key as String
-        if(adcode != nil && count(adcode!)>0) {
+        if(adcode != nil && (adcode!).characters.count>0) {
             geo.city = [adcode!]
         }
         self.search?.AMapGeocodeSearch(geo)
@@ -177,7 +177,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if (touchPoi == nil) {
             return nil;
         }
-        var annotation:MAPointAnnotation = MAPointAnnotation()
+        let annotation:MAPointAnnotation = MAPointAnnotation()
         annotation.coordinate = touchPoi!.coordinate
         annotation.title = touchPoi!.name
         return annotation
@@ -188,7 +188,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             return;
         }
         
-        var tips = AMapInputTipsSearchRequest()
+        let tips = AMapInputTipsSearchRequest()
         tips.keywords = key as String;
         self.search?.AMapInputTipsSearch(tips)
     }
@@ -211,7 +211,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         if self.locationMapView.annotations.count > 0 {
             self.locationMapView.removeAnnotation(self.locationMapView.annotations[0] as! MAPointAnnotation)
         }
-        var annotation:MAPointAnnotation = self.annotationForTouchPoi(pois[0] as? MATouchPoi)!
+        let annotation:MAPointAnnotation = self.annotationForTouchPoi(pois[0] as? MATouchPoi)!
         self.locationMapView.addAnnotation(annotation)
         self.locationMapView.selectAnnotation(annotation, animated: true)
     }
@@ -224,7 +224,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 poiAnnotationView = MAPinAnnotationView(annotation: annotation, reuseIdentifier: geoCellIdentifier)
             }
             poiAnnotationView?.canShowCallout = true
-            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIView
             return poiAnnotationView
         }
         if annotation.isKindOfClass(ReGeocodeAnnotation) {
@@ -235,7 +235,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             }
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = true
-            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIView
             return poiAnnotationView
         }
         if annotation.isKindOfClass(MAPointAnnotation) {
@@ -247,7 +247,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             poiAnnotationView?.animatesDrop = true
             poiAnnotationView?.canShowCallout = true
             poiAnnotationView?.draggable = true;
-            poiAnnotationView?.rightCalloutAccessoryView = UIButton.buttonWithType(UIButtonType.DetailDisclosure) as! UIView
+            poiAnnotationView?.rightCalloutAccessoryView = UIButton(type: UIButtonType.DetailDisclosure) as UIView
             return poiAnnotationView
         }
         return nil
@@ -260,12 +260,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
         
         var annotations = [GeocodeAnnotation]()
         (response.geocodes as NSArray).enumerateObjectsUsingBlock { (obj:AnyObject!, idx:Int, stop:UnsafeMutablePointer<ObjCBool>) -> Void in
-            var geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
+            let geocodeAnnotation:GeocodeAnnotation = GeocodeAnnotation(geocode: obj as! AMapGeocode)
             annotations.append(geocodeAnnotation)
         }
         if annotations.count == 1 {
-            println((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
-            println((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
+            print((annotations[0].coordinate as CLLocationCoordinate2D).latitude)
+            print((annotations[0].coordinate as CLLocationCoordinate2D).longitude)
             self.locationMapView.setCenterCoordinate(annotations[0].coordinate, animated: true)
         } else {
             self.locationMapView.setVisibleMapRect(CommonUtility.minMapRectForAnnotations(annotations), animated: true)
@@ -281,38 +281,38 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     //MARK: - UISearchBarDelegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        var key = searchBar.text;
-        self.clearAndSearchGeocodeWithKey(key, adcode:nil)
+        let key = searchBar.text;
+        self.clearAndSearchGeocodeWithKey(key!, adcode:nil)
         self.displayController?.setActive(false, animated: false)
         self.locationSearchBar.placeholder = key;
     }
     
     //MARK: - UISearchDisplayDelegate
-    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String!) -> Bool {
-        self.searchTipsWithKey(searchString)
+    func searchDisplayController(controller: UISearchDisplayController, shouldReloadTableForSearchString searchString: String?) -> Bool {
+        self.searchTipsWithKey(searchString!)
         return true
     }
     
     //MARK: - SearchBar UITableViewDataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        println("tips number:\(self.tips!.count)")
+        print("tips number:\(self.tips!.count)")
         return self.tips!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let tipCellIdentifier = "tipCellIdentifier"
-        var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(tipCellIdentifier) as? UITableViewCell
+        var cell: UITableViewCell? = tableView.dequeueReusableCellWithIdentifier(tipCellIdentifier)
         if cell == nil{
             cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: tipCellIdentifier)
         }
-        var tip:AMapTip = self.tips![indexPath.row]
+        let tip:AMapTip = self.tips![indexPath.row]
         cell?.textLabel?.text = tip.name
         cell?.detailTextLabel?.text = tip.adcode
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var tip:AMapTip = self.tips![indexPath.row]
+        let tip:AMapTip = self.tips![indexPath.row]
         self.clearAndSearchGeocodeWithKey(tip.name, adcode: tip.adcode)
         self.displayController?.setActive(false, animated: false)
         self.locationSearchBar.placeholder = tip.name
@@ -354,12 +354,12 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     func deleteParticipator(sender:UIPanGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.Ended{
-            var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
-            var panCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
+            let initPoint:CGPoint = sender.locationInView(participatorCollectionView)
+            let panCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
             if panCellPath != nil{
-                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(panCellPath!) as! ParticipatorCollectionViewCell
+                let cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(panCellPath!) as! ParticipatorCollectionViewCell
                 if cell.isParticipator{
-                    var array:[NSIndexPath] = [panCellPath!]
+                    let array:[NSIndexPath] = [panCellPath!]
                     participatorCollectionView.performBatchUpdates({
                         () -> Void in
                         self.participatorCollectionView.deleteItemsAtIndexPaths(array)
@@ -375,10 +375,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     
     func addParticipator(sender:UITapGestureRecognizer) {
         if sender.state == UIGestureRecognizerState.Ended{
-            var initPoint:CGPoint = sender.locationInView(participatorCollectionView)
-            var tapCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
+            let initPoint:CGPoint = sender.locationInView(participatorCollectionView)
+            let tapCellPath:NSIndexPath? = participatorCollectionView.indexPathForItemAtPoint(initPoint)
             if tapCellPath != nil{
-                var cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as! ParticipatorCollectionViewCell
+                let cell:ParticipatorCollectionViewCell = participatorCollectionView.cellForItemAtIndexPath(tapCellPath!) as! ParticipatorCollectionViewCell
                 if !cell.isParticipator{
                     self.performSegueWithIdentifier("addParticipant", sender: self)
                 }
@@ -433,10 +433,10 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             event!.obj!.setObject(event!.acceptMemberCount!, forKey: "acceptMemberCount")
             event!.obj!.setObject(event!.refuseMemberCount!, forKey: "refuseMemberCount")
             
-            var ownerRelation:AVRelation = event!.obj!.relationforKey("owner")
+            let ownerRelation:AVRelation = event!.obj!.relationforKey("owner")
             ownerRelation.addObject(AVUser.currentUser())
             
-            var participatorsRelation:AVRelation = event!.obj!.relationforKey("participater")
+            let participatorsRelation:AVRelation = event!.obj!.relationforKey("participater")
             for participator:AVUser in self.oldParticipators! {
                 participatorsRelation.removeObject(participator)
             }
@@ -446,23 +446,23 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
             
             event!.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                 if success {
-                    var query:AVQuery = AVQuery(className: "UserStatusForEvent")
+                    let query:AVQuery = AVQuery(className: "UserStatusForEvent")
                     query.whereKey("event", equalTo: self.event!.obj)
                     query.deleteAllInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                         if success {
                             for participator:AVUser in self.participators! {
-                                var status:AVObject = AVObject(className: "UserStatusForEvent")
-                                var userRelation:AVRelation = status.relationforKey("user")
+                                let status:AVObject = AVObject(className: "UserStatusForEvent")
+                                let userRelation:AVRelation = status.relationforKey("user")
                                 userRelation.addObject(participator)
-                                var eventRelation:AVRelation = status.relationforKey("event")
+                                let eventRelation:AVRelation = status.relationforKey("event")
                                 eventRelation.addObject(self.event!.obj)
                                 status.save()
                             }
                             
-                            var pushQuery:AVQuery = AVInstallation.query()
+                            let pushQuery:AVQuery = AVInstallation.query()
                             pushQuery.whereKey("deviceOwner", containedIn: self.participators)
                             
-                            var push:AVPush = AVPush()
+                            let push:AVPush = AVPush()
                             push.setQuery(pushQuery)
                             push.setMessage("您收到了新的邀约！请注意查收")
                             push.sendPushInBackground()
@@ -483,7 +483,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 TSMessage.showNotificationWithTitle("出错啦！", subtitle: "请设置时间", type: .Error)
             } else{
                 SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
-                var params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
+                let params:NSMutableDictionary = NSMutableDictionary(capacity: 8)
                 params.setObject(AVGeoPoint(latitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).latitude, longitude: (self.locationMapView.annotations[0].coordinate as CLLocationCoordinate2D).longitude), forKey: "coordinate")
                 params.setObject(event!.date!, forKey: "date")
                 params.setObject(event!.needLocation, forKey: "needLocation")
@@ -491,11 +491,11 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 params.setObject(0, forKey: "acceptMemberCount")
                 params.setObject(0, forKey: "refuseMemberCount")
                 
-                var newEvent:AVObject = AVObject(className: "Event", dictionary: params as [NSObject : AnyObject])
-                var ownerRelation:AVRelation = newEvent.relationforKey("owner")
+                let newEvent:AVObject = AVObject(className: "Event", dictionary: params as [NSObject : AnyObject])
+                let ownerRelation:AVRelation = newEvent.relationforKey("owner")
                 ownerRelation.addObject(AVUser.currentUser())
                 
-                var participatorsRelation:AVRelation = newEvent.relationforKey("participater")
+                let participatorsRelation:AVRelation = newEvent.relationforKey("participater")
                 for participator:AVUser in self.participators! {
                     participatorsRelation.addObject(participator)
                 }
@@ -503,17 +503,17 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
                 newEvent.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                     if success {
                         for participator:AVUser in self.participators! {
-                            var status:AVObject = AVObject(className: "UserStatusForEvent")
-                            var userRelation:AVRelation = status.relationforKey("user")
+                            let status:AVObject = AVObject(className: "UserStatusForEvent")
+                            let userRelation:AVRelation = status.relationforKey("user")
                             userRelation.addObject(participator)
-                            var eventRelation:AVRelation = status.relationforKey("event")
+                            let eventRelation:AVRelation = status.relationforKey("event")
                             eventRelation.addObject(newEvent)
                             status.save()
                         }
                         
-                        var pushQuery:AVQuery = AVInstallation.query()
+                        let pushQuery:AVQuery = AVInstallation.query()
                         pushQuery.whereKey("deviceOwner", containedIn: self.participators)
-                        var push:AVPush = AVPush()
+                        let push:AVPush = AVPush()
                         push.setQuery(pushQuery)
                         push.setMessage("您收到了新的邀约！请注意查收")
                         push.sendPushInBackground()

@@ -27,12 +27,12 @@ class CircleView: UIView {
         self.color = UIColor.whiteColor()
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func drawRect(rect: CGRect) {
-        let ctx: CGContextRef = UIGraphicsGetCurrentContext()
+        let ctx: CGContextRef = UIGraphicsGetCurrentContext()!
         
         CGContextSetFillColor(ctx, CGColorGetComponents(self.backgroundColor!.CGColor))
         CGContextFillRect(ctx, rect)

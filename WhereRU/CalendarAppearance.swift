@@ -101,14 +101,14 @@ class CalendarAppearance: NSObject {
         
         self.monthBlock = {
             (date:NSDate, calendar:CalendarView) -> String in
-            var newCalendar: NSCalendar = calendar.calendarAppearance!.calendar!
-            var comps: NSDateComponents = newCalendar.components(NSCalendarUnit.CalendarUnitYear | NSCalendarUnit.CalendarUnitMonth, fromDate: date)
+            let newCalendar: NSCalendar = calendar.calendarAppearance!.calendar!
+            let comps: NSDateComponents = newCalendar.components([NSCalendarUnit.Year, NSCalendarUnit.Month], fromDate: date)
             var currentMonthIndex = comps.month
             
             var dateFormatter:NSDateFormatter?
             
             if(dateFormatter == nil) {
-                dateFormatter = NSDateFormatter.new()
+                dateFormatter = NSDateFormatter()
                 dateFormatter!.timeZone = calendar.calendarAppearance!.calendar!.timeZone
             }
             
@@ -116,7 +116,7 @@ class CalendarAppearance: NSObject {
                 currentMonthIndex += 12
             }
             
-            return "\((dateFormatter!.standaloneMonthSymbols[currentMonthIndex - 1]) as! String)  \(comps.year)"
+            return "\((dateFormatter!.standaloneMonthSymbols[currentMonthIndex - 1]) )  \(comps.year)"
         }
     }
     
