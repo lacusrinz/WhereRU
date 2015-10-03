@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting {
+class EventViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate {
     
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
@@ -19,7 +19,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
         
@@ -39,22 +39,22 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
 
         documentPath = Utility.filePath("invited.plist")
         
-        var fileManage:NSFileManager = NSFileManager()
+        let fileManage:NSFileManager = NSFileManager()
         if fileManage.fileExistsAtPath(documentPath!) {
-            var allObjs:[NSDictionary] = NSKeyedUnarchiver.unarchiveObjectWithFile(documentPath!) as! [NSDictionary]
-            println("read:\(allObjs)")
+            let allObjs:[NSDictionary] = NSKeyedUnarchiver.unarchiveObjectWithFile(documentPath!) as! [NSDictionary]
+            print("read:\(allObjs)")
             for allObj in allObjs {
-                var obj:AVObject = AVObject(className: "Event")
+                let obj:AVObject = AVObject(className: "Event")
                 obj.objectFromDictionary(allObj as [NSObject : AnyObject])
-                var event:Event = Event()
+                let event:Event = Event()
                 event.obj = obj
                 
-                var ownerRelation = obj.objectForKey("owner") as! AVRelation
-                var ownerQuery = ownerRelation.query()
+                let ownerRelation = obj.objectForKey("owner") as! AVRelation
+                let ownerQuery = ownerRelation.query()
                 event.owner = ownerQuery.getFirstObject() as? AVUser
                 
-                var participatersRelation = obj.objectForKey("participater") as! AVRelation
-                var participatersQuery = participatersRelation.query()
+                let participatersRelation = obj.objectForKey("participater") as! AVRelation
+                let participatersQuery = participatersRelation.query()
                 participatersQuery.findObjectsInBackgroundWithBlock({ (part:[AnyObject]!, error:NSError!) -> Void in
                     event.participants = part as? [AVUser]
                 })
@@ -64,7 +64,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                 event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
                 event.date = obj.objectForKey("date") as? NSDate
                 event.eventID = obj.objectId as String
-                var point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
+                let point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
                 event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
                 event.message = obj.objectForKey("message") as? String
                 self.tableData!.append(event)
@@ -107,23 +107,23 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "eventTableViewCell"
-        var cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! EventTableViewCell
+        let cell:EventTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! EventTableViewCell
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.delegate = self
         
         cell.eventMessage.text = (self.tableData![indexPath.row] as Event).message
-        var date:String = NSDateFormatter.localizedStringFromDate((self.tableData![indexPath.row] as Event).date!, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
+        let date:String = NSDateFormatter.localizedStringFromDate((self.tableData![indexPath.row] as Event).date!, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
         cell.eventDateTime.text = date
         cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).acceptMemberCount!)"
         
         cell.eventStatus.hidden = true
         
-        var query:AVQuery = AVQuery(className: "UserStatusForEvent")
+        let query:AVQuery = AVQuery(className: "UserStatusForEvent")
         query.whereKey("user", equalTo: AVUser.currentUser())
         query.whereKey("event", equalTo: (self.tableData![indexPath.row] as Event).obj)
         query.getFirstObjectInBackgroundWithBlock { (object:AVObject!, error:NSError!) -> Void in
             if object != nil {
-                var status: Bool? = object.objectForKey("status") as? Bool
+                let status: Bool? = object.objectForKey("status") as? Bool
                 if status != nil {
                     if status == true {
                         cell.eventStatus.image = UIImage(named: "icon_accept_invite")
@@ -146,7 +146,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     
     // MARK: - SWTableViewCell Delegate
     func leftButtonsForParticipant()->NSArray {
-        var leftUtilityButtons:NSMutableArray = NSMutableArray()
+        let leftUtilityButtons:NSMutableArray = NSMutableArray()
         leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.greenColor(), icon: UIImage(named: "icon_accept"))
         leftUtilityButtons.sw_addUtilityButtonWithColor(UIColor.redColor(), icon: UIImage(named: "icon_delete"))
         return leftUtilityButtons
@@ -156,8 +156,8 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     func swipeableTableViewCell(cell: SWTableViewCell!, didTriggerLeftUtilityButtonWithIndex index: Int) {
         cell.hideUtilityButtonsAnimated(true)
         var id = (cell as! EventTableViewCell).cellParticipant
-        var selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
-        var row_event = self.tableData![selectedRowNumber] as Event
+        let selectedRowNumber = self.tableView.indexPathForCell(cell)!.row
+        let row_event = self.tableData![selectedRowNumber] as Event
         
         if index == 0{
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Clear)
@@ -165,24 +165,24 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
             row_event.obj!.setObject(row_event.acceptMemberCount!+1, forKey: "acceptMemberCount")
             row_event.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                 if success {
-                    var cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
-                    var pvalues:[AnyObject!] = [row_event.obj, AVUser.currentUser()]
+                    let cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
+                    let pvalues:[AnyObject!] = [row_event.obj, AVUser.currentUser()]
                     AVQuery.doCloudQueryInBackgroundWithCQL(cql, pvalues: pvalues, callback: { (result:AVCloudQueryResult!, error:NSError!) -> Void in
                         if !(error != nil) {
-                            var obj:AVObject = result.results[0] as! AVObject
+                            let obj:AVObject = result.results[0] as! AVObject
                             obj.setObject(true, forKey: "status")
                             obj.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
-                                print("update success!!")
+                                print("update success!!", terminator: "")
                                 SVProgressHUD.dismiss()
                                 self.tableView.header.beginRefreshing()
                             })
                         } else {
-                            print("\(error.description)")
+                            print("\(error.description)", terminator: "")
                         }
                     })
                     
                 } else {
-                    print("\(error.description)")
+                    print("\(error.description)", terminator: "")
                 }
             })
         } else{
@@ -191,23 +191,23 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
             row_event.obj!.setObject(row_event.refuseMemberCount!+1, forKey: "refuseMemberCount")
             row_event.obj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                 if success {
-                    var cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
-                    var pvalues:[AnyObject!] = [row_event.obj, AVUser.currentUser()]
+                    let cql:String = "select * from UserStatusForEvent where event = ? and user = ?"
+                    let pvalues:[AnyObject!] = [row_event.obj, AVUser.currentUser()]
                     AVQuery.doCloudQueryInBackgroundWithCQL(cql, pvalues: pvalues, callback: { (result:AVCloudQueryResult!, error:NSError!) -> Void in
                         if !(error != nil) {
-                            var obj:AVObject = result.results[0] as! AVObject
+                            let obj:AVObject = result.results[0] as! AVObject
                             obj.setObject(false, forKey: "status")
                             obj.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
-                                print("update success!!")
+                                print("update success!!", terminator: "")
                                 SVProgressHUD.dismiss()
                                 self.tableView.header.beginRefreshing()
                             })
                         } else {
-                            print("\(error.description)")
+                            print("\(error.description)", terminator: "")
                         }
                     })
                 } else {
-                    print("\(error.description)")
+                    print("\(error.description)", terminator: "")
                 }
             })
         }
@@ -222,7 +222,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
     func updateEvents() {
         var allObjs:Array = [NSDictionary]()
         
-        var query:AVQuery? = AVQuery(className: "Event")
+        let query:AVQuery? = AVQuery(className: "Event")
         query!.whereKey("participater", equalTo: AVUser.currentUser())
         query!.whereKey("date", greaterThanOrEqualTo: NSDate())
         query!.orderByAscending("date")
@@ -234,16 +234,16 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                 if objects.count != 0 {
                     self.tableData!.removeAll(keepCapacity: true)
                     for (var i=0; i<objects.count; ++i) {
-                        var event:Event = Event()
-                        var obj = objects[i] as! AVObject
+                        let event:Event = Event()
+                        let obj = objects[i] as! AVObject
                         event.obj = obj
                         
-                        var ownerRelation = obj.objectForKey("owner") as! AVRelation
-                        var ownerQuery = ownerRelation.query()
+                        let ownerRelation = obj.objectForKey("owner") as! AVRelation
+                        let ownerQuery = ownerRelation.query()
                         event.owner = ownerQuery.getFirstObject() as? AVUser
                         
-                        var participatersRelation = obj.objectForKey("participater") as! AVRelation
-                        var participatersQuery = participatersRelation.query()
+                        let participatersRelation = obj.objectForKey("participater") as! AVRelation
+                        let participatersQuery = participatersRelation.query()
                         participatersQuery.findObjectsInBackgroundWithBlock({ (part:[AnyObject]!, error:NSError!) -> Void in
                             event.participants = part as? [AVUser]
                         })
@@ -253,7 +253,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                         event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
                         event.date = obj.objectForKey("date") as? NSDate
                         event.eventID = obj.objectId as String
-                        var point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
+                        let point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
                         event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
                         event.message = obj.objectForKey("message") as? String
                         self.tableData!.append(event)
@@ -262,7 +262,7 @@ class EventViewController: UITableViewController, SWTableViewCellDelegate, Creat
                         allObjs.append(obj.dictionaryForObject())
                     }
                     //archive
-                    println(allObjs)
+                    print(allObjs)
                     NSKeyedArchiver.archiveRootObject(allObjs, toFile: self.documentPath!)
                     
                     self.tableView.reloadData();

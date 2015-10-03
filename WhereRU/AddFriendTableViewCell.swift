@@ -25,7 +25,7 @@ class AddFriendTableViewCell: UITableViewCell {
     
     @IBAction func addFriend(sender: AnyObject) {
         if myFriendsObj != nil {
-            var toRelation:AVRelation = myFriendsObj!.relationforKey("to")
+            let toRelation:AVRelation = myFriendsObj!.relationforKey("to")
             toRelation.addObject(friend)
             myFriendsObj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in
                 self.addFriendButton.enabled = false
@@ -33,9 +33,9 @@ class AddFriendTableViewCell: UITableViewCell {
             })
         } else {
             myFriendsObj = AVObject(className: "Friends")
-            var fromRelation:AVRelation = myFriendsObj!.relationforKey("from")
+            let fromRelation:AVRelation = myFriendsObj!.relationforKey("from")
             fromRelation.addObject(AVUser.currentUser())
-            var toRelation:AVRelation = myFriendsObj!.relationforKey("to")
+            let toRelation:AVRelation = myFriendsObj!.relationforKey("to")
             toRelation.addObject(friend)
             myFriendsObj!.setObject(true, forKey: "isTrue")
             myFriendsObj!.saveInBackgroundWithBlock({ (success:Bool, error:NSError!) -> Void in

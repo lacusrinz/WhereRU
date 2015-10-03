@@ -8,7 +8,7 @@
 
 import UIKit
 
-class InviteViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate, YALTabBarInteracting {
+class InviteViewController: UITableViewController, SWTableViewCellDelegate, CreateEventViewControllerDelegate, ViewEventViewControllerDelegate {
 
     private var tableData:Array<Event>?
     private var rowsCount:NSInteger = 0
@@ -21,7 +21,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
         self.tableView.backgroundColor = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
@@ -43,7 +43,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
         var fileManage:NSFileManager = NSFileManager()
         if fileManage.fileExistsAtPath(documentPath!) {
             var allObjs:[NSDictionary] = NSKeyedUnarchiver.unarchiveObjectWithFile(documentPath!) as! [NSDictionary]
-            println("read:\(allObjs)")
+            print("read:\(allObjs)")
             for allObj in allObjs {
                 var obj:AVObject = AVObject(className: "Event")
                 obj.objectFromDictionary(allObj as [NSObject : AnyObject])
@@ -91,7 +91,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
     func updateEvents() {
         var allObjs:Array = [NSDictionary]()
         
-        var query:AVQuery? = AVQuery(className: "Event")
+        let query:AVQuery? = AVQuery(className: "Event")
         query!.whereKey("owner", equalTo: AVUser.currentUser())
         query!.whereKey("date", greaterThanOrEqualTo: NSDate())
         query!.orderByAscending("date")
@@ -103,16 +103,16 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
                 if objects.count != 0 {
                     self.tableData!.removeAll(keepCapacity: true)
                     for (var i=0; i<objects.count; ++i) {
-                        var event:Event = Event()
-                        var obj = objects[i] as! AVObject
+                        let event:Event = Event()
+                        let obj = objects[i] as! AVObject
                         event.obj = obj
                         
-                        var ownerRelation = obj.objectForKey("owner") as! AVRelation
-                        var ownerQuery = ownerRelation.query()
+                        let ownerRelation = obj.objectForKey("owner") as! AVRelation
+                        let ownerQuery = ownerRelation.query()
                         event.owner = ownerQuery.getFirstObject() as? AVUser
                         
-                        var participatersRelation = obj.objectForKey("participater") as! AVRelation
-                        var participatersQuery = participatersRelation.query()
+                        let participatersRelation = obj.objectForKey("participater") as! AVRelation
+                        let participatersQuery = participatersRelation.query()
                         participatersQuery.findObjectsInBackgroundWithBlock({ (part:[AnyObject]!, error:NSError!) -> Void in
                             event.participants = part as? [AVUser]
                         })
@@ -122,7 +122,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
                         event.refuseMemberCount = obj.objectForKey("refuseMemberCount") as? Int
                         event.date = obj.objectForKey("date") as? NSDate
                         event.eventID = obj.objectId as String
-                        var point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
+                        let point:AVGeoPoint = obj.objectForKey("coordinate") as! AVGeoPoint
                         event.coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
                         event.message = obj.objectForKey("message") as? String
                         self.tableData!.append(event)
@@ -162,11 +162,11 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier:NSString = "InviteTableViewCell"
-        var cell:InviteTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! InviteTableViewCell
+        let cell:InviteTableViewCell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier as String, forIndexPath: indexPath) as! InviteTableViewCell
         
         cell.backgroundColor  = UIColor(red: 244/255, green: 246/255, blue: 246/255, alpha: 100.0)
         cell.eventMessage.text = (self.tableData![indexPath.row] as Event).message
-        var date:String = NSDateFormatter.localizedStringFromDate((self.tableData![indexPath.row] as Event).date!, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
+        let date:String = NSDateFormatter.localizedStringFromDate((self.tableData![indexPath.row] as Event).date!, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.ShortStyle)
         cell.eventDatetime.text = date
         cell.numberOfAccept.text = "\((self.tableData![indexPath.row] as Event).acceptMemberCount!)"
         cell.numberOfRefuse.text = "\((self.tableData![indexPath.row] as Event).refuseMemberCount!)"
@@ -188,7 +188,7 @@ class InviteViewController: UITableViewController, SWTableViewCellDelegate, Crea
 
     // MARK: - SWTableViewCell Delegate
     func rightButtonsForOwner()->NSArray {
-        var rightUtilityButtons:NSMutableArray = NSMutableArray()
+        let rightUtilityButtons:NSMutableArray = NSMutableArray()
         rightUtilityButtons.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "修改")
         return rightUtilityButtons
     }

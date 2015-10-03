@@ -9,31 +9,36 @@
 import UIKit
 import avatarImageView
 
-class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate, YALTabBarInteracting {
+class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, RSKImageCropViewControllerDelegate, UINavigationControllerDelegate {
 
-    required init(coder aDecoder: NSCoder) {
+    @IBOutlet weak var avatar: avatarImageView!
+    @IBOutlet var avatarTap: UITapGestureRecognizer!
+    @IBOutlet weak var name: UITextField!
+    @IBOutlet weak var email: UITextField!
+    @IBOutlet weak var desc: UITextField!
+    @IBOutlet weak var birthday: UITextField!
+    @IBOutlet weak var sex: UISegmentedControl!
+    @IBOutlet weak var isPush: UISwitch!
+    
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
-    @IBOutlet weak var avatar: avatarImageView!
-    @IBOutlet weak var name: UILabel!
-    @IBOutlet var avatarTap: UITapGestureRecognizer! = nil
     
-    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
+//    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
 
-        name.text = _name
-        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
-        if avatarObject != nil {
-            var avatarData = avatarObject.getData()
-            avatar.image = UIImage(data: avatarData)
-        }
+//        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
+//        if avatarObject != nil {
+//            var avatarData = avatarObject.getData()
+//            avatar.image = UIImage(data: avatarData)
+//        }
         avatar.addGestureRecognizer(avatarTap)
     }
 
@@ -42,23 +47,15 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func logout(sender: AnyObject) {
-        AVUser.logOut()
-        var fileManager:NSFileManager = NSFileManager()
-        fileManager.removeItemAtPath(Utility.filePath("invited.plist"), error: nil)
-        fileManager.removeItemAtPath(Utility.filePath("invite.plist"), error: nil)
-        self.performSegueWithIdentifier("logout", sender: self)
-    }
-    
     @IBAction func editAvatar(sender: UITapGestureRecognizer) {
-        var choiceSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Photo", "Take from Libray")
+        let choiceSheet: UIActionSheet = UIActionSheet(title: nil, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Photo", "Take from Libray")
         choiceSheet.showInView(self.view)
     }
     
     func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
         if(buttonIndex == 1) {
             if(self.isCameraAvailable()) {
-                var controller: UIImagePickerController = UIImagePickerController()
+                let controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.Camera
                 if(self.isFrontCameraAvailable()) {
                     controller.cameraDevice = UIImagePickerControllerCameraDevice.Front;
@@ -71,7 +68,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         }
         else if(buttonIndex == 2){
             if(self.isPhotoLibraryAvailable()) {
-                var controller: UIImagePickerController = UIImagePickerController()
+                let controller: UIImagePickerController = UIImagePickerController()
                 controller.sourceType = UIImagePickerControllerSourceType.PhotoLibrary
                 controller.delegate = self
                 self.presentViewController(controller, animated: true, completion: { () -> Void in
@@ -81,10 +78,10 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         }
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]) {
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         picker.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
-            var imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
+            let portraitImg:UIImage = info["UIImagePickerControllerOriginalImage"] as! UIImage
+            let imageCropVC:RSKImageCropViewController = RSKImageCropViewController(image: portraitImg)
             imageCropVC.delegate = self
             self.presentViewController(imageCropVC, animated: true, completion: { () -> Void in
                 //
@@ -129,8 +126,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect) {
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
-            var avatarData:NSData = UIImagePNGRepresentation(croppedImage)
-            var avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            let avatarData:NSData = UIImagePNGRepresentation(croppedImage)!
+            let avatarFile: AnyObject! = AVFile(name: "avatar.png", data: avatarData)
             AVUser.currentUser().setObject(avatarFile, forKey: "avatarFile")
             AVUser.currentUser().saveInBackground()
         })

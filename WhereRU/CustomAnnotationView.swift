@@ -33,7 +33,7 @@ class CustomAnnotationView: MAAnnotationView {
         }
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -45,8 +45,8 @@ class CustomAnnotationView: MAAnnotationView {
             if self.calloutView == nil {
                 self.calloutView = UIView(frame: CGRectMake(0, 0, 60, 20))
                 self.calloutView!.center = CGPointMake(CGRectGetWidth(self.bounds) / 2 + self.calloutOffset.x, -CGRectGetHeight(self.calloutView!.bounds) / 2 + self.calloutOffset.y)
-                println(self.calloutView!.center)
-                var nameLabel:UILabel = UILabel(frame: CGRectMake(0, 0, 60, 20))
+                print(self.calloutView!.center)
+                let nameLabel:UILabel = UILabel(frame: CGRectMake(0, 0, 60, 20))
                 nameLabel.textAlignment = NSTextAlignment.Center
                 nameLabel.backgroundColor = UIColor.grayColor()
                 nameLabel.textColor = UIColor.whiteColor()

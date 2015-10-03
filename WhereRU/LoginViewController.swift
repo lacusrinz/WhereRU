@@ -8,12 +8,12 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, LoginViewControllerDelegate {
+class LoginViewController: UIViewController, SignUpViewControllerDelegate {
     
-    @IBOutlet weak var nicknameTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 
@@ -23,30 +23,34 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
     }
 
     @IBAction func login(sender: AnyObject) {
-        AVUser.logInWithUsernameInBackground(nicknameTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
+        AVUser.logInWithUsernameInBackground(emailTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
             if (user != nil) {
-                println("login success")
+                print("login success")
                 
-                var currentInstallation:AVInstallation = AVInstallation.currentInstallation()
+                let currentInstallation:AVInstallation = AVInstallation.currentInstallation()
                 currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")
                 
                 self.performSegueWithIdentifier("login", sender: self)
             } else {
-                println("failed:\(error!.description)")
+                print("failed:\(error!.description)")
             }
         }
         
     }
+
+    @IBAction func register(sender: AnyObject) {
+        self.performSegueWithIdentifier("signUp", sender: self)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "goSignin" {
-            let signinViewController = segue.destinationViewController as! SigninViewController
-            signinViewController.delegate = self
+        if segue.identifier == "signUp" {
+            let signUpViewController = segue.destinationViewController as! SignUpViewController
+            signUpViewController.delegate = self
         }
     }
     
     //MARK: - LoginViewControllerDelegate
-    func loginViewControllerBack() {
+    func signUpViewControllerBack() {
         dismissViewControllerAnimated(true, completion: nil)
     }
 }
