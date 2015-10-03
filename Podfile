@@ -18,12 +18,12 @@ pod 'RSKImageCropper', '~>1.1.3'
 #pod 'DAContextMenuTableViewController'
 #pod 'SwiftyJSON', '>~> 2.1.3'
 pod 'SWTableViewCell', '~> 0.3.6'
-pod 'IQKeyboardManager'
+pod 'IQKeyboardManager', '~> 3.3.2'
 
-pod 'AMap3DMap'
-pod 'AMapSearch'
+pod 'AMap3DMap', '~> 3.1.0.1'
+pod 'AMapSearch', '~> 3.0.0'
 
-pod 'AVOSCloud'
+pod 'AVOSCloud', '~> 3.1.4'
 #pod 'FoldingTabBar', '~> 1.0.0'
 
 pod 'HSDatePickerViewController', '~> 1.0.1'

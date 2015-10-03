@@ -44,7 +44,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cellIdentifier = "menuCell"
-        let cell:MenuTableViewCell = self.menuTableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MenuTableViewCell
+        let cell: MenuTableViewCell = self.menuTableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! MenuTableViewCell
         
         if indexPath.row == 0 {
             cell.menuImage.image = UIImage(named:"Icon_home")

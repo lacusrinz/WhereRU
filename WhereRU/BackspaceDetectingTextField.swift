@@ -35,5 +35,8 @@ class BackspaceDetectingTextField: UITextField {
     
     override func deleteBackward() {
         self.backspaceDetectingTextFielddelegate!.textFieldDidDeleteBackwards(self)
+        super.deleteBackward()
     }
+    
+    
 }

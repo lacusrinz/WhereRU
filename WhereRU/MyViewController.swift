@@ -127,7 +127,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             let avatarData:NSData = UIImagePNGRepresentation(croppedImage)!
-            let avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            let avatarFile: AnyObject! = AVFile(name: "avatar.png", data: avatarData)
             AVUser.currentUser().setObject(avatarFile, forKey: "avatarFile")
             AVUser.currentUser().saveInBackground()
         })

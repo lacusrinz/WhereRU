@@ -40,6 +40,8 @@ class TokenView: UIView, UIKeyInput {
         super.init(frame: CGRectZero)
         let tintColor: UIColor = self.tintColor
         
+        self.backgroundView = UIView(frame: CGRectZero)
+        
         self.label = UILabel(frame: CGRectMake(PADDING_X, PADDING_Y, 0, 0))
         self.label!.font = UIFont.systemFontOfSize(17)
         self.label!.textColor = tintColor

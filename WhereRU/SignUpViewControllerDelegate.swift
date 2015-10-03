@@ -9,11 +9,11 @@
 import UIKit
 import avatarImageView
 
-protocol LoginViewControllerDelegate {
-    func loginViewControllerBack()
+protocol SignUpViewControllerDelegate {
+    func signUpViewControllerBack()
 }
 
-class SigninViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, RSKImageCropViewControllerDelegate {
+class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, RSKImageCropViewControllerDelegate {
     
     @IBOutlet weak var nicknameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -24,7 +24,7 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
 //    var returnKeyHandler: IQKeyboardReturnKeyHandler?
     var user:AVUser?
     
-    var delegate:LoginViewControllerDelegate?
+    var delegate:SignUpViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +83,7 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func back(sender: AnyObject) {
-        self.delegate!.loginViewControllerBack()
+        self.delegate!.signUpViewControllerBack()
     }
     
     
@@ -150,7 +150,7 @@ class SigninViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.userAvatarImageView.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             let avatarData:NSData = UIImagePNGRepresentation(croppedImage)!
-            let avatarFile: AnyObject! = AVFile.fileWithName("avatar.png", data: avatarData)
+            let avatarFile: AnyObject! = AVFile(name: "avatar.png", data: avatarData)
             self.user!.setObject(avatarFile, forKey: "avatarFile")
         })
     }

@@ -1,10 +1,10 @@
 PODS:
-  - AMap3DMap (2.5.1)
-  - AMapSearch (2.5.0)
-  - AVOSCloud (3.1.2.2)
+  - AMap3DMap (3.1.0.1)
+  - AMapSearch (3.0.0)
+  - AVOSCloud (3.1.4)
   - HexColors (2.2.1)
   - HSDatePickerViewController (1.0.1)
-  - IQKeyboardManager (3.2.4)
+  - IQKeyboardManager (3.3.2)
   - MJRefresh (1.4.7)
   - Reachability (3.1.1)
   - RESideMenu (4.0.7)
@@ -20,11 +20,11 @@ PODS:
     - SDWebImage (~> 3.7)
 
 DEPENDENCIES:
-  - AMap3DMap
-  - AMapSearch
-  - AVOSCloud
+  - AMap3DMap (~> 3.1.0.1)
+  - AMapSearch (~> 3.0.0)
+  - AVOSCloud (~> 3.1.4)
   - HSDatePickerViewController (~> 1.0.1)
-  - IQKeyboardManager
+  - IQKeyboardManager (~> 3.3.2)
   - MJRefresh (~> 1.4.5)
   - Reachability (~> 3.1.1)
   - RESideMenu (~> 4.0.7)
@@ -36,12 +36,12 @@ DEPENDENCIES:
   - UIActivityIndicator-for-SDWebImage (~> 1.2)
 
 SPEC CHECKSUMS:
-  AMap3DMap: 63349e4f7b6f097bce63853b24fe92ea0603a8f8
-  AMapSearch: eafa5a749b1078a46f15e6108e88307f78f75e9b
-  AVOSCloud: bdcd5f3ad4e56bc9027006b4d40f19d16998d1ba
+  AMap3DMap: 58f27323368dd0e351cc3c823a77ba389da294fc
+  AMapSearch: fd1ed96353f8a0f5c2e2463dac6a145bb3e6970f
+  AVOSCloud: 2be1640178facaac8343d67ed4d5348f4dffecd7
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
-  IQKeyboardManager: 555b1231fefafb21b19278d7cca72986a27b748b
+  IQKeyboardManager: d863eb0bca424d1f6dad6bdd1f856af52664add8
   MJRefresh: 6b140993028fa30f1fcb88e82925a7c7911415cf
   Reachability: dd9aa4fb6667b9f787690a74f53cb7634ce99893
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
@@ -52,4 +52,4 @@ SPEC CHECKSUMS:
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2

@@ -25,7 +25,7 @@ protocol TokenInputViewDelegate {
     func tokenInputView(view: TokenInputView, didChangeText text: String)
     func tokenInputView(view: TokenInputView, didAddToken token: Token)
     func tokenInputView(view: TokenInputView, didRemoveToken token: Token)
-    func tokenInputView(view: TokenInputView, tokenForText text: String) -> Token
+    func tokenInputView(view: TokenInputView, tokenForText text: String) -> Token?
     func tokenInputView(view: TokenInputView, didChangeHeightTo height: CGFloat)
 }
 
@@ -78,8 +78,21 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
     var delegate: TokenInputViewDelegate?
     var fieldView: UIView?
     var fieldName: String?
-    var placeholderText: String?
     var accessoryView: UIView?
+    
+    private var _placeholderText: String?
+    var placeholderText: String? {
+        get {
+            return _placeholderText
+        }
+        set {
+            if _placeholderText == newValue {
+                return
+            }
+            _placeholderText = newValue
+            self.updatePlaceholderTextVisibility()
+        }
+    }
     
     private var _allTokens: [Token]?
     var allTokens: [Token]? {
@@ -142,6 +155,9 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
         self.textField!.addTarget(self, action: "onTextFieldDidChange", forControlEvents: UIControlEvents.EditingChanged)
         self.addSubview(self.textField!)
         
+        self.tokens = [Token]()
+        self.tokenViews = [TokenView]()
+        
         self.fieldLabel = UILabel(frame: CGRectZero)
         self.fieldLabel!.font = self.textField!.font
         self.fieldLabel!.textColor = UIColor.lightGrayColor()
@@ -188,6 +204,8 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
         self.addSubview(tokenView)
         self.textField!.text = ""
         self.delegate!.tokenInputView(self, didAddToken: token)
+        self.updatePlaceholderTextVisibility()
+        self.repositionViews()
     }
     
     func removeToken(token: Token) {
@@ -206,12 +224,13 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
         tokenView.removeFromSuperview()
         self.tokenViews!.removeAtIndex(index)
         let removedToken: Token = self.tokens![index]
+        self.tokens?.removeAtIndex(index)
         self.delegate!.tokenInputView(self, didRemoveToken: removedToken)
         self.updatePlaceholderTextVisibility()
         self.repositionViews()
     }
     
-    func tokenizeTextfieldText() -> Token {
+    func tokenizeTextfieldText() -> Token? {
         var token: Token? = nil
         let text: String = self.textField!.text!
         if text.characters.count > 0 {
@@ -222,7 +241,7 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
                 self.onTextFieldDidChange()
             }
         }
-        return token!
+        return token
     }
     
     func repositionViews() {
@@ -311,8 +330,8 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
         self.intrinsicContentHeight = CGRectGetMaxY(textFieldRect)+PADDING_BOTTOM
         self.invalidateIntrinsicContentSize()
         
-        if (oldContentHeight != self.intrinsicContentHeight) {
-            self.delegate!.tokenInputView(self, didChangeHeightTo: self.intrinsicContentSize().height)
+        if (oldContentHeight != self.intrinsicContentHeight!) {
+            self.delegate?.tokenInputView(self, didChangeHeightTo: self.intrinsicContentSize().height)
         }
         self.setNeedsDisplay()
     }
@@ -364,7 +383,7 @@ class TokenInputView: UIView, BackspaceDetectingTextFieldDelegate, TokenViewDele
     //MARK: -  TokenViewDelegate
     func tokenViewDidRequestDeleteandReplaceWithText(tokenView: TokenView, replacementText: String?) {
         self.textField?.becomeFirstResponder()
-        if (replacementText!).characters.count > 0 {
+        if replacementText != nil && (replacementText!).characters.count > 0 {
             self.textField!.text = replacementText
         }
         let index: Int = (self.tokenViews!).indexOf(tokenView)!

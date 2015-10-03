@@ -14,7 +14,7 @@ protocol CreateEventViewControllerDelegate {
     func CreateEventViewControllerDone(_: CreateEventViewController)
 }
 
-class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsTableViewDelegate, HSDatePickerViewControllerDelegate {
+class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearchDelegate, UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate, UISearchDisplayDelegate, UITableViewDataSource, UITableViewDelegate,UIGestureRecognizerDelegate, AddParticipantsViewDelegate, HSDatePickerViewControllerDelegate {
 
     @IBOutlet weak var locationMapView: MAMapView!
     @IBOutlet weak var myAvatarImageView: avatarImageView!
@@ -391,7 +391,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "addParticipant"{
             let navigationController:UINavigationController = segue.destinationViewController as! UINavigationController
-            let addParticipantsTableViewController:AddParticipantsTableViewController = navigationController.viewControllers[0] as! AddParticipantsTableViewController
+            let addParticipantsTableViewController:AddParticipantsViewController = navigationController.viewControllers[0] as! AddParticipantsViewController
             addParticipantsTableViewController.delegate = self
         }
     }
@@ -405,7 +405,7 @@ class CreateEventViewController: UIViewController,  MAMapViewDelegate, AMapSearc
     }
     
     // MARK: - addParticipantsDelegate
-    func AddParticipantsDidDone(controller: AddParticipantsTableViewController, _ friends: [AVUser]) {
+    func AddParticipantsDidDone(controller: AddParticipantsViewController, _ friends: [AVUser]) {
         for friend in friends{
             var needAdd:Bool = true
             for participator in participators!{

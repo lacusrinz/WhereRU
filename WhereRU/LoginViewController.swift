@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController, LoginViewControllerDelegate {
+class LoginViewController: UIViewController, SignUpViewControllerDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -37,16 +37,20 @@ class LoginViewController: UIViewController, LoginViewControllerDelegate {
         }
         
     }
+
+    @IBAction func register(sender: AnyObject) {
+        self.performSegueWithIdentifier("signUp", sender: self)
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "goSignin" {
-            let signinViewController = segue.destinationViewController as! SigninViewController
-            signinViewController.delegate = self
+        if segue.identifier == "signUp" {
+            let signUpViewController = segue.destinationViewController as! SignUpViewController
+            signUpViewController.delegate = self
         }
     }
     
     //MARK: - LoginViewControllerDelegate
-    func loginViewControllerBack() {
+    func signUpViewControllerBack() {
         dismissViewControllerAnimated(true, completion: nil)
     }
 }

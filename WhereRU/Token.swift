@@ -12,32 +12,27 @@ class Token: NSObject {
     var displayText: String?
     var context: NSObject?
     
-    private var _hash: Int?
     override var hash: Int {
-        get {
-            return self.displayText!.hash + self.context!.hash
-        }
-        set {
-            _hash = newValue
-        }
+        return self.displayText!.hash + self.context!.hash
     }
     
-    init(displayText: String, context: NSObject) {
+    init(displayText: String, context: NSObject?) {
         super.init()
         self.displayText = displayText
         self.context = context
     }
     
     override func isEqual(object: AnyObject?) -> Bool {
-        if self == object as! Token {
-            return true
+        if self === object as? Token {
+            return false
         }
         if (!object!.isKindOfClass(Token)) {
             return false
         }
         
         let otherObject: Token = object as! Token
-        if(otherObject.displayText == self.displayText && otherObject.context!.isEqual(self.context)) {
+//        let contextEqual = self.context?.isEqual(otherObject.context)
+        if(otherObject.displayText == self.displayText) {
             return true
         }
         return false
