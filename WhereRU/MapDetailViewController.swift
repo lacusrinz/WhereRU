@@ -29,7 +29,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as [NSObject : AnyObject]
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         
 //        initToolBar()
         
@@ -43,23 +43,23 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         allParticipantsAvatars = [UIImage]()
         
         for user in self.participators! {
-            var query:AVQuery? = AVQuery(className: "_User")
+            let query:AVQuery? = AVQuery(className: "_User")
             query!.whereKey("username", equalTo: user.username)
-            var userObj:AVUser = query!.getFirstObject() as! AVUser
-            var avatarObject: AnyObject! = userObj.objectForKey("avatarFile")
+            let userObj:AVUser = query!.getFirstObject() as! AVUser
+            let avatarObject: AnyObject! = userObj.objectForKey("avatarFile")
             if avatarObject != nil {
-                var avatarData = avatarObject.getData()
+                let avatarData = avatarObject.getData()
                 self.allParticipantsAvatars!.append(UIImage(data: avatarData)!)
             } else {
                 self.allParticipantsAvatars!.append(UIImage(named: "default_avatar")!)
             }
         }
-        var query:AVQuery? = AVQuery(className: "_User")
+        let query:AVQuery? = AVQuery(className: "_User")
         query!.whereKey("username", equalTo: eventOwner!.username)
-        var userObj:AVUser = query!.getFirstObject() as! AVUser
-        var avatarObject: AnyObject! = userObj.objectForKey("avatarFile")
+        let userObj:AVUser = query!.getFirstObject() as! AVUser
+        let avatarObject: AnyObject! = userObj.objectForKey("avatarFile")
         if avatarObject != nil {
-            var avatarData = avatarObject.getData()
+            let avatarData = avatarObject.getData()
             self.allParticipantsAvatars!.append(UIImage(data: avatarData)!)
         } else {
             self.allParticipantsAvatars!.append(UIImage(named: "default_avatar")!)
@@ -82,13 +82,13 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
         }
         for var i:Int=0; i<self.participators!.count; i++ {
             if self.participators![i].username != AVUser.currentUser().username {
-                var query:AVQuery? = AVQuery(className: "_User")
+                let query:AVQuery? = AVQuery(className: "_User")
                 query!.whereKey("username", equalTo: self.participators![i].username)
-                var userObj:AVUser = query!.getFirstObject() as! AVUser
-                var hisCoordinate:AVGeoPoint? = userObj.objectForKey("location") as? AVGeoPoint
+                let userObj:AVUser = query!.getFirstObject() as! AVUser
+                let hisCoordinate:AVGeoPoint? = userObj.objectForKey("location") as? AVGeoPoint
                 
                 if hisCoordinate != nil {
-                    var point: ParticipantAnnotation = ParticipantAnnotation()
+                    let point: ParticipantAnnotation = ParticipantAnnotation()
                     point._coordinate = CLLocationCoordinate2D(latitude: hisCoordinate!.latitude, longitude: hisCoordinate!.longitude)
                     point._avatarImage = self.allParticipantsAvatars![i]
                     point._name = self.participators![i].username
@@ -97,13 +97,13 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
             }
         }
         if eventOwner != AVUser.currentUser() {
-            var query:AVQuery? = AVQuery(className: "_User")
+            let query:AVQuery? = AVQuery(className: "_User")
             query!.whereKey("username", equalTo: eventOwner!.username)
-            var userObj:AVUser = query!.getFirstObject() as! AVUser
-            var hisCoordinate:AVGeoPoint? = userObj.objectForKey("location") as? AVGeoPoint
+            let userObj:AVUser = query!.getFirstObject() as! AVUser
+            let hisCoordinate:AVGeoPoint? = userObj.objectForKey("location") as? AVGeoPoint
             
             if hisCoordinate != nil {
-                var point: ParticipantAnnotation = ParticipantAnnotation()
+                let point: ParticipantAnnotation = ParticipantAnnotation()
                 point._coordinate = CLLocationCoordinate2D(latitude: hisCoordinate!.latitude, longitude: hisCoordinate!.longitude)
                 point._avatarImage = self.allParticipantsAvatars![self.participators!.count]
                 allParticipantsPoints!.append(point)
@@ -114,7 +114,7 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
 
     
     override func viewDidAppear(animated: Bool) {
-        var targetPoint:TargetAnnotation = TargetAnnotation()
+        let targetPoint:TargetAnnotation = TargetAnnotation()
         targetPoint._coordinate = coordinate!
         
         mapView.addAnnotation(targetPoint)
@@ -140,8 +140,8 @@ class MapDetailViewController: UIViewController, MAMapViewDelegate, AMapSearchDe
     
     func mapView(mapView: MAMapView!, didUpdateUserLocation userLocation: MAUserLocation!, updatingLocation: Bool) {
         if updatingLocation{
-            println("location:\(userLocation.description)")
-            var userLocationPoint:AVGeoPoint = AVGeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
+            print("location:\(userLocation.description)")
+            let userLocationPoint:AVGeoPoint = AVGeoPoint(latitude: userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude)
             AVUser.currentUser().setObject(userLocationPoint, forKey: "location")
             AVUser.currentUser().save()
         }

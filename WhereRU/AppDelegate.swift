@@ -21,32 +21,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         MAMapServices.sharedServices().apiKey = apiKey
-        
-        var navBackgroundImage:UIImage = UIImage(named: "navigationBar_BackgroundColorPix")!
-        UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
+
+//        var navBackgroundImage:UIImage = UIImage(named: "white")!
+//        UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)
         
         AVOSCloud.setApplicationId("939y6w6xb1a0q3u8a2up63re3xdmiis9d6mo8lq7l1pqop8v", clientKey: "vben8bjx52stj4yo81tnq50djpurxr5ptod1qtawq7u629m0")
         AVAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
-        var setting:UIUserNotificationSettings = UIUserNotificationSettings(forTypes:UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, categories: nil)
+        let setting:UIUserNotificationSettings = UIUserNotificationSettings(forTypes:[UIUserNotificationType.Alert, UIUserNotificationType.Badge, UIUserNotificationType.Sound], categories: nil)
         application.registerUserNotificationSettings(setting)
         
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        var storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        var welcomeBackViewController:WelcomeBackViewController = storyboard.instantiateViewControllerWithIdentifier("welcomeBackViewController") as! WelcomeBackViewController
-        var loginViewController:LoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! LoginViewController
-        
-        var currentUser:AVUser? = AVUser.currentUser()
-        if (currentUser != nil) {
-            self.window!.rootViewController = welcomeBackViewController
-            var avatarObject: AnyObject! = currentUser!.objectForKey("avatarFile")
-            if avatarObject != nil {
-                var avatarData = avatarObject.getData()
-                welcomeBackViewController.image = UIImage(data: avatarData)
-            }
-        } else {
-            self.window!.rootViewController = loginViewController
-        }
+//        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//        var storyboard:UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        var welcomeBackViewController:WelcomeBackViewController = storyboard.instantiateViewControllerWithIdentifier("welcomeBackViewController") as! WelcomeBackViewController
+//        var loginViewController:LoginViewController = storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! LoginViewController
+//        
+//        var currentUser:AVUser? = AVUser.currentUser()
+//        if (currentUser != nil) {
+//            self.window!.rootViewController = welcomeBackViewController
+//            var avatarObject: AnyObject! = currentUser!.objectForKey("avatarFile")
+//            if avatarObject != nil {
+//                var avatarData = avatarObject.getData()
+//                welcomeBackViewController.image = UIImage(data: avatarData)
+//            }
+//        } else {
+//            self.window!.rootViewController = loginViewController
+//        }
         
         return true
     }
@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        var currentInstallation:AVInstallation = AVInstallation.currentInstallation()
+        let currentInstallation:AVInstallation = AVInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")
         currentInstallation.saveInBackground()
@@ -95,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "com.rinz.WhereRU" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as! NSURL
+        return urls[urls.count-1] 
     }()
 
     lazy var managedObjectModel: NSManagedObjectModel = {
@@ -111,18 +111,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("WhereRU.sqlite")
         var error: NSError? = nil
         var failureReason = "There was an error creating or loading the application's saved data."
-        if coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil, error: &error) == nil {
+        do {
+            try coordinator!.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+        } catch var error1 as NSError {
+            error = error1
             coordinator = nil
             // Report any error we got.
             let dict = NSMutableDictionary()
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             dict[NSUnderlyingErrorKey] = error
-            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as [NSObject : AnyObject])
+            error = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict as? [String : AnyObject])
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(error), \(error!.userInfo)")
             abort()
+        } catch {
+            fatalError()
         }
         
         return coordinator
@@ -144,11 +149,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func saveContext () {
         if let moc = self.managedObjectContext {
             var error: NSError? = nil
-            if moc.hasChanges && !moc.save(&error) {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                NSLog("Unresolved error \(error), \(error!.userInfo)")
-                abort()
+            if moc.hasChanges {
+                do {
+                    try moc.save()
+                } catch let error1 as NSError {
+                    error = error1
+                    // Replace this implementation with code to handle the error appropriately.
+                    // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                    NSLog("Unresolved error \(error), \(error!.userInfo)")
+                    abort()
+                }
             }
         }
     }
