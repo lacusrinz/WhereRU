@@ -4,11 +4,11 @@
 
 #import "RSKImageCropper.h"
 
-#import <MAMapKit/MAMapKit.h>
-#import <MAMapKit/MAPolyline.h>
-#import <MAMapKit/MAOverlay.h>
-#import <AMapSearchKit/AMapSearchAPI.h>
-#import <AMapSearchKit/AMapCommonObj.h>
+//#import <MAMapKit/MAMapKit.h>
+//#import <MAMapKit/MAPolyline.h>
+//#import <MAMapKit/MAOverlay.h>
+//#import <AMapSearchKit/AMapSearchAPI.h>
+//#import <AMapSearchKit/AMapCommonObj.h>
 
 #import "SWTableViewCell.h"
 

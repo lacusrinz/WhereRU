@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        MAMapServices.sharedServices().apiKey = apiKey
+//        MAMapServices.sharedServices().apiKey = apiKey
 
 //        var navBackgroundImage:UIImage = UIImage(named: "white")!
 //        UINavigationBar.appearance().setBackgroundImage(navBackgroundImage, forBarMetrics: .Default)

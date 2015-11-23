@@ -24,8 +24,8 @@ class LoginViewController: UIViewController, SignUpViewControllerDelegate {
 
     @IBAction func login(sender: AnyObject) {
         AVUser.logInWithUsernameInBackground(emailTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
-            if (user != nil) {
-                print("login success")
+            if let loginUser = user {
+                print("login success \(loginUser)")
                 
                 let currentInstallation:AVInstallation = AVInstallation.currentInstallation()
                 currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")

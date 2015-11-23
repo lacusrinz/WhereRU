@@ -152,7 +152,7 @@ class FollowingViewController: UIViewController, SWTableViewCellDelegate, AddFol
     // MARK: - AddFollowingViewControllerDelegate
     func AddFollowingViewControllerBack(controller: AddFollowingViewController) {
         dismissViewControllerAnimated(true, completion: { () -> Void in
-            self.followingTableView.header.beginRefreshing()
+            self.followingTableView.mj_header.beginRefreshing()
         })
     }
 

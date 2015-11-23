@@ -12,7 +12,7 @@ class Event: NSObject {
     var eventID:String?
     var owner:AVUser?
     var participants:[AVUser]?
-    var coordinate:CLLocationCoordinate2D?
+//    var coordinate:CLLocationCoordinate2D?
     var date:NSDate?
     var needLocation:Bool = false
     var message:String?
