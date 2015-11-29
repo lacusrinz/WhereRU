@@ -12,6 +12,9 @@ class LoginViewController: UIViewController, SignUpViewControllerDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: SubmitButton!
+    
+    private var returnKeyHandler: IQKeyboardReturnKeyHandler?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -20,18 +23,24 @@ class LoginViewController: UIViewController, SignUpViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
+        self.returnKeyHandler!.lastTextFieldReturnKeyType = UIReturnKeyType.Done
     }
 
     @IBAction func login(sender: AnyObject) {
+        self.loginButton.startLoadingAnimation()
         AVUser.logInWithUsernameInBackground(emailTextField.text, password: passwordTextField.text) { (user:AVUser?, error:NSError?) -> Void in
             if let loginUser = user {
                 print("login success \(loginUser)")
                 
                 let currentInstallation:AVInstallation = AVInstallation.currentInstallation()
                 currentInstallation.setObject(AVUser.currentUser(), forKey: "deviceOwner")
-                
-                self.performSegueWithIdentifier("login", sender: self)
+                self.loginButton.animateCompletionSuccess({ () -> () in
+                    self.performSegueWithIdentifier("login", sender: self)
+                })
             } else {
+                self.loginButton.animateCompletionFailed(nil)
                 print("failed:\(error!.description)")
             }
         }

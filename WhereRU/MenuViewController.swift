@@ -23,6 +23,10 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.menuTableView.dataSource = self
         
         self.menuTableView.tableFooterView = UIView()
+        
+        if let avatarObject =  AVUser.currentUser()!.objectForKey("avatarFile") {
+            self.userAvatarImageView.image = UIImage(data: avatarObject.getData())
+        }
     }
 
     override func didReceiveMemoryWarning() {

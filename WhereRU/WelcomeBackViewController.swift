@@ -12,7 +12,8 @@ import avatarImageView
 class WelcomeBackViewController: UIViewController {
 
     @IBOutlet weak var avatarImage: avatarImageView!
-    @IBOutlet weak var welcomeLabel: UILabel!
+    @IBOutlet weak var welcomeLabel: RQShineLabel!
+
     
     var image:UIImage?
     
@@ -21,18 +22,21 @@ class WelcomeBackViewController: UIViewController {
         if image != nil {
             avatarImage.image = image
         }
+        
+        self.welcomeLabel.numberOfLines = 0
+        self.welcomeLabel.text = "欢 迎 回 来"
+        self.welcomeLabel.font = UIFont(name: "HelveticaNeue-Light", size: 16)
+        self.welcomeLabel.textColor = UIColor.blackColor()
     }
-
+    
     override func viewDidAppear(animated: Bool) {
-        var pause:NSTimer = NSTimer.scheduledTimerWithTimeInterval(1.25, target: self, selector: "pause", userInfo: nil, repeats: false)
+        self.welcomeLabel.shineWithCompletion { () -> Void in
+            self.performSegueWithIdentifier("welcome", sender: self)
+        }
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-    }
-    
-    func pause() {
-        self.performSegueWithIdentifier("welcome", sender: self)
     }
 
 }

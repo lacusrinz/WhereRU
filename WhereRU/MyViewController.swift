@@ -20,6 +20,8 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     @IBOutlet weak var sex: UISegmentedControl!
     @IBOutlet weak var isPush: UISwitch!
     
+    private var returnKeyHandler: IQKeyboardReturnKeyHandler?
+    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -33,6 +35,9 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         self.tabBarController?.tabBar.translucent = false
         self.navigationController?.navigationBar.translucent = false
+        
+        self.returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
+        self.returnKeyHandler!.lastTextFieldReturnKeyType = UIReturnKeyType.Done
 
 //        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
 //        if avatarObject != nil {
@@ -123,7 +128,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         // Pass the selected object to the new view controller.
     }
     
-    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect) {
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
         self.avatar.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             let avatarData:NSData = UIImagePNGRepresentation(croppedImage)!
@@ -133,7 +138,7 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         })
     }
     
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController!) {
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             //
         })

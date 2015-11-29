@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		57BE627E684A45D69E5ECD76 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B7DD70D1EB048628041DBA1 /* libPods.a */; };
 		A806B91E1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */; };
 		A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A811A23819D407EC0079B7F8 /* MyViewController.swift */; };
 		A8131B801B88041B00BFE3FD /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8131B7F1B88041B00BFE3FD /* RootViewController.swift */; };
@@ -18,6 +17,10 @@
 		A814C90119CFFC5400735E7B /* avatarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A814C90019CFFC5400735E7B /* avatarImageView.swift */; };
 		A827BA951B88B6D200B54C03 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A827BA941B88B6D200B54C03 /* MenuViewController.swift */; };
 		A84CD40D1B634E750030214B /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A84CD40C1B634E750030214B /* CalendarViewController.swift */; };
+		A86221C51C09F1F50044D4A3 /* SubmitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86221C41C09F1F50044D4A3 /* SubmitButton.swift */; };
+		A86221C91C09F6010044D4A3 /* NSTimerEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86221C71C09F6010044D4A3 /* NSTimerEx.swift */; };
+		A86221CA1C09F6010044D4A3 /* SpinerLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86221C81C09F6010044D4A3 /* SpinerLayer.swift */; };
+		A86221CC1C09F7D20044D4A3 /* CGRectEx.swift in Sources */ = {isa = PBXBuildFile; fileRef = A86221CB1C09F7D20044D4A3 /* CGRectEx.swift */; };
 		A87C80711B00F6A500A8B6B4 /* WelcomeBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */; };
 		A87ED7971B1E00DA0059A1A3 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A87ED7961B1E00DA0059A1A3 /* Friend.swift */; };
 		A88A55A71AFBB9BE00514B13 /* AddFriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */; };
@@ -64,6 +67,7 @@
 		A8F6D1AB1B47C48A00C87556 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6D1AA1B47C48A00C87556 /* MenuTableViewCell.swift */; };
 		A8F6D1AE1B48199900C87556 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8F6D1AC1B48199900C87556 /* EventCell.swift */; };
 		A8F6D1AF1B48199900C87556 /* EventCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8F6D1AD1B48199900C87556 /* EventCell.xib */; };
+		B5CE76FA3D8EB5B6F56D8FCC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 505A127094E2E84EF81867EF /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,7 +116,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0B7DD70D1EB048628041DBA1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		505A127094E2E84EF81867EF /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A33BB9B7AA719B13BE841C77 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		A806B91D1A35A049004C8D9F /* ParticipatorCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParticipatorCollectionViewCell.swift; sourceTree = "<group>"; };
 		A811A23819D407EC0079B7F8 /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +130,10 @@
 		A814C90019CFFC5400735E7B /* avatarImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = avatarImageView.swift; sourceTree = "<group>"; };
 		A827BA941B88B6D200B54C03 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuViewController.swift; path = WhereRU/MenuViewController.swift; sourceTree = SOURCE_ROOT; };
 		A84CD40C1B634E750030214B /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		A86221C41C09F1F50044D4A3 /* SubmitButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmitButton.swift; sourceTree = "<group>"; };
+		A86221C71C09F6010044D4A3 /* NSTimerEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSTimerEx.swift; sourceTree = "<group>"; };
+		A86221C81C09F6010044D4A3 /* SpinerLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinerLayer.swift; sourceTree = "<group>"; };
+		A86221CB1C09F7D20044D4A3 /* CGRectEx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGRectEx.swift; sourceTree = "<group>"; };
 		A87C80701B00F6A500A8B6B4 /* WelcomeBackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeBackViewController.swift; sourceTree = "<group>"; };
 		A87ED7961B1E00DA0059A1A3 /* Friend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		A88A55A51AFBB9BE00514B13 /* AddFriendTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddFriendTableViewCell.swift; sourceTree = "<group>"; };
@@ -200,7 +208,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A814C8F119CFF47A00735E7B /* avatarImageView.framework in Frameworks */,
-				57BE627E684A45D69E5ECD76 /* libPods.a in Frameworks */,
+				B5CE76FA3D8EB5B6F56D8FCC /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,6 +267,17 @@
 			name = IBDesignableViews;
 			sourceTree = "<group>";
 		};
+		A86221C61C09F5830044D4A3 /* SubmitButton */ = {
+			isa = PBXGroup;
+			children = (
+				A86221CB1C09F7D20044D4A3 /* CGRectEx.swift */,
+				A86221C71C09F6010044D4A3 /* NSTimerEx.swift */,
+				A86221C81C09F6010044D4A3 /* SpinerLayer.swift */,
+				A86221C41C09F1F50044D4A3 /* SubmitButton.swift */,
+			);
+			name = SubmitButton;
+			sourceTree = "<group>";
+		};
 		A8760B201B1A079C007D39ED /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,6 +322,7 @@
 				A8E0F7321B9A461000F8FA68 /* Token */,
 				A8E2FEED1B49777F009F3608 /* Cells */,
 				A8E2FEEC1B497665009F3608 /* Calendar */,
+				A86221C61C09F5830044D4A3 /* SubmitButton */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -379,6 +399,7 @@
 				A8D58A5F19C1EB0F00EEFC98 /* Images.xcassets */,
 				A8D58A6119C1EB0F00EEFC98 /* LaunchScreen.xib */,
 				A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */,
+				A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */,
 				A8D58A5319C1EB0F00EEFC98 /* Supporting Files */,
 				A811A24019D40E4A0079B7F8 /* WhereRU-Bridging-Header.h */,
 			);
@@ -388,7 +409,6 @@
 		A8D58A5319C1EB0F00EEFC98 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */,
 				A8D58A5419C1EB0F00EEFC98 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -466,7 +486,7 @@
 		FEE12FCDBF1E43C69B3E5840 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0B7DD70D1EB048628041DBA1 /* libPods.a */,
+				505A127094E2E84EF81867EF /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -733,13 +753,16 @@
 				A811A23A19D407EC0079B7F8 /* MyViewController.swift in Sources */,
 				A8E1E7641B4AC47E00B7C6AF /* CalendarDayView.swift in Sources */,
 				A8E0F7361B9A898500F8FA68 /* TokenView.swift in Sources */,
+				A86221CA1C09F6010044D4A3 /* SpinerLayer.swift in Sources */,
 				A8D58A5919C1EB0F00EEFC98 /* WhereRU.xcdatamodeld in Sources */,
 				A8E2FEEB1B4975A2009F3608 /* CalendarView.swift in Sources */,
+				A86221CC1C09F7D20044D4A3 /* CGRectEx.swift in Sources */,
 				A8F6D1AB1B47C48A00C87556 /* MenuTableViewCell.swift in Sources */,
 				A88A55A71AFBB9BE00514B13 /* AddFriendTableViewCell.swift in Sources */,
 				A8E1E76E1B4AC6AB00B7C6AF /* CalendarWeekView.swift in Sources */,
 				A8C25CF31A7B456F001EFDE1 /* CommonConstant.swift in Sources */,
 				A8C4BB261B5BE72A00ACDA01 /* CalendarDataSource.swift in Sources */,
+				A86221C51C09F1F50044D4A3 /* SubmitButton.swift in Sources */,
 				A8B975291B82246900B2A288 /* CalendarTitleView.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8DBE1961B8ED93D00A32EEE /* ChineseNameIndex.swift in Sources */,
@@ -766,6 +789,7 @@
 				A8BDD0CB1A53DAEC006DFD7B /* AddParticipantsViewController.swift in Sources */,
 				A8BDD0CD1A553224006DFD7B /* AddParticipantTableViewCell.swift in Sources */,
 				A8F6D1A71B47AE0600C87556 /* HomeViewController.swift in Sources */,
+				A86221C91C09F6010044D4A3 /* NSTimerEx.swift in Sources */,
 				A8E1E7701B4AC71500B7C6AF /* CircleView.swift in Sources */,
 				A87ED7971B1E00DA0059A1A3 /* Friend.swift in Sources */,
 			);

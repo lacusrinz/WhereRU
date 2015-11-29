@@ -3,8 +3,10 @@ PODS:
   - HexColors (2.2.1)
   - HSDatePickerViewController (1.0.2)
   - IQKeyboardManager (3.3.4)
+  - LiquidFloatingActionButton (0.1.2)
   - MJRefresh (3.0.4)
   - RESideMenu (4.0.7)
+  - RQShineLabel (0.1.3)
   - RSKImageCropper (1.4.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
@@ -20,8 +22,10 @@ DEPENDENCIES:
   - AVOSCloud (~> 3.1.6.4)
   - HSDatePickerViewController (~> 1.0.2)
   - IQKeyboardManager (~> 3.3.4)
+  - LiquidFloatingActionButton (~> 0.1.2)
   - MJRefresh (~> 3.0.4)
   - RESideMenu (~> 4.0.7)
+  - RQShineLabel (~> 0.1.3)
   - RSKImageCropper (~> 1.4.1)
   - SDWebImage (~> 3.7.3)
   - SVProgressHUD (~> 2.0-beta)
@@ -34,8 +38,10 @@ SPEC CHECKSUMS:
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
   HSDatePickerViewController: 61ef88a61e3a553c28ffbecbdcf2d8743789a85f
   IQKeyboardManager: ac803e61e5b50efae6b3aeedd95a02c7c7d3b2b3
+  LiquidFloatingActionButton: 12ed6f642365142f85c73eaebef8c40b6590511e
   MJRefresh: c95f0d541606ef584dab3fbeda28f4f32b4aca6e
   RESideMenu: f24c508404b49c667344c54aba7e590883533958
+  RQShineLabel: ae66343d6c779a8efdf61241734ddcec5d79d351
   RSKImageCropper: 98ae426eb4eb11b733ff87f8e2542a480f4fa8e6
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SVProgressHUD: c83337f10ed32d701c423d519059a249973c8662

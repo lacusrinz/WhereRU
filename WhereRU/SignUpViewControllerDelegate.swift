@@ -20,6 +20,9 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var userAvatarImageView: avatarImageView!
     @IBOutlet var avatarTap: UITapGestureRecognizer!
+    @IBOutlet weak var registerButton: SubmitButton!
+    
+    private var returnKeyHandler: IQKeyboardReturnKeyHandler?
     
 //    var returnKeyHandler: IQKeyboardReturnKeyHandler?
     var user:AVUser?
@@ -30,7 +33,8 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         super.viewDidLoad()
         userAvatarImageView.addGestureRecognizer(avatarTap)
         
-//        returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
+        self.returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
+        self.returnKeyHandler!.lastTextFieldReturnKeyType = UIReturnKeyType.Done
         
         user = AVUser()
     }
@@ -41,7 +45,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     @IBAction func signin(sender: AnyObject) {
-        if (nicknameTextField.text?.isEmpty != nil){
+        if nicknameTextField.text!.isEmpty{
             TSMessage.showNotificationInViewController(self, title: "出错啦！", subtitle: "请输入昵称", type: .Error)
             return
         }
@@ -60,23 +64,24 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.user!.setObject("", forKey: "avatar")
         self.user!.setObject(true, forKey: "is_active")
         
-        SVProgressHUD.show()
+        registerButton.startLoadingAnimation()
         self.user!.signUpInBackgroundWithBlock { (succeeded:Bool, error:NSError!) -> Void in
             if succeeded{
                 print("success!")
                 AVUser.logInWithUsernameInBackground(self.user!.username, password: self.user!.password) { (user:AVUser?, error:NSError?) -> Void in
                     if (user != nil) {
                         print("login success")
-                        SVProgressHUD.showSuccessWithStatus("")
-                        self.performSegueWithIdentifier("loginaftersignin", sender: self)
+                        self.registerButton.animateCompletionSuccess({ () -> () in
+                            self.performSegueWithIdentifier("loginaftersignin", sender: self)
+                        })
                     } else {
-                        SVProgressHUD.showErrorWithStatus("登陆失败")
+                        self.registerButton.animateCompletionFailed(nil)
                         print("failed:\(error!.description)")
                     }
                 }
             }
             else{
-                SVProgressHUD.showErrorWithStatus("注册失败")
+                self.registerButton.animateCompletionFailed(nil)
                 print("failed:\(error.description)")
             }
         }
@@ -146,7 +151,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
     }
     
     // MARK: - RSKImageCropViewControllerDelegate
-    func imageCropViewController(controller: RSKImageCropViewController!, didCropImage croppedImage: UIImage!, usingCropRect cropRect: CGRect) {
+    func imageCropViewController(controller: RSKImageCropViewController, didCropImage croppedImage: UIImage, usingCropRect cropRect: CGRect) {
         self.userAvatarImageView.image = croppedImage
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             let avatarData:NSData = UIImagePNGRepresentation(croppedImage)!
@@ -155,7 +160,7 @@ class SignUpViewController: UIViewController, UIImagePickerControllerDelegate, U
         })
     }
     
-    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController!) {
+    func imageCropViewControllerDidCancelCrop(controller: RSKImageCropViewController) {
         self.dismissViewControllerAnimated(true, completion: { () -> Void in
             //
         })

@@ -22,9 +22,11 @@
 #import "TSMessage.h"
 #import "MJRefresh.h"
 
+#import "KeyboardManager.h"
 #import "IQKeyboardReturnKeyHandler.h"
 #import "HSDatePickerViewController.h"
 
 #import "RESideMenu.h"
 
 #import "pinyin.h"
+#import "RQShineLabel.h"

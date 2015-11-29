@@ -1,4 +1,5 @@
 #source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
 platform :ios, '8.0'
 #pod 'Reachability', '~> 3.1.1'
@@ -29,3 +30,5 @@ pod 'AVOSCloud', '~> 3.1.6.4'
 pod 'HSDatePickerViewController', '~> 1.0.2'
 
 pod 'RESideMenu', '~> 4.0.7'
+pod 'RQShineLabel', '~> 0.1.3'
+pod 'LiquidFloatingActionButton', '~> 0.1.2'
