@@ -176,7 +176,7 @@ extension FollowingViewController : UITableViewDelegate {
         }
     }
     
-    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]! {
+    func sectionIndexTitlesForTableView(tableView: UITableView) -> [String]? {
         var existTitles = [String]()
         var allTitles = UILocalizedIndexedCollation.currentCollation().sectionIndexTitles
         for var i: Int = 0; i < allTitles.count; ++i {

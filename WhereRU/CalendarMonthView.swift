@@ -85,8 +85,8 @@ class CalendarMonthView: UIView {
     
     func setBeginningOfMonth(date:NSDate) {
         var currentDate: NSDate = date
-        var calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
-        var comps: NSDateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month], fromDate: currentDate)
+        let calendar: NSCalendar = self.calendarManager!.calendarAppearance!.calendar!
+        let comps: NSDateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Month], fromDate: currentDate)
         currentMonthIndex = comps.month
         if(comps.day > 7) {
             currentMonthIndex = (currentMonthIndex % 12) + 1
@@ -94,7 +94,7 @@ class CalendarMonthView: UIView {
         for view in weeksViews! {
             (view as! CalendarWeekView).currentMonthIndex = currentMonthIndex
             (view as! CalendarWeekView).setBeginningOfWeek(currentDate)
-            var dayComponent: NSDateComponents = NSDateComponents()
+            let dayComponent: NSDateComponents = NSDateComponents()
             dayComponent.day = 7
             currentDate = calendar.dateByAddingComponents(dayComponent, toDate: currentDate, options: NSCalendarOptions(rawValue: 0))!
             if(self.calendarManager!.calendarAppearance!.isWeekMode == true) {

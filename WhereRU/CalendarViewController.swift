@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController, CalendarDataSource, CalendarContentViewDelegate {
+class CalendarViewController: UIViewController {
 
     @IBOutlet weak var calendarContentView: CalendarContentView!
     @IBOutlet weak var calendarContentViewHeight: NSLayoutConstraint!
@@ -17,6 +17,7 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
     var calendar: CalendarView?
     
     private var height: CGFloat = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,29 +75,6 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
     override func viewDidLayoutSubviews() {
         self.calendar!.repositionViews()
     }
-    
-    // MARK: - JTCalendarDataSource
-    
-    func calendarHaveEvent(calendar: CalendarView, date: NSDate) -> Bool {
-        return false
-    }
-    
-    func calendarDidDateSelected(calendar: CalendarView, date: NSDate) {
-        //
-    }
-    
-    func calendarDidLoadNextPage() {
-        //
-    }
-    
-    func calendarDidLoadPreviousPage() {
-        print("xxxx")
-    }
-    
-    func calendarCanSelectDate(calendar: CalendarView, date: NSDate) -> Bool {
-        return true
-    }
-    
 
     /*
     // MARK: - Navigation
@@ -129,6 +107,28 @@ class CalendarViewController: UIViewController, CalendarDataSource, CalendarCont
         }
     }
 
+}
+
+extension CalendarViewController: CalendarDataSource, CalendarContentViewDelegate {
+    func calendarHaveEvent(calendar: CalendarView, date: NSDate) -> Bool {
+        return false
+    }
+    
+    func calendarDidDateSelected(calendar: CalendarView, date: NSDate) {
+        //
+    }
+    
+    func calendarDidLoadNextPage() {
+        //
+    }
+    
+    func calendarDidLoadPreviousPage() {
+        print("xxxx")
+    }
+    
+    func calendarCanSelectDate(calendar: CalendarView, date: NSDate) -> Bool {
+        return true
+    }
 }
 
 extension CalendarViewController: UITableViewDataSource {
