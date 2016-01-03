@@ -25,9 +25,6 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-
-    
-//    var _name:String = AVUser.currentUser().objectForKey("username") as! String//User.shared.nickname!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,11 +36,10 @@ class MyViewController: UIViewController, UIActionSheetDelegate, UIImagePickerCo
         self.returnKeyHandler = IQKeyboardReturnKeyHandler(viewController: self)
         self.returnKeyHandler!.lastTextFieldReturnKeyType = UIReturnKeyType.Done
 
-//        var avatarObject: AnyObject! = AVUser.currentUser().objectForKey("avatarFile")
-//        if avatarObject != nil {
-//            var avatarData = avatarObject.getData()
-//            avatar.image = UIImage(data: avatarData)
-//        }
+        if let avatarObject =  AVUser.currentUser()!.objectForKey("avatarFile") {
+            self.avatar.image = UIImage(data: avatarObject.getData())
+        }
+        
         avatar.addGestureRecognizer(avatarTap)
     }
 

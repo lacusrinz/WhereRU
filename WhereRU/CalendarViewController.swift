@@ -21,6 +21,9 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
 
         self.eventTableView.delegate = self
         self.eventTableView.dataSource = self
@@ -33,10 +36,10 @@ class CalendarViewController: UIViewController {
         self.calendar!.calendarAppearance!.dayCircleRatio = 9 / 10
         self.calendar!.calendarAppearance!.focusSelectedDayChangeMode = true
         
-        self.calendar!.calendarAppearance!.weekDayBackgroundColor = UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
+        self.calendar!.calendarAppearance!.weekDayBackgroundColor = UIColor(patternImage: UIImage(named: "pink")!)//UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
         self.calendar!.calendarAppearance!.weekDayTextColor = UIColor.whiteColor()
         
-        self.calendar!.calendarAppearance!.dayBackgroundColor = UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
+        self.calendar!.calendarAppearance!.dayBackgroundColor = UIColor(patternImage: UIImage(named: "pink")!)//UIColor(hue:0.96, saturation:0.49, brightness:1, alpha:1)
         
         self.calendar!.calendarAppearance!.dayCircleColorSelected = UIColor.whiteColor()
         self.calendar!.calendarAppearance!.dayCircleColorSelectedOtherMonth = UIColor(hue: 0, saturation: 0, brightness: 100, alpha: 0.5)

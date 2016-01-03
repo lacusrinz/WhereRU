@@ -27,17 +27,20 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let navBar = self.navigationController!.navigationBar
         navBar.barTintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
         
         let calendar: NSCalendar = NSCalendar.currentCalendar()
         let dateformat = NSDateFormatter()
         let weekIndex = calendar.component(.Weekday, fromDate: NSDate())
         self.weekLabel.text = dateformat.standaloneWeekdaySymbols[weekIndex - 1]
-        dateformat.dateFormat = "YYYY年MM月dd日"
+        dateformat.dateFormat = "yyyy年MM月dd日"
         self.dayLabel.text = dateformat.stringFromDate(NSDate())
         
         if let avatarObject =  AVUser.currentUser()!.objectForKey("avatarFile") {
             self.userAvatarImageView.image = UIImage(data: avatarObject.getData())
         }
+        
+        self.navigationController?.navigationBar.shadowImage = UIImage()
     }
 
     override func didReceiveMemoryWarning() {

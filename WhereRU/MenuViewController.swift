@@ -35,7 +35,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 44
+        return self.view.bounds.size.height / 2 / 6
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -43,7 +43,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return 6
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -60,21 +60,21 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             cell.nemuNumber.text = ""
         }else if indexPath.row == 2 {
             cell.menuImage.image = UIImage(named:"Icon_followee")
-            cell.menuName.text = "关 注"
+            cell.menuName.text = "联 系 人"
             cell.nemuNumber.text = "123"
         }else if indexPath.row == 3 {
             cell.menuImage.image = UIImage(named:"Icon_follower")
-            cell.menuName.text = "被 关 注"
+            cell.menuName.text = "日 记"
             cell.nemuNumber.text = "5200"
         }else if indexPath.row == 4 {
             cell.menuImage.image = UIImage(named:"Icon_profile")
             cell.menuName.text = "我"
             cell.nemuNumber.text = ""
+//        }else if indexPath.row == 5 {
+//            cell.menuImage.image = UIImage(named:"Icon_setting")
+//            cell.menuName.text = "设 置"
+//            cell.nemuNumber.text = ""
         }else if indexPath.row == 5 {
-            cell.menuImage.image = UIImage(named:"Icon_setting")
-            cell.menuName.text = "设 置"
-            cell.nemuNumber.text = ""
-        }else if indexPath.row == 6 {
             cell.menuImage.image = UIImage(named:"Icon_logout")
             cell.menuName.text = "登 出"
             cell.nemuNumber.text = ""
@@ -103,30 +103,27 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             self.sideMenuViewController.hideMenuViewController()
             break
         case 4:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
-            self.sideMenuViewController.hideMenuViewController()
-            break
-        case 5:
             self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("myViewController") ), animated: true)
             self.sideMenuViewController.hideMenuViewController()
             break
-        case 6:
-            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
-            self.sideMenuViewController.hideMenuViewController()
+        case 5:
+            self.performSegueWithIdentifier("logout", sender: self)
             break
+//        case 6:
+//            self.sideMenuViewController.setContentViewController(UINavigationController(rootViewController: self.storyboard!.instantiateViewControllerWithIdentifier("homeViewController") ), animated: true)
+//            self.sideMenuViewController.hideMenuViewController()
+//            break
         default:
             break
         }
     }
     
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "logout" {
+            AVUser.logOut()
+        }
     }
-    */
 
 }
