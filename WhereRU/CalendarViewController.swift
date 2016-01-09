@@ -22,8 +22,8 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
+//        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
 
         self.eventTableView.delegate = self
         self.eventTableView.dataSource = self
@@ -89,6 +89,9 @@ class CalendarViewController: UIViewController {
     }
     */
     
+    @IBAction func createEvent(sender: AnyObject) {
+        self.performSegueWithIdentifier("addEvent", sender: self)
+    }
     
     func changeMode(gesture: UISwipeGestureRecognizer) {
         self.calendar?.calendarAppearance?.isWeekMode = !self.calendar!.calendarAppearance!.isWeekMode!

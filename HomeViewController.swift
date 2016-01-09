@@ -25,9 +25,11 @@ class HomeViewController: UIViewController, UITableViewDataSource, UITableViewDe
         self.todayListTable.delegate = self
         self.todayListTable.dataSource = self
         
-        let navBar = self.navigationController!.navigationBar
-        navBar.barTintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
+//        let navBar = self.navigationController!.navigationBar
+//        navBar.barTintColor = UIColor.whiteColor()
+//        self.navigationController?.navigationBar.titleTextAttributes = NSDictionary(object: UIColor.whiteColor(), forKey: NSForegroundColorAttributeName) as? [String : AnyObject]
+//        self.tabBarController?.tabBar.translucent = false
+//        self.navigationController?.navigationBar.translucent = false
         
         let calendar: NSCalendar = NSCalendar.currentCalendar()
         let dateformat = NSDateFormatter()

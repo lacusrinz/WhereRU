@@ -44,6 +44,7 @@
 		A8D58A6019C1EB0F00EEFC98 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A5F19C1EB0F00EEFC98 /* Images.xcassets */; };
 		A8D58A6319C1EB0F00EEFC98 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8D58A6119C1EB0F00EEFC98 /* LaunchScreen.xib */; };
 		A8D58A6F19C1EB0F00EEFC98 /* WhereRUTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */; };
+		A8DA0A8F1C400F5E00BCF666 /* AddNewEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DA0A8E1C400F5E00BCF666 /* AddNewEventViewController.swift */; };
 		A8DBE1961B8ED93D00A32EEE /* ChineseNameIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */; };
 		A8E0F7341B9A895300F8FA68 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0F7331B9A895300F8FA68 /* Token.swift */; };
 		A8E0F7361B9A898500F8FA68 /* TokenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8E0F7351B9A898500F8FA68 /* TokenView.swift */; };
@@ -160,6 +161,7 @@
 		A8D58A6819C1EB0F00EEFC98 /* WhereRUTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhereRUTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8D58A6D19C1EB0F00EEFC98 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A8D58A6E19C1EB0F00EEFC98 /* WhereRUTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WhereRUTests.swift; sourceTree = "<group>"; };
+		A8DA0A8E1C400F5E00BCF666 /* AddNewEventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNewEventViewController.swift; sourceTree = "<group>"; };
 		A8DBE1951B8ED93D00A32EEE /* ChineseNameIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChineseNameIndex.swift; sourceTree = "<group>"; };
 		A8E0F7331B9A895300F8FA68 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		A8E0F7351B9A898500F8FA68 /* TokenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TokenView.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				A8BDD0CA1A53DAEC006DFD7B /* AddParticipantsViewController.swift */,
+				A8DA0A8E1C400F5E00BCF666 /* AddNewEventViewController.swift */,
 				A84CD40C1B634E750030214B /* CalendarViewController.swift */,
 			);
 			name = Event;
@@ -391,6 +394,7 @@
 		A8D58A5219C1EB0F00EEFC98 /* WhereRU */ = {
 			isa = PBXGroup;
 			children = (
+				A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */,
 				A8B8A1921A14F8F00000FB6F /* Utils */,
 				A8B8A18F1A124F0C0000FB6F /* Model */,
 				A8B8A12219FF0D470000FB6F /* Controller */,
@@ -399,7 +403,6 @@
 				A8D58A5F19C1EB0F00EEFC98 /* Images.xcassets */,
 				A8D58A6119C1EB0F00EEFC98 /* LaunchScreen.xib */,
 				A8D58A5719C1EB0F00EEFC98 /* WhereRU.xcdatamodeld */,
-				A8D58A5519C1EB0F00EEFC98 /* AppDelegate.swift */,
 				A8D58A5319C1EB0F00EEFC98 /* Supporting Files */,
 				A811A24019D40E4A0079B7F8 /* WhereRU-Bridging-Header.h */,
 			);
@@ -763,6 +766,7 @@
 				A8C25CF31A7B456F001EFDE1 /* CommonConstant.swift in Sources */,
 				A8C4BB261B5BE72A00ACDA01 /* CalendarDataSource.swift in Sources */,
 				A86221C51C09F1F50044D4A3 /* SubmitButton.swift in Sources */,
+				A8DA0A8F1C400F5E00BCF666 /* AddNewEventViewController.swift in Sources */,
 				A8B975291B82246900B2A288 /* CalendarTitleView.swift in Sources */,
 				A8B8A1251A07C7520000FB6F /* ContactTableViewCell.swift in Sources */,
 				A8DBE1961B8ED93D00A32EEE /* ChineseNameIndex.swift in Sources */,
