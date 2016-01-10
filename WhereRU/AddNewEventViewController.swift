@@ -10,9 +10,14 @@ import UIKit
 
 class AddNewEventViewController: UIViewController {
 
+    @IBOutlet weak var startTimeHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var endTimeHeightConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
+        startTimeHeightConstraint.constant = 0
+        endTimeHeightConstraint.constant = 0
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +26,15 @@ class AddNewEventViewController: UIViewController {
     }
     
 
+    @IBAction func cancel(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    @IBAction func create(sender: AnyObject) {
+    }
+    
     /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
