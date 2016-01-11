@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15D13b" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
         <!--Login View Controller-->
@@ -385,23 +386,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎回来" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsV-tQ-Qfd" customClass="RQShineLabel">
-                                <rect key="frame" x="266" y="289" width="68" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d1e-Ru-req" customClass="avatarImageView" customModule="avatarImageView">
-                                <rect key="frame" x="236" y="116" width="128" height="128"/>
+                                <rect key="frame" x="220" y="121" width="160" height="160"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="128" id="8Uc-I1-DnZ"/>
-                                    <constraint firstAttribute="width" secondItem="d1e-Ru-req" secondAttribute="height" multiplier="1:1" id="txD-32-XO7"/>
+                                    <constraint firstAttribute="width" secondItem="d1e-Ru-req" secondAttribute="height" multiplier="1:1" id="3rb-JP-Ili"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="image" keyPath="avatarImage" value="default_avatar"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="64"/>
+                                        <real key="value" value="80"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="mask" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
@@ -412,13 +406,20 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="欢迎回来" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsV-tQ-Qfd" customClass="RQShineLabel">
+                                <rect key="frame" x="266" y="289" width="68" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="bsV-tQ-Qfd" firstAttribute="centerX" secondItem="p7a-3v-Aj2" secondAttribute="centerX" id="Xuw-TU-9HK"/>
-                            <constraint firstItem="bsV-tQ-Qfd" firstAttribute="top" secondItem="d1e-Ru-req" secondAttribute="bottom" constant="45" id="au0-qB-gXt"/>
-                            <constraint firstItem="d1e-Ru-req" firstAttribute="centerX" secondItem="bsV-tQ-Qfd" secondAttribute="centerX" id="ceJ-wB-3cu"/>
-                            <constraint firstItem="bsV-tQ-Qfd" firstAttribute="centerY" secondItem="p7a-3v-Aj2" secondAttribute="centerY" id="fMy-Di-Dck"/>
+                            <constraint firstItem="d1e-Ru-req" firstAttribute="centerX" secondItem="p7a-3v-Aj2" secondAttribute="centerX" id="3sa-ni-QiH"/>
+                            <constraint firstItem="bsV-tQ-Qfd" firstAttribute="centerX" secondItem="d1e-Ru-req" secondAttribute="centerX" id="GiH-p5-aHr"/>
+                            <constraint firstItem="d1e-Ru-req" firstAttribute="width" secondItem="p7a-3v-Aj2" secondAttribute="width" multiplier="4:15" id="cqc-Zy-M4S"/>
+                            <constraint firstItem="bsV-tQ-Qfd" firstAttribute="top" secondItem="d1e-Ru-req" secondAttribute="bottom" constant="8" symbolic="YES" id="lQn-Gw-EBu"/>
+                            <constraint firstItem="bsV-tQ-Qfd" firstAttribute="centerY" secondItem="p7a-3v-Aj2" secondAttribute="centerY" id="rXR-ER-XdD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -1257,7 +1258,6 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="61" id="KPe-zg-NO0"/>
                                                 </constraints>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -1276,7 +1276,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-91-fqD">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PIg-91-fqD">
                                                 <rect key="frame" x="67" y="162" width="525" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="eln-kG-j3I"/>
@@ -1326,7 +1326,7 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epi-pu-UXW">
+                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epi-pu-UXW">
                                                 <rect key="frame" x="67" y="347" width="525" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="ON4-Y5-1S5"/>
@@ -1578,6 +1578,6 @@
         <image name="团·聚" width="416" height="101"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gaa-vT-cd1"/>
+        <segue reference="eeo-Rb-vWO"/>
     </inferredMetricsTieBreakers>
 </document>

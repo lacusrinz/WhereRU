@@ -29,6 +29,10 @@ class WelcomeBackViewController: UIViewController {
         self.welcomeLabel.textColor = UIColor.blackColor()
     }
     
+    override func viewDidLayoutSubviews() {
+        self.avatarImage.layer.cornerRadius = self.avatarImage.frame.width / 2
+    }
+    
     override func viewDidAppear(animated: Bool) {
         self.welcomeLabel.shineWithCompletion { () -> Void in
             self.performSegueWithIdentifier("welcome", sender: self)
